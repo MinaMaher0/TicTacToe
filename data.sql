@@ -18,7 +18,7 @@ USE `Tic_Tac_Toe` ;
 -- Table `Tic_Tac_Toe`.`player`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Tic_Tac_Toe`.`player` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` LONGTEXT NOT NULL,
