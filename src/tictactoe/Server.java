@@ -19,8 +19,6 @@ public interface Server{
     
     public boolean signIN(String userName,String password);
     
-    //set profile data of the user 
-    public Player setProfile();
     
     public boolean signUP(String userName,String email,String password);
     
@@ -43,7 +41,7 @@ public interface Server{
     public ArrayList<String> fillLsitofBusyUser();
     
     //remove from BusyList and Change state in list as free 
-    public void leaveGame(int userID);
+    public void leaveGame(int pID);
     
     //deletc from online and set at offline and set state of player in DB
     public void logOut(int pID);
