@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="767.0" spacing="5.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="230.0" prefWidth="767.0">
+         <children>
+            <ImageView fitHeight="256.0" fitWidth="331.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/eastwood-sign-in.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="204.0" text="Sign In">
+         <font>
+            <Font name="Comic Sans MS" size="60.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#804ca8" />
+                  <Stop color="#e81523" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="78.0" prefWidth="767.0" spacing="10.0">
+         <children>
+            <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" lineSpacing="10.0" size="25" />
+            <JFXTextField prefHeight="46.0" prefWidth="330.0" promptText="User Name" styleClass="facebook" unFocusColor="#c14378">
+               <focusColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="BLACK" />
+                        <Stop color="#d31557" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </focusColor>
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font>
+            </JFXTextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="65.0" prefWidth="767.0" spacing="10.0">
+         <children>
+            <FontAwesomeIconView glyphName="KEY" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="25" />
+            <JFXPasswordField prefHeight="40.0" prefWidth="337.0" promptText="Password" unFocusColor="#c14378ed">
+               <focusColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="BLACK" />
+                        <Stop color="#d31557" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </focusColor>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXPasswordField>
+         </children></HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="81.0" prefWidth="767.0" spacing="30.0">
+         <children>
+            <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="236.0" styleClass="btn_login" stylesheets="@login.css" text="Sign In">
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="236.0" styleClass="btn_login" stylesheets="@login.css" text="Sign Up">
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font>
+            </JFXButton>
+         </children></HBox>
+      <Label alignment="BASELINE_LEFT" prefHeight="30.0" prefWidth="357.0" styleClass="forget_passowrd" text="Forget Password?" textFill="#757171" underline="true">
+         <font>
+            <Font name="System Italic" size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="105.0" prefWidth="767.0" spacing="70.0">
+         <children>
+            <JFXButton styleClass="google_btn" stylesheets="@login.css" text="oogle">
+               <font>
+                  <Font name="Tahoma" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#e81523" />
+                        <Stop color="#173ee5" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <graphic>
+                  <FontAwesomeIconView glyphName="GOOGLE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="40" />
+               </graphic>
+            </JFXButton>
+            <JFXButton styleClass="facebook_btn" stylesheets="@login.css" text="aceBook">
+               <font>
+                  <Font name="Tahoma" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#e81523" />
+                        <Stop color="#173ee5" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <graphic>
+                  <FontAwesomeIconView glyphName="FACEBOOK_OFFICIAL" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="40" />
+               </graphic>
+            </JFXButton>
+         </children></HBox>
+   </children>
+</VBox>
