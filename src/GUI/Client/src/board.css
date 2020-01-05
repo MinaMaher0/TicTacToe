@@ -1,0 +1,27 @@
+
+.mainFxmlClass {
+
+}
+
+.btn_board{
+  -fx-font-family : Tahoma;
+  -fx-font-size : 22px;
+  -fx-text-fill: #FFF;
+  -fx-background-radius: 10px;
+  -fx-background-color: #AA3672;
+    -fx-animated: true;
+}
+.btn_board:hover{
+    -fx-cursor: hand;
+    -fx-border-color: #AA3672;
+    -fx-border-width: 3px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #FFF;
+    -fx-text-fill: #AA3672;
+    -fx-font-weight: bold; 
+  
+}
+
+.forget_passowrd:hover{
+   -fx-cursor: hand; 
+}
