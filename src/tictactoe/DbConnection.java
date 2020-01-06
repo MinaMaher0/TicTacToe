@@ -27,16 +27,16 @@ public class DbConnection {
     Statement st = null;
 
     public DbConnection() {
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe", "root", "password");
-//            st = conn.createStatement();
-//        } catch (SQLException ex) {
-//            System.out.println("test");
-//            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe", "root", "password");
+            st = conn.createStatement();
+        } catch (SQLException ex) {
+            System.out.println("test");
+            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
