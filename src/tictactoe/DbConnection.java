@@ -21,22 +21,22 @@ import java.util.logging.Logger;
  */
 public class DbConnection {
 
-    Vector<Player> v = new Vector<>();
+    Vector <Player> v = new Vector<>();
     int indexP = 0;
     Connection conn = null;
     Statement st = null;
 
-    DbConnection() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe", "root", "password");
-            st = conn.createStatement();
-        } catch (SQLException ex) {
-            System.out.println("test");
-            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public DbConnection() {
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe", "root", "password");
+//            st = conn.createStatement();
+//        } catch (SQLException ex) {
+//            System.out.println("test");
+//            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 
@@ -59,6 +59,10 @@ public class DbConnection {
     {
         return v.get(v.size()-1).getId()+1;
     }*/
+
+    public Vector<Player> getV() {
+        return v;
+    }
     
     public void signUp( String user_name , String password , String mail)
     {
@@ -85,12 +89,7 @@ public class DbConnection {
        
         d.signUp("m", "m", "mmm");
         
-        d.getData();
-        
-       
-       
-
-        
+        d.getData();   
     }
 
 }
