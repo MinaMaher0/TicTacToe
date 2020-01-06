@@ -1,0 +1,64 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.signin_btn{
+  -fx-font-family : Tahoma;
+  -fx-font-size : 22px;
+  -fx-text-fill: #FFF;
+  -fx-background-radius: 10px;
+  -fx-background-color: #AA3672;
+}
+.signin_btn:hover{
+    -fx-cursor: hand;
+    -fx-border-color: #AA3672;
+    -fx-border-width: 3px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #FFF;
+     -fx-text-fill: linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-font-weight: bold; 
+}
+.signup_btn{
+  -fx-font-family : Tahoma;
+  -fx-font-size : 22px;
+  -fx-text-fill: #FFF;
+  -fx-background-radius: 10px;
+  -fx-background-color: #AA3672;
+}
+.signup_btn:hover{
+    -fx-cursor: hand;
+    -fx-border-color: #AA3672;
+    -fx-border-width: 3px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #FFF;
+     -fx-text-fill: linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-font-weight: bold; 
+}
+.forget_passowrd:hover{
+   -fx-cursor: hand; 
+}
+.facebook_btn:hover{
+      -fx-cursor: hand;
+      -fx-border-color: #AA3672;
+      -fx-border-width: 3px;
+      -fx-background-radius: 10px;
+       -fx-font-weight: bold;
+}
+
+.google_btn:hover{
+      -fx-cursor: hand;
+      -fx-border-color: #AA3672;
+      -fx-border-width: 3px;
+      -fx-background-radius: 10px;
+       -fx-font-weight: bold;
+}
