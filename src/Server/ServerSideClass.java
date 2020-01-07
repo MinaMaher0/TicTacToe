@@ -89,6 +89,27 @@ public class ServerSideClass implements Server {
 
     @Override
     public boolean signIN(String userName, String password) {
+        for (int i=0;i<db.getV().size();i++)
+        {
+            if (db.getV().get(i).getEmail().equals(userName))
+            {
+                if(db.getV().get(i).getPassword().equals(password))
+                {
+                    return true;
+                }
+            }
+            if (db.getV().get(i).getEmail().equals(userName))
+            {
+                if(!db.getV().get(i).getPassword().equals(password))
+                {
+                    return false;
+                }
+            }
+            if (!db.getV().get(i).getEmail().equals(userName))
+            {
+                return false;
+            }
+        }
         return true;
     }
 
