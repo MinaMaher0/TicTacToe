@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientgui.SignUpController">
+   <children>
+      <ImageView fitHeight="172.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/sign-in-3.png" />
+         </image>
+      </ImageView>
+      <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="135.0" text="Sign Up">
+         <font>
+            <Font name="Comic Sans MS" size="34.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#804ca8" />
+                  <Stop color="#e81523" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="58.0" prefWidth="647.0" spacing="10.0">
+         <children>
+            <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" lineSpacing="10.0" size="30" />
+            <JFXTextField prefHeight="46.0" prefWidth="330.0" promptText="User Name" unFocusColor="#c14378">
+               <focusColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#d31557" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </focusColor>
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font>
+            </JFXTextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <FontAwesomeIconView glyphName="LOCK" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="30" />
+            <JFXPasswordField prefHeight="40.0" prefWidth="337.0" promptText="Password" unFocusColor="#c14378ed">
+               <focusColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#d31557" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </focusColor>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXPasswordField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="67.0" prefWidth="647.0" spacing="10.0">
+         <children>
+            <FontAwesomeIconView glyphName="ENVELOPE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" lineSpacing="10.0" size="30" />
+            <JFXTextField prefHeight="48.0" prefWidth="330.0" promptText="Email" unFocusColor="#c14378">
+               <focusColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#d31557" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </focusColor>
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font>
+            </JFXTextField>
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="99.0" prefWidth="647.0">
+         <children>
+            <JFXButton alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#signUp" prefHeight="60.0" prefWidth="260.0" styleClass="signup_btn" stylesheets="@signup.css" text="Sign Up">
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="766.0" spacing="70.0">
+         <children>
+            <JFXButton alignment="BASELINE_LEFT" onAction="#goBackSignIn" prefHeight="46.0" prefWidth="36.0" styleClass="google_btn" stylesheets="@../signin/signin.css" text="Back" textAlignment="RIGHT">
+               <font>
+                  <Font name="Tahoma" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#e81523" />
+                        <Stop color="#1841e2" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <graphic>
+                  <FontAwesomeIconView glyphName="ANGLE_DOUBLE_LEFT" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="40" textAlignment="JUSTIFY" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</VBox>

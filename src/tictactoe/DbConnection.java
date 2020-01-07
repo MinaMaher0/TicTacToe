@@ -26,7 +26,7 @@ public class DbConnection {
     Connection conn = null;
     Statement st = null;
 
-    DbConnection() {
+  public DbConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe", "root", "password");
@@ -40,12 +40,13 @@ public class DbConnection {
 
     }
 
-    void getData() {
+    public Vector<Player> getData() {
         v.clear();
-        String queryString = new String("select * from player");
+        String queryString = "select * from player";
         ResultSet rs = null;
         try {
             rs = st.executeQuery(queryString);
+            
             while (rs.next()) {
                 Player e = new Player(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getBoolean(8));
                 v.add(e);
@@ -53,7 +54,7 @@ public class DbConnection {
         } catch (SQLException ex) {
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        return v ;
     }
     /*public int getNewId()
     {
@@ -81,11 +82,75 @@ public class DbConnection {
     }
     
     
+    public Player signIn(String mail , String password)
+    {   
+        Player p = new Player();
+        
+        PreparedStatement pst;
+        try {
+            pst = conn.prepareStatement(" select email , password from player" +"where email= "+mail+" && password="+password+"; ");
+ 
+            ResultSet rs = pst.executeQuery();  
+            
+            if(rs.next())
+             {
+                 p.setUser_name(rs.getString("user_name"));
+                 p.setProfile_picture(rs.getString("profile_picture"));
+                 p.setScore(rs.getInt("score"));
+                 p.setFlag(rs.getBoolean("flag"));
+                 return p ;
+             }
+            
+        }   catch (SQLException ex) {
+            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        return null;
+        
+    }
+    
+    public boolean checkAvailableGame(int pId1 , int pId2)
+    {
+        PreparedStatement pst;
+        try {
+            pst = conn.prepareStatement(" select * from game" +"where first_player=? && second_player=?; ");
+        
+            pst.setInt(1, pId1);
+            pst.setInt(2, pId2); 
+            ResultSet rs = pst.executeQuery();  
+            if(rs.next())
+                return true;
+        }   catch (SQLException ex) {
+            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false ;
+    }
+        
+//    public Game getGame(int pId1 , int pId2)
+//    {
+//        return null;
+//        
+//    }
+//    public void deleteGame(int pId1, int pId2)
+//    {
+//        
+//    }
+//    public void saveGame(Game game)
+//    {
+//        
+//    }
+    
+    
     
     public static void main(String[] args) {
 
         DbConnection d = new DbConnection();
-        d.getData();
+//        
+//       
+//        //d.signUp("m", "m", "mmm");
+//        
+       Player x=d.signIn("kkkk", "kk");
        
         d.signUp("m", "m", "mmm");
         
