@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServerPackage;
+
 import java.util.ArrayList;
+import tictactoe.Game;
+import tictactoe.Player;
 
 /**
  *
@@ -47,7 +49,7 @@ public interface Server{
     public void logOut(int pID);
     
     //set board for users to play
-    public void setGameBoard(Palyer pOne,Palyer pTwo);
+    public void setGameBoard(Player pOne,Player pTwo);
     
     //inside it will counter++ and call set Game
     public void setTieCounter();

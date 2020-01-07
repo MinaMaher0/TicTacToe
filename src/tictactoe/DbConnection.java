@@ -27,7 +27,7 @@ public class DbConnection {
     Statement st = null;
 
   public DbConnection() {
-        try {
+        /*try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe", "root", "password");
             st = conn.createStatement();
@@ -36,7 +36,7 @@ public class DbConnection {
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
     }
 
