@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class DbConnection {
 
-    Vector<Player> v = new Vector<>();
+    Vector <Player> v = new Vector<>();
     int indexP = 0;
     Connection conn = null;
     Statement st = null;
@@ -60,6 +60,10 @@ public class DbConnection {
     {
         return v.get(v.size()-1).getId()+1;
     }*/
+
+    public Vector<Player> getV() {
+        return v;
+    }
     
     public void signUp( String user_name , String password , String mail)
     {
@@ -148,10 +152,9 @@ public class DbConnection {
 //        
        Player x=d.signIn("kkkk", "kk");
        
-       
-       
-
+        d.signUp("m", "m", "mmm");
         
+        d.getData();   
     }
 
 }
