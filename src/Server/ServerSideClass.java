@@ -54,23 +54,21 @@ public class ServerSideClass implements Server {
     @Override
     public void startServer() {
         try {
-            sSocket = new ServerSocket(8000);
+            sSocket = new ServerSocket(5007);
             System.out.println("server started");
             while(true)
             {
-            s = sSocket.accept();
-            System.out.println("accepted: " + s.toString());
-            dis = new DataInputStream(s.getInputStream());
-            
-            String test = dis.readLine();
-            JSONObject json = new JSONObject(test);
-            System.out.println(test);
-           
+                s = sSocket.accept();
+                System.out.println("accepted: " + s.toString());
+                dis = new DataInputStream(s.getInputStream());
+                ps = new PrintStream(s.getOutputStream());
+                ps.println("welcome");
+                
+                String test = dis.readLine();
+                JSONObject json = new JSONObject(test);
+                //System.out.println(test);
                 System.out.println(json.getString("password"));
                 System.out.println(json.getString("userName"));
-   
-            ps = new PrintStream(s.getOutputStream());
-            ps.println("welcome");
             }
         } catch (IOException e) {
         } catch (JSONException ex) {
@@ -91,7 +89,7 @@ public class ServerSideClass implements Server {
 
     @Override
     public boolean signIN(String userName, String password) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
 
     @Override

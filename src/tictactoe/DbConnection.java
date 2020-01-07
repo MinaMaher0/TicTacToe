@@ -26,7 +26,7 @@ public class DbConnection {
     Connection conn = null;
     Statement st = null;
 
-    public DbConnection() {
+    DbConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe", "root", "password");
