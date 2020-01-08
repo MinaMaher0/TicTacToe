@@ -16,4 +16,7 @@ public enum Request{
     SIGNUP,
     SIGN_UP_SUCCESS,
     SIGN_UP_FAILED,
+    INVITE_PLAYER,
+    INVITE_PLAYER_SUCESS,
+    INVITE_PLAYER_FAILED,
 }
