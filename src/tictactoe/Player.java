@@ -20,7 +20,7 @@ public class Player {
     
     public Player(){    }
     
-    public Player(int id, String user_name, String  email, String token, String profile_picture, int score, boolean flag  ){
+    public Player(int id, String user_name,String  email, String token, String profile_picture, int score, boolean flag  ){
 
         this.id=id;
         this.user_name= user_name;
@@ -30,7 +30,7 @@ public class Player {
         this.score=score;
         this.flag=flag;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }

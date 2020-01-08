@@ -15,9 +15,12 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONException;
+
 //import org.json.simple.JSONObject;
 import org.json.JSONObject;
 import utils.Request;
+
+
 
 /**
  *
@@ -75,6 +78,7 @@ public class PlayerFunctions implements Client {
     }
 
     @Override
+
     public boolean signIn(String email, String password) {
         try {
             JSONObject SigninObject = new JSONObject();
@@ -86,6 +90,8 @@ public class PlayerFunctions implements Client {
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+  
         return true;
     }
 
@@ -96,7 +102,10 @@ public class PlayerFunctions implements Client {
             SignupObject.put("userName", userName);
             SignupObject.put("email", email);
             SignupObject.put("password", password);
+
             SignupObject.put("RequestType", Request.SIGNUP);
+
+         
             output.println(SignupObject.toString());
             
         } catch (JSONException ex) {
@@ -136,6 +145,7 @@ public class PlayerFunctions implements Client {
 
     @Override
     public void logOut(int pId) {
+
         try {
             JSONObject logOutObject = new JSONObject();
             try {
@@ -185,6 +195,7 @@ public class PlayerFunctions implements Client {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("tttttttttttttttt");
+
     }
 
    public static void main(String[] args) {

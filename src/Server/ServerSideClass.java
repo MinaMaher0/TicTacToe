@@ -5,10 +5,10 @@
  */
 package Server;
 
-import java.io.BufferedReader;
+
 import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -19,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import tictactoe.DbConnection;
 import tictactoe.Player;
+import utils.Request;
+import Server.ServerHandler;
 
 /**
  *
@@ -46,39 +48,32 @@ public class ServerSideClass implements Server {
         return password;
     }
 
-    public ServerSideClass() {
-        // db=new DbConnection();
+    public ServerSideClass(PrintStream ps,DataInputStream dis) {
+        this.ps=ps;
+        this.dis=dis;
+        db=new DbConnection();
+        onlinePlayers= new Vector<>();
         startServer();
     }
 
     @Override
     public void startServer() {
         try {
-            sSocket = new ServerSocket(5007);
+            sSocket = new ServerSocket(8000);
             System.out.println("server started");
             while(true)
             {
                 s = sSocket.accept();
-                System.out.println("accepted: " + s.toString());
-                dis = new DataInputStream(s.getInputStream());
-                ps = new PrintStream(s.getOutputStream());
-                ps.println("welcome");
-                
-                String test = dis.readLine();
-                JSONObject json = new JSONObject(test);
-                //System.out.println(test);
-                System.out.println(json.getString("password"));
-                System.out.println(json.getString("userName"));
+                new ServerHandler(s);
             }
         } catch (IOException e) {
-        } catch (JSONException ex) {
-            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Override
     public void stopServer() {
         try {
+            
             ps.close();
             dis.close();
             s.close();
@@ -86,28 +81,34 @@ public class ServerSideClass implements Server {
         } catch (Exception e) {
         }
     }
-
-    @Override
-    public boolean signIN(String userName, String password) {
-        for (int i=0;i<db.getV().size();i++)
+    
+    public boolean signIN(String email, String password) {
+        Player p=db.signIn(email, password);
+        JSONObject singInBack= new JSONObject();
+        if(p != null)
         {
-            if (db.getV().get(i).getEmail().equals(userName))
-            {
-                if(db.getV().get(i).getPassword().equals(password))
-                {
-                    return true;
-                }
-            }
-            if (db.getV().get(i).getEmail().equals(userName))
-            {
-                if(!db.getV().get(i).getPassword().equals(password))
-                {
-                    return false;
-                }
-            }
-            if (!db.getV().get(i).getEmail().equals(userName))
-            {
-                return false;
+            try {
+                singInBack.put("id",p.getId());
+                singInBack.put("userName",p.getUser_name());
+                singInBack.put("email",p.getEmail());
+                singInBack.put("score",p.getScore());
+                singInBack.put("pPic",p.getProfile_picture());
+                singInBack.put("RequestType",Request.LOGIN_SUCCESS);
+                System.out.println(p.getEmail());
+                ps.println(singInBack.toString());
+            } 
+            catch (JSONException ex) {
+                Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        } 
+        else 
+        {
+            try {
+                singInBack.put("RequestType",Request.LOGIN_FAILED);
+                System.out.println(p.getEmail());
+                ps.println(singInBack.toString());
+            } catch (JSONException ex) {
+                Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return true;
@@ -115,7 +116,35 @@ public class ServerSideClass implements Server {
 
     @Override
     public boolean signUP(String userName, String email, String password) {
-        db.signUp(userName, password, email);
+        boolean sUpStatus=db.signUp(userName, password, email);
+        JSONObject singUpBack= new JSONObject();
+        if(sUpStatus == true)
+        {
+            int size=db.getV().size()-1;
+            Player p = db.getV().get(size);
+            System.out.println("test "+p.getEmail());
+            onlinePlayers.add(p);
+            try {
+                singUpBack.put("id",p.getId());
+                singUpBack.put("userName",p.getUser_name());
+                singUpBack.put("email",p.getEmail());
+                singUpBack.put("score",p.getScore());
+                singUpBack.put("pPic",p.getProfile_picture());
+                singUpBack.put("RequestType",Request.SIGN_UP_SUCCESS);
+                ps.println(singUpBack.toString());
+            } catch (JSONException ex) {
+                Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+        }
+        else
+        {
+            try {
+                singUpBack.put("RequestType",Request.SIGN_UP_FAILED);
+                ps.println(singUpBack.toString());
+            } catch (JSONException ex) {
+                Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return true;
     }
 
@@ -138,9 +167,12 @@ public class ServerSideClass implements Server {
     public Vector<Player> getOnlineUser() {
         Player p = new Player();
         for (int i = 0; i < db.getV().size(); i++) {
-            if (db.getV().get(i).getFlag() == false) {
+            if (db.getV().get(i).getFlag() == false)
+            {
                 offlinePlayers.add(db.getV().get(i));
-            } else {
+            } 
+            else 
+            {
                 onlinePlayers.add(db.getV().get(i));
             }
         }
@@ -149,7 +181,7 @@ public class ServerSideClass implements Server {
 
     @Override
     public Vector<Player> getOfflineUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return offlinePlayers;   
     }
 
     @Override
@@ -164,7 +196,7 @@ public class ServerSideClass implements Server {
 
     @Override
     public void logOut(int pID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
@@ -179,12 +211,21 @@ public class ServerSideClass implements Server {
 
     @Override
     public void reciveRequestFromPlayer(int pID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
     public void sendRequestToOtherPlayer(int pID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(pID);
+       
+        try {
+            JSONObject sendRequest= new JSONObject();
+            sendRequest.put("RequestType",Request.INVITE_PLAYER_SUCESS);
+            ps.println(sendRequest.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override
@@ -193,7 +234,8 @@ public class ServerSideClass implements Server {
     }
 
     public static void main(String[] args) {
-        new ServerSideClass();
+        new ServerSideClass(null,null);
     }
 
 }
+
