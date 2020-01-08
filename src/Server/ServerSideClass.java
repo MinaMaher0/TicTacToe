@@ -5,10 +5,9 @@
  */
 package Server;
 
-import java.io.BufferedReader;
+
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -47,7 +46,7 @@ public class ServerSideClass implements Server {
     }
 
     public ServerSideClass() {
-        // db=new DbConnection();
+        db=new DbConnection();
         startServer();
     }
 
@@ -79,6 +78,7 @@ public class ServerSideClass implements Server {
     @Override
     public void stopServer() {
         try {
+            
             ps.close();
             dis.close();
             s.close();
@@ -89,27 +89,7 @@ public class ServerSideClass implements Server {
 
     @Override
     public boolean signIN(String userName, String password) {
-        for (int i=0;i<db.getV().size();i++)
-        {
-            if (db.getV().get(i).getEmail().equals(userName))
-            {
-                if(db.getV().get(i).getPassword().equals(password))
-                {
-                    return true;
-                }
-            }
-            if (db.getV().get(i).getEmail().equals(userName))
-            {
-                if(!db.getV().get(i).getPassword().equals(password))
-                {
-                    return false;
-                }
-            }
-            if (!db.getV().get(i).getEmail().equals(userName))
-            {
-                return false;
-            }
-        }
+        db.signIn(userName, password);
         return true;
     }
 
@@ -138,9 +118,12 @@ public class ServerSideClass implements Server {
     public Vector<Player> getOnlineUser() {
         Player p = new Player();
         for (int i = 0; i < db.getV().size(); i++) {
-            if (db.getV().get(i).getFlag() == false) {
+            if (db.getV().get(i).getFlag() == false)
+            {
                 offlinePlayers.add(db.getV().get(i));
-            } else {
+            } 
+            else 
+            {
                 onlinePlayers.add(db.getV().get(i));
             }
         }
@@ -149,7 +132,7 @@ public class ServerSideClass implements Server {
 
     @Override
     public Vector<Player> getOfflineUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return offlinePlayers;   
     }
 
     @Override
@@ -164,7 +147,7 @@ public class ServerSideClass implements Server {
 
     @Override
     public void logOut(int pID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
