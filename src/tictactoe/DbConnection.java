@@ -117,7 +117,7 @@ public class DbConnection {
     {
         PreparedStatement pst;
         try {
-            pst = conn.prepareStatement(" select * from game" +"where first_player=? && second_player=?; ");
+            pst = conn.prepareStatement(" select * from game" +"where first_player=? and second_player=?; ");
         
             pst.setInt(1, pId1);
             pst.setInt(2, pId2); 
@@ -131,12 +131,12 @@ public class DbConnection {
         return false ;
     }
      public Player getPlayer(int pId) {
+        PreparedStatement pst;
         
-        String queryString = " select * from player " +"where id= "+pId+"; ";
-        ResultSet rs = null;
         try {
-            rs = st.executeQuery(queryString);
-            
+            pst = conn.prepareStatement("  select * from player " +"where id= ?; ");
+            pst.setInt(1, pId);
+            ResultSet rs = pst.executeQuery();  
             if (rs.next()) {
                 Player p = new Player(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getBoolean(8));
                 return p ;
@@ -152,9 +152,11 @@ public class DbConnection {
         
         PreparedStatement pst;
         try {
-            pst = conn.prepareStatement(" select * from game " +"where first_player= "+pId1+" && second_player="+pId2+"; ");
- 
-            ResultSet rs = pst.executeQuery();  
+             pst = conn.prepareStatement(" select * from game " +"where first_player= ? && second_player=? ; ");
+             pst.setInt(1, pId1);
+             pst.setInt(2, pId2);
+             
+             ResultSet rs = pst.executeQuery();  
             
             if(rs.next())
              {
@@ -173,9 +175,11 @@ public class DbConnection {
     {
         PreparedStatement pst;
         try {
-            pst = conn.prepareStatement(" DELETE FROM game " +"where first_player= "+pId1+" and second_player="+pId2+"; ");
-  
-            int rs = pst.executeUpdate();  
+            pst = conn.prepareStatement(" DELETE FROM game " +"where first_player= ? and second_player=?; ");
+            pst.setInt(1, pId1);
+            pst.setInt(2, pId2);
+            
+            pst.executeUpdate();  
             
         }   catch (SQLException ex) {
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
