@@ -22,4 +22,5 @@ public enum Request{
     INVITE_PLAYER_FAILED,
     ACCEPT_INVITATION,
     REFUSE_INVITATION
+
 }
