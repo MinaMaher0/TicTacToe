@@ -13,7 +13,8 @@ import java.net.Socket;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -89,8 +90,13 @@ public class PlayerFunctions implements Client {
     @Override
     public boolean signIn(String userName, String password) {
         JSONObject SigninObject = new JSONObject();
-        SigninObject.put("userName", userName);
-        SigninObject.put("password", password);
+        try {
+            SigninObject.put("userName", userName);
+            SigninObject.put("password", password);
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         //System.err.println(SigninObject.toString());
         output.println(SigninObject.toString());
         return true;
@@ -98,13 +104,18 @@ public class PlayerFunctions implements Client {
 
     @Override
     public boolean signUp(String userName, String email, String password) {
-       JSONObject SignupObject = new JSONObject();
-       SignupObject.put("userName", userName);
-       SignupObject.put("email", email);
-       SignupObject.put("password", password);
-      // System.err.println(SignupObject.toString());
-       output.println(SignupObject.toString());
-       return true;
+        try {
+            JSONObject SignupObject = new JSONObject();
+            SignupObject.put("userName", userName);
+            SignupObject.put("email", email);
+            SignupObject.put("password", password);
+            // System.err.println(SignupObject.toString());
+            output.println(SignupObject.toString());
+            
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
 
     @Override
@@ -130,7 +141,11 @@ public class PlayerFunctions implements Client {
     @Override
     public void logOut(int pId) {
         JSONObject logOutObject = new JSONObject();
-        logOutObject.put("userId", pId);
+        try {
+            logOutObject.put("userId", pId);
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
         output.close();
     }
 

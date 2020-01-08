@@ -5,7 +5,7 @@
  */
 package ClientGUI.signin;
 
-import static clientgui.ClientGUI.myStage;
+import clientgui.ClientGUI;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
@@ -19,7 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import clientgui.ClientGUI;
+
 /**
  * FXML Controller class
  *
