@@ -1,0 +1,24 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.signin_btn{
+  -fx-font-family : Tahoma;
+  -fx-font-size : 22px;
+  -fx-text-fill: #FFF;
+  -fx-margin-top:55px; 
+  -fx-background-radius: 10px;
+  -fx-background-color: #AA3672;
+}
+.signin_btn:hover{
+    -fx-cursor: hand;
+    -fx-border-color: #AA3672;
+    -fx-border-width: 3px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #FFF;
+     -fx-text-fill: linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-font-weight: bold; 
+}

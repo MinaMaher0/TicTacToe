@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import tictactoe.Player;
 
 /**
  *
@@ -28,8 +29,8 @@ public class DbConnection {
 
   public DbConnection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe", "root", "password");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe?useSSL=false", "root", "ahmedxd22");
             st = conn.createStatement();
         } catch (SQLException ex) {
             System.out.println("test");
@@ -48,7 +49,7 @@ public class DbConnection {
             rs = st.executeQuery(queryString);
             
             while (rs.next()) {
-                Player e = new Player(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getBoolean(8));
+                Player e = new Player(rs.getInt(1), rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getBoolean(8));
                 v.add(e);
             }
         } catch (SQLException ex) {
@@ -81,32 +82,28 @@ public class DbConnection {
         }
     }
     
-    
     public Player signIn(String mail , String password)
     {   
         Player p = new Player();
-        
         PreparedStatement pst;
-        try {
-            pst = conn.prepareStatement(" select email , password from player" +"where email= "+mail+" && password="+password+"; ");
- 
+        try{
+            pst =conn.prepareStatement("SELECT * FROM player WHERE email=? and password=?;");
+            pst.setString(1,mail);
+            pst.setString(2,password);
             ResultSet rs = pst.executeQuery();  
-            
             if(rs.next())
-             {
-                 p.setUser_name(rs.getString("user_name"));
-                 p.setProfile_picture(rs.getString("profile_picture"));
-                 p.setScore(rs.getInt("score"));
-                 p.setFlag(rs.getBoolean("flag"));
-                 return p ;
-             }
-            
+            {
+                p.setUser_name(rs.getString("user_name"));
+                p.setEmail(rs.getString("email"));    
+                p.setProfile_picture(rs.getString("profile_picture"));
+                p.setScore(rs.getInt("score"));
+                p.setFlag(rs.getBoolean("flag"));
+                return p ;
+            }
         }   catch (SQLException ex) {
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
         return null;
-        
     }
     
     public boolean checkAvailableGame(int pId1 , int pId2)
@@ -144,17 +141,13 @@ public class DbConnection {
     
     
     public static void main(String[] args) {
-
         DbConnection d = new DbConnection();
-//        
-//       
-//        //d.signUp("m", "m", "mmm");
-//        
-       Player x=d.signIn("kkkk", "kk");
-       
-        d.signUp("m", "m", "mmm");
-        
-        d.getData();   
+      //d.signUp("m", "m", "mmm");  
+        Player x =d.signIn("ahmed@gmail.com","aa22");
+        System.out.println(x.getUser_name());
+       // d.signUp("ahmed", "aa22", "ahmed@gmail.com");
+        d.getData();
+         
     }
 
 }

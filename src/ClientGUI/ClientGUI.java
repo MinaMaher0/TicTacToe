@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+
 /**
  *
  * @author Salama
@@ -32,7 +33,6 @@ public class ClientGUI extends Application {
         try {
             myStage = stage;
             root = FXMLLoader.load(getClass().getResource("signin/Signin.fxml"));
-
             Scene scene = new Scene(root);
             stage.setTitle("Signin");
             stage.setScene(scene);
@@ -40,7 +40,7 @@ public class ClientGUI extends Application {
         } catch (IOException ex) {
             Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
 
     /**
