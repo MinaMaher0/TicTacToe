@@ -203,7 +203,21 @@ public class DbConnection {
         }
        
     }
-    
+    public void updateScore(int pId , int pScore)
+    {
+        PreparedStatement pst;
+        try {
+            pst = conn.prepareStatement(" UPDATE player set score= score+?" +"where id=?; ");
+             
+            pst.setInt(1, pId);
+            pst.setInt(2, pScore); 
+            int rs = pst.executeUpdate();  
+            
+        }   catch (SQLException ex) {
+            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     
     
     public static void main(String[] args) {
