@@ -27,7 +27,7 @@ class ServerHandler extends Thread {
     DataInputStream Dis;
     PrintStream Ps;
     Socket s;
-    public static Vector<ServerHandler> socketVector = new Vector<ServerHandler>();
+    public static Vector <ServerHandler> socketVector = new Vector<ServerHandler>();
 
     public ServerHandler(Socket socket) {
         try {
@@ -40,15 +40,12 @@ class ServerHandler extends Thread {
         } catch (IOException io) {
             io.printStackTrace();
         }
-
     }
-
 
     public void run() {
         while (true) {
             String str;
             try {
-                //sendMessageToAll(str);
                 str = Dis.readLine();
                 System.out.println("str");
                 requestHandler(str);
@@ -58,8 +55,8 @@ class ServerHandler extends Thread {
                 Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
+    
     public void requestHandler(String request)
     {
         JSONObject json;   
@@ -71,17 +68,15 @@ class ServerHandler extends Thread {
             } 
             if(json.get("RequestType").equals(Request.LOGIN.toString()))
             {
-                serverObj.signIN(json.getString("email"), json.getString("password"));
+                serverObj.signIN(json.getString("email"), json.getString("password"),s);
             } 
             if(json.get("RequestType").equals(Request.INVITE_PLAYER.toString()))
             {
-                serverObj.sendRequestToOtherPlayer(json.getInt("userId"));
+                serverObj.reciveRequestFromPlayer(json.getInt("userId"));
             } 
             
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-
 }
