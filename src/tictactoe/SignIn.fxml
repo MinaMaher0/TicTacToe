@@ -36,12 +36,12 @@
       <HBox alignment="CENTER" prefHeight="78.0" prefWidth="767.0" spacing="10.0">
          <children>
             <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" lineSpacing="10.0" size="25" />
-            <JFXTextField fx:id="userName" prefHeight="46.0" prefWidth="400.0" promptText="User Name" unFocusColor="#c14378">
+            <JFXTextField fx:id="email" prefHeight="46.0" prefWidth="400.0" promptText="User Name" unFocusColor="#c14378">
                <focusColor>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
                         <Stop color="#804ca8" />
-                        <Stop color="#e81523" offset="1.0" />
+                        <Stop color="#d31557" offset="1.0" />
                      </stops>
                   </LinearGradient>
                </focusColor>
@@ -59,7 +59,7 @@
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
                         <Stop color="#804ca8" />
-                        <Stop color="#804ca8" offset="1.0" />
+                        <Stop color="#d31557" offset="1.0" />
                      </stops>
                   </LinearGradient>
                </focusColor>
@@ -71,8 +71,8 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="78.0" prefWidth="766.0" spacing="30.0">
          <children>
-            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#sign_in" prefHeight="60.0" prefWidth="236.0" styleClass="signin_btn" stylesheets="@signin.css" text="Sign In" />
-            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="246.0" styleClass="signup_btn" stylesheets="@signin.css" text="Sign Up" />
+            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#controlButtons" prefHeight="60.0" prefWidth="236.0" styleClass="signin_btn" stylesheets="@signin.css" text="Sign In" />
+            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#tosign_up" prefHeight="60.0" prefWidth="246.0" styleClass="signup_btn" stylesheets="@signin.css" text="Sign Up" />
          </children>
       </HBox>
       <Label alignment="BASELINE_LEFT" prefHeight="30.0" prefWidth="357.0" styleClass="forget_passowrd" stylesheets="@signin.css" text="Forget Password?" textFill="#757171" underline="true">

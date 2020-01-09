@@ -19,7 +19,24 @@ import javafx.scene.Scene;
 
 
 public class SignUpController implements Initializable {
+    
+    
+    
+    @FXML
+    void sign_up(ActionEvent event) {
+        
+        try {
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("SignUp");
+            MainGUI.primaryStage.setScene(scene);
+            MainGUI.primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    }
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
