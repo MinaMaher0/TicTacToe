@@ -12,7 +12,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import tictactoe.DbConnection;
+import tictactoe.Player;
 
 /**
  *
@@ -23,14 +27,20 @@ public class ServerControl {
     ServerSocket sSocket;
     Socket s;
     DbConnection db;
+    ServerSideClass sSC;
     public static Map <Integer,ServerHandler> playerMap;
-
+    public static Vector <Player>onlinePlayers,offlinePlayers;
     
     public ServerControl()
     {
         db=new DbConnection();
-        playerMap= new HashMap <Integer, ServerHandler>();
-
+        playerMap = new HashMap <Integer, ServerHandler>();
+        onlinePlayers = new Vector<>();
+        offlinePlayers = new Vector<>();
+        offlinePlayers=db.getData();
+        sSC= new ServerSideClass();
+        sSC.getOfflineUser();
+        startServer();
     }
     
     
@@ -57,5 +67,8 @@ public class ServerControl {
             sSocket.close();
         } catch (Exception e) {
         }
+    }
+    public static void main(String[] args) {
+        new ServerControl();
     }
 }
