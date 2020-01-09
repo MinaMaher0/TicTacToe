@@ -33,7 +33,7 @@ public class PlayerFunctions implements Client {
             s = new Socket("7.7.7.42", 8000);
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
-           signIn("mina10@gmail.com", "More34");
+           //signIn("mina10@gmail.com", "More34");
           //invitePlayer(28);
         } catch (IOException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
