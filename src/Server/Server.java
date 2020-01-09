@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Server;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Vector;
 import tictactoe.Player;
@@ -15,13 +16,7 @@ import tictactoe.Player;
  */
 public interface Server{
     
-    public void startServer();
-    
-    //send ack to online players to save game state if they play
-    public void stopServer();
-    
-    public boolean signIN(String userName,String password);
-    
+    public boolean signIN(String userName,String password,Socket s);
     
     public boolean signUP(String userName,String email,String password);
     
@@ -56,7 +51,7 @@ public interface Server{
     public void setTieCounter();
 
     //from player if wants to play with ither player 
-    public void reciveRequestFromPlayer(int pID);
+    public Socket reciveRequestFromPlayer(int pID);
     
     //send request to other player
     public void sendRequestToOtherPlayer(int pID);
