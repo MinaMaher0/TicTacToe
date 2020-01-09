@@ -21,6 +21,8 @@ import tictactoe.DbConnection;
 import tictactoe.Player;
 import utils.Request;
 import Server.ServerHandler;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -31,14 +33,13 @@ public class ServerSideClass implements Server {
     private static final String name = "admin";
     private static final String password = "admin";
     DbConnection db;
-
-    Vector<Player> offlinePlayers;
-    Vector<Player> onlinePlayers;
-
-    ServerSocket sSocket;
-    Socket s;
     DataInputStream dis;
     PrintStream ps;
+    
+    Map <Integer,Socket> playerMap;
+    
+    Vector<Player> offlinePlayers;
+    Vector<Player> onlinePlayers;
 
     public static String getName() {
         return name;
@@ -51,38 +52,13 @@ public class ServerSideClass implements Server {
     public ServerSideClass(PrintStream ps,DataInputStream dis) {
         this.ps=ps;
         this.dis=dis;
-        db=new DbConnection();
+        db= new DbConnection();
+        playerMap= new HashMap <Integer, Socket>();
         onlinePlayers= new Vector<>();
-        startServer();
     }
 
     @Override
-    public void startServer() {
-        try {
-            sSocket = new ServerSocket(8000);
-            System.out.println("server started");
-            while(true)
-            {
-                s = sSocket.accept();
-                new ServerHandler(s);
-            }
-        } catch (IOException e) {
-        }
-    }
-    
-    @Override
-    public void stopServer() {
-        try {
-            
-            ps.close();
-            dis.close();
-            s.close();
-            sSocket.close();
-        } catch (Exception e) {
-        }
-    }
-    
-    public boolean signIN(String email, String password) {
+    public boolean signIN(String email, String password,Socket s) {
         Player p=db.signIn(email, password);
         JSONObject singInBack= new JSONObject();
         if(p != null)
@@ -96,6 +72,7 @@ public class ServerSideClass implements Server {
                 singInBack.put("RequestType",Request.LOGIN_SUCCESS);
                 System.out.println(p.getEmail());
                 ps.println(singInBack.toString());
+                playerMap.put(p.getId(),s);
             } 
             catch (JSONException ex) {
                 Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -210,14 +187,8 @@ public class ServerSideClass implements Server {
     }
 
     @Override
-    public void reciveRequestFromPlayer(int pID) {
-       
-    }
-
-    @Override
-    public void sendRequestToOtherPlayer(int pID) {
+    public Socket reciveRequestFromPlayer(int pID) {
         System.out.println(pID);
-       
         try {
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER_SUCESS);
@@ -225,7 +196,12 @@ public class ServerSideClass implements Server {
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        return playerMap.get(pID);
+    }
+
+    @Override
+    public void sendRequestToOtherPlayer(int pID) {
+
     }
 
     @Override
