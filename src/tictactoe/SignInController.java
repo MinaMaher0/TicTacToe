@@ -5,6 +5,7 @@
  */
 package tictactoe;
 
+
 import com.jfoenix.controls.JFXPasswordField;
 import java.io.IOException;
 import java.net.URI;
@@ -27,17 +28,46 @@ import com.jfoenix.controls.JFXTextField;
  */
 public class SignInController implements Initializable {
     
-   
-    @FXML
-    private JFXTextField userName;
+   @FXML
+    private JFXTextField email;
 
     @FXML
     private JFXPasswordField password;
 
     @FXML
     void sign_in(ActionEvent event) {
-        System.out.println(userName.getText());
+        System.out.println(email.getText());
     }
+    
+     @FXML
+    void tosign_up(ActionEvent event) {
+        try {
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("SignUp");
+            MainGUI.primaryStage.setScene(scene);
+            MainGUI.primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    @FXML
+    void controlButtons(ActionEvent event) {
+        try {
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("Signin");
+            MainGUI.primaryStage.setScene(scene);
+            MainGUI.primaryStage.show(); 
+        } catch (IOException ex) {
+            Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

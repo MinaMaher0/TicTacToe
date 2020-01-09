@@ -18,22 +18,23 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
 /**
  *
  * @author Salama
  */
-public class MainGUI extends Application {
+public class MainGUI extends Application {    
+   public static Stage primaryStage;
     Parent root;
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
         try {
+            primaryStage=stage;
             root=FXMLLoader.load(getClass().getResource("SignIn.fxml"));
             Scene scene=new Scene(root);
-            primaryStage.setTitle("SignIn");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            primaryStage.setResizable(false);
+            stage.setTitle("SignIn");
+            stage.setScene(scene);
+            stage.show();
+            stage.setResizable(false);
         } catch (IOException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
