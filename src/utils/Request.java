@@ -9,18 +9,17 @@ package utils;
  *
  * @author Me5a
  */
-public enum Request{
-    LOGIN,
-    LOGIN_SUCCESS,
-    LOGIN_FAILED,
-    SIGNUP,
-    SIGN_UP_SUCCESS,
-    SIGN_UP_FAILED,
-    INVITE_PLAYER,
-    SEND_INVITATION,
-    INVITE_PLAYER_SUCESS,
-    INVITE_PLAYER_FAILED,
-    ACCEPT_INVITATION,
-    REFUSE_INVITATION
-
+public class Request{
+    public static final int LOGIN=1;
+    public static final int LOGIN_SUCCESS=2;
+    public static final int LOGIN_FAILED=3;
+    public static final int SIGNUP=4;
+    public static final int SIGN_UP_SUCCESS=5;
+    public static final int SIGN_UP_FAILED=6;
+    public static final int INVITE_PLAYER=7;
+    public static final int SEND_INVITATION=8;
+    public static final int INVITE_PLAYER_SUCESS=9;
+    public static final int INVITE_PLAYER_FAILED=10;
+    public static final int ACCEPT_INVITATION=11;
+    public static final int REFUSE_INVITATION=12;
 }
