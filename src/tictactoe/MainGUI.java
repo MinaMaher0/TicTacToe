@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientgui;
+package tictactoe;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -22,25 +22,21 @@ import javafx.stage.Stage;
  *
  * @author Salama
  */
-public class ClientGUI extends Application {
-
+public class MainGUI extends Application {
     Parent root;
-    public static Stage myStage;
-
     @Override
-    public void start(Stage stage) {
+    public void start(Stage primaryStage) {
         try {
-            myStage = stage;
-            root = FXMLLoader.load(getClass().getResource("signin/Signin.fxml"));
-
-            Scene scene = new Scene(root);
-            stage.setTitle("Signin");
-            stage.setScene(scene);
-            stage.show();
+            root=FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+            Scene scene=new Scene(root);
+            primaryStage.setTitle("SignIn");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            primaryStage.setResizable(false);
         } catch (IOException ex) {
-            Logger.getLogger(ClientGUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+     
     }
 
     /**
@@ -49,5 +45,5 @@ public class ClientGUI extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
+    
 }
