@@ -16,6 +16,7 @@ import tictactoe.Player;
  */
 public interface Server{
     
+
     public boolean signIN(String userName,String password,ServerHandler s);
     
     public boolean signUP(String userName,String email,String password);

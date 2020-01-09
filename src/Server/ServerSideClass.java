@@ -35,7 +35,6 @@ public class ServerSideClass implements Server {
     DbConnection db;
     DataInputStream dis;
     PrintStream ps;
-  
     Vector<Player> offlinePlayers;
     Vector<Player> onlinePlayers;
 
@@ -51,7 +50,6 @@ public class ServerSideClass implements Server {
         this.ps=ps;
         this.dis=dis;
         db= new DbConnection();
-     
         onlinePlayers= new Vector<>();
     }
 
@@ -71,6 +69,7 @@ public class ServerSideClass implements Server {
                 System.out.println(p.getEmail());
                 ps.println(singInBack.toString());
                 ServerControl.playerMap.put(p.getId(),s);
+
             } 
             catch (JSONException ex) {
                 Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,7 +198,6 @@ public class ServerSideClass implements Server {
 
     @Override
     public void sendRequestToOtherPlayer(ServerHandler s) {
-            
         try {
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
@@ -207,7 +205,9 @@ public class ServerSideClass implements Server {
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
+
 
     @Override
     public void acceptPlayerRequest(int pID) {

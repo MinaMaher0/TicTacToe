@@ -24,12 +24,13 @@ public class ServerControl {
     Socket s;
     DbConnection db;
     public static Map <Integer,ServerHandler> playerMap;
+
     
     public ServerControl()
     {
         db=new DbConnection();
         playerMap= new HashMap <Integer, ServerHandler>();
-        startServer();
+
     }
     
     
@@ -40,7 +41,6 @@ public class ServerControl {
             while(true)
             {
                 s = sSocket.accept();
-                System.out.println(s);
                 new ServerHandler(s);
             }
         } catch (IOException e) {
@@ -57,8 +57,5 @@ public class ServerControl {
             sSocket.close();
         } catch (Exception e) {
         }
-    }
-    public static void main(String[] args) {
-        new ServerControl();
     }
 }
