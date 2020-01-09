@@ -36,6 +36,7 @@ public class SignInController implements Initializable {
 
     @FXML
     void sign_in(ActionEvent event) {
+
         System.out.println(email.getText());
     }
     
@@ -68,6 +69,13 @@ public class SignInController implements Initializable {
         }
     }
     
+         String emailAdress = userName.getText();
+         String passwordP = password.getText();
+            PlayerFunctions p= new PlayerFunctions();
+            System.out.println(p.signIn(emailAdress, passwordP));
+    }
+    
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
