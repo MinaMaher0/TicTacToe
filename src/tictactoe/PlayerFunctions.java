@@ -173,7 +173,7 @@ public class PlayerFunctions implements Client {
                 case Request.INVITE_PLAYER_FAILED:
                     System.out.println("invitation decliend");
                     break;
-                case Request.RECEIVE_INVITATION:
+                case Request.INVITE_PLAYER:
                     System.out.println(ReqObj.toString());
             }
             
