@@ -16,7 +16,7 @@ import tictactoe.Player;
  */
 public interface Server{
     
-    public boolean signIN(String userName,String password,Socket s);
+    public boolean signIN(String userName,String password,ServerHandler s);
     
     public boolean signUP(String userName,String email,String password);
     
@@ -51,10 +51,10 @@ public interface Server{
     public void setTieCounter();
 
     //from player if wants to play with ither player 
-    public Socket reciveRequestFromPlayer(int pID);
+    public void reciveRequestFromPlayer(int pID);
     
     //send request to other player
-    public void sendRequestToOtherPlayer(int pID);
+    public void sendRequestToOtherPlayer(ServerHandler s);
     
     //player two accpet request from other player
     public void acceptPlayerRequest(int pID);

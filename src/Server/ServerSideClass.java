@@ -35,9 +35,7 @@ public class ServerSideClass implements Server {
     DbConnection db;
     DataInputStream dis;
     PrintStream ps;
-    
-    Map <Integer,Socket> playerMap;
-    
+  
     Vector<Player> offlinePlayers;
     Vector<Player> onlinePlayers;
 
@@ -53,12 +51,12 @@ public class ServerSideClass implements Server {
         this.ps=ps;
         this.dis=dis;
         db= new DbConnection();
-        playerMap= new HashMap <Integer, Socket>();
+     
         onlinePlayers= new Vector<>();
     }
 
     @Override
-    public boolean signIN(String email, String password,Socket s) {
+    public boolean signIN(String email, String password,ServerHandler s) {
         Player p=db.signIn(email, password);
         JSONObject singInBack= new JSONObject();
         if(p != null)
@@ -72,7 +70,7 @@ public class ServerSideClass implements Server {
                 singInBack.put("RequestType",Request.LOGIN_SUCCESS);
                 System.out.println(p.getEmail());
                 ps.println(singInBack.toString());
-                playerMap.put(p.getId(),s);
+                ServerControl.playerMap.put(p.getId(),s);
             } 
             catch (JSONException ex) {
                 Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,31 +185,33 @@ public class ServerSideClass implements Server {
     }
 
     @Override
-    public Socket reciveRequestFromPlayer(int pID) {
+    public void reciveRequestFromPlayer(int pID) {
         System.out.println(pID);
         try {
             JSONObject sendRequest= new JSONObject();
-            sendRequest.put("RequestType",Request.INVITE_PLAYER_SUCESS);
+            sendRequest.put("RequestType",Request.INVITE_PLAYER);
             ps.println(sendRequest.toString());
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return playerMap.get(pID);
+        System.out.println(ServerControl.playerMap.get(pID).s);
     }
 
     @Override
-    public void sendRequestToOtherPlayer(int pID) {
-
+    public void sendRequestToOtherPlayer(ServerHandler s) {
+            
+        try {
+            JSONObject sendRequest= new JSONObject();
+            sendRequest.put("RequestType",Request.INVITE_PLAYER);
+            s.Ps.println(sendRequest.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void acceptPlayerRequest(int pID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public static void main(String[] args) {
-        new ServerSideClass(null,null);
-    }
-
 }
 
