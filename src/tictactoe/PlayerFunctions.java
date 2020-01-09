@@ -15,19 +15,14 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONException;
-
-//import org.json.simple.JSONObject;
 import org.json.JSONObject;
 import utils.Request;
-
-
 
 /**
  *
  * @author Aya Morsi
  */
 public class PlayerFunctions implements Client {
-
     String str;
     DataInputStream input;
     PrintStream output;
@@ -41,7 +36,7 @@ public class PlayerFunctions implements Client {
             
             //signUp("mina", "minasowar@gmail.com", "More34"); 
             //signIn("mina10@gmail.com", "More34");
-            invitePlayer(2);
+           // invitePlayer(2);
             
         } catch (IOException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,18 +48,19 @@ public class PlayerFunctions implements Client {
                 while (true) {
                     if (input != null) {
                         try {
-                            System.out.println("yyyyyyyyyyyyyy");
                             str = input.readLine();
                             System.out.println(str);
                             RequestHandller(str);
                             System.out.println("server response: " + str);
-                                        Scanner s = new Scanner(System.in);
-
-                            s.nextInt();
-            signIn("mina10@gmail.com", "More34");
+                    //  Scanner s = new Scanner(System.in);
+                    // s.nextInt();
+           // signIn("mina10@gmail.com", "More34");
                         } catch (IOException ex) {
                             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                    }
+                else{
+                        System.out.println("connection lost");
                     }
                 }
 
@@ -102,10 +98,7 @@ public class PlayerFunctions implements Client {
             SignupObject.put("userName", userName);
             SignupObject.put("email", email);
             SignupObject.put("password", password);
-
             SignupObject.put("RequestType", Request.SIGNUP);
-
-         
             output.println(SignupObject.toString());
             
         } catch (JSONException ex) {
@@ -165,42 +158,34 @@ public class PlayerFunctions implements Client {
          
         try {
             ReqObj = new JSONObject(str);
-            if(ReqObj.get("RequestType").equals(Request.SIGN_UP_SUCCESS.toString()))
-            {
-                System.out.println("sucess");
-            }
-            
-            if (ReqObj.get("RequestType").equals(Request.SIGN_UP_FAILED.toString())){
-                System.out.println("unsecss");
-            }
-            
-            if(ReqObj.get("RequestType").equals(Request.LOGIN_SUCCESS.toString()))
-            {
-                System.out.println("sign in sucess");
-            }
-            if(ReqObj.get("RequestType").equals(Request.LOGIN_FAILED.toString()))
-            {
-                System.out.println("sign in unsucess");
-            }
-            if(ReqObj.get("RequestType").equals(Request.INVITE_PLAYER_SUCESS.toString()))
-            {
-                System.out.println("invitation accepted");
-            }
-             if(ReqObj.get("RequestType").equals(Request.INVITE_PLAYER_FAILED.toString()))
-            {
-                System.out.println("invitation decliend");
+            switch(ReqObj.get("RequestType").hashCode()){
+                case Request.SIGN_UP_SUCCESS:
+                     System.out.println("sucess");
+                     break;
+                case Request.SIGN_UP_FAILED :
+                    System.out.println("unsecss");
+                case Request.LOGIN_SUCCESS:
+                    System.out.println("sign in sucess");
+                    break;
+                case Request.LOGIN_FAILED:
+                    System.out.println("sign in unsucess");
+                    break;
+                case Request.INVITE_PLAYER_SUCESS:
+                    System.out.println("invitation accepted");
+                    break;
+                case Request.INVITE_PLAYER_FAILED:
+                    System.out.println("invitation decliend");
             }
             
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("tttttttttttttttt");
+        
 
     }
 
    public static void main(String[] args) {
         new PlayerFunctions();
-       // PlayerFunctions p = new PlayerFunctions();
-        // p.signIn("aya", "sjdh5dls");
+       
     }
 }
