@@ -5,6 +5,8 @@
  */
 package tictactoe;
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -19,12 +21,29 @@ import javafx.scene.Scene;
 
 
 public class SignUpController implements Initializable {
+   @FXML
+    private JFXTextField userName;
+
+    @FXML
+    private JFXPasswordField password;
+
+    @FXML
+    private JFXTextField email;
     
-    
+    @FXML
+    void sign_up_method(ActionEvent event)
+    {
+        String username = userName.getText();
+        String emailAdress = email.getText();
+         String passwordP = password.getText();
+         PlayerFunctions p= new PlayerFunctions();
+         System.out.println(p.signUp(username, emailAdress, passwordP));
+        
+    }
     
     @FXML
     void sign_up(ActionEvent event) {
-        
+        sign_up_method(event);
         try {
             Parent root;
             root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
@@ -35,7 +54,7 @@ public class SignUpController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
   
     @Override

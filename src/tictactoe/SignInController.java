@@ -36,7 +36,11 @@ public class SignInController implements Initializable {
 
     @FXML
     void sign_in(ActionEvent event) {
-        System.out.println(email.getText());
+         String emailAdress = email.getText();
+         String passwordP = password.getText();
+         PlayerFunctions p= new PlayerFunctions();
+         System.out.println(p.signIn(emailAdress, passwordP));
+       
     }
     
      @FXML
@@ -56,6 +60,7 @@ public class SignInController implements Initializable {
     
     @FXML
     void controlButtons(ActionEvent event) {
+        sign_in(event);
         try {
             Parent root;
             root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
@@ -68,10 +73,14 @@ public class SignInController implements Initializable {
         }
     }
     
-    
-    @Override
+        @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }   
+    }
+
     
-}
+
+    
+     
+    

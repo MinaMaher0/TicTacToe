@@ -35,8 +35,8 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="78.0" prefWidth="767.0" spacing="10.0">
          <children>
-            <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" lineSpacing="10.0" size="25" />
-            <JFXTextField fx:id="email" prefHeight="46.0" prefWidth="400.0" promptText="User Name" unFocusColor="#c14378">
+            <FontAwesomeIconView glyphName="ENVELOPE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" lineSpacing="10.0" size="25" />
+            <JFXTextField prefHeight="46.0" prefWidth="400.0" promptText="Email" unFocusColor="#c14378" fx:id="email">
                <focusColor>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -54,7 +54,7 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="766.0" spacing="10.0">
          <children>
             <FontAwesomeIconView glyphName="KEY" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="25" />
-            <JFXPasswordField fx:id="password" prefHeight="40.0" prefWidth="400.0" promptText="Password" unFocusColor="#c14378ed">
+            <JFXPasswordField prefHeight="40.0" prefWidth="400.0" promptText="Password" unFocusColor="#c14378ed" fx:id="password">
                <focusColor>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
