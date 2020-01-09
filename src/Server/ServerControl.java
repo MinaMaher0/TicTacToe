@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import tictactoe.DbConnection;
 
 /**
@@ -21,11 +23,14 @@ public class ServerControl {
     ServerSocket sSocket;
     Socket s;
     DbConnection db;
+    public static Map <Integer,ServerHandler> playerMap;
+
     
     public ServerControl()
     {
         db=new DbConnection();
-        startServer();
+        playerMap= new HashMap <Integer, ServerHandler>();
+
     }
     
     

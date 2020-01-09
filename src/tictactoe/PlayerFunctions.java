@@ -30,14 +30,11 @@ public class PlayerFunctions implements Client {
 
     public PlayerFunctions() {
         try {
-            s = new Socket("192.168.43.151", 8000);
+            s = new Socket("7.7.7.42", 8000);
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
-            
-            //signUp("mina", "minasowar@gmail.com", "More34"); 
-            //signIn("mina10@gmail.com", "More34");
-           // invitePlayer(2);
-            
+           //signIn("mina10@gmail.com", "More34");
+          //invitePlayer(28);
         } catch (IOException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -175,6 +172,9 @@ public class PlayerFunctions implements Client {
                     break;
                 case Request.INVITE_PLAYER_FAILED:
                     System.out.println("invitation decliend");
+                    break;
+                case Request.INVITE_PLAYER:
+                    System.out.println(ReqObj.toString());
             }
             
         } catch (JSONException ex) {

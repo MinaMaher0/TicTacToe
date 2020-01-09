@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -62,19 +63,25 @@ class ServerHandler extends Thread {
         JSONObject json;   
         try {
             json = new JSONObject(request);
-            if(json.getString("RequestType").equals(Request.SIGNUP.toString()))
+            switch (json.getInt("RequestType"))
             {
-                serverObj.signUP(json.getString("userName"), json.getString("email"), json.getString("password"));
-            } 
-            if(json.get("RequestType").equals(Request.LOGIN.toString()))
-            {
-                serverObj.signIN(json.getString("email"), json.getString("password"),s);
-            } 
-            if(json.get("RequestType").equals(Request.INVITE_PLAYER.toString()))
-            {
-                serverObj.reciveRequestFromPlayer(json.getInt("userId"));
-            } 
+                case Request.SIGNUP:
+                {
+                     serverObj.signUP(json.getString("userName"), json.getString("email"), json.getString("password"));
+                     break;
+                }
+                case Request.LOGIN:
+                {
+                    serverObj.signIN(json.getString("email"), json.getString("password"),this);
+                    break;
+                }
+                case Request.INVITE_PLAYER:
+                {
+                    serverObj.reciveRequestFromPlayer(json.getInt("userId"));
+                    break;
+                } 
             
+            }
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
