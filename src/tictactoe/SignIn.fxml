@@ -41,7 +41,7 @@
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
                         <Stop color="#804ca8" />
-                        <Stop color="#d31557" offset="1.0" />
+                        <Stop color="#e81523" offset="1.0" />
                      </stops>
                   </LinearGradient>
                </focusColor>
@@ -59,7 +59,7 @@
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
                         <Stop color="#804ca8" />
-                        <Stop color="#d31557" offset="1.0" />
+                        <Stop color="#804ca8" offset="1.0" />
                      </stops>
                   </LinearGradient>
                </focusColor>
