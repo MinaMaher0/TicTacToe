@@ -31,17 +31,15 @@ public class PlayerFunctions implements Client {
     public PlayerFunctions() {
         try {
 
-            s = new Socket("7.7.7.42", 8000);
+            s = new Socket("127.0.0.1", 8000);
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
-           //signIn("mina10@gmail.com", "More34");
+             signIn("ma10@gmail.com", "More34");
           //invitePlayer(28);
 
         } catch (IOException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
-        
         }
-        
         new Thread(new Runnable() {
             @Override
             public void run() {
