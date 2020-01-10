@@ -23,12 +23,12 @@ public class runServerGUI extends Application{
 
     public static Stage primaryStage;
     Parent root;
-    
+ 
     @Override 
     public void start(Stage stage){
         try {
             primaryStage=stage;
-            root=FXMLLoader.load(getClass().getResource("ServerLogin.fxml"));
+            root=FXMLLoader.load(getClass().getResource("ServerHome.fxml"));
             Scene scene=new Scene(root);
             stage.setTitle("AdminLogin");
             stage.setScene(scene);

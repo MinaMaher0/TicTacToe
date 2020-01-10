@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 import javafx.scene.Scene;
+import ServerGui.runServerGUI;
 import tictactoe.PlayerFunctions;
 
 /**
@@ -40,7 +41,7 @@ public class ServerLoginController implements Initializable {
     private JFXPasswordField password;
     
     @FXML 
-    void signIn(ActionEvent event) //to goto control buttons scene
+    void signIn(ActionEvent event) throws IOException //to goto control buttons scene
     {  
         String serverUserName = username.getText();
         String serverPassword = password.getText();
@@ -48,7 +49,12 @@ public class ServerLoginController implements Initializable {
         if(serverUserName.equals(ServerSideClass.getName()) 
                 &&serverPassword.equals(ServerSideClass.getPassword()))
         {
-            System.out.println("Hello Server");
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("ServerHome.fxml"));
+            Scene scene = new Scene(root);
+            runServerGUI.primaryStage.setTitle("Home");
+            runServerGUI.primaryStage.setScene(scene);
+            runServerGUI.primaryStage.show();
         }
     }
     @Override

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerGui.ServerHomeController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" style="-fx-spacing: 10px;">
+         <children>
+            <Label alignment="CENTER" prefHeight="41.0" prefWidth="203.0" text="Online Players">
+               <font>
+                  <Font name="System Italic" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#c14378" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <JFXListView fx:id="onlineP" prefHeight="280.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" style="-fx-spacing: 10px;" styleClass="vbox" stylesheets="@serverhome.css">
+         <children>
+            <JFXButton onAction="#startServer" prefHeight="65.0" prefWidth="180.0" styleClass="btn" stylesheets="@serverhome.css" text="Start Server">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton prefHeight="65.0" prefWidth="179.0" styleClass="btn" stylesheets="@serverhome.css" text="Stop Server">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="358.0" prefWidth="200.0" style="-fx-spacing: 10px;">
+         <children>
+            <Label alignment="CENTER" prefHeight="41.0" prefWidth="207.0" text="Offline Players">
+               <font>
+                  <Font name="System Italic" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#c14378" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <JFXListView fx:id="offlineP" prefHeight="280.0" prefWidth="166.0" />
+         </children>
+      </VBox>
+   </children>
+</HBox>
