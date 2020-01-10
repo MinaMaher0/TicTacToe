@@ -15,8 +15,6 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import tictactoe.DbConnection;
 import tictactoe.Player;
 
