@@ -52,8 +52,10 @@ public class ServerSideClass implements Server {
         this.ps=ps;
         this.dis=dis;
         db= new DbConnection();
-        
-        getOfflineUser();
+       
+    }
+    public void signIN(String email, String password){
+        System.out.println("PPPPPPPPPPPP");
     }
 
     @Override
@@ -72,27 +74,21 @@ public class ServerSideClass implements Server {
                 singInBack.put("score",p.getScore());
                 singInBack.put("pPic",p.getProfile_picture());
                 singInBack.put("RequestType",Request.LOGIN_SUCCESS);
-                
-                System.out.println(p.getEmail());
-                
-                ServerControl.onlinePlayers.add(p);
-                
-                for(Player newP : ServerControl.offlinePlayers)
-                {
-                    if(p.getId() == newP.getId())
-                    {
-                        ServerControl.offlinePlayers.remove(newP);
-                        break;
+                                
+                for (int i=0;i<ServerControl.players.size();++i){
+                    if (ServerControl.players.get(i).getId()==p.getId()){
+                        ServerControl.players.get(i).setFlag(true);
                     }
                 }
-                getOfflineUser();
-                getOnlineUser();
                 
                 ps.println(singInBack.toString());
+                
+                sendUsers();
                 ServerControl.playerMap.put(p.getId(),s);
                 
             } 
-            catch (JSONException ex) {
+            catch (Exception ex) {
+                System.out.println("flola : "+ex.toString());
                 Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
             } 
         } 
@@ -100,7 +96,6 @@ public class ServerSideClass implements Server {
         {
             try {
                 singInBack.put("RequestType",Request.LOGIN_FAILED);
-                //System.out.println(p.getEmail());
                 ps.println(singInBack.toString());
             } catch (JSONException ex) {
                 Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,6 +103,21 @@ public class ServerSideClass implements Server {
         }
         return true;
     }
+    
+    public void sendUsers(){
+        JSONObject users= new JSONObject();
+        try {
+            users.put("RequestType",Request.USERS);
+            users.put("users",ServerControl.players);
+            for (ServerHandler sv : ServerHandler.socketVector){
+                sv.Ps.println(users.toString());
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
 
     @Override
     public boolean signUP(String userName, String email, String password){
@@ -117,8 +127,8 @@ public class ServerSideClass implements Server {
         {
             int size=db.getV().size()-1;
             Player p = db.getV().get(size);
-            System.out.println("test "+p.getEmail());
-            ServerControl.onlinePlayers.add(p);
+            p.setFlag(true);
+            ServerControl.players.add(p);
             try {
                 singUpBack.put("id",p.getId());
                 singUpBack.put("userName",p.getUser_name());
@@ -158,24 +168,7 @@ public class ServerSideClass implements Server {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Vector<Player> getOnlineUser() {
-        for(Player onlineP:ServerControl.onlinePlayers)
-        {
-            System.out.println(onlineP.getUser_name());   
-        }
-        return ServerControl.onlinePlayers;
-    }
-
-    @Override
-    public Vector<Player> getOfflineUser() {
-        for(Player p : ServerControl.offlinePlayers)
-        {
-            System.out.println(p.getEmail());
-        }
-        return ServerControl.offlinePlayers;   
-    }
-
+   
     @Override
     public Vector<String> fillLsitofBusyUser() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -189,12 +182,9 @@ public class ServerSideClass implements Server {
     @Override
     public void logOut(int pID) {
        
-        for(Player logOutP :ServerControl.onlinePlayers)
-        {
-            if(logOutP.getId() == pID)
-            {
-               ServerControl.onlinePlayers.remove(logOutP);
-               ServerControl.offlinePlayers.add(logOutP);
+        for (int i=0;i<ServerControl.players.size();++i){
+            if (ServerControl.players.get(i).getId()==pID){
+                ServerControl.players.get(i).setFlag(false);
             }
         }
     }

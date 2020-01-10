@@ -14,6 +14,7 @@ import java.util.Scanner;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import utils.Request;
@@ -27,16 +28,14 @@ public class PlayerFunctions implements Client {
     DataInputStream input;
     PrintStream output;
     Socket s;
-
+    public static Vector<Player> users;
     public PlayerFunctions() {
         try {
-
-
-            s = new Socket("7.7.7.42", 8000);
+            s = new Socket("127.0.0.1", 8000);
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
-             signIn("ma10@gmail.com", "More34");
-          //invitePlayer(28);
+            
+            users= new Vector<>();
 
         } catch (IOException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,7 +52,7 @@ public class PlayerFunctions implements Client {
                             System.out.println("server response: " + str);
                     //  Scanner s = new Scanner(System.in);
                     // s.nextInt();
-           // signIn("mina10@gmail.com", "More34");
+                     //    signIn("m@m.com", "1234");
                         } catch (IOException ex) {
                             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -147,6 +146,8 @@ public class PlayerFunctions implements Client {
         }
     }
     
+    
+    
     public void RequestHandller(String str)
     {
          JSONObject ReqObj = null;
@@ -173,7 +174,15 @@ public class PlayerFunctions implements Client {
                     break;
                 case Request.INVITE_PLAYER:
                     System.out.println(ReqObj.toString());
-
+                    break;
+                case Request.USERS:
+                    users.clear(); // remove it when run clients from different laptops
+                    JSONArray jArr = ReqObj.getJSONArray("users");
+                    for (int i =0 ;i<jArr.length();++i){
+                        Player p = convertJsonObjtoPlayer(jArr.getJSONObject(i));
+                        users.add(p);
+                    }
+                    break;
             }
             
         } catch (JSONException ex) {
@@ -183,6 +192,18 @@ public class PlayerFunctions implements Client {
 
     }
 
+    Player convertJsonObjtoPlayer(JSONObject jObj){
+        Player p = new Player();
+        try {
+            p.setEmail(jObj.getString("email"));
+            p.setId(jObj.getInt("id"));
+            p.setUser_name(jObj.getString("user_name"));
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return p;
+    }
+    
    public static void main(String[] args) {
         new PlayerFunctions();
        

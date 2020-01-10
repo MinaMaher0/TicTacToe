@@ -31,25 +31,17 @@ public class ServerControl {
     DbConnection db;
     ServerSideClass sSC;
     public static Map <Integer,ServerHandler> playerMap;
-    public static Vector <Player> onlinePlayers;
-    public static Vector <Player> offlinePlayers;
-  
-    public static ObservableList offlineItems;
+
+    public static Vector<Player> players;
+    
+
     public ServerControl()
     {
         db=new DbConnection();
         playerMap = new HashMap <Integer, ServerHandler>();
-        onlinePlayers = new Vector<>();
-        offlinePlayers = new Vector<>();
-        offlineItems=FXCollections.observableArrayList();
-        offlinePlayers=db.getData();
-        for (Player p:offlinePlayers)
-        {
-            offlineItems.add(p.getUser_name());
-        }
+        players = new Vector<>();
+        players=db.getData();
         sSC= new ServerSideClass();
-        sSC.getOfflineUser();
-        
         startServer();
     }
     
