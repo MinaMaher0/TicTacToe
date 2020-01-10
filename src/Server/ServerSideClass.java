@@ -99,7 +99,7 @@ public class ServerSideClass implements Server {
         {
             try {
                 singInBack.put("RequestType",Request.LOGIN_FAILED);
-                System.out.println(p.getEmail());
+                //System.out.println(p.getEmail());
                 ps.println(singInBack.toString());
             } catch (JSONException ex) {
                 Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
