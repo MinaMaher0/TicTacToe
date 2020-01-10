@@ -2,14 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-
-        <group>
-            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/SignUp.fxml</file>
-            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/SignInController.java</file>
-            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/MainGUI.java</file>
-            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/SignUpController.java</file>
-        </group>
         <group/>
-
+        <group>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/MainGUI.java</file>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/Player.java</file>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/TicTacToe.java</file>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/Client.java</file>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/TestController.java</file>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/PlayerFunctions.java</file>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/DbConnection.java</file>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/SignInController.java</file>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/Game.java</file>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/ControlButtonsController.java</file>
+            <file>file:/C:/Users/hp/Desktop/TicTacToe/src/tictactoe/SignUpController.java</file>
+        </group>
     </open-files>
 </project-private>

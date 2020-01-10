@@ -210,7 +210,7 @@ public class DbConnection {
         }
        
     }
-    public void updateScore(int pId , int pScore)
+    public Boolean updateScore(int pId , int pScore)
     {
         PreparedStatement pst;
         try {
@@ -219,11 +219,12 @@ public class DbConnection {
             pst.setInt(1, pId);
             pst.setInt(2, pScore); 
             int rs = pst.executeUpdate();  
-            
+            if(rs!=0)
+                return true;
         }   catch (SQLException ex) {
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        return false ;
     }
     
     
