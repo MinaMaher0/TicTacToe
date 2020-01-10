@@ -28,6 +28,13 @@ public class PlayerFunctions implements Client {
     DataInputStream input;
     PrintStream output;
     Socket s;
+    ControlButtonsController cbController = null;
+    
+    public void setControlButtonsController(ControlButtonsController obj){
+        cbController=obj;
+        cbController.showPlayers();
+    }
+    
     public static Vector<Player> users;
     public PlayerFunctions() {
         try {
@@ -151,7 +158,6 @@ public class PlayerFunctions implements Client {
     public void RequestHandller(String str)
     {
          JSONObject ReqObj = null;
-         
         try {
             ReqObj = new JSONObject(str);
             switch(ReqObj.get("RequestType").hashCode()){
@@ -182,6 +188,8 @@ public class PlayerFunctions implements Client {
                         Player p = convertJsonObjtoPlayer(jArr.getJSONObject(i));
                         users.add(p);
                     }
+                    if (cbController!=null)
+                    cbController.showPlayers();
                     break;
             }
             
@@ -198,6 +206,7 @@ public class PlayerFunctions implements Client {
             p.setEmail(jObj.getString("email"));
             p.setId(jObj.getInt("id"));
             p.setUser_name(jObj.getString("user_name"));
+            p.setFlag(jObj.getBoolean("flag"));
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
