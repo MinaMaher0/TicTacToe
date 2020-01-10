@@ -29,17 +29,15 @@ public class ServerControl {
     DbConnection db;
     ServerSideClass sSC;
     public static Map <Integer,ServerHandler> playerMap;
-    public static Vector <Player>onlinePlayers,offlinePlayers;
+    public static Vector<Player> players;
     
     public ServerControl()
     {
         db=new DbConnection();
         playerMap = new HashMap <Integer, ServerHandler>();
-        onlinePlayers = new Vector<>();
-        offlinePlayers = new Vector<>();
-        offlinePlayers=db.getData();
+        players = new Vector<>();
+        players=db.getData();
         sSC= new ServerSideClass();
-        sSC.getOfflineUser();
         startServer();
     }
     
