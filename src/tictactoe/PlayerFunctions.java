@@ -30,16 +30,17 @@ public class PlayerFunctions implements Client {
 
     public PlayerFunctions() {
         try {
+
             s = new Socket("7.7.7.42", 8000);
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
            //signIn("mina10@gmail.com", "More34");
           //invitePlayer(28);
+
         } catch (IOException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
         new Thread(new Runnable() {
-
             @Override
             public void run() {
                 while (true) {
@@ -71,20 +72,16 @@ public class PlayerFunctions implements Client {
     }
 
     @Override
-
     public boolean signIn(String email, String password) {
         try {
             JSONObject SigninObject = new JSONObject();
             SigninObject.put("email", email);
             SigninObject.put("password", password);
             SigninObject.put("RequestType", Request.LOGIN);
-            output.println(SigninObject.toString());
-            
+            output.println(SigninObject.toString());   
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-  
         return true;
     }
 
@@ -96,8 +93,7 @@ public class PlayerFunctions implements Client {
             SignupObject.put("email", email);
             SignupObject.put("password", password);
             SignupObject.put("RequestType", Request.SIGNUP);
-            output.println(SignupObject.toString());
-            
+            output.println(SignupObject.toString());  
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -129,13 +125,11 @@ public class PlayerFunctions implements Client {
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
        return true;
     }
 
     @Override
     public void logOut(int pId) {
-
         try {
             JSONObject logOutObject = new JSONObject();
             try {

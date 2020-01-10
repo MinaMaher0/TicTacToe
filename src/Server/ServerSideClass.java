@@ -35,9 +35,7 @@ public class ServerSideClass implements Server {
     DbConnection db;
     DataInputStream dis;
     PrintStream ps;
-    Vector<Player> offlinePlayers;
-    Vector<Player> onlinePlayers;
-
+   
     public static String getName() {
         return name;
     }
@@ -45,18 +43,25 @@ public class ServerSideClass implements Server {
     public static String getPassword() {
         return password;
     }
-
+    
+    public ServerSideClass() {
+    }
+    
     public ServerSideClass(PrintStream ps,DataInputStream dis) {
         this.ps=ps;
         this.dis=dis;
         db= new DbConnection();
-        onlinePlayers= new Vector<>();
+        
+        getOfflineUser();
     }
 
     @Override
     public boolean signIN(String email, String password,ServerHandler s) {
+        
         Player p=db.signIn(email, password);
+        
         JSONObject singInBack= new JSONObject();
+        
         if(p != null)
         {
             try {
@@ -66,10 +71,25 @@ public class ServerSideClass implements Server {
                 singInBack.put("score",p.getScore());
                 singInBack.put("pPic",p.getProfile_picture());
                 singInBack.put("RequestType",Request.LOGIN_SUCCESS);
+                
                 System.out.println(p.getEmail());
+                
+                ServerControl.onlinePlayers.add(p);
+                
+                for(Player newP : ServerControl.offlinePlayers)
+                {
+                    if(p.getId() == newP.getId())
+                    {
+                        ServerControl.offlinePlayers.remove(newP);
+                        break;
+                    }
+                }
+                getOfflineUser();
+                getOnlineUser();
+                
                 ps.println(singInBack.toString());
                 ServerControl.playerMap.put(p.getId(),s);
-
+                
             } 
             catch (JSONException ex) {
                 Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,7 +109,7 @@ public class ServerSideClass implements Server {
     }
 
     @Override
-    public boolean signUP(String userName, String email, String password) {
+    public boolean signUP(String userName, String email, String password){
         boolean sUpStatus=db.signUp(userName, password, email);
         JSONObject singUpBack= new JSONObject();
         if(sUpStatus == true)
@@ -97,7 +117,7 @@ public class ServerSideClass implements Server {
             int size=db.getV().size()-1;
             Player p = db.getV().get(size);
             System.out.println("test "+p.getEmail());
-            onlinePlayers.add(p);
+            ServerControl.onlinePlayers.add(p);
             try {
                 singUpBack.put("id",p.getId());
                 singUpBack.put("userName",p.getUser_name());
@@ -139,23 +159,20 @@ public class ServerSideClass implements Server {
 
     @Override
     public Vector<Player> getOnlineUser() {
-        Player p = new Player();
-        for (int i = 0; i < db.getV().size(); i++) {
-            if (db.getV().get(i).getFlag() == false)
-            {
-                offlinePlayers.add(db.getV().get(i));
-            } 
-            else 
-            {
-                onlinePlayers.add(db.getV().get(i));
-            }
+        for(Player onlineP:ServerControl.onlinePlayers)
+        {
+            System.out.println(onlineP.getUser_name());   
         }
-        return onlinePlayers;
+        return ServerControl.onlinePlayers;
     }
 
     @Override
     public Vector<Player> getOfflineUser() {
-       return offlinePlayers;   
+        for(Player p : ServerControl.offlinePlayers)
+        {
+            System.out.println(p.getEmail());
+        }
+        return ServerControl.offlinePlayers;   
     }
 
     @Override
@@ -171,6 +188,14 @@ public class ServerSideClass implements Server {
     @Override
     public void logOut(int pID) {
        
+        for(Player logOutP :ServerControl.onlinePlayers)
+        {
+            if(logOutP.getId() == pID)
+            {
+               ServerControl.onlinePlayers.remove(logOutP);
+               ServerControl.offlinePlayers.add(logOutP);
+            }
+        }
     }
 
     @Override
@@ -194,6 +219,7 @@ public class ServerSideClass implements Server {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println(ServerControl.playerMap.get(pID).s);
+        sendRequestToOtherPlayer(ServerControl.playerMap.get(pID));
     }
 
     @Override
@@ -201,11 +227,11 @@ public class ServerSideClass implements Server {
         try {
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
+            sendRequest.put("msg","hello wants to player with you");
             s.Ps.println(sendRequest.toString());
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
 
