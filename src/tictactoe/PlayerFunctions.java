@@ -38,7 +38,6 @@ public class PlayerFunctions implements Client {
     public static Vector<Player> users;
     public PlayerFunctions() {
         try {
-
             s = new Socket("127.0.0.1", 8000);
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
@@ -86,7 +85,7 @@ public class PlayerFunctions implements Client {
             SigninObject.put("email", email);
             SigninObject.put("password", password);
             SigninObject.put("RequestType", Request.LOGIN);
-            output.println(SigninObject.toString());   
+           output.println(SigninObject.toString());   
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -102,6 +101,7 @@ public class PlayerFunctions implements Client {
             SignupObject.put("password", password);
             SignupObject.put("RequestType", Request.SIGNUP);
             output.println(SignupObject.toString());  
+
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -133,11 +133,13 @@ public class PlayerFunctions implements Client {
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
+
        return true;
     }
 
     @Override
     public void logOut(int pId) {
+
         try {
             JSONObject logOutObject = new JSONObject();
             try {
