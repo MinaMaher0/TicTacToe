@@ -40,7 +40,7 @@ public class SignInController implements Initializable {
          String passwordP = password.getText();
          PlayerFunctions p= new PlayerFunctions();
          System.out.println(p.signIn(emailAdress, passwordP));
-       
+         
     }
     
      @FXML

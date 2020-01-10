@@ -23,6 +23,7 @@ import utils.Request;
 import Server.ServerHandler;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -35,7 +36,7 @@ public class ServerSideClass implements Server {
     DbConnection db;
     DataInputStream dis;
     PrintStream ps;
-   
+     
     public static String getName() {
         return name;
     }

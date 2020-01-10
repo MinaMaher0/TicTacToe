@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tictactoe.DbConnection;
 import tictactoe.Player;
 
@@ -29,17 +31,25 @@ public class ServerControl {
     DbConnection db;
     ServerSideClass sSC;
     public static Map <Integer,ServerHandler> playerMap;
-    public static Vector <Player>onlinePlayers,offlinePlayers;
-    
+    public static Vector <Player> onlinePlayers;
+    public static Vector <Player> offlinePlayers;
+  
+    public static ObservableList offlineItems;
     public ServerControl()
     {
         db=new DbConnection();
         playerMap = new HashMap <Integer, ServerHandler>();
         onlinePlayers = new Vector<>();
         offlinePlayers = new Vector<>();
+        offlineItems=FXCollections.observableArrayList();
         offlinePlayers=db.getData();
+        for (Player p:offlinePlayers)
+        {
+            offlineItems.add(p.getUser_name());
+        }
         sSC= new ServerSideClass();
         sSC.getOfflineUser();
+        
         startServer();
     }
     

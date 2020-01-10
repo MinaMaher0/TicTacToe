@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="ServerGui.ServerLoginController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerGui.ServerLoginController">
    <children>
       <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -24,7 +24,7 @@
             <Cursor fx:constant="S_RESIZE" />
          </cursor>
       </ImageView>
-      <Label text="Welcom Admin">
+      <Label text="Welcome Admin">
          <font>
             <Font name="Comic Sans MS" size="60.0" />
          </font>
@@ -32,7 +32,8 @@
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
                   <Stop color="#804ca8" />
-                  <Stop color="#e81523" offset="1.0" />
+                  <Stop color="#804ca8" offset="0.007662835249042145" />
+                  <Stop color="#c14378" offset="1.0" />
                </stops>
             </LinearGradient>
          </textFill>
@@ -73,6 +74,6 @@
             </JFXPasswordField>
          </children>
       </HBox>
-      <JFXButton onAction="#sign" prefHeight="60.0" prefWidth="234.0" styleClass="signin_btn" stylesheets="@serverlogin.css" text="Sing in" textAlignment="CENTER" />
+      <JFXButton onAction="#signIn" prefHeight="60.0" prefWidth="234.0" styleClass="signin_btn" stylesheets="@serverlogin.css" text="Sing in" textAlignment="CENTER" />
    </children>
 </VBox>
