@@ -214,6 +214,7 @@ public class ServerSideClass implements Server {
     @Override 
     public void sendRequestToOtherPlayer(int senderID,int receiverID,String senderUserName) {
         try {
+            System.out.println("id  = "+pID);
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
             sendRequest.put("senderID",senderID);
