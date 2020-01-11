@@ -36,7 +36,7 @@
                   <Font size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton prefHeight="65.0" prefWidth="179.0" styleClass="btn" stylesheets="@serverhome.css" text="Stop Server">
+            <JFXButton onAction="#stopServer" prefHeight="65.0" prefWidth="179.0" styleClass="btn" stylesheets="@serverhome.css" text="Stop Server">
                <font>
                   <Font size="15.0" />
                </font>
