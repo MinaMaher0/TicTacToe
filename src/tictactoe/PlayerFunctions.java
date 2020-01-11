@@ -44,10 +44,10 @@ public class PlayerFunctions implements Client {
 
     public PlayerFunctions() {
         try {
-            s = new Socket("127.0.0.1", 8000);
+            s = new Socket("192.168.43.151", 8000);
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
-            signIn("m@m.m", "1");
+           // signIn("m@m.m", "1");
            /* invitePlayer(1);*/
             users= new Vector<>();
 
@@ -66,7 +66,7 @@ public class PlayerFunctions implements Client {
                             System.out.println("server response: " + str);
                     //  Scanner s = new Scanner(System.in);
                     // s.nextInt();
-                    signIn("mina10@gmail.com", "More34");
+                   // signIn("mina10@gmail.com", "More34");
                         } catch (IOException ex) {
                             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -134,8 +134,9 @@ public class PlayerFunctions implements Client {
     public boolean invitePlayer(int id) {
        JSONObject invitePlayerObject = new JSONObject();
         try {
-            invitePlayerObject.put("receiverUserId", id);
-            invitePlayerObject.put("senderUserId", id);
+            invitePlayerObject.put("receiverID", id);
+            invitePlayerObject.put("senderID", pla.getId());
+            invitePlayerObject.put("senderUserName",pla.getUser_name());
             invitePlayerObject.put("RequestType",Request.INVITE_PLAYER);
             output.println(invitePlayerObject.toString());
         } catch (JSONException ex) {
