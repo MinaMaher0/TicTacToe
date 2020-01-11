@@ -24,4 +24,5 @@ public class Request{
     public static final int REFUSE_INVITATION=12;
     public static final int RECEIVE_INVITATION=13;
     public static final int USERS=14;
+    public static final int LOG_OUT = 15;
 }

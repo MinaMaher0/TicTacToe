@@ -33,32 +33,30 @@ public class SignUpController implements Initializable {
     @FXML
     private Label urequired;
 
-//   String username = new String();
-//   String emailAdress = new String();
-//   String passwordP = new String();
-//     
+   String username = new String();
+   String emailAdress = new String();
+   String passwordP = new String();
+     
     boolean SignUpValidate() {
-         String username = userName.getText();
-         String  emailAdress = email.getText();
-         String  passwordP = password.getText();
-        //signUp(username, emailAdress, passwordP);
-        boolean checkValid = false;
+          username = userName.getText();
+          emailAdress = email.getText();
+          passwordP = password.getText();
         String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         if (username.equals("")) {
             urequired.setVisible(true);
-            checkValid = true;
+            return false;
         }
         if (emailAdress.equals("")) {
             email.setText("entar your email");
-            checkValid = true;
+            return false;
         }
         if (passwordP.equals("")) {
             password.setText("enter your password");
-            checkValid = true;
+            return false;
         }
         if (!EmailValidator.getInstance().isValid(emailAdress)) {
             email.setText("Enter a valid email address");
-            checkValid = true;
+            return false;
         }
         if (!passwordP.matches(pattern)) {
             System.out.println("a digit must occur at least once "
@@ -67,21 +65,22 @@ public class SignUpController implements Initializable {
                     + "a special character must occur at least once"
                     + "no whitespace allowed in the entire string"
                     + "at least 8 characters");
-            password.setText("");
-            checkValid = true;
+            password.setText("lslls");
+            return false;
         }
-        return checkValid;
+        return true;
     }
+    
     @FXML
     void sign_up(ActionEvent event) {
-        boolean valid = SignUpValidate();
-        if (valid){
-            return;
-        } else {
-//             PlayerFunctions p = new PlayerFunctions();
-//             System.out.println(p.signUp(this.username, emailAdress, passwordP));
-//            return;    
-        }
+        
+  
+       if(!SignUpValidate())
+       {
+           return;
+       }
+        PlayerFunctions p = new PlayerFunctions();
+        p.signUp(username, emailAdress, passwordP);
         
         try {
             Parent root;
@@ -90,6 +89,7 @@ public class SignUpController implements Initializable {
             MainGUI.primaryStage.setTitle("SignUp");
             MainGUI.primaryStage.setScene(scene);
             MainGUI.primaryStage.show();
+             
         } catch (IOException ex) {
             Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }

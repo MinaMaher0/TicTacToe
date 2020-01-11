@@ -32,10 +32,16 @@ public class PlayerFunctions implements Client {
 
 
     ControlButtonsController cbController = null;
+    SignInController siginObj = null;
     
     public void setControlButtonsController(ControlButtonsController obj){
         cbController=obj;
         cbController.showPlayers();
+    }
+    
+    public void setSignInObject(SignInController obj)
+    {
+        siginObj =obj;
     }
     
     public static Vector<Player> users;
@@ -63,7 +69,7 @@ public class PlayerFunctions implements Client {
                             System.out.println("server response: " + str);
                     //  Scanner s = new Scanner(System.in);
                     // s.nextInt();
-                    signIn("mina10@gmail.com", "More34");
+                    //signIn("mina10@gmail.com", "More34");
                         } catch (IOException ex) {
                             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -99,6 +105,7 @@ public class PlayerFunctions implements Client {
     @Override
     public boolean signUp(String userName, String email, String password) {
         try {
+            System.out.println("hhhhhhhhhhhhhh");
             JSONObject SignupObject = new JSONObject();
             SignupObject.put("userName", userName);
             SignupObject.put("email", email);
@@ -148,6 +155,7 @@ public class PlayerFunctions implements Client {
             JSONObject logOutObject = new JSONObject();
             try {
                 logOutObject.put("userId", pId);
+                logOutObject.put("RequestType",Request.LOG_OUT);
             } catch (JSONException ex) {
                 Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -175,9 +183,11 @@ public class PlayerFunctions implements Client {
                     pla.setEmail(ReqObj.getString("email"));
                     pla.setUser_name(ReqObj.getString("userName"));
                     pla.setScore(ReqObj.getInt("score"));
+                    siginObj.sign_in_sucess();
                     break;
                 case Request.LOGIN_FAILED:
-                    System.out.println("sign in unsucess");
+                    //System.out.println("sign in unsucess");
+                    siginObj.sign_in_faild();
                     break;
                 case Request.INVITE_PLAYER_SUCESS:
                     System.out.println("invitation accepted");
