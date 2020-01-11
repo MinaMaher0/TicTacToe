@@ -59,7 +59,7 @@ public class PlayerFunctions implements Client {
                             System.out.println("server response: " + str);
                     //  Scanner s = new Scanner(System.in);
                     // s.nextInt();
-                     //    signIn("m@m.com", "1234");
+                    signIn("mina10@gmail.com", "More34");
                         } catch (IOException ex) {
                             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
