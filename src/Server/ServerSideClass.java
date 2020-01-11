@@ -209,13 +209,12 @@ public class ServerSideClass implements Server {
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        sendRequestToOtherPlayer(pID,ServerControl.playerMap.get(pID));
+       // sendRequestToOtherPlayer(pID,);
     }
 
     @Override
-    public void sendRequestToOtherPlayer(int pID,ServerHandler s) {
+    public void sendRequestToOtherPlayer(int senderID,int receiverID,String senderUserName) {
         try {
-            System.out.println("id  = "+pID);
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
             sendRequest.put("senderID",senderID);
