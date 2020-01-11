@@ -44,7 +44,7 @@ public class PlayerFunctions implements Client {
 
     public PlayerFunctions() {
         try {
-            s = new Socket("127.0.0.1", 8000);
+            s = new Socket("192.168.43.151", 8000);
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
            // signIn("m@m.m", "1");
