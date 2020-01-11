@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -17,6 +18,7 @@
    <children>
       <VBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="400.0" prefWidth="300.0">
          <children>
+            <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />
             <Label alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="95.0" prefWidth="287.0" text="Friends">
                <font>
                   <Font name="Comic Sans MS" size="34.0" />
@@ -30,6 +32,32 @@
                   </LinearGradient>
                </textFill>
             </Label>
+            <Pane prefHeight="75.0" prefWidth="300.0" styleClass="friend_pane">
+               <children>
+                  <Circle fill="WHITE" layoutX="43.0" layoutY="37.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <ImageView fitHeight="49.0" fitWidth="44.0" layoutX="19.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/sign-in-3.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton layoutX="135.0" layoutY="22.0" prefHeight="28.0" prefWidth="62.0" styleClass="invite_button" stylesheets="@controlbutton.css" text="Invite" textFill="#37cd0d">
+                     <font>
+                        <Font name="Comic Sans MS" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <Label alignment="CENTER" layoutX="85.0" layoutY="23.0" prefHeight="28.0" prefWidth="44.0" text="80" textFill="#2a9dd7">
+                     <font>
+                        <Font name="Comic Sans MS" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="85.0" layoutY="-1.0" prefHeight="28.0" prefWidth="157.0" text="Atef" textFill="#756d6d">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Line endX="252.0" layoutX="50.0" startX="-40.0" />
+               </children>
+            </Pane>
             <Pane prefHeight="75.0" prefWidth="300.0" styleClass="friend_pane">
                <children>
                   <Circle fill="WHITE" layoutX="43.0" layoutY="37.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
@@ -134,32 +162,6 @@
                </children>
             </Pane>
             <Line endX="252.0" startX="-40.0" />
-            <Pane prefHeight="75.0" prefWidth="300.0" styleClass="friend_pane">
-               <children>
-                  <Circle fill="WHITE" layoutX="43.0" layoutY="37.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <ImageView fitHeight="49.0" fitWidth="44.0" layoutX="19.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/sign-in-3.png" />
-                     </image>
-                  </ImageView>
-                  <JFXButton layoutX="135.0" layoutY="22.0" prefHeight="28.0" prefWidth="62.0" styleClass="invite_button" stylesheets="@controlbutton.css" text="Invite" textFill="#37cd0d">
-                     <font>
-                        <Font name="Comic Sans MS" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <Label alignment="CENTER" layoutX="85.0" layoutY="23.0" prefHeight="28.0" prefWidth="44.0" text="80" textFill="#2a9dd7">
-                     <font>
-                        <Font name="Comic Sans MS" size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="85.0" layoutY="-1.0" prefHeight="28.0" prefWidth="157.0" text="Atef" textFill="#756d6d">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Line endX="252.0" layoutX="50.0" startX="-40.0" />
-               </children>
-            </Pane>
          </children>
       </VBox>
       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="500.0">

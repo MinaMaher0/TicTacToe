@@ -3,49 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoe;
+package ServerGui;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 
 /**
  *
- * @author Salama
+ * @author DELL
  */
-public class MainGUI extends Application {    
-   public static Stage primaryStage;
+public class runServerGUI extends Application{
+
+    public static Stage primaryStage;
     Parent root;
-    @Override
-    public void start(Stage stage) {
+    
+    @Override 
+    public void start(Stage stage){
         try {
             primaryStage=stage;
-            root=FXMLLoader.load(getClass().getResource("signin.fxml"));
+            root=FXMLLoader.load(getClass().getResource("ServerLogin.fxml"));
             Scene scene=new Scene(root);
-            stage.setTitle("SignIn");
+            stage.setTitle("AdminLogin");
             stage.setScene(scene);
             stage.show();
             stage.setResizable(false);
         } catch (IOException ex) {
-            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(runServerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+      public static void main(String[] args) {
         launch(args);
     }
-    
 }
