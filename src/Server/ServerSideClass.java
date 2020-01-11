@@ -225,13 +225,6 @@ public class ServerSideClass implements Server {
                 if (p.getId()==receiverID){
                     sendRequest.put("usrName",senderUserName);
                 }
-            }
-            s.Ps.println(sendRequest.toString());
-        } catch (JSONException ex) {
-            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
 
     @Override
     public void acceptPlayerRequest(int pID) {
