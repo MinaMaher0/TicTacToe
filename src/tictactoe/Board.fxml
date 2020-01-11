@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="638.0" prefWidth="850.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.BoardController">
+    <stylesheets>
+        <URL value="@board.css" />
+    </stylesheets>
+   <children>
+      <ImageView cache="true" fitHeight="638.0" fitWidth="860.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/last.jpg" />
+         </image></ImageView>
+      <FontAwesomeIconView glyphName="GAMEPAD" glyphStyle="-fx-fill: linear-gradient(#9596EC 20%,#EAC6F5 50%);" layoutX="277.0" layoutY="120.0" size="200" text="" textAlignment="CENTER" wrappingWidth="240.0" />
+      <Label layoutX="664.0" layoutY="28.0" prefHeight="36.0" prefWidth="73.0" text="20" textFill="#65d8f2">
+         <font>
+            <Font name="Comic Sans MS Bold Italic" size="25.0" />
+         </font>
+      </Label>
+      <Button fx:id="chat_button" alignment="CENTER" layoutY="81.0" mnemonicParsing="false" onAction="#chat_pane" prefHeight="36.0" prefWidth="59.0" styleClass="input_button" stylesheets="@controlbuttons/controlbutton.css" textAlignment="JUSTIFY" />
+      <FontAwesomeIconView glyphName="WHATSAPP" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="21.0" layoutY="109.0" size="20" />
+      <Button alignment="CENTER" layoutX="790.0" layoutY="78.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="59.0" styleClass="input_button" stylesheets="@controlbuttons/controlbutton.css" textAlignment="JUSTIFY" />
+      <FontAwesomeIconView glyphName="SAVE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="811.0" layoutY="108.0" size="20" text="" />
+      <Label alignment="CENTER" layoutX="613.0" prefHeight="36.0" prefWidth="142.0" text="Your Score" textFill="#65d8f2">
+         <font>
+            <Font name="Comic Sans MS Italic" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="36.0" text="Friend Score" textFill="#eeb2c0">
+         <font>
+            <Font name="Comic Sans MS" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="80.0" layoutY="28.0" prefHeight="36.0" prefWidth="73.0" text="10" textFill="#eeb2c0">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Label>
+      <Pane fx:id="chat_pane" layoutX="11.0" layoutY="405.0" prefHeight="200.0" prefWidth="203.0" visible="false">
+         <children>
+            <Button layoutX="161.0" layoutY="167.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" styleClass="close_pane_button" stylesheets="@board.css" />
+            <FontAwesomeIconView glyphName="SHARE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="172.0" layoutY="183.0" size="10" />
+            <JFXTextField layoutX="-5.0" layoutY="156.0" prefHeight="36.0" prefWidth="168.0" unFocusColor="#c14378">
+               <focusColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#d31557" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </focusColor>
+            </JFXTextField>
+            <TextArea editable="false" layoutX="-5.0" prefHeight="162.0" prefWidth="203.0" />
+            <Button fx:id="close_pane" alignment="CENTER" layoutX="157.0" layoutY="4.0" mnemonicParsing="false" onAction="#close_chat_pane" prefHeight="20.0" prefWidth="40.0" styleClass="close_pane_button" stylesheets="@board.css" />
+            <FontAwesomeIconView glyphName="CLOSE" layoutX="173.0" layoutY="17.0" size="10" />
+         </children>
+      </Pane>
+      <GridPane layoutX="129.0" layoutY="183.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="610.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="129.0" AnchorPane.rightAnchor="134.0" AnchorPane.topAnchor="183.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" prefHeight="118.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" />
+            <Button lineSpacing="10.0" mnemonicParsing="false" prefHeight="118.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="118.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="118.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="118.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="118.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="118.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="118.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" prefHeight="118.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
