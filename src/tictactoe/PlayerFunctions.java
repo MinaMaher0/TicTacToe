@@ -19,7 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import utils.Request;
-
 /**
  *
  * @author Aya Morsi
@@ -29,6 +28,10 @@ public class PlayerFunctions implements Client {
     DataInputStream input;
     PrintStream output;
     Socket s;
+
+    Player pla = new Player();
+
+
     ControlButtonsController cbController = null;
     
     
@@ -38,6 +41,7 @@ public class PlayerFunctions implements Client {
     }
     
     public static Vector<Player> users;
+
     public PlayerFunctions() {
         try {
             s = new Socket("127.0.0.1", 8000);
@@ -62,7 +66,7 @@ public class PlayerFunctions implements Client {
                             System.out.println("server response: " + str);
                     //  Scanner s = new Scanner(System.in);
                     // s.nextInt();
-                     //    signIn("m@m.com", "1234");
+                    signIn("mina10@gmail.com", "More34");
                         } catch (IOException ex) {
                             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -171,8 +175,10 @@ public class PlayerFunctions implements Client {
                 case Request.SIGN_UP_FAILED :
                     System.out.println("unsecss");
                 case Request.LOGIN_SUCCESS:
-                    System.out.println(str);
-                    System.out.println("sign in sucess");
+                    pla.setId(ReqObj.getInt("id"));
+                    pla.setEmail(ReqObj.getString("email"));
+                    pla.setUser_name(ReqObj.getString("userName"));
+                    pla.setScore(ReqObj.getInt("score"));
                     break;
                 case Request.LOGIN_FAILED:
                     System.out.println("sign in unsucess");
