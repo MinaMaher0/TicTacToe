@@ -38,10 +38,17 @@ public class SignUpController implements Initializable {
 //   String passwordP = new String();
 //     
     boolean SignUpValidate() {
+
          String username = userName.getText();
          String  emailAdress = email.getText();
          String  passwordP = password.getText();
         //signUp(username, emailAdress, passwordP);
+
+        String username = userName.getText();
+        String emailAdress = email.getText();
+        String passwordP = password.getText();
+        System.out.println("user1 ");
+
         boolean checkValid = false;
         String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         if (username.equals("")) {
@@ -75,6 +82,7 @@ public class SignUpController implements Initializable {
     @FXML
     void sign_up(ActionEvent event) {
         boolean valid = SignUpValidate();
+      //  System.out.println("user2 "+ username);
         if (valid){
             return;
         } else {

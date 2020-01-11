@@ -199,25 +199,33 @@ public class ServerSideClass implements Server {
     }
 
     @Override
-    public void reciveRequestFromPlayer(int pID) {
-        System.out.println(pID);
+    public void reciveRequestFromPlayer(int senderID,int receiverID,String senderUserName) {
         try {
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
-            ps.println(sendRequest.toString());
+            sendRequest.put("senderID",senderID);
+            sendRequest.put("senderUserName",senderUserName);
+           // ps.println(sendRequest.toString());
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(ServerControl.playerMap.get(pID).s);
-        sendRequestToOtherPlayer(ServerControl.playerMap.get(pID));
+        sendRequestToOtherPlayer(pID,ServerControl.playerMap.get(pID));
     }
 
     @Override
-    public void sendRequestToOtherPlayer(ServerHandler s) {
+    public void sendRequestToOtherPlayer(int pID,ServerHandler s) {
         try {
+            System.out.println("id  = "+pID);
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
-            sendRequest.put("msg","hello wants to player with you");
+            sendRequest.put("senderID",senderID);
+            sendRequest.put("senderUserName",senderUserName);
+            ServerHandler s =ServerControl.playerMap.get(receiverID);
+            for (Player p : ServerControl.players){
+                if (p.getId()==receiverID){
+                    sendRequest.put("usrName",senderUserName);
+                }
+            }
             s.Ps.println(sendRequest.toString());
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);

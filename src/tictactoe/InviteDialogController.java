@@ -7,7 +7,9 @@ package tictactoe;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -19,6 +21,13 @@ public class InviteDialogController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private Label usrName;
+    
+    public void setUserName(String name){
+        usrName.setText(name);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
