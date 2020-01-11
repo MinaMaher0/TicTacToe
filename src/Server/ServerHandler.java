@@ -80,7 +80,7 @@ class ServerHandler extends Thread {
                 }
                 case Request.INVITE_PLAYER:
                 {
-                    serverObj.reciveRequestFromPlayer(json.getInt("userId"));
+                    serverObj.sendRequestToOtherPlayer(json.getInt("senderID"),json.getInt("receiverID"),json.getString("senderUserName"));
                     break;
                 } 
             
