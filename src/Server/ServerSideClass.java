@@ -204,20 +204,27 @@ public class ServerSideClass implements Server {
         try {
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
-            ps.println(sendRequest.toString());
+            sendRequest.put("id",pID);
+           // ps.println(sendRequest.toString());
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(ServerControl.playerMap.get(pID).s);
-        sendRequestToOtherPlayer(ServerControl.playerMap.get(pID));
+        sendRequestToOtherPlayer(pID,ServerControl.playerMap.get(pID));
     }
 
     @Override
-    public void sendRequestToOtherPlayer(ServerHandler s) {
+    public void sendRequestToOtherPlayer(int pID,ServerHandler s) {
         try {
+            System.out.println("id  = "+pID);
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
-            sendRequest.put("msg","hello wants to player with you");
+            sendRequest.put("id",pID);
+            for (Player p : ServerControl.players){
+                if (p.getId()==pID){
+                    sendRequest.put("usrName",p.getUser_name());
+                    System.out.println("user name = "+p.getUser_name());
+                }
+            }
             s.Ps.println(sendRequest.toString());
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
