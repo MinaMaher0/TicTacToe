@@ -18,32 +18,66 @@ import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
+import org.apache.commons.validator.routines.EmailValidator;
 
 public class SignUpController implements Initializable {
-   @FXML
-    private JFXTextField userName;
 
+    @FXML
+    private JFXTextField userName;
     @FXML
     private JFXPasswordField password;
-
     @FXML
     private JFXTextField email;
-    
+
     @FXML
-    void sign_up_method(ActionEvent event)
-    {
+    boolean SignUpValidate() {
         String username = userName.getText();
         String emailAdress = email.getText();
-         String passwordP = password.getText();
-         PlayerFunctions p= new PlayerFunctions();
-         System.out.println(p.signUp(username, emailAdress, passwordP));
-        
+        String passwordP = password.getText();
+        boolean checkValid = false;
+        String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+        if (username.equals("")) {
+            System.out.println("enter your user name");
+            userName.setText("enter your user name");
+            checkValid = true;
+        }
+        if (emailAdress.equals("")) {
+            System.out.println("enter your email");
+            email.setText("entar your email");
+            checkValid = true;
+        }
+        if (passwordP.equals("")) {
+            System.out.println("enter your password");
+            password.setText("enter your password");
+            checkValid = true;
+        }
+        if (!EmailValidator.getInstance().isValid(emailAdress)) {
+            System.out.println("Enter a valid email address");
+            email.setText("Enter a valid email address");
+            checkValid = true;
+        }
+        if (!passwordP.matches(pattern)) {
+            System.out.println("a digit must occur at least once "
+                    + "a lower case letter must occur at least once"
+                    + "an upper case letter must occur at least once"
+                    + "a special character must occur at least once"
+                    + "no whitespace allowed in the entire string"
+                    + "at least 8 characters");
+            password.setText("enter valid password");
+            checkValid = true;
+        }
+        return checkValid;
     }
-    
     @FXML
     void sign_up(ActionEvent event) {
-        sign_up_method(event);
+        boolean valid = SignUpValidate();
+        if (valid){
+            return;
+        } else {
+            // PlayerFunctions p = new PlayerFunctions();
+            // System.out.println(p.signUp(username, emailAdress, passwordP));
+//            return;    
+        }
         try {
             Parent root;
             root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
@@ -54,12 +88,12 @@ public class SignUpController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-  
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  
-    }    
-    
+
+    }
+
 }

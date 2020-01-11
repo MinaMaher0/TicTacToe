@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import utils.Request;
-
 /**
  *
  * @author Aya Morsi
@@ -27,6 +26,7 @@ public class PlayerFunctions implements Client {
     DataInputStream input;
     PrintStream output;
     Socket s;
+    Player pla = new Player();
 
     public PlayerFunctions() {
         try {
@@ -162,7 +162,10 @@ public class PlayerFunctions implements Client {
                 case Request.SIGN_UP_FAILED :
                     System.out.println("unsecss");
                 case Request.LOGIN_SUCCESS:
-                    System.out.println("sign in sucess");
+                    pla.setId(ReqObj.getInt("id"));
+                    pla.setEmail(ReqObj.getString("email"));
+                    pla.setUser_name(ReqObj.getString("userName"));
+                    pla.setScore(ReqObj.getInt("score"));
                     break;
                 case Request.LOGIN_FAILED:
                     System.out.println("sign in unsucess");
