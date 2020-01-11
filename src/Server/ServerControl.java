@@ -22,43 +22,56 @@ import tictactoe.Player;
  *
  * @author DELL
  */
-public class ServerControl {
+public class ServerControl extends Thread{
 
     ServerSocket sSocket;
     Socket s;
-    DbConnection db;
+    public DbConnection db;
     ServerSideClass sSC;
     public static Map <Integer,ServerHandler> playerMap;
+    Thread startServer;
     public static Vector<Player> players;
     
+
     public ServerControl()
     {
-        db=new DbConnection();
-        playerMap = new HashMap <Integer, ServerHandler>();
+        db=new DbConnection();playerMap = new HashMap <Integer, ServerHandler>();
         players = new Vector<>();
         players=db.getData();
-        sSC= new ServerSideClass();
+        for (Player p:players)
+        {
+            System.out.println(p.getUser_name());
+        }
+        //sSC= new ServerSideClass();
         startServer();
     }
     
-    
     public void startServer() {
-        try {
-            sSocket = new ServerSocket(8000);
-            System.out.println("server started");
-            while(true)
-            {
-                s = sSocket.accept();
-                new ServerHandler(s);
-            }
-        } catch (IOException e) {
-        }
+        
+            startServer=new Thread(() -> {
+                try {
+                    sSocket = new ServerSocket(8000);
+                    System.out.println("server started");
+                    while(true)
+                    {
+                        s = sSocket.accept();
+                        new ServerHandler(s);
+                    }
+                }
+                  catch (IOException e) {
+        
+                  }
+            });
+            startServer.start();
     }
+           
+    
     
     public void stopServer() {
         try 
         {
-            for(ServerHandler s: ServerHandler.socketVector)
+            startServer.stop();
+           for(ServerHandler s: ServerHandler.socketVector)
             {
                 s.s.close();
             }

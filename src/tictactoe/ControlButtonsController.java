@@ -24,24 +24,60 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import Server.ServerControl;
+import java.io.IOException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 public class ControlButtonsController implements Initializable {
-    
+    PlayerFunctions pF;
+    String s= new String("test");
     ObservableList li =FXCollections.observableArrayList();
-   @FXML
+    @FXML
     void invite_friend(ActionEvent event) {
         System.out.println("invite a friend!");
     }
     
+    public boolean showInviteDialog(String name){
+        boolean ret=false;
+        try {
+            Stage newStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InviteDialog.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            InviteDialogController inviterController=loader.getController();
+            inviterController.setUserName(name);
+            newStage.initModality(Modality.WINDOW_MODAL);
+            Scene scene=new Scene(root);
+            newStage.setTitle("InviteDialogController");
+            newStage.setScene(scene);
+            newStage.show();
+            newStage.setResizable(false);
+        } catch (IOException ex) {
+            Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
     @FXML
     private ListView<?> listView;
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("bateeeeeeee5");        
-        
+    
+    public void setPlayerObj(PlayerFunctions obj){
+        pF=obj;
+        pF.setControlButtonsController(this);
+    }
+    
+    public void showPlayers(){
+        listView.getItems().clear();
+        li.clear();
         for (Player p : PlayerFunctions.users){
             
             HBox item = new HBox();
@@ -68,12 +104,26 @@ public class ControlButtonsController implements Initializable {
             Text score = new Text(String.valueOf(p.getScore()));
 
             Button invite = new Button();
-
-            invite.setText("Invite");
-            invite.setCursor(Cursor.HAND);
-
-            invite.setStyle("-fx-color: #00FF00; -fx-border-width: 5px;");
-
+            
+            invite.addEventHandler(ActionEvent.ACTION,new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    int id = p.getId();
+                    System.out.println(id);
+                    pF.invitePlayer(id);
+                }
+            });
+            
+            if (p.getFlag()){
+                invite.setText("Invite");
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle("-fx-color: #00FF00; -fx-border-width: 5px;");
+                
+            }else {
+                invite.setText("Offline");
+                invite.setStyle("-fx-color: #A9A9A9; -fx-border-width: 5px;");
+            }
+                
 
             score_button.getChildren().addAll(score,invite);
 
@@ -86,6 +136,11 @@ public class ControlButtonsController implements Initializable {
             li.add(item);
         }
         listView.getItems().addAll(li);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        showPlayers();
     }    
     
 }

@@ -53,7 +53,7 @@ public interface Server{
     public void reciveRequestFromPlayer(int pID);
     
     //send request to other player
-    public void sendRequestToOtherPlayer(ServerHandler s);
+    public void sendRequestToOtherPlayer(int pID,ServerHandler s);
     
     //player two accpet request from other player
     public void acceptPlayerRequest(int pID);

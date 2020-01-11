@@ -14,11 +14,11 @@ import java.util.Scanner;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import utils.Request;
-
 /**
  *
  * @author Aya Morsi
@@ -28,13 +28,27 @@ public class PlayerFunctions implements Client {
     DataInputStream input;
     PrintStream output;
     Socket s;
+
+    Player pla = new Player();
+
+
+    ControlButtonsController cbController = null;
+    
+    
+    public void setControlButtonsController(ControlButtonsController obj){
+        cbController=obj;
+        cbController.showPlayers();
+    }
+    
     public static Vector<Player> users;
+
     public PlayerFunctions() {
         try {
             s = new Socket("127.0.0.1", 8000);
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
-            
+            signIn("m@m.m", "1");
+           /* invitePlayer(1);*/
             users= new Vector<>();
 
         } catch (IOException ex) {
@@ -52,7 +66,7 @@ public class PlayerFunctions implements Client {
                             System.out.println("server response: " + str);
                     //  Scanner s = new Scanner(System.in);
                     // s.nextInt();
-                     //    signIn("m@m.com", "1234");
+                    signIn("mina10@gmail.com", "More34");
                         } catch (IOException ex) {
                             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -120,7 +134,8 @@ public class PlayerFunctions implements Client {
     public boolean invitePlayer(int id) {
        JSONObject invitePlayerObject = new JSONObject();
         try {
-            invitePlayerObject.put("userId", id);
+            invitePlayerObject.put("receiverUserId", id);
+            invitePlayerObject.put("senderUserId", id);
             invitePlayerObject.put("RequestType",Request.INVITE_PLAYER);
             output.println(invitePlayerObject.toString());
         } catch (JSONException ex) {
@@ -150,10 +165,9 @@ public class PlayerFunctions implements Client {
     
     public void RequestHandller(String str)
     {
-         JSONObject ReqObj = null;
-         
+        
         try {
-            ReqObj = new JSONObject(str);
+            final JSONObject ReqObj = new JSONObject(str);
             switch(ReqObj.get("RequestType").hashCode()){
                 case Request.SIGN_UP_SUCCESS:
                      System.out.println("sucess");
@@ -161,7 +175,10 @@ public class PlayerFunctions implements Client {
                 case Request.SIGN_UP_FAILED :
                     System.out.println("unsecss");
                 case Request.LOGIN_SUCCESS:
-                    System.out.println("sign in sucess");
+                    pla.setId(ReqObj.getInt("id"));
+                    pla.setEmail(ReqObj.getString("email"));
+                    pla.setUser_name(ReqObj.getString("userName"));
+                    pla.setScore(ReqObj.getInt("score"));
                     break;
                 case Request.LOGIN_FAILED:
                     System.out.println("sign in unsucess");
@@ -173,7 +190,19 @@ public class PlayerFunctions implements Client {
                     System.out.println("invitation decliend");
                     break;
                 case Request.INVITE_PLAYER:
-                    System.out.println(ReqObj.toString());
+                    if (cbController!=null){
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    System.out.println("user "+ReqObj.getString("usrName"));
+                                    cbController.showInviteDialog(ReqObj.getString("usrName"));
+                                } catch (JSONException ex) {
+                                    Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        });
+                    }
                     break;
                 case Request.USERS:
                     users.clear(); // remove it when run clients from different laptops
@@ -182,11 +211,21 @@ public class PlayerFunctions implements Client {
                         Player p = convertJsonObjtoPlayer(jArr.getJSONObject(i));
                         users.add(p);
                     }
+                    if (cbController!=null){
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                cbController.showPlayers();
+                            }
+                        });
+                    }
                     break;
             }
             
-        } catch (JSONException ex) {
-            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            //System.out.println("bateeeeeeeeee5");
+            System.out.println(ex.toString());
+            //Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 
@@ -198,6 +237,7 @@ public class PlayerFunctions implements Client {
             p.setEmail(jObj.getString("email"));
             p.setId(jObj.getInt("id"));
             p.setUser_name(jObj.getString("user_name"));
+            p.setFlag(jObj.getBoolean("flag"));
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }

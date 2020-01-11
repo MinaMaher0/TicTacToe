@@ -21,13 +21,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.deploy.util.FXLoader;
 /**
  * FXML Controller class
  *
  * @author Salama
  */
 public class SignInController implements Initializable {
-    
+    PlayerFunctions p= new PlayerFunctions();
    @FXML
     private JFXTextField email;
 
@@ -38,23 +39,26 @@ public class SignInController implements Initializable {
     void sign_in(ActionEvent event) {
          String emailAdress = email.getText();
          String passwordP = password.getText();
-         PlayerFunctions p= new PlayerFunctions();
+         
          System.out.println(p.signIn(emailAdress, passwordP));
        
     }
     
      @FXML
     void tosign_up(ActionEvent event) {
-        try {
+     /*   try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUp.fxml"));
             Parent root;
-            root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+            root = (Parent)loader.load();
+            ControlButtonsController CBController=loader.getController();
             Scene scene = new Scene(root);
+            CBController.setPlayerObj(p);
             MainGUI.primaryStage.setTitle("SignUp");
             MainGUI.primaryStage.setScene(scene);
             MainGUI.primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
     
     
@@ -62,8 +66,11 @@ public class SignInController implements Initializable {
     void controlButtons(ActionEvent event) {
         sign_in(event);
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ControlButtons.fxml"));
             Parent root;
-            root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
+            root = (Parent)loader.load();
+            ControlButtonsController CBController=loader.getController();
+            CBController.setPlayerObj(p);
             Scene scene = new Scene(root);
             MainGUI.primaryStage.setTitle("Signin");
             MainGUI.primaryStage.setScene(scene);
