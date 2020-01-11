@@ -82,7 +82,13 @@ class ServerHandler extends Thread {
                 {
                     serverObj.sendRequestToOtherPlayer(json.getInt("senderID"),json.getInt("receiverID"),json.getString("senderUserName"));
                     break;
-                } 
+                }
+                case Request.ACCEPT_INVITATION:
+                {
+                    System.out.println("accept");
+                    System.out.println(json);
+                    break;
+                }
             
             }
         } catch (Exception ex) {
