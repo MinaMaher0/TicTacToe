@@ -5,7 +5,9 @@
  */
 package ServerGui;
 
-
+import Server.*;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 import javafx.scene.Scene;
+import tictactoe.PlayerFunctions;
 
 /**
  * FXML Controller class
@@ -30,19 +33,22 @@ public class ServerLoginController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private JFXTextField username;
+
+    @FXML
+    private JFXPasswordField password;
+    
     @FXML 
-    private void signIn(ActionEvent event) //to goto control buttons scene
-    {
-        try {
-            Parent root;
-            root = FXMLLoader.load(getClass().getResource("controlbuttons/ControlButton.fxml"));
-            Scene scene = new Scene(root);
-            /*ClientGUI.myStage.setTitle("Signin");
-            ClientGUI.myStage.setScene(scene);
-            ClientGUI.myStage.show();*/
-            System.out.println("Server SignIn");
-        } catch (IOException ex) {
-            Logger.getLogger(ServerLoginController.class.getName()).log(Level.SEVERE, null, ex);
+    void signIn(ActionEvent event) //to goto control buttons scene
+    {  
+        String serverUserName = username.getText();
+        String serverPassword = password.getText();
+    
+        if(serverUserName.equals(ServerSideClass.getName()) 
+                &&serverPassword.equals(ServerSideClass.getPassword()))
+        {
+            System.out.println("Hello Server");
         }
     }
     @Override

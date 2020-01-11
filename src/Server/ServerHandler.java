@@ -28,6 +28,7 @@ class ServerHandler extends Thread {
     DataInputStream Dis;
     PrintStream Ps;
     Socket s;
+    ServerHandler me;
     public static Vector <ServerHandler> socketVector = new Vector<ServerHandler>();
 
     public ServerHandler(Socket socket) {
@@ -37,6 +38,7 @@ class ServerHandler extends Thread {
             Ps = new PrintStream(socket.getOutputStream());
             serverObj = new ServerSideClass(Ps,Dis);
             socketVector.add(this);
+            me=this;
             start();
         } catch (IOException io) {
             io.printStackTrace();
@@ -48,10 +50,11 @@ class ServerHandler extends Thread {
             String str;
             try {
                 str = Dis.readLine();
-                System.out.println("str");
+                System.out.println(str);
                 requestHandler(str);
             } catch (Exception ex) {
-                System.out.println("tttttttttttttt");
+                System.out.println(ex.toString());
+                System.out.println("tttttttttttttteee");
                 this.stop();
                 Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -82,7 +85,8 @@ class ServerHandler extends Thread {
                 } 
             
             }
-        } catch (JSONException ex) {
+        } catch (Exception ex) {
+            
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

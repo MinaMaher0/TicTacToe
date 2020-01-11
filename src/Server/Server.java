@@ -33,9 +33,7 @@ public interface Server{
     public char checkWinner();
     
     //in its body should check state of the online if busy or not 
-    public Vector<Player> getOnlineUser();
-     
-    public Vector<Player> getOfflineUser();
+  
     
     public Vector<String> fillLsitofBusyUser();
     

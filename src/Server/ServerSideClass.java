@@ -35,9 +35,7 @@ public class ServerSideClass implements Server {
     DbConnection db;
     DataInputStream dis;
     PrintStream ps;
-    Vector<Player> offlinePlayers;
-    Vector<Player> onlinePlayers;
-
+   
     public static String getName() {
         return name;
     }
@@ -45,18 +43,27 @@ public class ServerSideClass implements Server {
     public static String getPassword() {
         return password;
     }
-
+    
+    public ServerSideClass() {
+    }
+    
     public ServerSideClass(PrintStream ps,DataInputStream dis) {
         this.ps=ps;
         this.dis=dis;
         db= new DbConnection();
-        onlinePlayers= new Vector<>();
+       
+    }
+    public void signIN(String email, String password){
+        System.out.println("PPPPPPPPPPPP");
     }
 
     @Override
     public boolean signIN(String email, String password,ServerHandler s) {
+        
         Player p=db.signIn(email, password);
+        
         JSONObject singInBack= new JSONObject();
+        
         if(p != null)
         {
             try {
@@ -66,12 +73,21 @@ public class ServerSideClass implements Server {
                 singInBack.put("score",p.getScore());
                 singInBack.put("pPic",p.getProfile_picture());
                 singInBack.put("RequestType",Request.LOGIN_SUCCESS);
-                System.out.println(p.getEmail());
+                                
+                for (int i=0;i<ServerControl.players.size();++i){
+                    if (ServerControl.players.get(i).getId()==p.getId()){
+                        ServerControl.players.get(i).setFlag(true);
+                    }
+                }
+                
                 ps.println(singInBack.toString());
+                
+                sendUsers();
                 ServerControl.playerMap.put(p.getId(),s);
-
+                
             } 
-            catch (JSONException ex) {
+            catch (Exception ex) {
+                System.out.println("flola : "+ex.toString());
                 Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
             } 
         } 
@@ -79,7 +95,6 @@ public class ServerSideClass implements Server {
         {
             try {
                 singInBack.put("RequestType",Request.LOGIN_FAILED);
-                System.out.println(p.getEmail());
                 ps.println(singInBack.toString());
             } catch (JSONException ex) {
                 Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,17 +102,32 @@ public class ServerSideClass implements Server {
         }
         return true;
     }
+    
+    public void sendUsers(){
+        JSONObject users= new JSONObject();
+        try {
+            users.put("RequestType",Request.USERS);
+            users.put("users",ServerControl.players);
+            for (ServerHandler sv : ServerHandler.socketVector){
+                sv.Ps.println(users.toString());
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
 
     @Override
-    public boolean signUP(String userName, String email, String password) {
+    public boolean signUP(String userName, String email, String password){
         boolean sUpStatus=db.signUp(userName, password, email);
         JSONObject singUpBack= new JSONObject();
         if(sUpStatus == true)
         {
             int size=db.getV().size()-1;
             Player p = db.getV().get(size);
-            System.out.println("test "+p.getEmail());
-            onlinePlayers.add(p);
+            p.setFlag(true);
+            ServerControl.players.add(p);
             try {
                 singUpBack.put("id",p.getId());
                 singUpBack.put("userName",p.getUser_name());
@@ -137,27 +167,7 @@ public class ServerSideClass implements Server {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Vector<Player> getOnlineUser() {
-        Player p = new Player();
-        for (int i = 0; i < db.getV().size(); i++) {
-            if (db.getV().get(i).getFlag() == false)
-            {
-                offlinePlayers.add(db.getV().get(i));
-            } 
-            else 
-            {
-                onlinePlayers.add(db.getV().get(i));
-            }
-        }
-        return onlinePlayers;
-    }
-
-    @Override
-    public Vector<Player> getOfflineUser() {
-       return offlinePlayers;   
-    }
-
+   
     @Override
     public Vector<String> fillLsitofBusyUser() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -171,6 +181,11 @@ public class ServerSideClass implements Server {
     @Override
     public void logOut(int pID) {
        
+        for (int i=0;i<ServerControl.players.size();++i){
+            if (ServerControl.players.get(i).getId()==pID){
+                ServerControl.players.get(i).setFlag(false);
+            }
+        }
     }
 
     @Override
@@ -194,6 +209,7 @@ public class ServerSideClass implements Server {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println(ServerControl.playerMap.get(pID).s);
+        sendRequestToOtherPlayer(ServerControl.playerMap.get(pID));
     }
 
     @Override
@@ -201,11 +217,11 @@ public class ServerSideClass implements Server {
         try {
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
+            sendRequest.put("msg","hello wants to player with you");
             s.Ps.println(sendRequest.toString());
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
 
