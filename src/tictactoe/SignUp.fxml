@@ -36,7 +36,7 @@
       <HBox alignment="CENTER" prefHeight="58.0" prefWidth="647.0" spacing="10.0">
          <children>
             <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" lineSpacing="10.0" size="30" />
-            <JFXTextField prefHeight="46.0" prefWidth="330.0" promptText="User Name" unFocusColor="#c14378" fx:id="userName">
+            <JFXTextField fx:id="userName" prefHeight="46.0" prefWidth="330.0" promptText="User Name" unFocusColor="#c14378">
                <focusColor>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -49,12 +49,17 @@
                   <Font name="Tahoma" size="15.0" />
                </font>
             </JFXTextField>
+            <Label fx:id="urequired" prefHeight="22.0" prefWidth="156.0" text="Enter your user name" textFill="#c61c1c" visible="false">
+               <font>
+                  <Font name="Comic Sans MS" size="15.0" />
+               </font>
+            </Label>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
          <children>
             <FontAwesomeIconView glyphName="LOCK" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="30" />
-            <JFXPasswordField prefHeight="40.0" prefWidth="337.0" promptText="Password" unFocusColor="#c14378ed" fx:id="password">
+            <JFXPasswordField fx:id="password" prefHeight="40.0" prefWidth="337.0" promptText="Password" unFocusColor="#c14378ed">
                <focusColor>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -72,7 +77,7 @@
       <HBox alignment="CENTER" prefHeight="67.0" prefWidth="647.0" spacing="10.0">
          <children>
             <FontAwesomeIconView glyphName="ENVELOPE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" lineSpacing="10.0" size="30" />
-            <JFXTextField prefHeight="48.0" prefWidth="330.0" promptText="Email" unFocusColor="#c14378" fx:id="email">
+            <JFXTextField fx:id="email" prefHeight="48.0" prefWidth="330.0" promptText="Email" unFocusColor="#c14378">
                <focusColor>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>

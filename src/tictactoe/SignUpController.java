@@ -7,6 +7,7 @@ package tictactoe;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import javafx.scene.Scene;
 import org.apache.commons.validator.routines.EmailValidator;
 
 public class SignUpController implements Initializable {
+    
 
     @FXML
     private JFXTextField userName;
@@ -28,32 +30,40 @@ public class SignUpController implements Initializable {
     private JFXPasswordField password;
     @FXML
     private JFXTextField email;
-
     @FXML
+    private Label urequired;
+
+//   String username = new String();
+//   String emailAdress = new String();
+//   String passwordP = new String();
+//     
     boolean SignUpValidate() {
+
+         String username = userName.getText();
+         String  emailAdress = email.getText();
+         String  passwordP = password.getText();
+        //signUp(username, emailAdress, passwordP);
+
         String username = userName.getText();
         String emailAdress = email.getText();
         String passwordP = password.getText();
         System.out.println("user1 ");
+
         boolean checkValid = false;
         String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         if (username.equals("")) {
-            System.out.println("enter your user name");
-            userName.setText("enter your user name");
+            urequired.setVisible(true);
             checkValid = true;
         }
         if (emailAdress.equals("")) {
-            System.out.println("enter your email");
             email.setText("entar your email");
             checkValid = true;
         }
         if (passwordP.equals("")) {
-            System.out.println("enter your password");
             password.setText("enter your password");
             checkValid = true;
         }
         if (!EmailValidator.getInstance().isValid(emailAdress)) {
-            System.out.println("Enter a valid email address");
             email.setText("Enter a valid email address");
             checkValid = true;
         }
@@ -64,7 +74,7 @@ public class SignUpController implements Initializable {
                     + "a special character must occur at least once"
                     + "no whitespace allowed in the entire string"
                     + "at least 8 characters");
-            password.setText("enter valid password");
+            password.setText("");
             checkValid = true;
         }
         return checkValid;
@@ -76,10 +86,11 @@ public class SignUpController implements Initializable {
         if (valid){
             return;
         } else {
-            // PlayerFunctions p = new PlayerFunctions();
-            // System.out.println(p.signUp(username, emailAdress, passwordP));
+//             PlayerFunctions p = new PlayerFunctions();
+//             System.out.println(p.signUp(this.username, emailAdress, passwordP));
 //            return;    
         }
+        
         try {
             Parent root;
             root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
