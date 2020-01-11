@@ -25,10 +25,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import Server.ServerControl;
 import java.util.Vector;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 
 
 public class ControlButtonsController implements Initializable {
-    
+    PlayerFunctions p;
+    String s= new String("test");
     ObservableList li =FXCollections.observableArrayList();
    @FXML
     void invite_friend(ActionEvent event) {
@@ -37,11 +40,15 @@ public class ControlButtonsController implements Initializable {
     
     @FXML
     private ListView<?> listView;
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("bateeeeeeee5");        
-        
+    
+    public void setPlayerObj(PlayerFunctions obj){
+        p=obj;
+        p.setControlButtonsController(this);
+    }
+    
+    public void showPlayers(){
+        listView.getItems().clear();
+        li.clear();
         for (Player p : PlayerFunctions.users){
             
             HBox item = new HBox();
@@ -68,12 +75,25 @@ public class ControlButtonsController implements Initializable {
             Text score = new Text(String.valueOf(p.getScore()));
 
             Button invite = new Button();
-
-            invite.setText("Invite");
-            invite.setCursor(Cursor.HAND);
-
-            invite.setStyle("-fx-color: #00FF00; -fx-border-width: 5px;");
-
+            
+            invite.addEventHandler(ActionEvent.ACTION,new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    int id = p.getId();
+                    System.out.println(id);
+                }
+            });
+            
+            if (p.getFlag()){
+                invite.setText("Invite");
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle("-fx-color: #00FF00; -fx-border-width: 5px;");
+                
+            }else {
+                invite.setText("Offline");
+                invite.setStyle("-fx-color: #A9A9A9; -fx-border-width: 5px;");
+            }
+                
 
             score_button.getChildren().addAll(score,invite);
 
@@ -86,6 +106,11 @@ public class ControlButtonsController implements Initializable {
             li.add(item);
         }
         listView.getItems().addAll(li);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        showPlayers();
     }    
     
 }
