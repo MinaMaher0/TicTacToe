@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="ServerGui.ServerLoginController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerGui.ServerLoginController">
    <children>
       <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -24,7 +24,7 @@
             <Cursor fx:constant="S_RESIZE" />
          </cursor>
       </ImageView>
-      <Label text="Welcom Admin">
+      <Label text="Welcome Admin">
          <font>
             <Font name="Comic Sans MS" size="60.0" />
          </font>
@@ -37,7 +37,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <HBox alignment="CENTER" prefHeight="59.0" prefWidth="657.0">
+      <HBox alignment="CENTER" prefHeight="59.0" prefWidth="657.0" spacing="5.0">
          <children>
             <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="25" />
             <JFXTextField fx:id="username" prefHeight="39.0" prefWidth="305.0" promptText="User Name" unFocusColor="#c14378">
@@ -55,7 +55,7 @@
             </JFXTextField>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="68.0" prefWidth="657.0">
+      <HBox alignment="CENTER" prefHeight="68.0" prefWidth="657.0" spacing="5.0">
          <children>
             <FontAwesomeIconView glyphName="KEY" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="25" />
             <JFXPasswordField fx:id="password" prefHeight="38.0" prefWidth="298.0" promptText="Password" unFocusColor="#c14378">
@@ -73,6 +73,6 @@
             </JFXPasswordField>
          </children>
       </HBox>
-      <JFXButton onAction="#sign" prefHeight="60.0" prefWidth="234.0" styleClass="signin_btn" stylesheets="@serverlogin.css" text="Sing in" textAlignment="CENTER" />
+      <JFXButton onAction="#signIn" prefHeight="60.0" prefWidth="234.0" styleClass="signin_btn" stylesheets="@serverlogin.css" text="Sing in" textAlignment="CENTER" />
    </children>
 </VBox>

@@ -26,9 +26,9 @@ public class runServerGUI extends Application{
     
     @Override 
     public void start(Stage stage){
-        try {
+       try{
             primaryStage=stage;
-            root=FXMLLoader.load(getClass().getResource("ServerLogin.fxml"));
+            root=FXMLLoader.load(getClass().getResource("ServerHome.fxml"));
             Scene scene=new Scene(root);
             stage.setTitle("AdminLogin");
             stage.setScene(scene);

@@ -83,6 +83,11 @@ class ServerHandler extends Thread {
                     serverObj.reciveRequestFromPlayer(json.getInt("userId"));
                     break;
                 } 
+                case Request.ACCEPT_INVITATION:
+                {
+                    serverObj.acceptPlayerRequest(json.getInt(request));
+                    break;
+                }
             
             }
         } catch (Exception ex) {

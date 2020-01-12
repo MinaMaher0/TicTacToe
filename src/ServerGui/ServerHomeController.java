@@ -10,15 +10,19 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import Server.ServerControl;
+import Server.ServerSideClass;
 import com.jfoenix.controls.JFXListView;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import tictactoe.Player;
 
@@ -37,55 +41,54 @@ public class ServerHomeController implements Initializable {
     private JFXListView <?> offlineP; 
     @FXML
     private JFXListView <?> onlineP; 
+    @FXML
+    private Label serverCondition;
     
-    ObservableList on = FXCollections.observableArrayList();
+     ObservableList on = FXCollections.observableArrayList();
     ObservableList off = FXCollections.observableArrayList();
+  ServerControl serverControl= new ServerControl();
+
     
     @FXML
     void startServer(ActionEvent event) {
-        new ServerControl().startServer();
-        for(Player p:ServerControl.players)
-        {
-            if(p.getFlag() == true)
-                on.add(Item(p.getUser_name()));
-            else 
-                off.add(Item(p.getUser_name()));
-        }
-        onlineP.getItems().addAll(on);
-        offlineP.getItems().addAll(off);
-        
+        serverControl.startServer();
+        setOnlineList();
+        serverCondition.setText("Server is Running");
+        serverCondition.setFont(Font.font(15));
+    }
+    public void setOnlineList()
+    {
+        Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        offlineP.getItems().clear();
+                        onlineP.getItems().clear();
+                        on.clear();
+                        off.clear();
+                        for (Player p:ServerControl.players)
+                        {
+                            if(p.getFlag())
+                                on.add(p.getUser_name());
+                            else
+                                off.add(p.getUser_name());
+                        }
+                        offlineP.getItems().addAll(off);
+                        onlineP.getItems().addAll(on);  
+                    }
+                });
+         
     }
     @FXML
     void stopServer(ActionEvent event) {
-        new ServerControl().stopServer();
+        serverControl.stopServer();
+        serverCondition.setText("Server is Stopped");
+        serverCondition.setFont(Font.font(15));
     }
-    public HBox Item(String name)
-    {
-        HBox item=new HBox();
-        item.setSpacing(10);
-        
-        Image pP= new Image("1.jpg");
-        ImageView imgView=new ImageView(pP);
-        imgView.setFitWidth(40);
-        imgView.setFitHeight(40);
-        
-        Rectangle circle= new Rectangle(40,40);
-        circle.setArcWidth(40);
-        circle.setArcHeight(40);
-        
-        imgView.setClip(circle);
-        item.getChildren().add(imgView);
-        
-        Text playerName= new Text(name);
-        
-        item.getChildren().addAll(imgView,playerName);
-        
-        return item;
-    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }  
+              }  
     
     
 }
