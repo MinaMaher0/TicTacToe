@@ -209,25 +209,32 @@ public class ServerSideClass implements Server {
     }
 
     @Override
-    public void reciveRequestFromPlayer(int pID) {
-        System.out.println(pID);
+    public void reciveRequestFromPlayer(int senderID,int receiverID,String senderUserName) {
         try {
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
-            ps.println(sendRequest.toString());
+            sendRequest.put("senderID",senderID);
+            sendRequest.put("senderUserName",senderUserName);
+           // ps.println(sendRequest.toString());
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(ServerControl.playerMap.get(pID).s);
-        sendRequestToOtherPlayer(ServerControl.playerMap.get(pID));
+       // sendRequestToOtherPlayer(pID,);
     }
 
     @Override
-    public void sendRequestToOtherPlayer(ServerHandler s) {
+    public void sendRequestToOtherPlayer(int senderID,int receiverID,String senderUserName) {
         try {
             JSONObject sendRequest= new JSONObject();
             sendRequest.put("RequestType",Request.INVITE_PLAYER);
-            sendRequest.put("msg","hello wants to player with you");
+            sendRequest.put("senderID",senderID);
+            sendRequest.put("senderUserName",senderUserName);
+            ServerHandler s =ServerControl.playerMap.get(receiverID);
+            for (Player p : ServerControl.players){
+                if (p.getId()==receiverID){
+                    sendRequest.put("usrName",senderUserName);
+                }
+            }
             s.Ps.println(sendRequest.toString());
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -238,6 +245,21 @@ public class ServerSideClass implements Server {
     @Override
     public void acceptPlayerRequest(int pID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void sendStartGameRequest(int p1 , int p2)
+    {
+        JSONObject jsonStart = new JSONObject();
+        try {
+            jsonStart.put("SenderID", p1);
+            jsonStart.put("receiverID", p2);
+            jsonStart.put("RequestType", Request.START_GAME);
+            ps.println(jsonStart.toString());
+            ServerControl.playerMap.get(p1).Ps.println(jsonStart.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
 

@@ -24,26 +24,58 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import Server.ServerControl;
+import java.io.IOException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 public class ControlButtonsController implements Initializable {
-    PlayerFunctions p;
+    public static Stage newStage = new Stage();
+    PlayerFunctions pF;
     String s= new String("test");
     ObservableList li =FXCollections.observableArrayList();
-   @FXML
+    @FXML
     void invite_friend(ActionEvent event) {
         System.out.println("invite a friend!");
+    }
+    
+    public boolean showInviteDialog(String name,int p1,int p2){
+        boolean ret=false;
+        try {
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InviteDialog.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            InviteDialogController inviterController=loader.getController();
+            inviterController.setUserName(name);
+            inviterController.setplayersId(p1, p2);
+            inviterController.setControlObject(this);
+            newStage.initModality(Modality.WINDOW_MODAL);
+            Scene scene=new Scene(root);
+            newStage.setTitle("InviteDialogController");
+            newStage.setScene(scene);
+            newStage.show();
+            newStage.setResizable(false);
+        } catch (IOException ex) {
+            Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
     }
     
     @FXML
     private ListView<?> listView;
     
     public void setPlayerObj(PlayerFunctions obj){
-        p=obj;
-        p.setControlButtonsController(this);
+        pF=obj;
+        pF.setControlButtonsController(this);
     }
     
     public void showPlayers(){
@@ -81,6 +113,7 @@ public class ControlButtonsController implements Initializable {
                 public void handle(ActionEvent event) {
                     int id = p.getId();
                     System.out.println(id);
+                    pF.invitePlayer(id);
                 }
             });
             
@@ -111,6 +144,20 @@ public class ControlButtonsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         showPlayers();
-    }    
+    }
+    public void loadBoard(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewBoard.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("GameBoard");
+            MainGUI.primaryStage.setScene(scene);
+            MainGUI.primaryStage.show(); 
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+//Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

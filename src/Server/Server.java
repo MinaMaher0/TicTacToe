@@ -50,10 +50,10 @@ public interface Server{
     public void setTieCounter();
 
     //from player if wants to play with ither player 
-    public void reciveRequestFromPlayer(int pID);
+    public void reciveRequestFromPlayer(int senderID,int receiverID,String senderUserName);
     
     //send request to other player
-    public void sendRequestToOtherPlayer(ServerHandler s);
+     public void sendRequestToOtherPlayer(int senderID,int receiverID,String senderUserName);
     
     //player two accpet request from other player
     public void acceptPlayerRequest(int pID);

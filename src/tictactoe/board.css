@@ -1,0 +1,93 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.input_button {
+    -fx-border: none;
+    -fx-background: #FFF;
+    -fx-display: block;
+    -fx-background-size: 200%;
+    -fx-color: #fff;
+    -fx-outline: none;
+    -fx-transition: .5s;
+    -fx-font-family : Tahoma;
+    -fx-font-size : 22px;
+    -fx-text-fill: #FFF;
+    -fx-background-radius: 10px;
+    -fx-background-color: FFF;
+    -fx-animated: true;
+
+}
+
+
+
+.input_button:hover{
+    -fx-cursor: hand;
+    -fx-border-color: #AA3672;
+    -fx-border-width: 3px;
+    -fx-background-radius: 10px;
+
+    -fx-text-fill: linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-font-weight: bold; 
+}
+
+.board_button {
+
+    -fx-border: none;
+    -fx-background-size: 200%;
+    -fx-outline: none;
+    -fx-transition: .5s;
+    -fx-font-size : 52px;
+    -fx-background-color: FFF;
+    -fx-text-fill:#C02347;
+    -fx-font-weight:bold;
+    -fx-font-family: Comic Sans MS;
+    
+    -fx-position: absolute;
+    -fx-width: 147px;
+    -fx-height: 147px;
+    -fx-left: 333px;
+    -fx-top: 506px;
+
+    -fx-border: 25px solid #A0D0FB;
+    -fx-transform: rotate(-90deg);
+    
+}
+
+
+
+.board_button:hover{
+    -fx-cursor: hand;
+    -fx-border-color:  linear-gradient(#C02347 0%,#8F3D85 85%);;
+    -fx-border-width: 5px;
+
+}
+
+
+
+.close_pane_button{
+    -fx-border: none;
+    -fx-background: #FFF;
+    -fx-display: block;
+    -fx-background-size: 200%;
+    -fx-color: #fff;
+    -fx-outline: none;
+    -fx-transition: .5s;
+    -fx-font-family : Tahoma;
+    -fx-font-size : 10px;
+    -fx-text-fill: #FFF;
+    -fx-background-radius: 10px;
+    -fx-background-color: FFF;
+    -fx-animated: true;
+}
+.close_pane_button:hover{
+    -fx-cursor: hand;
+    -fx-border-color:#AA3672;
+    -fx-border-width: 3px;
+    -fx-background-radius: 5px;
+    -fx-background-color: #FFF;
+    -fx-font-weight: bold; 
+}

@@ -26,5 +26,9 @@ public interface Client {
     
     public boolean invitePlayer(int id);
     
+    public boolean acceptinvitation(int pOneId,int pTwoId);
+    
     public void logOut(int pId);
+    
+    public void sort(Vector<Player> p);
 }

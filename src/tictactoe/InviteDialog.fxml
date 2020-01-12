@@ -9,12 +9,12 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="182.0" prefWidth="399.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tictactoe.InviteDialogController">
+<AnchorPane id="AnchorPane" prefHeight="182.0" prefWidth="399.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.InviteDialogController">
     <stylesheets>
         <URL value="@invitedialog.css" />
     </stylesheets>
    <children>
-      <Label layoutX="115.0" layoutY="14.0" prefHeight="36.0" prefWidth="218.0" text="Mohamed salama" textFill="#756d6d">
+      <Label fx:id="usrName" layoutX="115.0" layoutY="14.0" prefHeight="36.0" prefWidth="218.0" text="Mohamed salama" textFill="#756d6d">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -30,7 +30,7 @@
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </Label>
-      <JFXButton layoutX="56.0" layoutY="111.0" prefHeight="45.0" prefWidth="144.0" styleClass="accept_btn" stylesheets="@invitedialog.css" text="Accept">
+      <JFXButton layoutX="56.0" layoutY="111.0" onAction="#accept" prefHeight="45.0" prefWidth="144.0" styleClass="accept_btn" stylesheets="@invitedialog.css" text="Accept">
          <font>
             <Font name="Comic Sans MS" size="25.0" />
          </font>
