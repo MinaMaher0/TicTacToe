@@ -81,7 +81,7 @@ PlayerFunctions p= new PlayerFunctions();
     
     @FXML
     void sign_up(ActionEvent event) {
-  
+        
        if(!SignUpValidate())
        {
            return;
