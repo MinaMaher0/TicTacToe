@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.deploy.util.FXLoader;
+import javafx.application.Platform;
 /**
  * FXML Controller class
  *
@@ -35,18 +36,59 @@ public class SignInController implements Initializable {
     @FXML
     private JFXPasswordField password;
 
+    String emailAdress = new String();
+    String passwordP = new String();
+    
     @FXML
-    void sign_in(ActionEvent event) {
-         String emailAdress = email.getText();
-         String passwordP = password.getText();
-         
-         System.out.println(p.signIn(emailAdress, passwordP));
-       
+    boolean sign_in(ActionEvent event) {
+          emailAdress = email.getText();
+          passwordP = password.getText();
+           
+          if(emailAdress.equals(""))
+          {
+             email.setText("enter your email");
+             return false;
+          }
+          if(passwordP.equals(""))
+          {
+              password.setText("plz enter your pass");
+              return false;
+          }
+          
+           return true;
     }
     
+     void sign_in_faild()
+    {
+        Platform.runLater(() -> {
+            email.setText("you are not signed in");
+        });
+        
+    }
+     void sign_in_sucess()
+     {
+         Platform.runLater(() -> {
+             try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ControlButtons.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            ControlButtonsController CBController=loader.getController();
+            CBController.setPlayerObj(p);
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("Signin");
+            MainGUI.primaryStage.setScene(scene);
+            MainGUI.primaryStage.show(); 
+        } catch (IOException ex) {
+            Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
+         } 
+         });
+          
+     }
      @FXML
     void tosign_up(ActionEvent event) {
-        try {
+
+       try {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUp.fxml"));
             Parent root;
             root = (Parent)loader.load();
@@ -62,25 +104,17 @@ public class SignInController implements Initializable {
     
     @FXML
     void controlButtons(ActionEvent event) {
-        sign_in(event);
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ControlButtons.fxml"));
-            Parent root;
-            root = (Parent)loader.load();
-            ControlButtonsController CBController=loader.getController();
-            CBController.setPlayerObj(p);
-            Scene scene = new Scene(root);
-            MainGUI.primaryStage.setTitle("Signin");
-            MainGUI.primaryStage.setScene(scene);
-            MainGUI.primaryStage.show(); 
-        } catch (IOException ex) {
-            Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
+        
+        if(!sign_in(event))
+        {
+            return;
         }
+         System.out.println(p.signIn(emailAdress, passwordP));
     }
     
         @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        p.setSignInObject(this);
     }   
     }
 
