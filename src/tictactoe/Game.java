@@ -29,6 +29,11 @@ public class Game {
         this.tie_score = tie_score;
         cellFilled=countCells();
     }
+
+    public Game(Player player1, Player player2) {
+       this(player1, player2, new char[9], 1);
+        
+    }
     
     public Game(Player player1, Player player2, char[] board, int playerTurn) {
         this(player1, player2, board, playerTurn, 0, 0, 0);
