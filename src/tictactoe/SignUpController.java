@@ -16,14 +16,16 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import org.apache.commons.validator.routines.EmailValidator;
+import sun.awt.PlatformFont;
 
 public class SignUpController implements Initializable {
     
-
+PlayerFunctions p= new PlayerFunctions();
     @FXML
     private JFXTextField userName;
     @FXML
@@ -74,14 +76,16 @@ public class SignUpController implements Initializable {
     @FXML
     void sign_up(ActionEvent event) {
         
-  
        if(!SignUpValidate())
        {
            return;
        }
         PlayerFunctions p = new PlayerFunctions();
         p.signUp(username, emailAdress, passwordP);
-        
+    }
+    
+    void SignUp_Success()
+    {
         try {
             Parent root;
             root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
@@ -93,9 +97,13 @@ public class SignUpController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
+//    void SignUp_Faild()
+//    {
+//        Platform.runLater(() -> {
+//        });
+//    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
