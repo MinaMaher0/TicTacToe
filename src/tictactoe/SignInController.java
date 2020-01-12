@@ -87,7 +87,9 @@ public class SignInController implements Initializable {
      }
      @FXML
     void tosign_up(ActionEvent event) {
+
        try {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUp.fxml"));
             Parent root;
             root = (Parent)loader.load();

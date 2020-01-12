@@ -38,11 +38,13 @@ PlayerFunctions p= new PlayerFunctions();
    String username = new String();
    String emailAdress = new String();
    String passwordP = new String();
+
      
     boolean SignUpValidate() {
           username = userName.getText();
           emailAdress = email.getText();
           passwordP = password.getText();
+
         String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         if (username.equals("")) {
             urequired.setVisible(true);

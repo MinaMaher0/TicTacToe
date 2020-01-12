@@ -51,7 +51,7 @@ public class PlayerFunctions implements Client {
 
     public PlayerFunctions() {
         try {
-            s = new Socket("192.168.43.151", 8000);
+            s = new Socket("127.0.0.1", 8000);
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
            // signIn("m@m.m", "1");
@@ -146,6 +146,7 @@ public class PlayerFunctions implements Client {
             invitePlayerObject.put("senderUserName",pla.getUser_name());
             invitePlayerObject.put("RequestType",Request.INVITE_PLAYER);
             output.println(invitePlayerObject.toString());
+            acceptinvitation(pla.getId(), id);
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -207,8 +208,8 @@ public class PlayerFunctions implements Client {
                             @Override
                             public void run() {
                                 try {
-                                    System.out.println("user "+ReqObj.getString("usrName"));
-                                    cbController.showInviteDialog(ReqObj.getString("usrName"));
+                                    System.out.println("user "+ReqObj);
+                                    cbController.showInviteDialog(ReqObj.getString("usrName"),ReqObj.getInt("senderID"),pla.getId());
                                 } catch (JSONException ex) {
                                     Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -260,4 +261,19 @@ public class PlayerFunctions implements Client {
         new PlayerFunctions();
        
     }
+
+    @Override
+    public boolean acceptinvitation(int pOneId, int pTwoId) {
+        JSONObject acceptinvitation = new JSONObject();
+        try {
+            acceptinvitation.put("player1Id", pOneId);
+            acceptinvitation.put("player2Id", pTwoId);
+            acceptinvitation.put("RequestType",Request.ACCEPT_INVITATION);
+            output.println(acceptinvitation.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return true;
+    }
+    
 }

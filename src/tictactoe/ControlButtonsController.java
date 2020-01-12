@@ -46,7 +46,7 @@ public class ControlButtonsController implements Initializable {
         System.out.println("invite a friend!");
     }
     
-    public boolean showInviteDialog(String name){
+    public boolean showInviteDialog(String name,int p1,int p2){
         boolean ret=false;
         try {
             Stage newStage = new Stage();
@@ -55,6 +55,7 @@ public class ControlButtonsController implements Initializable {
             root = (Parent)loader.load();
             InviteDialogController inviterController=loader.getController();
             inviterController.setUserName(name);
+            inviterController.setplayersId(p1, p2);
             newStage.initModality(Modality.WINDOW_MODAL);
             Scene scene=new Scene(root);
             newStage.setTitle("InviteDialogController");
