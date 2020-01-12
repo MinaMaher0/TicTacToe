@@ -16,14 +16,16 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import org.apache.commons.validator.routines.EmailValidator;
+import sun.awt.PlatformFont;
 
 public class SignUpController implements Initializable {
     
-
+PlayerFunctions p= new PlayerFunctions();
     @FXML
     private JFXTextField userName;
     @FXML
@@ -31,7 +33,11 @@ public class SignUpController implements Initializable {
     @FXML
     private JFXTextField email;
     @FXML
-    private Label urequired;
+    private Label userReq;
+    @FXML
+    private Label passwordReq;
+    @FXML
+    private Label emailReq;
 
    String username = new String();
    String emailAdress = new String();
@@ -45,15 +51,15 @@ public class SignUpController implements Initializable {
 
         String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         if (username.equals("")) {
-            urequired.setVisible(true);
+            userReq.setVisible(true);
             return false;
         }
         if (emailAdress.equals("")) {
-            email.setText("entar your email");
+            emailReq.setVisible(true);
             return false;
         }
         if (passwordP.equals("")) {
-            password.setText("enter your password");
+            passwordReq.setVisible(true);
             return false;
         }
         if (!EmailValidator.getInstance().isValid(emailAdress)) {
@@ -67,7 +73,7 @@ public class SignUpController implements Initializable {
                     + "a special character must occur at least once"
                     + "no whitespace allowed in the entire string"
                     + "at least 8 characters");
-            password.setText("lslls");
+            passwordReq.setVisible(true);
             return false;
         }
         return true;
@@ -75,7 +81,7 @@ public class SignUpController implements Initializable {
     
     @FXML
     void sign_up(ActionEvent event) {
-  
+        
        if(!SignUpValidate())
        {
            return;
@@ -84,7 +90,11 @@ public class SignUpController implements Initializable {
         p.signUp(username, emailAdress, passwordP);
 
         
-        try {
+       
+    }
+    void SignUp_Success()
+    {
+         try {
             Parent root;
             root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
             Scene scene = new Scene(root);
@@ -95,9 +105,13 @@ public class SignUpController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
+//    void SignUp_Faild()
+//    {
+//        Platform.runLater(() -> {
+//        });
+//    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

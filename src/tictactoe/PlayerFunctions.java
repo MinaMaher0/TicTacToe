@@ -28,17 +28,18 @@ public class PlayerFunctions implements Client {
     DataInputStream input;
     PrintStream output;
     Socket s;
-
     Player pla = new Player();
-
-
     ControlButtonsController cbController = null;
     SignInController siginObj = null;
-    
+    SignUpController signupObj = null;
     
     public void setControlButtonsController(ControlButtonsController obj){
         cbController=obj;
         cbController.showPlayers();
+    }
+    
+    public void setSignUpObject(SignUpController obj){
+        signupObj = obj;
     }
     
     public void setSignInObject(SignInController obj)
@@ -108,7 +109,6 @@ public class PlayerFunctions implements Client {
     @Override
     public boolean signUp(String userName, String email, String password) {
         try {
-            System.out.println("hhhhhhhhhhhhhh");
             JSONObject SignupObject = new JSONObject();
             SignupObject.put("userName", userName);
             SignupObject.put("email", email);
@@ -180,9 +180,10 @@ public class PlayerFunctions implements Client {
             final JSONObject ReqObj = new JSONObject(str);
             switch(ReqObj.get("RequestType").hashCode()){
                 case Request.SIGN_UP_SUCCESS:
-                     System.out.println("sucess");
+                    signupObj.SignUp_Success();
                      break;
                 case Request.SIGN_UP_FAILED :
+                    
                     System.out.println("unsecss");
                 case Request.LOGIN_SUCCESS:
                     pla.setId(ReqObj.getInt("id"));
@@ -192,7 +193,6 @@ public class PlayerFunctions implements Client {
                     siginObj.sign_in_sucess();
                     break;
                 case Request.LOGIN_FAILED:
-                    //System.out.println("sign in unsucess");
                     siginObj.sign_in_faild();
                     break;
                 case Request.INVITE_PLAYER_SUCESS:
@@ -273,6 +273,11 @@ public class PlayerFunctions implements Client {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
          return true;
+    }
+
+    @Override
+    public void sort(Vector<Player> p) {
+        
     }
     
 }

@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.deploy.util.FXLoader;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
 /**
  * FXML Controller class
  *
@@ -35,7 +36,13 @@ public class SignInController implements Initializable {
 
     @FXML
     private JFXPasswordField password;
-
+    @FXML
+    private Label passReq;
+    @FXML
+    private Label emailReq;
+    @FXML
+    private Label emailReq1;
+   
     String emailAdress = new String();
     String passwordP = new String();
     
@@ -46,12 +53,12 @@ public class SignInController implements Initializable {
            
           if(emailAdress.equals(""))
           {
-             email.setText("enter your email");
+             emailReq.setVisible(true);
              return false;
           }
           if(passwordP.equals(""))
           {
-              password.setText("plz enter your pass");
+              passReq.setVisible(true);
               return false;
           }
           
@@ -61,10 +68,11 @@ public class SignInController implements Initializable {
      void sign_in_faild()
     {
         Platform.runLater(() -> {
-            email.setText("you are not signed in");
+            emailReq1.setVisible(true);
         });
         
     }
+     
      void sign_in_sucess()
      {
          Platform.runLater(() -> {
