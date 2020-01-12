@@ -65,6 +65,7 @@ public class SignInController implements Initializable {
         });
         
     }
+     
      void sign_in_sucess()
      {
          Platform.runLater(() -> {
