@@ -46,8 +46,7 @@ public class NewBoardController implements Initializable {
 
     @FXML
     private Label lbl_33;
-
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        
