@@ -34,7 +34,7 @@ public class InviteDialogController implements Initializable {
     }
     public void accept()
     {   
-        
+        System.out.println("habllllll =======================");
         playerfunc.acceptinvitation(p1, p2);
     }
     public void setplayersId(int p1,int p2)

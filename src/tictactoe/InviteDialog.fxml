@@ -30,7 +30,7 @@
             <Font name="Comic Sans MS" size="20.0" />
          </font>
       </Label>
-      <JFXButton layoutX="56.0" layoutY="111.0" prefHeight="45.0" prefWidth="144.0" styleClass="accept_btn" stylesheets="@invitedialog.css" text="Accept">
+      <JFXButton layoutX="56.0" layoutY="111.0" onAction="#accept" prefHeight="45.0" prefWidth="144.0" styleClass="accept_btn" stylesheets="@invitedialog.css" text="Accept">
          <font>
             <Font name="Comic Sans MS" size="25.0" />
          </font>

@@ -142,6 +142,20 @@ public class ControlButtonsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         showPlayers();
-    }    
+    }
+    public void loadBoard(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewBoard.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("GameBoard");
+            MainGUI.primaryStage.setScene(scene);
+            MainGUI.primaryStage.show(); 
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+//Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
