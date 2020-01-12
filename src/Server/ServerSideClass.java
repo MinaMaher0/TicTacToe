@@ -23,6 +23,10 @@ import utils.Request;
 import Server.ServerHandler;
 import java.util.HashMap;
 import java.util.Map;
+import ServerGui.ServerHomeController;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -35,6 +39,7 @@ public class ServerSideClass implements Server {
     DbConnection db;
     DataInputStream dis;
     PrintStream ps;
+    ServerHomeController sHome;
    
     public static String getName() {
         return name;
@@ -44,14 +49,15 @@ public class ServerSideClass implements Server {
         return password;
     }
     
-    public ServerSideClass() {
+    public ServerSideClass() {    
     }
     
     public ServerSideClass(PrintStream ps,DataInputStream dis) {
         this.ps=ps;
         this.dis=dis;
         db= new DbConnection();
-       
+        sHome= new ServerHomeController();
+        System.out.println("PPPPPPPPPPPP");
     }
     public void signIN(String email, String password){
         System.out.println("PPPPPPPPPPPP");
@@ -61,7 +67,7 @@ public class ServerSideClass implements Server {
     public boolean signIN(String email, String password,ServerHandler s) {
         
         Player p=db.signIn(email, password);
-        
+         
         JSONObject singInBack= new JSONObject();
         
         if(p != null)
@@ -75,16 +81,20 @@ public class ServerSideClass implements Server {
                 singInBack.put("RequestType",Request.LOGIN_SUCCESS);
                                 
                 for (int i=0;i<ServerControl.players.size();++i){
-                    if (ServerControl.players.get(i).getId()==p.getId()){
+                    if (ServerControl.players.get(i).getId()== p.getId()){
                         ServerControl.players.get(i).setFlag(true);
+                     
                     }
                 }
+                
                 
                 ps.println(singInBack.toString());
                 
                 sendUsers();
                 ServerControl.playerMap.put(p.getId(),s);
                 
+                sHome.setOnlineList();
+                 System.out.println("PPPPPPPPPPPP");
             } 
             catch (Exception ex) {
                 System.out.println("flola : "+ex.toString());

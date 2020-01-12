@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tictactoe.DbConnection;
 import tictactoe.Player;
 
@@ -31,19 +33,18 @@ public class ServerControl extends Thread{
     public static Map <Integer,ServerHandler> playerMap;
     Thread startServer;
     public static Vector<Player> players;
-    
+   
+
 
     public ServerControl()
     {
-        db=new DbConnection();playerMap = new HashMap <Integer, ServerHandler>();
+        db=new DbConnection();
+        playerMap = new HashMap <Integer, ServerHandler>();
         players = new Vector<>();
         players=db.getData();
-        for (Player p:players)
-        {
-            System.out.println(p.getUser_name());
-        }
+        players.get(0).setFlag(true);
         //sSC= new ServerSideClass();
-        startServer();
+       // startServer();
     }
     
     public void startServer() {
@@ -68,18 +69,22 @@ public class ServerControl extends Thread{
     
     
     public void stopServer() {
+        System.out.println("stoooooooooop");
         try 
         {
-            startServer.stop();
+           db.closeConnnection();
+           startServer.stop();
            for(ServerHandler s: ServerHandler.socketVector)
             {
+                s.Ps.close();
+                s.Dis.close();
                 s.s.close();
             }
             sSocket.close();
         } catch (Exception e) {
         }
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new ServerControl();
-    }
+    }*/
 }

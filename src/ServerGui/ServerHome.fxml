@@ -26,11 +26,24 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <JFXListView fx:id="onlineP" prefHeight="280.0" prefWidth="200.0" />
+            <JFXListView fx:id="onlineP" prefHeight="280.0" prefWidth="200.0" stylesheets="@serverhome.css" />
          </children>
       </VBox>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" style="-fx-spacing: 10px;" styleClass="vbox" stylesheets="@serverhome.css">
          <children>
+            <Label fx:id="serverCondition" alignment="CENTER" prefHeight="61.0" prefWidth="125.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#e81523" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <font>
+                  <Font name="Centaur" size="18.0" />
+               </font>
+            </Label>
             <JFXButton onAction="#startServer" prefHeight="65.0" prefWidth="180.0" styleClass="btn" stylesheets="@serverhome.css" text="Start Server">
                <font>
                   <Font size="15.0" />

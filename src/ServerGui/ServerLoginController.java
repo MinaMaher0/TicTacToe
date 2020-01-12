@@ -6,6 +6,7 @@
 package ServerGui;
 
 import Server.*;
+import static ServerGui.runServerGUI.primaryStage;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -48,7 +49,17 @@ public class ServerLoginController implements Initializable {
         if(serverUserName.equals(ServerSideClass.getName()) 
                 &&serverPassword.equals(ServerSideClass.getPassword()))
         {
-            System.out.println("Hello Server");
+            try {
+                    System.out.println("Hello Server");
+                    Parent root;
+                    root = FXMLLoader.load(getClass().getResource("ServerHome.fxml"));
+                    Scene scene = new Scene(root);
+                    runServerGUI.primaryStage.setTitle("Home");
+                    runServerGUI.primaryStage.setScene(scene);
+                    runServerGUI.primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(runServerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }
     @Override

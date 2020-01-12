@@ -64,7 +64,7 @@ public class PlayerFunctions implements Client {
         } catch (IOException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
-        new Thread(new Runnable() {
+        Thread th=new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
@@ -74,19 +74,23 @@ public class PlayerFunctions implements Client {
                             System.out.println(str);
                             RequestHandller(str);
                             System.out.println("server response: " + str);
+
                             //  Scanner s = new Scanner(System.in);
                             // s.nextInt();
                             // signIn("mina10@gmail.com", "More34");
+
                         } catch (IOException ex) {
                             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
                         System.out.println("connection lost");
+                        break;
                     }
                 }
 
             }
-        }).start();
+        });
+        th.start();
     }
 
     @Override

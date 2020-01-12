@@ -31,7 +31,8 @@ public class DbConnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe?uSSL=false","root","password");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe?useSSL=false","root","ahmedxd22");
+
 
             st = conn.createStatement();
         } catch (SQLException ex) {
@@ -226,7 +227,15 @@ public class DbConnection {
         }
         return false ;
     }
-    
+    public void closeConnnection()
+    {
+        try {
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public static void main(String[] args) {
         DbConnection d = new DbConnection();
