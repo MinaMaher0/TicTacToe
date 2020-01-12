@@ -38,6 +38,7 @@ import javafx.stage.Stage;
 
 
 public class ControlButtonsController implements Initializable {
+    public static Stage newStage = new Stage();
     PlayerFunctions pF;
     String s= new String("test");
     ObservableList li =FXCollections.observableArrayList();
@@ -49,13 +50,14 @@ public class ControlButtonsController implements Initializable {
     public boolean showInviteDialog(String name,int p1,int p2){
         boolean ret=false;
         try {
-            Stage newStage = new Stage();
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InviteDialog.fxml"));
             Parent root;
             root = (Parent)loader.load();
             InviteDialogController inviterController=loader.getController();
             inviterController.setUserName(name);
             inviterController.setplayersId(p1, p2);
+            inviterController.setControlObject(this);
             newStage.initModality(Modality.WINDOW_MODAL);
             Scene scene=new Scene(root);
             newStage.setTitle("InviteDialogController");
