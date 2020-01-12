@@ -193,7 +193,6 @@ public class PlayerFunctions implements Client {
                     siginObj.sign_in_sucess();
                     break;
                 case Request.LOGIN_FAILED:
-                    //System.out.println("sign in unsucess");
                     siginObj.sign_in_faild();
                     break;
                 case Request.INVITE_PLAYER_SUCESS:
@@ -274,6 +273,11 @@ public class PlayerFunctions implements Client {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
          return true;
+    }
+
+    @Override
+    public void sort(Vector<Player> p) {
+        
     }
     
 }

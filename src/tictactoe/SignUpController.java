@@ -33,7 +33,11 @@ PlayerFunctions p= new PlayerFunctions();
     @FXML
     private JFXTextField email;
     @FXML
-    private Label urequired;
+    private Label userReq;
+    @FXML
+    private Label passwordReq;
+    @FXML
+    private Label emailReq;
 
    String username = new String();
    String emailAdress = new String();
@@ -47,15 +51,15 @@ PlayerFunctions p= new PlayerFunctions();
 
         String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         if (username.equals("")) {
-            urequired.setVisible(true);
+            userReq.setVisible(true);
             return false;
         }
         if (emailAdress.equals("")) {
-            email.setText("entar your email");
+            emailReq.setVisible(true);
             return false;
         }
         if (passwordP.equals("")) {
-            password.setText("enter your password");
+            passwordReq.setVisible(true);
             return false;
         }
         if (!EmailValidator.getInstance().isValid(emailAdress)) {
@@ -69,7 +73,7 @@ PlayerFunctions p= new PlayerFunctions();
                     + "a special character must occur at least once"
                     + "no whitespace allowed in the entire string"
                     + "at least 8 characters");
-            password.setText("lslls");
+            passwordReq.setVisible(true);
             return false;
         }
         return true;
@@ -86,7 +90,11 @@ PlayerFunctions p= new PlayerFunctions();
         p.signUp(username, emailAdress, passwordP);
 
         
-        try {
+       
+    }
+    void SignUp_Success()
+    {
+         try {
             Parent root;
             root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
             Scene scene = new Scene(root);
