@@ -147,7 +147,7 @@ public class ControlButtonsController implements Initializable {
     }
     public void loadBoard(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewBoard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TheBoard.fxml"));
             Parent root;
             root = (Parent)loader.load();
             Scene scene = new Scene(root);
@@ -156,7 +156,7 @@ public class ControlButtonsController implements Initializable {
             MainGUI.primaryStage.show(); 
         } catch (Exception ex) {
             System.out.println(ex.toString());
-//Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
+Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
