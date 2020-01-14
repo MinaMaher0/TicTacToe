@@ -207,7 +207,7 @@ public class ServerSideClass implements Server {
     public void setTieCounter() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+//removed
     @Override
     public void reciveRequestFromPlayer(int senderID,int receiverID,String senderUserName) {
         try {
@@ -251,11 +251,13 @@ public class ServerSideClass implements Server {
     {
         JSONObject jsonStart = new JSONObject();
         try {
-            jsonStart.put("SenderID", p1);
+            jsonStart.put("senderID", p1);
             jsonStart.put("receiverID", p2);
             jsonStart.put("RequestType", Request.START_GAME);
-            ps.println(jsonStart.toString());
+            //ps.println(jsonStart.toString());
             ServerControl.playerMap.get(p1).Ps.println(jsonStart.toString());
+            //ServerControl.playerMap.get(p2).Ps.println(jsonStart.toString());
+            
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }

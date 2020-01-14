@@ -44,7 +44,7 @@ public class ServerControl extends Thread{
         players=db.getData();
         players.get(0).setFlag(true);
         //sSC= new ServerSideClass();
-       // startServer();
+        //startServer();
     }
     
     public void startServer() {
