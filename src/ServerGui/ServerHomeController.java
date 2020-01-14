@@ -12,18 +12,11 @@ import javafx.fxml.Initializable;
 import Server.ServerControl;
 import Server.ServerSideClass;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import tictactoe.Player;
 
 /**
@@ -41,21 +34,35 @@ public class ServerHomeController implements Initializable {
     private JFXListView <?> offlineP; 
     @FXML
     private JFXListView <?> onlineP; 
+    
     @FXML
-    private Label serverCondition;
+    private JFXToggleButton toggle;
     
-     ObservableList on = FXCollections.observableArrayList();
+    ObservableList on = FXCollections.observableArrayList();
     ObservableList off = FXCollections.observableArrayList();
-  ServerControl serverControl= new ServerControl();
-
-    
+    ServerControl serverControl; 
+    int flag;
+  
     @FXML
     void startServer(ActionEvent event) {
-        serverControl.startServer();
-        setOnlineList();
-        serverCondition.setText("Server is Running");
-        serverCondition.setFont(Font.font(15));
+       /* serverControl.startServer();
+        setOnlineList();*/
+       if(toggle.isArmed())
+        {
+            if(flag == 0)
+            {
+                serverControl.startServer();
+                setOnlineList();
+                flag=1;
+            }
+            else
+            {
+             serverControl.stopServer();
+             flag=0;
+            }
+        }
     }
+    
     public void setOnlineList()
     {
         Platform.runLater(new Runnable() {
@@ -76,19 +83,15 @@ public class ServerHomeController implements Initializable {
                         onlineP.getItems().addAll(on);  
                     }
                 });
-         
-    }
-    @FXML
-    void stopServer(ActionEvent event) {
-        serverControl.stopServer();
-        serverCondition.setText("Server is Stopped");
-        serverCondition.setFont(Font.font(15));
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-              }  
+       serverControl=new ServerControl();
+       flag=0;
+       
+    }  
     
     
 }
