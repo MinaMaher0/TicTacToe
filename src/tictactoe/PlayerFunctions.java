@@ -5,6 +5,7 @@
  */
 package tictactoe;
 
+import Server.ServerControl;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -51,20 +52,21 @@ public class PlayerFunctions implements Client {
     {
         siginObj =obj;
     }
-    
+
     public void setBoardObj(TheBoardController obj){
         boardObj=obj;
     }
+
 
     public static Vector<Player> users;
 
     public PlayerFunctions() {
         try {
-            s = new Socket("192.168.43.151", 8000);
+
+            s = new Socket("127.0.0.1", 8000);
+
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
-            // signIn("m@m.m", "1");
-            /* invitePlayer(1);*/
             users = new Vector<>();
 
         } catch (IOException ex) {
@@ -80,11 +82,6 @@ public class PlayerFunctions implements Client {
                             System.out.println(str);
                             RequestHandller(str);
                             System.out.println("server response: " + str);
-
-                            //  Scanner s = new Scanner(System.in);
-                            // s.nextInt();
-                            // signIn("mina10@gmail.com", "More34");
-
                         } catch (IOException ex) {
                             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -153,10 +150,12 @@ public class PlayerFunctions implements Client {
     public boolean invitePlayer(int id) {
         JSONObject invitePlayerObject = new JSONObject();
         try {
-            invitePlayerObject.put("receiverID", id);
+            
             invitePlayerObject.put("senderID", pla.getId());
+            invitePlayerObject.put("receiverID", id);
             invitePlayerObject.put("senderUserName", pla.getUser_name());
             invitePlayerObject.put("RequestType", Request.INVITE_PLAYER);
+            
             output.println(invitePlayerObject.toString());
             //acceptinvitation(pla.getId(), id);
         } catch (JSONException ex) {
@@ -242,6 +241,7 @@ public class PlayerFunctions implements Client {
                         });
                     }
                     break;
+                    
                 case Request.START_GAME:
                     System.out.println("bateeeeeeeeeeee5");
                     Platform.runLater(new Runnable() {
@@ -253,8 +253,15 @@ public class PlayerFunctions implements Client {
                         }
                     });
                     break;
+
                 case Request.PLAYED_CELL:
                     boardObj.setLbl(ReqObj.getInt("cellNum"), ReqObj.getString("cellChar").charAt(0));
+
+                case Request.REFUSE_INVITATION:
+                {
+                    cbController.loadDeclineboard(ReqObj.getString("usrName"));
+                }
+
             }
 
         } catch (Exception ex) {
@@ -285,13 +292,14 @@ public class PlayerFunctions implements Client {
 
     @Override
     public boolean acceptinvitation(int pOneId, int pTwoId) {
-        System.out.println("meeeeeeeeee5a");
+       
         JSONObject acceptinvitation = new JSONObject();
         try {
-            acceptinvitation.put("player1Id", pOneId);
-            acceptinvitation.put("player2Id", pTwoId);
+            acceptinvitation.put("senderID", pOneId);
+            acceptinvitation.put("receiverID", pTwoId);
             acceptinvitation.put("RequestType", Request.ACCEPT_INVITATION);
             output.println(acceptinvitation.toString());
+            
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -311,9 +319,24 @@ public class PlayerFunctions implements Client {
         }
     }
 
+
     @Override
     public void sort(Vector<Player> p) {
         
+    }
+
+    @Override
+    public void declineInvitation(int pOneId, int pTwoId) {
+        System.out.println("ayaaaaaaaaaa");
+        JSONObject declineinvitation = new JSONObject();
+         try {
+            declineinvitation.put("SenderId", pOneId);
+            declineinvitation.put("RecieverId", pTwoId);
+            declineinvitation.put("RequestType", Request.REFUSE_INVITATION);
+            output.println(declineinvitation.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

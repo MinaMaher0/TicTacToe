@@ -43,8 +43,9 @@ public class ServerControl extends Thread{
         players = new Vector<>();
         players=db.getData();
         players.get(0).setFlag(true);
-        sSC= new ServerSideClass();
-        startServer();
+        //sSC= new ServerSideClass();
+        //startServer();
+
     }
     
     public void startServer() {

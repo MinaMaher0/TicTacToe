@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -31,7 +31,7 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" style="-fx-spacing: 10px;" styleClass="vbox" stylesheets="@serverhome.css">
          <children>
-            <Label fx:id="serverCondition" alignment="CENTER" prefHeight="61.0" prefWidth="125.0">
+            <JFXToggleButton fx:id="toggle" onAction="#startServer" size="15.0" text="Open Server">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -41,19 +41,41 @@
                   </LinearGradient>
                </textFill>
                <font>
-                  <Font name="Centaur" size="18.0" />
+                  <Font name="Consolas Bold Italic" size="16.0" />
                </font>
-            </Label>
-            <JFXButton onAction="#startServer" prefHeight="65.0" prefWidth="180.0" styleClass="btn" stylesheets="@serverhome.css" text="Start Server">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </JFXButton>
-            <JFXButton onAction="#stopServer" prefHeight="65.0" prefWidth="179.0" styleClass="btn" stylesheets="@serverhome.css" text="Stop Server">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </JFXButton>
+               <unToggleLineColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#e81523" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </unToggleLineColor>
+               <toggleLineColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#804ca8" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </toggleLineColor>
+               <unToggleColor>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.7904761904761904">
+                     <stops>
+                        <Stop color="#e81523" />
+                        <Stop color="#804ca8" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </unToggleColor>
+               <toggleColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#e81523" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </toggleColor>
+            </JFXToggleButton>
          </children>
       </VBox>
       <VBox alignment="CENTER" prefHeight="358.0" prefWidth="200.0" style="-fx-spacing: 10px;">

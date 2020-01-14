@@ -35,7 +35,7 @@
             <Font name="Comic Sans MS" size="25.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="210.0" layoutY="111.0" prefHeight="45.0" prefWidth="136.0" styleClass="deline_btn" stylesheets="@invitedialog.css" text="Decline">
+      <JFXButton layoutX="210.0" layoutY="111.0" onAction="#decline" prefHeight="45.0" prefWidth="136.0" styleClass="deline_btn" stylesheets="@invitedialog.css" text="Decline">
          <font>
             <Font name="Comic Sans MS" size="25.0" />
          </font>
