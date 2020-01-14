@@ -3,19 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Me5a/Desktop/Java%20project/TicTacToe/src/Server/ServerControl.java</file>
-            <file>file:/C:/Users/Me5a/Desktop/Java%20project/TicTacToe/src/tictactoe/MainGUI.java</file>
-            <file>file:/C:/Users/Me5a/Desktop/Java%20project/TicTacToe/src/tictactoe/SignInController.java</file>
-            <file>file:/C:/Users/Me5a/Desktop/Java%20project/TicTacToe/src/tictactoe/InviteDialogController.java</file>
-            <file>file:/C:/Users/Me5a/Desktop/Java%20project/TicTacToe/src/tictactoe/ControlButtonsController.java</file>
-            <file>file:/C:/Users/Me5a/Desktop/Java%20project/TicTacToe/src/tictactoe/PlayerFunctions.java</file>
-            <file>file:/C:/Users/Me5a/Desktop/Java%20project/TicTacToe/src/Server/ServerSideClass.java</file>
+            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/InviteDialogController.java</file>
+            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/PlayerFunctions.java</file>
+            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/Client.java</file>
+            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/MainGUI.java</file>
+            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/utils/Request.java</file>
         </group>
         <group>
+            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/InviteDialogController.java</file>
             <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/PlayerFunctions.java</file>
-            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/Server/ServerControl.java</file>
-            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/SignInController.java</file>
+            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/Client.java</file>
             <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/MainGUI.java</file>
+            <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/utils/Request.java</file>
             <file>file:/C:/Users/Aya%20Morsi/Documents/GitHub/TicTacToe/src/tictactoe/SignUpController.java</file>
         </group>
     </open-files>

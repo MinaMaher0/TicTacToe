@@ -261,5 +261,17 @@ public class ServerSideClass implements Server {
         }
         
     }
+    public void sendRefuseGameRequest(int p1 ,int p2)
+    {
+        JSONObject jsonRefuse = new JSONObject();
+        try {
+            jsonRefuse.put("SenderID", p1);
+            jsonRefuse.put("receiverID", p2);
+            jsonRefuse.put("RequestType", Request.REFUSE_INVITATION);
+            ServerControl.playerMap.get(p1).Ps.println(jsonRefuse.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
 

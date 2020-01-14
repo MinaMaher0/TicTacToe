@@ -29,6 +29,10 @@ public class InviteDialogController implements Initializable {
     int p1 , p2 ;
     @FXML
     private JFXButton accept;
+    
+    @FXML
+    private JFXButton decline;
+    
     ControlButtonsController invite=null;
     
     public void setControlObject(ControlButtonsController obj){
@@ -43,8 +47,15 @@ public class InviteDialogController implements Initializable {
 //       // MainGUI.primaryStage.close();
 //        System.out.println("habllllll =======================");
         
+    @FXML
+    void decline(ActionEvent event)
+    {
+        ControlButtonsController.newStage.close();
+        playerfunc.declineInvitation(p1, p1);
+    }
     
-        @FXML
+    
+    @FXML
     void accept(ActionEvent event) {
        ControlButtonsController.newStage.close();
        invite.loadBoard();

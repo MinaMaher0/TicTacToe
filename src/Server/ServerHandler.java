@@ -98,7 +98,7 @@ class ServerHandler extends Thread {
                     serverObj.sendRequestToOtherPlayer(json.getInt("senderID"),json.getInt("receiverID"),json.getString("senderUserName"));
                     break;
 
-                
+                }
                 case Request.ACCEPT_INVITATION:
                 {
                    System.out.println(json);
@@ -107,6 +107,12 @@ class ServerHandler extends Thread {
                    Game game = new Game(p1, p2);
                    serverObj.sendStartGameRequest(p1.getId(), p2.getId());
                     break;
+                }
+                case Request.REFUSE_INVITATION:
+                {
+                  Player sender = getPlayer(json.getInt("SenderId"));
+                  Player reciever = getPlayer(json.getInt("RecieverId"));
+                  serverObj.sendRefuseGameRequest(sender.getId(), reciever.getId());
                 }
             
             }
