@@ -50,6 +50,8 @@ public class PlayerFunctions implements Client {
     {
         siginObj =obj;
     }
+    
+   
 
     public static Vector<Player> users;
 
@@ -244,6 +246,10 @@ public class PlayerFunctions implements Client {
                         }
                     });
                     break;
+                case Request.REFUSE_INVITATION:
+                {
+                    cbController.loadDeclineboard(ReqObj.getString("usrName"));
+                }
 
             }
 
@@ -293,6 +299,20 @@ public class PlayerFunctions implements Client {
     @Override
     public void sort(Vector<Player> p) {
         
+    }
+
+    @Override
+    public void declineInvitation(int pOneId, int pTwoId) {
+        System.out.println("ayaaaaaaaaaa");
+        JSONObject declineinvitation = new JSONObject();
+         try {
+            declineinvitation.put("SenderId", pOneId);
+            declineinvitation.put("RecieverId", pTwoId);
+            declineinvitation.put("RequestType", Request.REFUSE_INVITATION);
+            output.println(declineinvitation.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

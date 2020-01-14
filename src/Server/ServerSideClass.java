@@ -254,14 +254,26 @@ public class ServerSideClass implements Server {
             jsonStart.put("senderID", p1);
             jsonStart.put("receiverID", p2);
             jsonStart.put("RequestType", Request.START_GAME);
-            //ps.println(jsonStart.toString());
-            ServerControl.playerMap.get(p1).Ps.println(jsonStart.toString());
+            ps.println(jsonStart.toString());
+            //ServerControl.playerMap.get(p1).Ps.println(jsonStart.toString());
             //ServerControl.playerMap.get(p2).Ps.println(jsonStart.toString());
             
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    public void sendRefuseGameRequest(int p1 ,int p2)
+    {
+        JSONObject jsonRefuse = new JSONObject();
+        try {
+            jsonRefuse.put("SenderID", p1);
+            jsonRefuse.put("receiverID", p2);
+            jsonRefuse.put("RequestType", Request.REFUSE_INVITATION);
+            ServerControl.playerMap.get(p1).Ps.println(jsonRefuse.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 

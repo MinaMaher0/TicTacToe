@@ -106,16 +106,19 @@ class ServerHandler extends Thread {
                 {
                     System.out.println("hela hlop");
                    System.out.println(json);
+
                     p1 = getPlayer(json.getInt("player1Id"));
                     System.out.println(p1.getId());
                     p2 = getPlayer(json.getInt("player2Id"));
             System.out.println(p2.getId());
                             
                     game = new Game(p1, p2);
+
                    serverObj.sendStartGameRequest(p1.getId(), p2.getId());
 
                     break;
                 }
+
                 case Request.PLAYED_CELL:
                    int cellNum=json.getInt("cellNum");
                    JSONObject sendCell=new JSONObject();
