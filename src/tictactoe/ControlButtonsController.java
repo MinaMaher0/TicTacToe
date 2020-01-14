@@ -147,9 +147,12 @@ public class ControlButtonsController implements Initializable {
     }
     public void loadBoard(){
         try {
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("TheBoard.fxml"));
             Parent root;
             root = (Parent)loader.load();
+            TheBoardController boardObj=loader.getController();
+            boardObj.SetPlayerFunctionObj(pF);
             Scene scene = new Scene(root);
             MainGUI.primaryStage.setTitle("GameBoard");
             MainGUI.primaryStage.setScene(scene);

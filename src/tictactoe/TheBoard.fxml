@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.TheBoardController">
    <children>
       <GridPane alignment="CENTER" layoutX="315.0" layoutY="198.0" prefHeight="446.0" prefWidth="585.0">
@@ -21,15 +20,15 @@
             <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="144.33334350585938" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="lbl_13" alignment="CENTER" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="2" />
-            <Label fx:id="lbl_12" alignment="CENTER" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="1" />
-            <Label fx:id="lbl_11" alignment="CENTER" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" />
-            <Label fx:id="lbl_21" alignment="CENTER" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.rowIndex="1" />
-            <Label fx:id="lbl_22" alignment="CENTER" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="lbl_23" alignment="CENTER" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label fx:id="lbl_31" alignment="CENTER" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.rowIndex="2" />
-            <Label fx:id="lbl_32" alignment="CENTER" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="lbl_33" alignment="CENTER" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="lbl_13" alignment="CENTER" onMouseClicked="#lbl3" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="2" />
+            <Label fx:id="lbl_12" alignment="CENTER" onMouseClicked="#lbl2" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="1" />
+            <Label fx:id="lbl_11" alignment="CENTER" onMouseClicked="#lbl1" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" />
+            <Label fx:id="lbl_21" alignment="CENTER" onMouseClicked="#lbl4" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.rowIndex="1" />
+            <Label fx:id="lbl_22" alignment="CENTER" onMouseClicked="#lbl5" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="lbl_23" alignment="CENTER" onMouseClicked="#lbl6" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="lbl_31" alignment="CENTER" onMouseClicked="#lbl7" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.rowIndex="2" />
+            <Label fx:id="lbl_32" alignment="CENTER" onMouseClicked="#lbl8" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="lbl_33" alignment="CENTER" onMouseClicked="#lbl9" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

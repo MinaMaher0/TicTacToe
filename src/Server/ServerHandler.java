@@ -78,6 +78,7 @@ class ServerHandler extends Thread {
     
     public void requestHandler(String request)
     {
+        System.out.println("youuuuuuuuuuuu "+request);
         JSONObject json;   
         try {
             json = new JSONObject(request);
@@ -97,7 +98,7 @@ class ServerHandler extends Thread {
                 {
                     serverObj.sendRequestToOtherPlayer(json.getInt("senderID"),json.getInt("receiverID"),json.getString("senderUserName"));
                     break;
-
+                }
                 
                 case Request.ACCEPT_INVITATION:
                 {
