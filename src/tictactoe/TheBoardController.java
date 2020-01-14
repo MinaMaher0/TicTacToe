@@ -15,10 +15,8 @@ import javafx.fxml.Initializable;
  * @author Salama
  */
 public class TheBoardController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

@@ -32,9 +32,15 @@ class ServerHandler extends Thread {
     public PrintStream Ps;
     Socket s;
     ServerHandler me;
-    
+    Player p1,p2;
     public static Vector <ServerHandler> socketVector = new Vector<ServerHandler>();
-
+    Game g;
+    
+    public void setGame(Game pg){
+        pg=g;
+    }
+            
+            
     public ServerHandler(Socket socket) {
         try {
             s=socket;
@@ -99,15 +105,28 @@ class ServerHandler extends Thread {
                 {
                     serverObj.sendRequestToOtherPlayer(json.getInt("senderID"),json.getInt("receiverID"),json.getString("senderUserName"));
                     break;
-
                 }
+                
                 case Request.ACCEPT_INVITATION:
                 {
                    System.out.println(json);
-                   Player p1 = getPlayer(json.getInt("player1Id"));
-                   Player p2 = getPlayer(json.getInt("player2Id"));
+                   p1 = getPlayer(json.getInt("player1Id"));
+                   p2 = getPlayer(json.getInt("player2Id"));
                    Game game = new Game(p1, p2);
+                   g=game;
+                   ServerControl.playerMap.get(p1.getId()).g=game;
+                   
                    serverObj.sendStartGameRequest(p1.getId(), p2.getId());
+
+                   
+                    break;
+                }
+                case Request.PLAYED_CELL:
+                {
+                    
+                    ServerControl.playerMap.get(p2.getId()).g.chooseCell(json.getInt("cellNumber"));
+                    ServerControl.playerMap.get(p1.getId()).g.chooseCell(json.getInt("cellNumber"));
+                    
 
                     break;
                 }
@@ -119,3 +138,4 @@ class ServerHandler extends Thread {
         }
     }
 }
+    

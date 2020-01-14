@@ -47,9 +47,9 @@ public class Game {
         return counter;
     }
     
-    public int chooseCell(int x,int y){
+    public int chooseCell(int x){
         char ch = getPlayerChar();
-        board[x*3+y]=ch;
+        board[x]=ch;
         ++cellFilled;
         if  (checkWinner(ch)) // current player win
             return 1;
@@ -59,24 +59,24 @@ public class Game {
         return 0;
     }
     
-    void changeTurn(){
+    public void changeTurn(){
         playerTurn%=2;
         playerTurn++;
     }
     
-    char getPlayerChar(){
+    public char getPlayerChar(){
         if (playerTurn==1)
-            return 'x';
-        return 'o';
+            return 'X';
+            return 'O';
     }
     
-    boolean checkWinner(char ch){
+    public boolean checkWinner(char ch){
         if (checkHorizontal(ch) || checkVertical(ch) || checkDiagonal(ch))
             return true;
         return false;
     }
     
-    boolean checkHorizontal(char ch){
+    public boolean checkHorizontal(char ch){
         if (board[0]==board[1] && board[1]==board[2] && board[2]==ch){
             return true;
         }
@@ -89,7 +89,7 @@ public class Game {
         return false;
     }
     
-    boolean checkVertical(char ch){
+    public boolean checkVertical(char ch){
         if (board[0]==board[3] && board[3]==board[6] && board[6]==ch){
             return true;
         }
@@ -102,7 +102,7 @@ public class Game {
         return false;
     }
     
-    boolean checkDiagonal(char ch){
+    public boolean checkDiagonal(char ch){
         if (board[0]==board[4] && board[4]==board[8] && board[8]==ch){
             return true;
         }
