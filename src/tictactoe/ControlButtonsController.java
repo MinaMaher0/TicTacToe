@@ -160,4 +160,24 @@ Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, nul
         }
     }
     
+    public void loadDeclineboard(String name){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DeclineDialog.fxml"));
+            Parent root;
+
+            root = (Parent)loader.load();
+            DeclineDialogController declineController=loader.getController();
+            declineController.setUserName(name);
+            newStage.initModality(Modality.WINDOW_MODAL);
+            Scene scene=new Scene(root);
+            newStage.setTitle("DeclineDialogController");
+            newStage.setScene(scene);
+            newStage.show();
+            newStage.setResizable(false);
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

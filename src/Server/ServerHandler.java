@@ -111,6 +111,12 @@ class ServerHandler extends Thread {
 
                     break;
                 }
+                case Request.REFUSE_INVITATION:
+                {
+                  Player sender = getPlayer(json.getInt("SenderId"));
+                  Player reciever = getPlayer(json.getInt("RecieverId"));
+                  serverObj.sendRefuseGameRequest(sender.getId(), reciever.getId());
+                }
             
             }
         } catch (Exception ex) {
