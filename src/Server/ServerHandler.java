@@ -104,8 +104,8 @@ class ServerHandler extends Thread {
                 case Request.ACCEPT_INVITATION:
                 {
                    System.out.println(json);
-                   Player p1 = getPlayer(json.getInt("player1Id"));
-                   Player p2 = getPlayer(json.getInt("player2Id"));
+                   Player p1 = getPlayer(json.getInt("senderID"));
+                   Player p2 = getPlayer(json.getInt("receiverID"));
                    Game game = new Game(p1, p2);
                    serverObj.sendStartGameRequest(p1.getId(), p2.getId());
 
