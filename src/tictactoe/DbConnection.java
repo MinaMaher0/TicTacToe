@@ -31,7 +31,7 @@ public class DbConnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe?useSSL=false","root","ahmedxd22");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe?useSSL=false","root","password");
 
 
             st = conn.createStatement();

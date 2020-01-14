@@ -81,6 +81,7 @@ class ServerHandler extends Thread {
     
     public void requestHandler(String request)
     {
+        System.out.println("youuuuuuuuuuuu "+request);
         JSONObject json;   
         try {
             json = new JSONObject(request);
@@ -102,6 +103,7 @@ class ServerHandler extends Thread {
                     break;
 
                 }
+
                 case Request.ACCEPT_INVITATION:
                 {
                     System.out.println("hela hlop");

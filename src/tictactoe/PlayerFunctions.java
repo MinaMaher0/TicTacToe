@@ -36,6 +36,8 @@ public class PlayerFunctions implements Client {
     ControlButtonsController cbController = null;
     SignInController siginObj = null;
     SignUpController signupObj = null;
+    TheBoardController boardObj = null;
+    
     
     public void setControlButtonsController(ControlButtonsController obj){
         cbController=obj;
@@ -50,14 +52,19 @@ public class PlayerFunctions implements Client {
     {
         siginObj =obj;
     }
-    
-   
+
+    public void setBoardObj(TheBoardController obj){
+        boardObj=obj;
+    }
+
 
     public static Vector<Player> users;
 
     public PlayerFunctions() {
         try {
+
             s = new Socket("127.0.0.1", 8000);
+
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
             users = new Vector<>();
@@ -246,6 +253,10 @@ public class PlayerFunctions implements Client {
                         }
                     });
                     break;
+
+                case Request.PLAYED_CELL:
+                    boardObj.setLbl(ReqObj.getInt("cellNum"), ReqObj.getString("cellChar").charAt(0));
+
                 case Request.REFUSE_INVITATION:
                 {
                     cbController.loadDeclineboard(ReqObj.getString("usrName"));
@@ -295,7 +306,20 @@ public class PlayerFunctions implements Client {
         return true;
     }
 
-    
+    public void sendPlayedCellRequest(int cellNum)
+    {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("RequestType", Request.PLAYED_CELL);
+            json.put("PlayerID", pla.getId());
+            json.put("cellNum", cellNum);
+            output.println(json.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
     @Override
     public void sort(Vector<Player> p) {
         

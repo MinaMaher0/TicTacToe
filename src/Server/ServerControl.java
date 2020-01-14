@@ -45,6 +45,7 @@ public class ServerControl extends Thread{
         players.get(0).setFlag(true);
         //sSC= new ServerSideClass();
         //startServer();
+
     }
     
     public void startServer() {
@@ -84,7 +85,7 @@ public class ServerControl extends Thread{
         } catch (Exception e) {
         }
     }
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         new ServerControl();
-    }*/
+    }
 }
