@@ -47,9 +47,9 @@ public class Game {
         return counter;
     }
     
-    public int chooseCell(int x,int y){
+    public int chooseCell(int cellNum){
         char ch = getPlayerChar();
-        board[x*3+y]=ch;
+        board[cellNum]=ch;
         ++cellFilled;
         if  (checkWinner(ch)) // current player win
             return 1;
