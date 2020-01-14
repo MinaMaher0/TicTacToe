@@ -1,4 +1,4 @@
-
+    
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,11 +26,13 @@ import utils.Request;
  */
 
 class ServerHandler extends Thread {
+    
     ServerSideClass serverObj;
     DataInputStream Dis;
-    PrintStream Ps;
+    public PrintStream Ps;
     Socket s;
     ServerHandler me;
+    
     public static Vector <ServerHandler> socketVector = new Vector<ServerHandler>();
 
     public ServerHandler(Socket socket) {
@@ -102,10 +104,11 @@ class ServerHandler extends Thread {
                 case Request.ACCEPT_INVITATION:
                 {
                    System.out.println(json);
-                   Player p1 = getPlayer(json.getInt("player1Id"));
-                   Player p2 = getPlayer(json.getInt("player2Id"));
+                   Player p1 = getPlayer(json.getInt("senderID"));
+                   Player p2 = getPlayer(json.getInt("receiverID"));
                    Game game = new Game(p1, p2);
                    serverObj.sendStartGameRequest(p1.getId(), p2.getId());
+
                     break;
                 }
                 case Request.REFUSE_INVITATION:

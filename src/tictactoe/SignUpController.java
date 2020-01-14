@@ -21,7 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import org.apache.commons.validator.routines.EmailValidator;
-import sun.awt.PlatformFont;
+
 
 public class SignUpController implements Initializable {
     

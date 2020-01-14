@@ -24,15 +24,20 @@ public class InviteDialogController implements Initializable {
      * Initializes the controller class.
      */
     PlayerFunctions playerfunc = new PlayerFunctions();
+    
     @FXML
     private Label usrName;
+    
     int p1 , p2 ;
+    
     @FXML
     private JFXButton accept;
     
+
     @FXML
     private JFXButton decline;
     
+
     ControlButtonsController invite=null;
     
     public void setControlObject(ControlButtonsController obj){
@@ -58,8 +63,9 @@ public class InviteDialogController implements Initializable {
     @FXML
     void accept(ActionEvent event) {
        ControlButtonsController.newStage.close();
-       invite.loadBoard();
        playerfunc.acceptinvitation(p1, p2);
+       invite.loadBoard();
+      //swaped
     }
     
     public void setplayersId(int p1,int p2)
