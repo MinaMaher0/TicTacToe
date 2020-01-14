@@ -32,7 +32,8 @@ class ServerHandler extends Thread {
     public PrintStream Ps;
     Socket s;
     ServerHandler me;
-    
+    Player p1,p2;
+    Game game;
     public static Vector <ServerHandler> socketVector = new Vector<ServerHandler>();
 
     public ServerHandler(Socket socket) {
@@ -105,21 +106,37 @@ class ServerHandler extends Thread {
 
                 case Request.ACCEPT_INVITATION:
                 {
+                    System.out.println("hela hlop");
                    System.out.println(json);
-                   Player p1 = getPlayer(json.getInt("senderID"));
-                   Player p2 = getPlayer(json.getInt("receiverID"));
-                   Game game = new Game(p1, p2);
+
+                    p1 = getPlayer(json.getInt("player1Id"));
+                    System.out.println(p1.getId());
+                    p2 = getPlayer(json.getInt("player2Id"));
+            System.out.println(p2.getId());
+                            
+                    game = new Game(p1, p2);
+
                    serverObj.sendStartGameRequest(p1.getId(), p2.getId());
 
                     break;
                 }
-                case Request.REFUSE_INVITATION:
-                {
-                  Player sender = getPlayer(json.getInt("SenderId"));
-                  Player reciever = getPlayer(json.getInt("RecieverId"));
-                  serverObj.sendRefuseGameRequest(sender.getId(), reciever.getId());
-                }
-            
+
+                case Request.PLAYED_CELL:
+                   int cellNum=json.getInt("cellNum");
+                   JSONObject sendCell=new JSONObject();
+                   sendCell.put("RequestType", Request.PLAYED_CELL);
+                   sendCell.put("cellNum",cellNum);
+                   sendCell.put("cellChar","X");
+                   if (game == null) System.out.println("nulllllllllllllllll ");
+               /*    ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(json.toString());
+                   ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(json.toString());*/
+                   
+                              
+                  //  System.out.println("test   "+p2.getId());
+                   Ps.println(sendCell.toString());
+                   //ServerControl.playerMap.get(p1.getId()).Ps.println(json.toString());
+                   //ServerControl.playerMap.get(p1.getId()).Ps.println(json.toString());
+                           break;
             }
         } catch (Exception ex) {
             
