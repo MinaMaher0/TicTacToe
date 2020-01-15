@@ -247,8 +247,12 @@ public class PlayerFunctions implements Client {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            if (cbController!=null)
-                            cbController.loadBoard();
+                            if (cbController!=null){
+                                cbController.loadBoard();
+                                Platform.runLater(() -> {
+                                    boardObj.setTurnLbl(playerIsTurn);
+                                });
+                            }
                             else System.out.println("nullllllllllll");
                         }
                     });
@@ -271,6 +275,9 @@ public class PlayerFunctions implements Client {
                     break;
                 case Request.PLAYER_TURN:
                     playerIsTurn=true;
+                    Platform.runLater(() -> {
+            boardObj.setTurnLbl(playerIsTurn);
+            });
                     break;
                 
 
@@ -333,6 +340,9 @@ public class PlayerFunctions implements Client {
             System.out.println(json);
             output.println(json.toString());
             playerIsTurn=false;
+            Platform.runLater(() -> {
+            boardObj.setTurnLbl(playerIsTurn);
+            });
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
