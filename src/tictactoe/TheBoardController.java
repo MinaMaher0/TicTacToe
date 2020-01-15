@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -33,7 +34,10 @@ public class TheBoardController implements Initializable {
         pf=obj;
         pf.setBoardObj(this);
     }
-    
+    @FXML
+    private Pane turn_lbl;
+    @FXML
+    private Label turnLbl;
     @FXML
     private Label lbl_13;
 
@@ -60,6 +64,8 @@ public class TheBoardController implements Initializable {
 
     @FXML
     private Label lbl_33;
+    
+    
     
     public void setLbl(int cellNum,char cellChar)
     {
@@ -104,6 +110,10 @@ public class TheBoardController implements Initializable {
         }
     }
     
+    public void setTurnLbl(boolean turn){
+        System.out.println("ttttttttt "+turn);
+        turnLbl.setVisible(turn);
+    }
     public void sendLblRequest(int id)
     {
         pf.sendPlayedCellRequest(id);
