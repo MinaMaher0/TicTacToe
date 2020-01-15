@@ -66,35 +66,35 @@ public class TheBoardController implements Initializable {
                 break;
             
             case 2:
-                lbl_11.setText(String.valueOf(cellChar));
+                lbl_12.setText(String.valueOf(cellChar));
                 break;
            
             case 3:
-                lbl_11.setText(String.valueOf(cellChar));
+                lbl_13.setText(String.valueOf(cellChar));
                 break;
             
             case 4:
-                lbl_11.setText(String.valueOf(cellChar));
+                lbl_21.setText(String.valueOf(cellChar));
                 break;
                 
             case 5:
-                lbl_11.setText(String.valueOf(cellChar));
+                lbl_22.setText(String.valueOf(cellChar));
                 break;
             
             case 6:
-                lbl_11.setText(String.valueOf(cellChar));
+                lbl_23.setText(String.valueOf(cellChar));
                 break;
            
             case 7:
-                lbl_11.setText(String.valueOf(cellChar));
+                lbl_31.setText(String.valueOf(cellChar));
                 break;
             
             case 8:
-                lbl_11.setText(String.valueOf(cellChar));
+                lbl_32.setText(String.valueOf(cellChar));
                 break;
                 
             case 9:
-                lbl_11.setText(String.valueOf(cellChar));
+                lbl_33.setText(String.valueOf(cellChar));
                 break;
         }
     }

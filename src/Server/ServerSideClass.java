@@ -254,9 +254,9 @@ public class ServerSideClass implements Server {
             jsonStart.put("senderID", p1);
             jsonStart.put("receiverID", p2);
             jsonStart.put("RequestType", Request.START_GAME);
-            ps.println(jsonStart.toString());
-            //ServerControl.playerMap.get(p1).Ps.println(jsonStart.toString());
-            //ServerControl.playerMap.get(p2).Ps.println(jsonStart.toString());
+            //ps.println(jsonStart.toString());
+            ServerControl.playerMap.get(p1).Ps.println(jsonStart.toString());
+            ServerControl.playerMap.get(p2).Ps.println(jsonStart.toString());
             
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);

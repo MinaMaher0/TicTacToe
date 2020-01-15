@@ -217,7 +217,7 @@ public class PlayerFunctions implements Client {
                             public void run() {
                                 try {
                                     System.out.println("user " + ReqObj);
-                                    cbController.showInviteDialog(ReqObj.getString("usrName"), ReqObj.getInt("senderID"), pla.getId());
+                                    cbController.showInviteDialog(ReqObj.getString("senderUserName"), ReqObj.getInt("senderID"), pla.getId());
                                 } catch (JSONException ex) {
                                     Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -243,7 +243,6 @@ public class PlayerFunctions implements Client {
                     break;
                     
                 case Request.START_GAME:
-                    System.out.println("bateeeeeeeeeeee5");
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
@@ -255,8 +254,17 @@ public class PlayerFunctions implements Client {
                     break;
 
                 case Request.PLAYED_CELL:
-                    boardObj.setLbl(ReqObj.getInt("cellNum"), ReqObj.getString("cellChar").charAt(0));
-
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                boardObj.setLbl(ReqObj.getInt("cellNum"), ReqObj.getString("cellChar").charAt(0));
+                            } catch (JSONException ex) {
+                                Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    });
+                    break;
                 case Request.REFUSE_INVITATION:
                 {
                     cbController.loadDeclineboard(ReqObj.getString("usrName"));
@@ -311,8 +319,9 @@ public class PlayerFunctions implements Client {
         JSONObject json = new JSONObject();
         try {
             json.put("RequestType", Request.PLAYED_CELL);
-            json.put("PlayerID", pla.getId());
+            json.put("Player1ID", pla.getId());
             json.put("cellNum", cellNum);
+            System.out.println(json);
             output.println(json.toString());
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);

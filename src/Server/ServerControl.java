@@ -5,18 +5,12 @@
  */
 package Server;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import tictactoe.DbConnection;
 import tictactoe.Player;
 
@@ -43,8 +37,8 @@ public class ServerControl extends Thread{
         players = new Vector<>();
         players=db.getData();
         players.get(0).setFlag(true);
-        //sSC= new ServerSideClass();
-        //startServer();
+        sSC= new ServerSideClass();
+        startServer();
 
     }
     
