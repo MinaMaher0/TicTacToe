@@ -28,6 +28,5 @@ public class Request{
     public static final int LOG_OUT = 15;
     public static final int PLAYED_CELL=17;
     public static final int PLAYER_TURN=18;
-
     
 }
