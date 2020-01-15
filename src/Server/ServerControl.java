@@ -36,7 +36,7 @@ public class ServerControl extends Thread{
         playerMap = new HashMap <Integer, ServerHandler>();
         players = new Vector<>();
         players=db.getData();
-        players.get(0).setFlag(true);
+//        players.get(0).setFlag(true);
         sSC= new ServerSideClass();
         startServer();
 

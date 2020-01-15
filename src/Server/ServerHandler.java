@@ -114,20 +114,59 @@ class ServerHandler extends Thread {
                     ServerControl.playerMap.get(json.getInt("senderID")).setGame(g);
                     ServerControl.playerMap.get(json.getInt("receiverID")).setGame(g);
                     serverObj.sendStartGameRequest(p1.getId(), p2.getId());
+                    JSONObject sendReqType=new JSONObject();
+                sendReqType.put("RequestType", Request.PLAYER_TURN);
+                
+                ServerControl.playerMap.get(g.getPlayerTurn()).Ps.println(sendReqType.toString());
                     break;
                 case Request.PLAYED_CELL:
                    int cellNum=json.getInt("cellNum");
-                   JSONObject sendCell=new JSONObject();
-                   sendCell.put("RequestType", Request.PLAYED_CELL);
-                   sendCell.put("cellNum",cellNum);
-                   sendCell.put("cellChar","X");
-                   ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendCell.toString());
-                   ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendCell.toString());
+                   handleCellPlayed(cellNum);
+                   
                     break;
             }
         } catch (Exception ex) {
             
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    void handleCellPlayed(int cellNum){
+        try {
+            char ch=game.getPlayerChar();
+            int result=game.chooseCell(cellNum-1);
+            JSONObject sendCell=new JSONObject();
+            sendCell.put("RequestType", Request.PLAYED_CELL);
+            sendCell.put("cellNum",cellNum);
+            System.out.println("ch "+ch);
+            sendCell.put("cellChar",String.valueOf(ch));
+            ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendCell.toString());
+            ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendCell.toString());
+            
+            if(result==1){
+                System.out.println("Winner");
+            }else if(result==-1){
+                System.out.println("Tie");
+            }else{
+                try {
+                    Game g=game;
+                    ServerControl.playerMap.get(g.getPlayer1().getId()).setGame(g);
+                    ServerControl.playerMap.get(g.getPlayer2().getId()).setGame(g);
+                    
+                    JSONObject sendReqType=new JSONObject();
+                    sendReqType.put("RequestType", Request.PLAYER_TURN);
+                    ServerControl.playerMap.get(game.getPlayerTurn()).Ps.println(sendReqType.toString());
+                } catch (JSONException ex) {
+                    Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        } catch (JSONException ex) {                    
+            Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Game getGame(){
+        return game;
     }
 }

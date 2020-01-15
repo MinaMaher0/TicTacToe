@@ -31,7 +31,7 @@ public class DbConnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","1234");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/tic_tac_toe?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
 
 
             st = conn.createStatement();
@@ -240,8 +240,8 @@ public class DbConnection {
     public static void main(String[] args) {
         DbConnection d = new DbConnection();
       //d.signUp("m", "m", "mmm");  
-        Player x =d.signIn("ahmed@gmail.com","aa22");
-        System.out.println(x.getUser_name());
+  //      Player x =d.signIn("ahmed@gmail.com","aa22");
+//        System.out.println(x.getUser_name());
        // d.signUp("ahmed", "aa22", "ahmed@gmail.com");
         d.getData();
         
