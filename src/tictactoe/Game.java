@@ -31,7 +31,7 @@ public class Game {
     }
 
     public Game(Player player1, Player player2) {
-       this(player1, player2, new char[9], 1);
+       this(player1, player2, new char[9], player1.getId());
         
     }
     
@@ -60,12 +60,15 @@ public class Game {
     }
     
     void changeTurn(){
-        playerTurn%=2;
-        playerTurn++;
+        if(playerTurn == player1.getId()){
+            playerTurn=player2.getId();
+        }else{
+            playerTurn=player1.getId();
+        }
     }
     
-    char getPlayerChar(){
-        if (playerTurn==1)
+   public char getPlayerChar(){
+        if (playerTurn==player1.getId())
             return 'x';
         return 'o';
     }
