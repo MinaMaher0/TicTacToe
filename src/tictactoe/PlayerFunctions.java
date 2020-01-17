@@ -33,7 +33,7 @@ public class PlayerFunctions implements Client {
     Socket s;
     Player pla = new Player();
     Boolean playerIsTurn = false;
-
+    Game game;
     ControlButtonsController cbController = null;
     SignInController siginObj = null;
     SignUpController signupObj = null;
@@ -64,7 +64,7 @@ public class PlayerFunctions implements Client {
     public PlayerFunctions() {
         try {
 
-            s = new Socket("192.168.43.146", 8000);
+            s = new Socket("127.0.0.1", 8000);
 
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
@@ -227,7 +227,7 @@ public class PlayerFunctions implements Client {
                     }
                     break;
                 case Request.USERS:
-                    users.clear(); // remove it when run clients from different laptops
+                    users.clear(); 
                     JSONArray jArr = ReqObj.getJSONArray("users");
                     for (int i = 0; i < jArr.length(); ++i) {
                         Player p = convertJsonObjtoPlayer(jArr.getJSONObject(i));
@@ -248,7 +248,7 @@ public class PlayerFunctions implements Client {
                         @Override
                         public void run() {
                             if (cbController!=null){
-                                cbController.loadBoard();
+                                cbController.loadBoard(false);
                                 Platform.runLater(() -> {
                                     boardObj.setTurnLbl(playerIsTurn);
                                 });
@@ -276,8 +276,8 @@ public class PlayerFunctions implements Client {
                 case Request.PLAYER_TURN:
                     playerIsTurn=true;
                     Platform.runLater(() -> {
-            boardObj.setTurnLbl(playerIsTurn);
-            });
+                        boardObj.setTurnLbl(playerIsTurn);
+                    });
                     break;
                 
 
@@ -325,26 +325,71 @@ public class PlayerFunctions implements Client {
         return true;
     }
 
-    public void sendPlayedCellRequest(int cellNum)
+    public void playWithComuter(String level){
+        game = new Game(pla, true,level);
+        playerIsTurn=true;
+        
+    }
+    
+    public void sendPlayedCellRequest(int cellNum,boolean isComputer)
     {
+        System.out.println("turn "+ playerIsTurn);
         if (!playerIsTurn)
         {
             // handle when it's not your turn
             return;
-        }
-        JSONObject json = new JSONObject();
-        try {
-            json.put("RequestType", Request.PLAYED_CELL);
-            json.put("Player1ID", pla.getId());
-            json.put("cellNum", cellNum);
-            System.out.println(json);
-            output.println(json.toString());
-            playerIsTurn=false;
-            Platform.runLater(() -> {
-            boardObj.setTurnLbl(playerIsTurn);
-            });
-        } catch (JSONException ex) {
-            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }else{
+            if (isComputer){
+                int ret = game.chooseCell(cellNum-1);
+                Platform.runLater(() -> {
+                    boardObj.setLbl(cellNum, 'X');
+                    boardObj.setTurnLbl(!playerIsTurn);
+                });
+                if (ret==1){
+                    System.out.println("you are winner");
+                    boardObj.setTurnLbl(false);
+                }else if (ret==-1){
+                    System.out.println("Tie");
+                }else{
+                   int cpuCell;
+                   if (game.getLevel()=="hard"){
+                        cpuCell= PlayWithComputer.hard(game.getBoard());
+                   }else if (game.getLevel()=="medium"){
+                        cpuCell= PlayWithComputer.medium(game.getBoard());
+                    }else{
+                        cpuCell= PlayWithComputer.easy(game.getBoard());
+                    }   
+                   int cpuret = game.chooseCell(cpuCell);
+                   Platform.runLater(() -> {
+                        boardObj.setLbl(cpuCell+1, 'O');
+                        
+                    });
+                   if (cpuret==1){
+                        System.out.println("CPU is winner");
+                    }else if (cpuret==-1){
+                        System.out.println("Tie");
+                    }else{
+                        Platform.runLater(() -> {
+                            boardObj.setTurnLbl(playerIsTurn);
+                        });
+                    }
+                }
+            }else{
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("RequestType", Request.PLAYED_CELL);
+                    json.put("Player1ID", pla.getId());
+                    json.put("cellNum", cellNum);
+                    System.out.println(json);
+                    output.println(json.toString());
+                    playerIsTurn=false;
+                    Platform.runLater(() -> {
+                        boardObj.setTurnLbl(playerIsTurn);
+                    });
+                } catch (JSONException ex) {
+                    Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 

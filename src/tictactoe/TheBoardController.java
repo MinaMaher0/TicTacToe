@@ -27,6 +27,16 @@ public class TheBoardController implements Initializable {
      * Initializes the controller class.
      */
     PlayerFunctions pf ;
+    boolean isComputer=false;
+    EventHandler<Event> lbl_11Event;
+    EventHandler<Event> lbl_12Event;
+    EventHandler<Event> lbl_13Event;
+    EventHandler<Event> lbl_21Event;
+    EventHandler<Event> lbl_22Event;
+    EventHandler<Event> lbl_23Event;
+    EventHandler<Event> lbl_31Event;
+    EventHandler<Event> lbl_32Event;
+    EventHandler<Event> lbl_33Event;
     
     
     public  void SetPlayerFunctionObj(PlayerFunctions obj)
@@ -34,6 +44,11 @@ public class TheBoardController implements Initializable {
         pf=obj;
         pf.setBoardObj(this);
     }
+    
+    public void setComputerPlayer(boolean isComputer){
+        this.isComputer=isComputer;
+    }
+    
     @FXML
     private Pane turn_lbl;
     @FXML
@@ -73,130 +88,171 @@ public class TheBoardController implements Initializable {
         {
             case 1:
                 lbl_11.setText(String.valueOf(cellChar));
-                
+                lbl_11.removeEventHandler(MouseEvent.MOUSE_CLICKED, lbl_11Event);
                 break;
             
             case 2:
                 lbl_12.setText(String.valueOf(cellChar));
+                lbl_12.removeEventHandler(MouseEvent.MOUSE_CLICKED, lbl_12Event);
                 break;
            
             case 3:
                 lbl_13.setText(String.valueOf(cellChar));
+                lbl_13.removeEventHandler(MouseEvent.MOUSE_CLICKED, lbl_13Event);
                 break;
             
             case 4:
                 lbl_21.setText(String.valueOf(cellChar));
+                lbl_21.removeEventHandler(MouseEvent.MOUSE_CLICKED, lbl_21Event);
                 break;
                 
             case 5:
                 lbl_22.setText(String.valueOf(cellChar));
+                lbl_22.removeEventHandler(MouseEvent.MOUSE_CLICKED, lbl_22Event);
                 break;
             
             case 6:
                 lbl_23.setText(String.valueOf(cellChar));
+                lbl_23.removeEventHandler(MouseEvent.MOUSE_CLICKED, lbl_23Event);
                 break;
            
             case 7:
                 lbl_31.setText(String.valueOf(cellChar));
+                lbl_31.removeEventHandler(MouseEvent.MOUSE_CLICKED, lbl_31Event);
                 break;
             
             case 8:
                 lbl_32.setText(String.valueOf(cellChar));
+                lbl_32.removeEventHandler(MouseEvent.MOUSE_CLICKED, lbl_32Event);
                 break;
                 
             case 9:
                 lbl_33.setText(String.valueOf(cellChar));
+                lbl_33.removeEventHandler(MouseEvent.MOUSE_CLICKED, lbl_33Event);
                 break;
         }
     }
     
     public void setTurnLbl(boolean turn){
-        System.out.println("ttttttttt "+turn);
         turnLbl.setVisible(turn);
     }
     public void sendLblRequest(int id)
     {
-        pf.sendPlayedCellRequest(id);
+        pf.sendPlayedCellRequest(id,isComputer);
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        lbl_11.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
-            @Override
-            public void handle(Event event) {
-                sendLblRequest(1);
-               // lbl_11.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
-            }
-        }
-        );
         
-        lbl_12.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+        lbl_11Event=new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                sendLblRequest(2);
-                //lbl_12.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                 if (turnLbl.isVisible()){
+                    sendLblRequest(1);
+                }else{
+                    
+                }
             }
-        }
-        );
+        };
         
-        lbl_13.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+        lbl_12Event=new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                sendLblRequest(3);
-                //lbl_13.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                 if (turnLbl.isVisible()){
+                    sendLblRequest(2);
+                }else{
+                    
+                }
             }
-        }
-        );
+        };
         
-        lbl_21.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+        lbl_13Event=new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                sendLblRequest(4);
-                //lbl_21.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                 if (turnLbl.isVisible()){
+                    sendLblRequest(3);
+                }else{
+                    
+                }
             }
-        }
-        );
-        lbl_22.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+        };
+        
+        lbl_21Event=new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                sendLblRequest(5);
-                //lbl_22.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                 if (turnLbl.isVisible()){
+                    sendLblRequest(4);
+                }else{
+                    
+                }
             }
-        }
-        );
-        lbl_23.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+        };
+        
+        lbl_22Event=new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                sendLblRequest(6);
-                //lbl_23.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                 if (turnLbl.isVisible()){
+                    sendLblRequest(5);
+                }else{
+                    
+                }
             }
-        }
-        );
-        lbl_31.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+        };
+        
+        lbl_23Event=new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                sendLblRequest(7);
-                //lbl_31.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                 if (turnLbl.isVisible()){
+                    sendLblRequest(6);
+                }else{
+                    
+                }
             }
-        }
-        );
-        lbl_32.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+        };
+        
+        lbl_31Event=new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                sendLblRequest(8);
-                //lbl_32.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                 if (turnLbl.isVisible()){
+                    sendLblRequest(7);
+                }else{
+                    
+                }
             }
-        }
-        );
-        lbl_33.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+        };
+        
+        lbl_32Event=new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                sendLblRequest(9);
-                //lbl_33.removeEventHandler(MouseEvent.MOUSE_CLICKED, this);
+                 if (turnLbl.isVisible()){
+                    sendLblRequest(8);
+                }else{
+                    
+                }
             }
-        }
-        );
-    }    
+        };
+        
+        lbl_33Event=new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                 if (turnLbl.isVisible()){
+                    sendLblRequest(9);
+                }else{
+                    
+                }
+            }
+        };
+        
+        lbl_11.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_11Event);
+        lbl_12.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_12Event);
+        lbl_13.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_13Event);
+        lbl_21.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_21Event);
+        lbl_22.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_22Event);
+        lbl_23.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_23Event);
+        lbl_31.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_31Event);
+        lbl_32.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_32Event);
+        lbl_33.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_33Event);
+    }
     
 }

@@ -14,7 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 /**
  *  
- * @author Salamamina
+ * @author Salama
  */
 public class MainGUI extends Application {    
    public static Stage primaryStage;
@@ -32,7 +32,6 @@ public class MainGUI extends Application {
         } catch (IOException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
     }
 
     /**
