@@ -64,7 +64,7 @@ public class PlayerFunctions implements Client {
     public PlayerFunctions() {
         try {
 
-            s = new Socket("192.168.43.146", 8000);
+            s = new Socket("127.0.0.1", 8000);
 
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
@@ -269,10 +269,14 @@ public class PlayerFunctions implements Client {
                 case Request.REFUSE_INVITATION:
                     cbController.loadDeclineboard(ReqObj.getString("usrName"));
                     break;
+
                 case Request.PLAYER_TURN:
                     playerIsTurn=true;
                     break;
                 
+                }
+                case Request.SEND_MESSAGE:
+
 
             }
 
@@ -337,7 +341,17 @@ public class PlayerFunctions implements Client {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    public void sendMessage(String msg){
+        try {
+            JSONObject sendMsg =new JSONObject();
+            sendMsg.put("RequestType",Request.SEND_MESSAGE);
+            sendMsg.put("PlayerID", pla.getId());
+            sendMsg.put("msg", msg);
+            output.println(sendMsg.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public void sort(Vector<Player> p) {

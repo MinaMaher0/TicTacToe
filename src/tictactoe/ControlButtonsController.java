@@ -122,6 +122,7 @@ public class ControlButtonsController implements Initializable {
                 invite.setCursor(Cursor.HAND);
                 invite.setStyle("-fx-color: #00FF00; -fx-border-width: 5px;");
                 
+                
             }else {
                 invite.setText("Offline");
                 invite.setStyle("-fx-color: #A9A9A9; -fx-border-width: 5px;");
