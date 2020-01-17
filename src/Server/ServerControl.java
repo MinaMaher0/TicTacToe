@@ -5,6 +5,7 @@
  */
 package Server;
 
+import ServerGui.ServerHomeController;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -26,9 +27,8 @@ public class ServerControl extends Thread{
     ServerSideClass sSC;
     public static Map <Integer,ServerHandler> playerMap;
     Thread startServer;
-    public static Vector<Player> players;
-   
-
+    public static Vector <Player> players;
+    public static ServerHomeController sHome;
 
     public ServerControl()
     {
@@ -36,50 +36,47 @@ public class ServerControl extends Thread{
         playerMap = new HashMap <Integer, ServerHandler>();
         players = new Vector<>();
         players=db.getData();
-        players.get(0).setFlag(true);
         sSC= new ServerSideClass();
-        startServer();
-
     }
     
-    public void startServer() {
-        
-            startServer=new Thread(() -> {
-                try {
-                    sSocket = new ServerSocket(8000);
-                    System.out.println("server started");
+    public void setHomeControllerObj(ServerHomeController sH)
+    {
+        sHome=sH;
+    }
+    public void startServer() 
+    {
+        startServer=new Thread(() -> {
+        try {
+                sSocket = new ServerSocket(8000);
+                System.out.println("server started");
                     while(true)
                     {
                         s = sSocket.accept();
                         new ServerHandler(s);
                     }
                 }
-                  catch (IOException e) {
-        
-                  }
-            });
-            startServer.start();
+        catch (IOException e) {}
+        });
+        startServer.start();
     }
            
     
     
     public void stopServer() {
         System.out.println("stoooooooooop");
+        sSC.serverFallen();
         try 
         {
-           db.closeConnnection();
-           startServer.stop();
            for(ServerHandler s: ServerHandler.socketVector)
             {
                 s.Ps.close();
                 s.Dis.close();
                 s.s.close();
             }
+            db.closeConnnection();
+            startServer.stop();
             sSocket.close();
         } catch (Exception e) {
         }
-    }
-    public static void main(String[] args) {
-        new ServerControl();
     }
 }

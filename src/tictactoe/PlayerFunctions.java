@@ -16,9 +16,15 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import static tictactoe.ControlButtonsController.newStage;
 import utils.Request;
 
 /**
@@ -90,7 +96,6 @@ public class PlayerFunctions implements Client {
                         break;
                     }
                 }
-
             }
         });
         th.start();
@@ -187,11 +192,11 @@ public class PlayerFunctions implements Client {
         try {
             final JSONObject ReqObj = new JSONObject(str);
             switch (ReqObj.get("RequestType").hashCode()) {
+            
                 case Request.SIGN_UP_SUCCESS:
                     signupObj.SignUp_Success();
                      break;
                 case Request.SIGN_UP_FAILED :
-                    
                     System.out.println("unsecss");
                     break;
                 case Request.LOGIN_SUCCESS:
@@ -210,6 +215,7 @@ public class PlayerFunctions implements Client {
                 case Request.INVITE_PLAYER_FAILED:
                     System.out.println("invitation decliend");
                     break;
+                    
                 case Request.INVITE_PLAYER:
                     if (cbController != null) {
                         Platform.runLater(new Runnable() {
@@ -268,6 +274,18 @@ public class PlayerFunctions implements Client {
                 case Request.REFUSE_INVITATION:
                 {
                     cbController.loadDeclineboard(ReqObj.getString("usrName"));
+                }
+                
+                case Request.SERVER_FAILED:
+                { 
+                    Platform.runLater(new Runnable() {
+                    @Override
+                     public void run() {
+                        System.out.println("Server Fallen ya beeh ");
+                         cbController.showServerDownDialog();                     
+                        }
+                 });
+                    break;
                 }
 
             }

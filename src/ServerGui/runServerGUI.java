@@ -30,7 +30,7 @@ public class runServerGUI extends Application{
             primaryStage=stage;
             root=FXMLLoader.load(getClass().getResource("ServerHome.fxml"));
             Scene scene=new Scene(root);
-            stage.setTitle("AdminLogin");
+            stage.setTitle("Server Home");
             stage.setScene(scene);
             stage.show();
             stage.setResizable(false);

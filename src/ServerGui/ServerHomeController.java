@@ -25,72 +25,68 @@ import tictactoe.Player;
  * @author DELL
  */
 public class ServerHomeController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
     
     @FXML
     private JFXListView <?> offlineP; 
     @FXML
-    private JFXListView <?> onlineP; 
+    public JFXListView <?> onlineP; 
     
     @FXML
     private JFXToggleButton toggle;
-    
-    ObservableList on = FXCollections.observableArrayList();
+   
     ObservableList off = FXCollections.observableArrayList();
+    ObservableList on = FXCollections.observableArrayList();
+    
     ServerControl serverControl; 
+    
     int flag;
   
     @FXML
     void startServer(ActionEvent event) {
-       /* serverControl.startServer();
-        setOnlineList();*/
        if(toggle.isArmed())
         {
             if(flag == 0)
             {
+                toggle.setText("Close Server");
                 serverControl.startServer();
-                setOnlineList();
+                setOfflineList();
                 flag=1;
             }
             else
             {
-             serverControl.stopServer();
-             flag=0;
+                toggle.setText("Open Server");
+                serverControl.stopServer();
+                flag=0;
+                on.clear();
+                off.clear();
+                offlineP.getItems().clear();
+                onlineP.getItems().clear();
             }
         }
-    }
-    
-    public void setOnlineList()
+    }    
+    public void setOfflineList()
     {
-        Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        offlineP.getItems().clear();
-                        onlineP.getItems().clear();
-                        on.clear();
-                        off.clear();
-                        for (Player p:ServerControl.players)
-                        {
-                            if(p.getFlag())
-                                on.add(p.getUser_name());
-                            else
-                                off.add(p.getUser_name());
-                        }
-                        offlineP.getItems().addAll(off);
-                        onlineP.getItems().addAll(on);  
-                    }
-                });
+        on.clear();
+        off.clear();
+        offlineP.getItems().clear();
+        onlineP.getItems().clear();
+        for (Player p:ServerControl.players)
+        {
+            if(!p.getFlag())
+                off.add(p.getUser_name()+"              "+p.getScore());
+            else
+                on.add(p.getUser_name()+"               "+p.getScore());
+        }
+        offlineP.getItems().addAll(off);
+        onlineP.getItems().addAll(on);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
        serverControl=new ServerControl();
+       serverControl.setHomeControllerObj(this);
        flag=0;
-       
     }  
     
     

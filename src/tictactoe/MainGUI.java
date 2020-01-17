@@ -29,10 +29,9 @@ public class MainGUI extends Application {
             stage.setScene(scene);
             stage.show();
             stage.setResizable(false);
-        } catch (IOException ex) {
+        } catch (IOException ex) { 
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
     }
 
     /**
