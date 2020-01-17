@@ -38,7 +38,7 @@ public class InviteDialogController implements Initializable {
     private JFXButton decline;
     
 
-    ControlButtonsController invite=null;
+    ControlButtonsController invite = null;
     
     public void setControlObject(ControlButtonsController obj){
         invite=obj;

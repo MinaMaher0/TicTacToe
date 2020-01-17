@@ -6,6 +6,7 @@
 package tictactoe;
 
 import Server.ServerControl;
+import ServerGui.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -84,6 +85,24 @@ public class ControlButtonsController implements Initializable {
             Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
+    }
+    public void showServerDownDialog()
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ServerDownDialog.fxml"));
+            Parent root;
+            //Stage s= new Stage();
+            root = (Parent)loader.load();
+            newStage.initModality(Modality.WINDOW_MODAL);
+            Scene scene=new Scene(root);
+            newStage.setTitle("ServerFallen");
+            newStage.setScene(scene);
+            newStage.show();
+            newStage.setResizable(false);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @FXML

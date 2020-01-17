@@ -5,20 +5,19 @@
 .mainFxmlClass {
 
 }
-.signin_btn{
+.ok{
   -fx-font-family : Tahoma;
   -fx-font-size : 22px;
   -fx-text-fill: #FFF;
-  -fx-margin-top:55px; 
   -fx-background-radius: 10px;
-  -fx-background-color: #AA3672;
+  -fx-background-color: #FF0000;
 }
-.signin_btn:hover{
+.ok:hover{
     -fx-cursor: hand;
-    -fx-border-color: #AA3672;
+    -fx-border-color: #FF0000;
     -fx-border-width: 3px;
     -fx-background-radius: 10px;
     -fx-background-color: #FFF;
-     -fx-text-fill: linear-gradient(#C02347 0%,#8F3D85 85%);
+     -fx-text-fill:#FF0000;
     -fx-font-weight: bold; 
 }

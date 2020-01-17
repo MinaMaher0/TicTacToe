@@ -41,7 +41,7 @@
                   </LinearGradient>
                </textFill>
                <font>
-                  <Font name="Consolas Bold Italic" size="16.0" />
+                  <Font name="Consolas Bold Italic" size="15.0" />
                </font>
                <unToggleLineColor>
                   <LinearGradient endX="1.0" endY="1.0">
