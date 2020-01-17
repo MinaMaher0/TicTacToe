@@ -48,6 +48,23 @@ public class ControlButtonsController implements Initializable {
         System.out.println("invite a friend!");
     }
     
+      @FXML
+    void playWithComputer(ActionEvent event) {
+        try {            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Levels.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            LevelsController levelsObj=loader.getController();
+            levelsObj.setPlayerObj(pF);
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("GameBoard");
+            MainGUI.primaryStage.setScene(scene); 
+            MainGUI.primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public boolean showInviteDialog(String name,int p1,int p2){
         boolean ret=false;
         try {
@@ -59,7 +76,6 @@ public class ControlButtonsController implements Initializable {
             inviterController.setUserName(name);
             inviterController.setplayersId(p1, p2);
             inviterController.setControlObject(this);
-            newStage.initModality(Modality.WINDOW_MODAL);
             Scene scene=new Scene(root);
             newStage.setTitle("InviteDialogController");
             newStage.setScene(scene);
@@ -164,21 +180,20 @@ public class ControlButtonsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         showPlayers();
     }
-    public void loadBoard(){
+    public void loadBoard(boolean isComputer){
         try {
-            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("TheBoard.fxml"));
             Parent root;
             root = (Parent)loader.load();
             TheBoardController boardObj=loader.getController();
             boardObj.SetPlayerFunctionObj(pF);
+            boardObj.setComputerPlayer(isComputer);
             Scene scene = new Scene(root);
             MainGUI.primaryStage.setTitle("GameBoard");
             MainGUI.primaryStage.setScene(scene);
             MainGUI.primaryStage.show(); 
         } catch (Exception ex) {
-            System.out.println(ex.toString());
-Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -198,7 +213,7 @@ Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, nul
             newStage.setResizable(false);
         } catch (Exception ex) {
             System.out.println(ex.toString());
-Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -277,5 +277,16 @@ public class ServerSideClass implements Server {
         }
     }
 
+    public void sendTurn(int pID){
+        try {
+            JSONObject plyerTurn=new JSONObject();
+            plyerTurn.put("RequestType",Request.PLAYER_TURN);
+            ServerControl.playerMap.get(pID).Ps.println(plyerTurn.toString());
+            
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }
 

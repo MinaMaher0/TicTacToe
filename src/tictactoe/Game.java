@@ -18,7 +18,9 @@ public class Game {
     int sp_score;
     int tie_score;
     int cellFilled;
-
+    boolean isComputer;
+    String level;
+    
     public Game(Player player1, Player player2, char[] board, int playerTurn, int fp_score, int sp_score, int tie_score) {
         this.player1 = player1;
         this.player2 = player2;
@@ -28,15 +30,32 @@ public class Game {
         this.sp_score = sp_score;
         this.tie_score = tie_score;
         cellFilled=countCells();
+        for (int i=0;i<9;++i){
+            board[i]=' ';
+        }
     }
 
     public Game(Player player1, Player player2) {
-       this(player1, player2, new char[9], 1);
+       this(player1, player2, new char[9], player1.getId());
         
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
     
     public Game(Player player1, Player player2, char[] board, int playerTurn) {
         this(player1, player2, board, playerTurn, 0, 0, 0);
+    }
+    
+    public Game(Player player,boolean isComputer,String level){
+        this(player,null);
+        this.isComputer=isComputer;
+        this.level=level;
     }
     
     int countCells(){
@@ -60,12 +79,19 @@ public class Game {
     }
     
     void changeTurn(){
-        playerTurn%=2;
-        playerTurn++;
+        if(playerTurn == player1.getId()){
+            if (isComputer){
+                playerTurn=-1;
+            }else{
+                playerTurn=player2.getId();
+            }
+        }else{
+            playerTurn=player1.getId();
+        }
     }
     
-    char getPlayerChar(){
-        if (playerTurn==1)
+    public char getPlayerChar(){
+        if (playerTurn==player1.getId())
             return 'x';
         return 'o';
     }

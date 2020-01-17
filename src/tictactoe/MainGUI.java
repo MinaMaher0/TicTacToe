@@ -14,7 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 /**
  *  
- * @author Salamamina
+ * @author Salama
  */
 public class MainGUI extends Application {    
    public static Stage primaryStage;
