@@ -366,6 +366,7 @@ public class PlayerFunctions implements Client {
         game = new Game(pla, true, level);
         playerIsTurn = true;
         boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),"Computer", game.getSp_score(), game.getTie_score());
+        boardObj.hideChatAndSave();
     }
 
     public void sendPlayedCellRequest(int cellNum, boolean isComputer) {

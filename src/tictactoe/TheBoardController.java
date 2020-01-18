@@ -210,13 +210,11 @@ public class TheBoardController implements Initializable {
     }
     
     public void hideChatAndSave(){
-        if (pf!=null && pf.isPlayWithComputer()){
-            chat_btn.setVisible(false);
-            chat_pane.setVisible(false);
-            cht_icon.setVisible(false);
-            save_btn.setVisible(false);
-            save_icon.setVisible(false);
-        }
+        chat_btn.setVisible(false);
+        chat_pane.setVisible(false);
+        cht_icon.setVisible(false);
+        save_btn.setVisible(false);
+        save_icon.setVisible(false);
     }
     
     public void createBoard(){
