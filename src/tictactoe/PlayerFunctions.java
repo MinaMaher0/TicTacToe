@@ -19,12 +19,18 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import static tictactoe.ControlButtonsController.newStage;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 import utils.Request;
 
 /**
@@ -310,13 +316,27 @@ public class PlayerFunctions implements Client {
                             }
                         }
                     });
-                    System.out.println("The Message Body" + ReqObj.getString("Message"));
-
+                    break;
                 case Request.PLAY_AGAIN:
                     showPlayAgain();
                     break;
                 case Request.EXIT_GAME:
                     extiPlayAgain();
+                    break;
+                case Request.NOTIFICATION:
+                    if (ReqObj.getInt("pID")!=pla.getId()){
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    notifi(ReqObj.getString("userName"));
+                                } catch (JSONException ex) {
+                                    Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        });
+                        
+                    }
                     break;
             }
 
@@ -326,6 +346,16 @@ public class PlayerFunctions implements Client {
             //Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    void notifi(String userName){
+        NotificationType notification = NotificationType.SUCCESS;
+        TrayNotification tray = new TrayNotification();
+        tray.setTitle("New Player is Online");
+        tray.setMessage(userName + " is Online now");
+        tray.setRectangleFill(Paint.valueOf("#2A9A84"));
+        tray.setAnimationType(AnimationType.POPUP);
+        tray.showAndDismiss(Duration.seconds(2));
     }
 
     Player convertJsonObjtoPlayer(JSONObject jObj) {
