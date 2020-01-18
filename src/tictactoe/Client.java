@@ -28,6 +28,8 @@ public interface Client {
     
     public boolean acceptinvitation(int pOneId,int pTwoId);
     
+    public void declineInvitation(int pOneId,int pTwoId);
+    
     public void logOut(int pId);
     
     public void sort(Vector<Player> p);

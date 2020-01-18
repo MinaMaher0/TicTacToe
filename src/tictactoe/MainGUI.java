@@ -21,18 +21,18 @@ public class MainGUI extends Application {
     Parent root;
     @Override
     public void start(Stage stage) {
-        try {
+        try {   
             primaryStage=stage;
             root=FXMLLoader.load(getClass().getResource("SignIn.fxml"));
             Scene scene=new Scene(root);
             stage.setTitle("SignIn");
             stage.setScene(scene);
             stage.show();
-            stage.setResizable(false);
+            stage.setResizable(true);
         } catch (IOException ex) {
+
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
     }
 
     /**

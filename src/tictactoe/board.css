@@ -36,8 +36,8 @@
 
 .board_button {
 
-    -fx-border: none;
-    -fx-background-size: 200%;
+    
+    -fx-background-size: 200%; 
     -fx-outline: none;
     -fx-transition: .5s;
     -fx-font-size : 80px;
@@ -52,9 +52,11 @@
     -fx-height: 147px;
     -fx-left: 333px;
     -fx-top: 506px;
-
+    
     -fx-border: 25px solid #A0D0FB;
     -fx-transform: rotate(-90deg);
+ 
+
     
 }
 
@@ -64,6 +66,8 @@
     -fx-cursor: hand;
     -fx-border-color:  linear-gradient(#C02347 0%,#8F3D85 85%);;
     -fx-border-width: 5px;
+
+    
 
 }
 
@@ -91,4 +95,78 @@
     -fx-background-radius: 5px;
     -fx-background-color: #FFF;
     -fx-font-weight: bold; 
+}
+.detail_label{
+      
+  -fx-background: rgba(0,0,0,.5);
+
+}
+.textArea{
+    -fx-margin: 20px 0;
+  -fx-background: rgba(255,255,255,.5);
+  -fx-border-radius: 6px;
+}
+.countd{
+  -fx-display: inline-block;
+  -fx-width: 80px;
+  -fx-height: 80px;
+  -fx-border: 2px solid;
+  -fx-margin: 0 30px;
+  -fx-font-size: 12px;
+  -fx-border-radius: 50%;
+  -fx-overflow: hidden;
+}
+
+.user_label{
+    
+    -fx-background-color:  rgbargba(255,255,255,0.008);
+     -fx-cursor: hand;
+  
+    -fx-border-color: linear-gradient(#C59FFD 15%,#8F3D85 80%);
+     -fx-border-width: 3px;
+ 
+    -fx-border-radius:10px;
+  
+     
+}
+
+.user_label:hover{
+    
+    -fx-background-color:  rgba(0, 0, 0, 0.03);
+     -fx-cursor: hand;
+  
+    -fx-border-color:#85D3FF;
+     -fx-border-width: 3px;
+ 
+    -fx-border-radius:10px;
+  
+     
+}
+.close_window{
+     
+    
+    -fx-outline: none;
+    -fx-transition: .5s;
+    -fx-font-size : 10px;
+    -fx-background-color: FFF;
+    -fx-text-fill: linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-font-weight:bold;
+    -fx-font-family: 'Comic Sans MS';
+    -fx-font: italic;
+   -fx-font: bold;
+}
+.close_window:hover{
+     
+    -fx-cursor: hand;
+    -fx-border-color:  linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-border-width: 2px;
+    -fx-outline: none;
+    -fx-transition: .5s;
+    -fx-font-size : 10px;
+    -fx-background-color: FFF;
+    -fx-text-fill: linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-font-weight:bold;
+    -fx-font-family: 'Comic Sans MS';
+    -fx-font: italic;
+   -fx-font: bold;
 }
