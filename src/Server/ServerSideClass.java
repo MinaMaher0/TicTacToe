@@ -21,6 +21,7 @@ import javafx.application.Platform;
 import tictactoe.PlayerFunctions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import tictactoe.Game;
 
 /**
  *
@@ -287,13 +288,18 @@ public class ServerSideClass implements Server {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void sendStartGameRequest(int p1 , int p2)
+    public void sendStartGameRequest(int p1 , int p2,Game game)
     {
         JSONObject jsonStart = new JSONObject();
         try {
             jsonStart.put("senderID", p1);
             jsonStart.put("receiverID", p2);
             jsonStart.put("RequestType", Request.START_GAME);
+            jsonStart.put("playerOneName", game.getPlayer1().getUser_name());
+            jsonStart.put("playerTwoName", game.getPlayer2().getUser_name());
+            jsonStart.put("playerOneScore", game.getFp_score());
+            jsonStart.put("playerTwoScore", game.getSp_score());
+            jsonStart.put("tieScore", game.getTie_score());
             ServerControl.playerMap.get(p1).Ps.println(jsonStart.toString());
             ServerControl.playerMap.get(p2).Ps.println(jsonStart.toString());
         } catch (JSONException ex) {

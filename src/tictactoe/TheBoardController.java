@@ -27,6 +27,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.json.JSONException;
+import org.json.JSONObject;
 import static tictactoe.ControlButtonsController.newStage;
 
 /**
@@ -75,6 +77,14 @@ public class TheBoardController implements Initializable {
     {
         pf=obj;
         pf.setBoardObj(this);
+    }
+    
+    public void setGameDetails(String playerOneName,int playerOneScore,String playerTwoName,int playerTwoScore,int tieScore){
+        num_of_tie.setText(String.valueOf(tieScore));
+        playerOname.setText(playerOneName);
+        playerOscore.setText(String.valueOf(playerOneScore));
+        playerTname.setText(playerTwoName);
+        pTscore.setText(String.valueOf(playerTwoScore));
     }
    
     @FXML

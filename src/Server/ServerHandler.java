@@ -116,7 +116,7 @@ class ServerHandler extends Thread {
                     Game g = new Game(p1, p2);
                     ServerControl.playerMap.get(json.getInt("senderID")).setGame(g);
                     ServerControl.playerMap.get(json.getInt("receiverID")).setGame(g);
-                    serverObj.sendStartGameRequest(p1.getId(), p2.getId());
+                    serverObj.sendStartGameRequest(p1.getId(), p2.getId(),g);
                     JSONObject sendReqType=new JSONObject();
                     sendReqType.put("RequestType", Request.PLAYER_TURN);
                     ServerControl.playerMap.get(g.getPlayerTurn()).Ps.println(sendReqType.toString());
@@ -191,7 +191,7 @@ class ServerHandler extends Thread {
             try {
                 ServerControl.playerMap.get(game.getPlayer1().getId()).setGame(game);
                 ServerControl.playerMap.get(game.getPlayer2().getId()).setGame(game);
-                serverObj.sendStartGameRequest(game.getPlayer1().getId(), game.getPlayer2().getId());
+                serverObj.sendStartGameRequest(game.getPlayer1().getId(), game.getPlayer2().getId(),game);
                 JSONObject sendReqType=new JSONObject();
                 sendReqType.put("RequestType", Request.PLAYER_TURN);
                 ServerControl.playerMap.get(game.getPlayerTurn()).Ps.println(sendReqType.toString());

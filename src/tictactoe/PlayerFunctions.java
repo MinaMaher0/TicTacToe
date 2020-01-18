@@ -254,8 +254,13 @@ public class PlayerFunctions implements Client {
                             if (cbController != null) {
                                 cbController.loadBoard(false);
                                 Platform.runLater(() -> {
-                                    boardObj.exitDialog();
-                                    boardObj.setTurnLbl(playerIsTurn);
+                                    try {
+                                        boardObj.exitDialog();
+                                        boardObj.setTurnLbl(playerIsTurn);
+                                        boardObj.setGameDetails(ReqObj.getString("playerOneName"),ReqObj.getInt("playerOneScore"),ReqObj.getString("playerTwoName"),ReqObj.getInt("playerTwoScore"),ReqObj.getInt("tieScore"));
+                                    } catch (JSONException ex) {
+                                        Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
                                 });
                             } else {
                                 System.out.println("nullllllllllll");
@@ -360,7 +365,7 @@ public class PlayerFunctions implements Client {
     public void playWithComuter(String level) {
         game = new Game(pla, true, level);
         playerIsTurn = true;
-
+        boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),"Computer", game.getSp_score(), game.getTie_score());
     }
 
     public void sendPlayedCellRequest(int cellNum, boolean isComputer) {
@@ -443,6 +448,7 @@ public class PlayerFunctions implements Client {
     public void playAgain() {
         if (game!=null) {
             game.playAgain();
+            boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),"Computer", game.getSp_score(), game.getTie_score());
             if (game.playerTurn==-1)
                 computerTurn();
         }else {
