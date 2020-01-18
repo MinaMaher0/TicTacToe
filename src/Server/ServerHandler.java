@@ -35,10 +35,9 @@ class ServerHandler extends Thread {
     Player p1,p2;
     Game game;
     public static Vector <ServerHandler> socketVector = new Vector<ServerHandler>();
-    Game g;
     
     public void setGame(Game pg){
-        pg=g;
+        game=pg;
     }
             
             
@@ -82,10 +81,6 @@ class ServerHandler extends Thread {
         }
      return null;
             
-    }
-    
-    public void setGame(Game g){
-        game=g;
     }
     
     
@@ -147,6 +142,7 @@ class ServerHandler extends Thread {
     
     void handleCellPlayed(int cellNum){
         try {
+            if (game==null) System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             char ch=game.getPlayerChar();
             int result=game.chooseCell(cellNum-1);
             JSONObject sendCell=new JSONObject();

@@ -267,11 +267,20 @@ public class TheBoardController implements Initializable {
                     
                 }
             }
-        }
-        );
+        };
+        
+        lbl_11.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_11Event);
+        lbl_12.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_12Event);
+        lbl_13.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_13Event);
+        lbl_21.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_21Event);
+        lbl_22.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_22Event);
+        lbl_23.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_23Event);
+        lbl_31.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_31Event);
+        lbl_32.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_32Event);
+        lbl_33.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_33Event);
     }    
 
-    @FXML
+    /*@FXML
     void lbl1(MouseEvent event) {
         sendLblRequest(1);
     }
@@ -321,7 +330,7 @@ public class TheBoardController implements Initializable {
     void lbl9(MouseEvent event) {
         sendLblRequest(9);
 
-    }
+    }*/
        
        
     @FXML
@@ -354,26 +363,7 @@ public class TheBoardController implements Initializable {
       }else{
           chat_pane.setVisible(false);
      // textArea.appendText(body+"\n");
-     
+      }
   }
-//    @Override
-//    public void initialize(URL url, ResourceBundle rb) {
-//        // TODO
-//    }
-  }
-
-
-        };
-        
-        lbl_11.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_11Event);
-        lbl_12.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_12Event);
-        lbl_13.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_13Event);
-        lbl_21.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_21Event);
-        lbl_22.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_22Event);
-        lbl_23.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_23Event);
-        lbl_31.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_31Event);
-        lbl_32.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_32Event);
-        lbl_33.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_33Event);
-    }
     
 }

@@ -277,23 +277,16 @@ public class PlayerFunctions implements Client {
                     break;
                 case Request.REFUSE_INVITATION:
                     cbController.loadDeclineboard(ReqObj.getString("usrName"));
-
-                }
-                
+                    break;
                 case Request.SERVER_FAILED:
-                { 
                     Platform.runLater(new Runnable() {
                     @Override
                      public void run() {
                         System.out.println("Server Fallen ya beeh ");
                          cbController.showServerDownDialog();                     
                         }
-                 });
+                    });
                     break;
-                }
-
-                    break;
-
                 case Request.PLAYER_TURN:
                     playerIsTurn=true;
                     Platform.runLater(() -> {
