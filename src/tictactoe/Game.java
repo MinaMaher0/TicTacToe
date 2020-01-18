@@ -70,10 +70,15 @@ public class Game {
         char ch = getPlayerChar();
         board[cellNum]=ch;
         ++cellFilled;
-        if  (checkWinner(ch)) // current player win
+        if  (checkWinner(ch)){ // current player win
+            if (player1.getId()==playerTurn) ++fp_score;
+            else ++sp_score;
             return 1;
-        if (cellFilled==9) // tie
+        }
+        if (cellFilled==9){ // tie
+            ++tie_score;
             return -1;
+        }
         changeTurn();
         return 0;
     }
@@ -136,6 +141,14 @@ public class Game {
             return true;
         }
         return false;
+    }
+    
+    public void playAgain(){
+        for (int i=0;i<9;++i){
+            board[i]=' ';
+        }
+        cellFilled=0;
+        playerTurn=-1;
     }
 
     public Player getPlayer1() {

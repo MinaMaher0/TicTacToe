@@ -118,11 +118,9 @@ class ServerHandler extends Thread {
                     ServerControl.playerMap.get(json.getInt("receiverID")).setGame(g);
                     serverObj.sendStartGameRequest(p1.getId(), p2.getId());
                     JSONObject sendReqType=new JSONObject();
-                sendReqType.put("RequestType", Request.PLAYER_TURN);
-                
-                ServerControl.playerMap.get(g.getPlayerTurn()).Ps.println(sendReqType.toString());
+                    sendReqType.put("RequestType", Request.PLAYER_TURN);
+                    ServerControl.playerMap.get(g.getPlayerTurn()).Ps.println(sendReqType.toString());
                     break;
-                    
                 case Request.PLAYED_CELL:
                    int cellNum=json.getInt("cellNum");
                    handleCellPlayed(cellNum);
@@ -152,17 +150,21 @@ class ServerHandler extends Thread {
             sendCell.put("cellChar",String.valueOf(ch));
             ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendCell.toString());
             ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendCell.toString());
-            
+            Game g=game;
+            ServerControl.playerMap.get(g.getPlayer1().getId()).setGame(game);
+            ServerControl.playerMap.get(g.getPlayer2().getId()).setGame(game);
             if(result==1){
-                System.out.println("Winner");
+                JSONObject sendReqType=new JSONObject();
+                sendReqType.put("RequestType", Request.PLAY_AGAIN);
+                ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
+                ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
             }else if(result==-1){
-                System.out.println("Tie");
+                JSONObject sendReqType=new JSONObject();
+                sendReqType.put("RequestType", Request.PLAY_AGAIN);
+                ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
+                ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
             }else{
                 try {
-                    Game g=game;
-                    ServerControl.playerMap.get(g.getPlayer1().getId()).setGame(g);
-                    ServerControl.playerMap.get(g.getPlayer2().getId()).setGame(g);
-                    
                     JSONObject sendReqType=new JSONObject();
                     sendReqType.put("RequestType", Request.PLAYER_TURN);
                     ServerControl.playerMap.get(game.getPlayerTurn()).Ps.println(sendReqType.toString());

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tictactoe.PlayAgainDialogController">
+    <stylesheets>
+        <URL value="@playagaindialog.css" />
+    </stylesheets>
+   <children>
+      <Button layoutX="180.0" layoutY="281.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="40.0" prefWidth="105.0" text="Play Again" />
+      <Button layoutX="340.0" layoutY="281.0" mnemonicParsing="false" onAction="#exit" prefHeight="40.0" prefWidth="89.0" text="Exit" />
+   </children>
+</AnchorPane>

@@ -192,7 +192,6 @@ public class PlayerFunctions implements Client {
         try {
             final JSONObject ReqObj = new JSONObject(str);
             switch (ReqObj.get("RequestType").hashCode()) {
-            
                 case Request.SIGN_UP_SUCCESS:
                     signupObj.SignUp_Success();
                      break;
@@ -262,7 +261,6 @@ public class PlayerFunctions implements Client {
                         }
                     });
                     break;
-
                 case Request.PLAYED_CELL:
                     Platform.runLater(new Runnable() {
                         @Override
@@ -306,6 +304,8 @@ public class PlayerFunctions implements Client {
                     });
                     System.out.println("The Message Body" + ReqObj.getString("Message"));
                   
+                case Request.PLAY_AGAIN:
+                    showPlayAgain();
                     break;
             }
 
@@ -365,40 +365,67 @@ public class PlayerFunctions implements Client {
             return;
         }else{
             if (isComputer){
-                int ret = game.chooseCell(cellNum-1);
-                Platform.runLater(() -> {
-                    boardObj.setLbl(cellNum, 'X');
-                    boardObj.setTurnLbl(!playerIsTurn);
-                });
-                if (ret==1){
-                    System.out.println("you are winner");
-                    boardObj.setTurnLbl(false);
-                }else if (ret==-1){
-                    System.out.println("Tie");
-                }else{
-                   int cpuCell;
-                   if (game.getLevel()=="hard"){
-                        cpuCell= PlayWithComputer.hard(game.getBoard());
-                   }else if (game.getLevel()=="medium"){
-                        cpuCell= PlayWithComputer.medium(game.getBoard());
-                    }else{
-                        cpuCell= PlayWithComputer.easy(game.getBoard());
-                    }   
-                   int cpuret = game.chooseCell(cpuCell);
-                   Platform.runLater(() -> {
-                        boardObj.setLbl(cpuCell+1, 'O');
-                        
-                    });
-                   if (cpuret==1){
-                        System.out.println("CPU is winner");
-                    }else if (cpuret==-1){
-                        System.out.println("Tie");
+                if (game.getPlayerTurn()==pla.getId()){
+                    System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+                    int ret = playerTurn(cellNum);
+                    if (ret==1){
+                        showPlayAgain();
+                        //boardObj.setTurnLbl(false);
+                    }else if (ret==-1){
+                        showPlayAgain();
                     }else{
                         Platform.runLater(() -> {
-                            boardObj.setTurnLbl(playerIsTurn);
+                            boardObj.setTurnLbl(!playerIsTurn);
                         });
+                       int cpuret = computerTurn();
+                       if (cpuret==1){
+                            showPlayAgain();
+                        }else if (cpuret==-1){
+                            showPlayAgain();
+                        }else{
+                            Platform.runLater(() -> {
+                                boardObj.setTurnLbl(playerIsTurn);
+                            });
+                        }
+                    }   
+                }else{
+                    System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+                    Platform.runLater(() -> {
+                        boardObj.setTurnLbl(false);
+                    });
+                   int cpuret = computerTurn();
+                   if (cpuret==1){
+                        showPlayAgain();
+                    }else if (cpuret==-1){
+                        showPlayAgain();
+                    }else{
+                        Platform.runLater(() -> {
+                            boardObj.setTurnLbl(true);
+                        });
+                        int ret = playerTurn(cellNum);
+                        if (ret==1){
+                            showPlayAgain();
+                            //boardObj.setTurnLbl(false);
+                        }else if (ret==-1){
+                            showPlayAgain();
+                        }else{
+                            Platform.runLater(() -> {
+                                boardObj.setTurnLbl(false);
+                            });
+                           int cpuret2 = computerTurn();
+                           if (cpuret2==1){
+                                showPlayAgain();
+                            }else if (cpuret2==-1){
+                                showPlayAgain();
+                            }else{
+                                Platform.runLater(() -> {
+                                    boardObj.setTurnLbl(true);
+                                });
+                            }
+                        }
                     }
                 }
+                
             }else{
                 JSONObject json = new JSONObject();
                 try {
@@ -451,4 +478,36 @@ public class PlayerFunctions implements Client {
     }
 
 
+    
+    void showPlayAgain(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                boardObj.showPlayAgainDialog();
+            }
+        });
+    }
+    
+    int playerTurn(int cellNum){
+        Platform.runLater(() -> {
+            boardObj.setLbl(cellNum, 'X');
+        });
+        return game.chooseCell(cellNum-1);
+    }
+    
+    int computerTurn(){
+        int cpuCell;
+        if (game.getLevel()=="hard"){
+             cpuCell= PlayWithComputer.hard(game.getBoard());
+        }else if (game.getLevel()=="medium"){
+             cpuCell= PlayWithComputer.medium(game.getBoard());
+         }else{
+             cpuCell= PlayWithComputer.easy(game.getBoard());
+         }   
+        Platform.runLater(() -> {
+             boardObj.setLbl(cpuCell+1, 'O');
+
+         });
+        return game.chooseCell(cpuCell);
+    }
 }
