@@ -128,6 +128,11 @@ class ServerHandler extends Thread {
                    handleCellPlayed(cellNum);
                    
                     break;
+                case Request.SEND_MESSAGE:
+                    serverObj.recieveMessageFromPlayer(json.getString("Message"), game.getPlayer1().getId(), game.getPlayer2().getId());
+                   
+                  
+                  
             }
         } catch (Exception ex) {
             

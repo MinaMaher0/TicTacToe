@@ -222,6 +222,22 @@ public class ServerSideClass implements Server {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+   
+//    public void sendMessagetoPlayer(int senderID,int receiverID,String senderUserName){
+//        JSONObject sendRequest=new JSONObject();
+//        sendRequest.put("RequestType",Request.SEND_MESSAGE);
+//        sendRequest.put("senderID",senderID);
+//        sendRequest.put("senderUserName",senderUserName);
+//         ServerHandler s =ServerControl.playerMap.get(receiverID);
+//            for (Player p : ServerControl.players){
+//                if (p.getId()==receiverID){
+//                    sendRequest.put("usrName",senderUserName);
+//                }
+//            }
+//            s.Ps.println(sendRequest.toString());
+//        
+//    }
+  
     @Override
     public void sendRequestToOtherPlayer(int senderID,int receiverID,String senderUserName) {
         try {
@@ -243,6 +259,26 @@ public class ServerSideClass implements Server {
         }
     }
 
+     public void recieveMessageFromPlayer(String message,int senderID ,int recieverID){
+       
+        try {
+            System.out.println(message);
+            JSONObject sendMessage=new JSONObject();
+            sendMessage.put("RequestType",Request.SEND_MESSAGE);
+            sendMessage.put("senderID",senderID);
+            sendMessage.put("recieverID",recieverID);
+            sendMessage.put("Message",message);
+              ServerControl.playerMap.get(senderID).Ps.println(sendMessage.toString());
+             ServerControl.playerMap.get(recieverID).Ps.println(sendMessage.toString());
+           // ps.println(sendMessage.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
+    
 
     @Override
     public void acceptPlayerRequest(int pID) {
