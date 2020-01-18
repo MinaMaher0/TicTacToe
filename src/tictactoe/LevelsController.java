@@ -58,6 +58,7 @@ public class LevelsController implements Initializable {
             TheBoardController boardObj=loader.getController();
             boardObj.SetPlayerFunctionObj(pF);
             boardObj.setComputerPlayer(true);
+            boardObj.hideChatAndSave();
             Scene scene = new Scene(root);
             MainGUI.primaryStage.setTitle("GameBoard");
             MainGUI.primaryStage.setScene(scene);
