@@ -7,6 +7,7 @@ package tictactoe;
 
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -77,8 +78,7 @@ public class TheBoardController implements Initializable {
     {
         pf=obj;
         pf.setBoardObj(this);
-    }
-    
+    }    
     public void setGameDetails(String playerOneName,int playerOneScore,String playerTwoName,int playerTwoScore,int tieScore){
         num_of_tie.setText(String.valueOf(tieScore));
         playerOname.setText(playerOneName);
@@ -87,6 +87,12 @@ public class TheBoardController implements Initializable {
         pTscore.setText(String.valueOf(playerTwoScore));
     }
    
+    @FXML
+    private FontAwesomeIconView save_icon;
+    @FXML
+    private FontAwesomeIconView cht_icon;
+    @FXML
+    private Button save_btn;
     @FXML
     private Label num_of_tie;
     @FXML
@@ -203,7 +209,18 @@ public class TheBoardController implements Initializable {
         pf.sendPlayedCellRequest(id,isComputer);
     }
     
+    public void hideChatAndSave(){
+        if (pf!=null && pf.isPlayWithComputer()){
+            chat_btn.setVisible(false);
+            chat_pane.setVisible(false);
+            cht_icon.setVisible(false);
+            save_btn.setVisible(false);
+            save_icon.setVisible(false);
+        }
+    }
+    
     public void createBoard(){
+        
         lbl_11.setText("");
         lbl_12.setText("");
         lbl_13.setText("");
