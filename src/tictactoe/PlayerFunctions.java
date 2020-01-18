@@ -39,7 +39,7 @@ public class PlayerFunctions implements Client {
     Socket s;
     Player pla = new Player();
     Boolean playerIsTurn = false;
-    Game game;
+    Game game=null;
     ControlButtonsController cbController = null;
     SignInController siginObj = null;
     SignUpController signupObj = null;
@@ -192,11 +192,10 @@ public class PlayerFunctions implements Client {
         try {
             final JSONObject ReqObj = new JSONObject(str);
             switch (ReqObj.get("RequestType").hashCode()) {
-            
                 case Request.SIGN_UP_SUCCESS:
                     signupObj.SignUp_Success();
-                     break;
-                case Request.SIGN_UP_FAILED :
+                    break;
+                case Request.SIGN_UP_FAILED:
                     System.out.println("unsecss");
                     break;
                 case Request.LOGIN_SUCCESS:
@@ -215,7 +214,7 @@ public class PlayerFunctions implements Client {
                 case Request.INVITE_PLAYER_FAILED:
                     System.out.println("invitation decliend");
                     break;
-                    
+
                 case Request.INVITE_PLAYER:
                     if (cbController != null) {
                         Platform.runLater(new Runnable() {
@@ -232,7 +231,7 @@ public class PlayerFunctions implements Client {
                     }
                     break;
                 case Request.USERS:
-                    users.clear(); 
+                    users.clear();
                     JSONArray jArr = ReqObj.getJSONArray("users");
                     for (int i = 0; i < jArr.length(); ++i) {
                         Player p = convertJsonObjtoPlayer(jArr.getJSONObject(i));
@@ -252,17 +251,18 @@ public class PlayerFunctions implements Client {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            if (cbController!=null){
+                            if (cbController != null) {
                                 cbController.loadBoard(false);
                                 Platform.runLater(() -> {
+                                    boardObj.exitDialog();
                                     boardObj.setTurnLbl(playerIsTurn);
                                 });
+                            } else {
+                                System.out.println("nullllllllllll");
                             }
-                            else System.out.println("nullllllllllll");
                         }
                     });
                     break;
-
                 case Request.PLAYED_CELL:
                     Platform.runLater(new Runnable() {
                         @Override
@@ -280,20 +280,21 @@ public class PlayerFunctions implements Client {
                     break;
                 case Request.SERVER_FAILED:
                     Platform.runLater(new Runnable() {
-                    @Override
-                     public void run() {
-                        System.out.println("Server Fallen ya beeh ");
-                         cbController.showServerDownDialog();                     
+                        @Override
+                        public void run() {
+                            System.out.println("Server Fallen ya beeh ");
+                            cbController.showServerDownDialog();
                         }
                     });
                     break;
                 case Request.PLAYER_TURN:
-                    playerIsTurn=true;
+                    playerIsTurn = true;
+                    System.out.println("yyyyyyyyyyyyyyy");
                     Platform.runLater(() -> {
-                        boardObj.setTurnLbl(playerIsTurn);
+                            boardObj.setTurnLbl(playerIsTurn);
                     });
                     break;
-                case Request.SEND_MESSAGE:   
+                case Request.SEND_MESSAGE:
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
@@ -305,7 +306,12 @@ public class PlayerFunctions implements Client {
                         }
                     });
                     System.out.println("The Message Body" + ReqObj.getString("Message"));
-                  
+
+                case Request.PLAY_AGAIN:
+                    showPlayAgain();
+                    break;
+                case Request.EXIT_GAME:
+                    extiPlayAgain();
                     break;
             }
 
@@ -350,56 +356,22 @@ public class PlayerFunctions implements Client {
         }
         return true;
     }
-    public void playWithComuter(String level){
-        game = new Game(pla, true,level);
-        playerIsTurn=true;
-        
+
+    public void playWithComuter(String level) {
+        game = new Game(pla, true, level);
+        playerIsTurn = true;
+
     }
-    
-    public void sendPlayedCellRequest(int cellNum,boolean isComputer)
-    {
-        System.out.println("turn "+ playerIsTurn);
-        if (!playerIsTurn)
-        {
+
+    public void sendPlayedCellRequest(int cellNum, boolean isComputer) {
+        System.out.println("turn " + playerIsTurn);
+        if (!playerIsTurn) {
             // handle when it's not your turn
             return;
-        }else{
-            if (isComputer){
-                int ret = game.chooseCell(cellNum-1);
-                Platform.runLater(() -> {
-                    boardObj.setLbl(cellNum, 'X');
-                    boardObj.setTurnLbl(!playerIsTurn);
-                });
-                if (ret==1){
-                    System.out.println("you are winner");
-                    boardObj.setTurnLbl(false);
-                }else if (ret==-1){
-                    System.out.println("Tie");
-                }else{
-                   int cpuCell;
-                   if (game.getLevel()=="hard"){
-                        cpuCell= PlayWithComputer.hard(game.getBoard());
-                   }else if (game.getLevel()=="medium"){
-                        cpuCell= PlayWithComputer.medium(game.getBoard());
-                    }else{
-                        cpuCell= PlayWithComputer.easy(game.getBoard());
-                    }   
-                   int cpuret = game.chooseCell(cpuCell);
-                   Platform.runLater(() -> {
-                        boardObj.setLbl(cpuCell+1, 'O');
-                        
-                    });
-                   if (cpuret==1){
-                        System.out.println("CPU is winner");
-                    }else if (cpuret==-1){
-                        System.out.println("Tie");
-                    }else{
-                        Platform.runLater(() -> {
-                            boardObj.setTurnLbl(playerIsTurn);
-                        });
-                    }
-                }
-            }else{
+        } else {
+            if (isComputer) {
+                action(cellNum);
+            } else {
                 JSONObject json = new JSONObject();
                 try {
                     json.put("RequestType", Request.PLAYED_CELL);
@@ -407,7 +379,7 @@ public class PlayerFunctions implements Client {
                     json.put("cellNum", cellNum);
                     System.out.println(json);
                     output.println(json.toString());
-                    playerIsTurn=false;
+                    playerIsTurn = false;
                     Platform.runLater(() -> {
                         boardObj.setTurnLbl(playerIsTurn);
                     });
@@ -450,5 +422,108 @@ public class PlayerFunctions implements Client {
         }
     }
 
+    void showPlayAgain() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                boardObj.showPlayAgainDialog();
+            }
+        });
+    }
+    
+    void extiPlayAgain(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                boardObj.exitPlayAgain();
+            }
+        });
+    }
 
+    public void playAgain() {
+        if (game!=null) {
+            game.playAgain();
+            if (game.playerTurn==-1)
+                computerTurn();
+        }else {
+            JSONObject json = new JSONObject();
+            try {
+                json.put("RequestType", Request.PLAY_AGAIN);
+                json.put("ID", pla.getId());
+                output.println(json.toString());
+            } catch (JSONException ex) {
+                Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void exitGame() {
+        if (game!=null)
+            game = null;
+        else{
+            JSONObject json = new JSONObject();
+            try {
+                json.put("RequestType", Request.EXIT_GAME);
+                output.println(json.toString());
+            } catch (JSONException ex) {
+                Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    int playerTurn(int cellNum) {
+        char ch = game.getPlayerChar();
+        Platform.runLater(() -> {
+            boardObj.setLbl(cellNum, ch);
+        });
+        return game.chooseCell(cellNum - 1);
+    }
+
+    int computerTurn() {
+        int cpuCell;
+        if (game.getLevel().equals("hard")) {
+            cpuCell = PlayWithComputer.hard(game.getBoard());
+        } else if (game.getLevel().equals("medium")) {
+            cpuCell = PlayWithComputer.medium(game.getBoard());
+        } else {
+            cpuCell = PlayWithComputer.easy(game.getBoard());
+        }
+        char ch = game.getPlayerChar();
+        Platform.runLater(() -> {
+            boardObj.setLbl(cpuCell + 1, ch);
+        });
+        return game.chooseCell(cpuCell);
+    }
+
+    void action(int cellNum) {
+        if (!game.isAvailable(cellNum - 1)) {
+            return;
+        }
+        int ret = playerTurn(cellNum);
+        if (ret == 1) {
+            showPlayAgain();
+            //boardObj.setTurnLbl(false);
+        } else if (ret == -1) {
+            showPlayAgain();
+        } else {
+            Platform.runLater(() -> {
+                boardObj.setTurnLbl(!playerIsTurn);
+            });
+            int cpuret = computerTurn();
+            if (cpuret == 1) {
+                showPlayAgain();
+            } else if (cpuret == -1) {
+                showPlayAgain();
+            } else {
+                Platform.runLater(() -> {
+                    boardObj.setTurnLbl(playerIsTurn);
+                });
+            }
+        }
+    }
+    
+    public boolean isPlayWithComputer(){
+        return game!=null;
+    }
+    
 }

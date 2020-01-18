@@ -71,7 +71,6 @@ public class ControlButtonsController implements Initializable {
     public boolean showInviteDialog(String name,int p1,int p2){
         boolean ret=false;
         try {
-            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InviteDialog.fxml"));
             Parent root;
             root = (Parent)loader.load();
@@ -96,7 +95,7 @@ public class ControlButtonsController implements Initializable {
             Parent root;
             //Stage s= new Stage();
             root = (Parent)loader.load();
-            newStage.initModality(Modality.WINDOW_MODAL);
+          //  newStage.initModality(Modality.WINDOW_MODAL);
             Scene scene=new Scene(root);
             newStage.setTitle("ServerFallen");
             newStage.setScene(scene);
@@ -230,7 +229,7 @@ public class ControlButtonsController implements Initializable {
             root = (Parent)loader.load();
             DeclineDialogController declineController=loader.getController();
             declineController.setUserName(name);
-            newStage.initModality(Modality.WINDOW_MODAL);
+         //   newStage.initModality(Modality.WINDOW_MODAL);
             Scene scene=new Scene(root);
             newStage.setTitle("DeclineDialogController");
             newStage.setScene(scene);

@@ -45,7 +45,7 @@
     -fx-font-weight:bold;
     -fx-font-family: 'Comic Sans MS';
     -fx-font: italic;
-   -fx-font: bold;   
+    -fx-font: bold;   
 }
 .friend_label{
      -fx-background-color: rgba(0, 0, 0, 0.03);

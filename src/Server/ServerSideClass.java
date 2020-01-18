@@ -83,7 +83,9 @@ public class ServerSideClass implements Server {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        ServerControl.sHome.setOfflineList();
+                        Platform.runLater(() -> {
+                            ServerControl.sHome.setOfflineList();
+                        });
                     }
                 });
                

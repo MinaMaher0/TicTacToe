@@ -126,7 +126,7 @@ public class PlayWithComputer {
     }
     
     public static int hard(char board[]){
-        int bestVal = -1000; 
+        int bestVal = -5000; 
         int bestMove = -1;
 
         for (int i = 0; i < 9; i++) 

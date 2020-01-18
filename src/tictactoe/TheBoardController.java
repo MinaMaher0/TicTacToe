@@ -7,19 +7,27 @@ package tictactoe;
 
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import static tictactoe.ControlButtonsController.newStage;
 
 /**
  * FXML Controller class
@@ -27,6 +35,7 @@ import javafx.scene.layout.Pane;
  * @author Salama
  */
 public class TheBoardController implements Initializable {
+    public static Stage newStage = new Stage();
 
     /**
      * Initializes the controller class.
@@ -43,6 +52,24 @@ public class TheBoardController implements Initializable {
     EventHandler<Event> lbl_32Event;
     EventHandler<Event> lbl_33Event;
     
+    
+    public void showPlayAgainDialog(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayAgainDialog.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            PlayAgainDialogController playAgainContoller=loader.getController();
+            playAgainContoller.setPlayerFunctionsObj(pf);
+            playAgainContoller.setBoardObj(this);
+            Scene scene=new Scene(root);
+            newStage.setTitle("Play Again ?");
+            newStage.setScene(scene);
+            newStage.show();
+            newStage.setResizable(false);
+        } catch (IOException ex) {
+            Logger.getLogger(TheBoardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public  void SetPlayerFunctionObj(PlayerFunctions obj)
     {
@@ -166,14 +193,21 @@ public class TheBoardController implements Initializable {
         pf.sendPlayedCellRequest(id,isComputer);
     }
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void createBoard(){
+        lbl_11.setText("");
+        lbl_12.setText("");
+        lbl_13.setText("");
+        lbl_21.setText("");
+        lbl_22.setText("");
+        lbl_23.setText("");
+        lbl_31.setText("");
+        lbl_32.setText("");
+        lbl_33.setText("");
         
         lbl_11Event=new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                 if (turnLbl.isVisible()){
+                if (turnLbl.isVisible()){
                     sendLblRequest(1);
                 }else{
                     
@@ -278,60 +312,7 @@ public class TheBoardController implements Initializable {
         lbl_31.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_31Event);
         lbl_32.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_32Event);
         lbl_33.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_33Event);
-    }    
-
-    /*@FXML
-    void lbl1(MouseEvent event) {
-        sendLblRequest(1);
-    }
-     @FXML
-    void lbl2(MouseEvent event) {
-         sendLblRequest(2);
-
-    }
-
-    @FXML
-    void lbl3(MouseEvent event) {
-        sendLblRequest(3);
-
-    }
-
-    @FXML
-    void lbl4(MouseEvent event) {
-        sendLblRequest(4);
-
-    }
-
-    @FXML
-    void lbl5(MouseEvent event) {
-        sendLblRequest(5);
-
-    }
-
-    @FXML
-    void lbl6(MouseEvent event) {
-        sendLblRequest(6);
-
-    }
-
-    @FXML
-    void lbl7(MouseEvent event) {
-        sendLblRequest(7);
-
-    }
-
-    @FXML
-    void lbl8(MouseEvent event) {
-        sendLblRequest(8);
-
-    }
-
-    @FXML
-    void lbl9(MouseEvent event) {
-        sendLblRequest(9);
-
-    }*/
-       
+    }       
        
     @FXML
     void textFtotextArea(ActionEvent event) {
@@ -365,5 +346,36 @@ public class TheBoardController implements Initializable {
      // textArea.appendText(body+"\n");
       }
   }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        createBoard();
+    }
+    
+    public void exitPlayAgain(){
+        newStage.close();
+        loadHomePage();
+    }
+    
+    public void exitDialog(){
+        if (newStage.isShowing())
+            newStage.close();
+    }
+    
+    void loadHomePage(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ControlButtons.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            ControlButtonsController controll=loader.getController();
+            controll.setPlayerObj(pf);
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("Home Page");
+            MainGUI.primaryStage.setScene(scene);
+            MainGUI.primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(PlayAgainDialogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
