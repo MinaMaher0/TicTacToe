@@ -35,7 +35,13 @@ class ServerHandler extends Thread {
     Player p1,p2;
     Game game;
     public static Vector <ServerHandler> socketVector = new Vector<ServerHandler>();
-
+    Game g;
+    
+    public void setGame(Game pg){
+        pg=g;
+    }
+            
+            
     public ServerHandler(Socket socket) {
         try {
             s=socket;
@@ -104,7 +110,6 @@ class ServerHandler extends Thread {
                 {
                     serverObj.sendRequestToOtherPlayer(json.getInt("senderID"),json.getInt("receiverID"),json.getString("senderUserName"));
                     break;
-
                 }
                 case Request.SERVER_FAILED:
                     serverObj.serverFallen();
@@ -179,3 +184,4 @@ class ServerHandler extends Thread {
         return game;
     }
 }
+    

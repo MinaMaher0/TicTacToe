@@ -166,7 +166,6 @@ public class TheBoardController implements Initializable {
         pf.sendPlayedCellRequest(id,isComputer);
     }
     
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

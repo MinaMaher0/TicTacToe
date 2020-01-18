@@ -96,13 +96,13 @@ public class Game {
         return 'o';
     }
     
-    boolean checkWinner(char ch){
+    public boolean checkWinner(char ch){
         if (checkHorizontal(ch) || checkVertical(ch) || checkDiagonal(ch))
             return true;
         return false;
     }
     
-    boolean checkHorizontal(char ch){
+    public boolean checkHorizontal(char ch){
         if (board[0]==board[1] && board[1]==board[2] && board[2]==ch){
             return true;
         }
@@ -115,7 +115,7 @@ public class Game {
         return false;
     }
     
-    boolean checkVertical(char ch){
+    public boolean checkVertical(char ch){
         if (board[0]==board[3] && board[3]==board[6] && board[6]==ch){
             return true;
         }
@@ -128,7 +128,7 @@ public class Game {
         return false;
     }
     
-    boolean checkDiagonal(char ch){
+    public boolean checkDiagonal(char ch){
         if (board[0]==board[4] && board[4]==board[8] && board[8]==ch){
             return true;
         }
