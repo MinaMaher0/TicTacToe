@@ -312,60 +312,7 @@ public class TheBoardController implements Initializable {
         lbl_31.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_31Event);
         lbl_32.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_32Event);
         lbl_33.addEventHandler(MouseEvent.MOUSE_CLICKED, lbl_33Event);
-    }    
-
-    /*@FXML
-    void lbl1(MouseEvent event) {
-        sendLblRequest(1);
-    }
-     @FXML
-    void lbl2(MouseEvent event) {
-         sendLblRequest(2);
-
-    }
-
-    @FXML
-    void lbl3(MouseEvent event) {
-        sendLblRequest(3);
-
-    }
-
-    @FXML
-    void lbl4(MouseEvent event) {
-        sendLblRequest(4);
-
-    }
-
-    @FXML
-    void lbl5(MouseEvent event) {
-        sendLblRequest(5);
-
-    }
-
-    @FXML
-    void lbl6(MouseEvent event) {
-        sendLblRequest(6);
-
-    }
-
-    @FXML
-    void lbl7(MouseEvent event) {
-        sendLblRequest(7);
-
-    }
-
-    @FXML
-    void lbl8(MouseEvent event) {
-        sendLblRequest(8);
-
-    }
-
-    @FXML
-    void lbl9(MouseEvent event) {
-        sendLblRequest(9);
-
-    }*/
-       
+    }       
        
     @FXML
     void textFtotextArea(ActionEvent event) {
@@ -403,6 +350,32 @@ public class TheBoardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createBoard();
+    }
+    
+    public void exitPlayAgain(){
+        newStage.close();
+        loadHomePage();
+    }
+    
+    public void exitDialog(){
+        if (newStage.isShowing())
+            newStage.close();
+    }
+    
+    void loadHomePage(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ControlButtons.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            ControlButtonsController controll=loader.getController();
+            controll.setPlayerObj(pf);
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("Home Page");
+            MainGUI.primaryStage.setScene(scene);
+            MainGUI.primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(PlayAgainDialogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

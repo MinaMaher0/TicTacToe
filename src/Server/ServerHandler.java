@@ -128,9 +128,14 @@ class ServerHandler extends Thread {
                     break;
                 case Request.SEND_MESSAGE:
                     serverObj.recieveMessageFromPlayer(json.getString("Message"), game.getPlayer1().getId(), game.getPlayer2().getId());
-                   
-                  
-                  
+                    break;
+                case Request.PLAY_AGAIN:
+                    HandlePlayAgain(json.getInt("ID"));
+                    break;
+                case Request.EXIT_GAME:
+                    handleExitGame();
+                    break;
+                
             }
         } catch (Exception ex) {
             
@@ -140,7 +145,6 @@ class ServerHandler extends Thread {
     
     void handleCellPlayed(int cellNum){
         try {
-            if (game==null) System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             char ch=game.getPlayerChar();
             int result=game.chooseCell(cellNum-1);
             JSONObject sendCell=new JSONObject();
@@ -180,6 +184,37 @@ class ServerHandler extends Thread {
     
     public Game getGame(){
         return game;
+    }
+    
+    void HandlePlayAgain(int id){
+        if (game.chkPlayersClickedPlayAgain(id)){
+            try {
+                ServerControl.playerMap.get(game.getPlayer1().getId()).setGame(game);
+                ServerControl.playerMap.get(game.getPlayer2().getId()).setGame(game);
+                serverObj.sendStartGameRequest(game.getPlayer1().getId(), game.getPlayer2().getId());
+                JSONObject sendReqType=new JSONObject();
+                sendReqType.put("RequestType", Request.PLAYER_TURN);
+                ServerControl.playerMap.get(game.getPlayerTurn()).Ps.println(sendReqType.toString());
+            } catch (JSONException ex) {
+                Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            
+        }
+    }
+    
+    void handleExitGame(){
+        try {
+            Game g= game;
+            ServerControl.playerMap.get(g.getPlayer1().getId()).setGame(null);
+            ServerControl.playerMap.get(g.getPlayer2().getId()).setGame(null);
+            JSONObject sendReqType=new JSONObject();
+            sendReqType.put("RequestType", Request.EXIT_GAME);
+            ServerControl.playerMap.get(g.getPlayer1().getId()).Ps.println(sendReqType.toString());
+            ServerControl.playerMap.get(g.getPlayer2().getId()).Ps.println(sendReqType.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
     

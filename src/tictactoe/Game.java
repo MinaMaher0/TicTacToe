@@ -14,12 +14,14 @@ public class Game {
     Player player1,player2;
     char board[];
     int playerTurn;
+    int playerPlayedFirstCell=1;
     int fp_score;
     int sp_score;
     int tie_score;
     int cellFilled;
     boolean isComputer;
     String level;
+    boolean playAgainPlayer1=false,playAgainPlayer2=false;
     
     public Game(Player player1, Player player2, char[] board, int playerTurn, int fp_score, int sp_score, int tie_score) {
         this.player1 = player1;
@@ -66,6 +68,10 @@ public class Game {
         return counter;
     }
     
+    public boolean isAvailable(int cellNum){
+        return board[cellNum]==' ';
+    }
+    
     public int chooseCell(int cellNum){
         char ch = getPlayerChar();
         board[cellNum]=ch;
@@ -99,6 +105,14 @@ public class Game {
         if (playerTurn==player1.getId())
             return 'x';
         return 'o';
+    }
+
+    public int getPlayerPlayedFirstCell() {
+        return playerPlayedFirstCell;
+    }
+
+    public void setPlayerPlayedFirstCell(int playerPlayedFirstCell) {
+        this.playerPlayedFirstCell = playerPlayedFirstCell;
     }
     
     public boolean checkWinner(char ch){
@@ -143,12 +157,33 @@ public class Game {
         return false;
     }
     
+    public boolean chkPlayersClickedPlayAgain(int pID){
+        if (pID==player1.getId()) playAgainPlayer1=true;
+        if (pID==player2.getId()) playAgainPlayer2=true;
+        if (playAgainPlayer1 && playAgainPlayer2){
+            playAgain();
+            return true;
+        }
+        return false;
+    }
+    
     public void playAgain(){
         for (int i=0;i<9;++i){
             board[i]=' ';
         }
         cellFilled=0;
-        playerTurn=-1;
+        if (playerPlayedFirstCell==1){
+            playerPlayedFirstCell=2;
+            if (isComputer){
+                playerTurn=-1;
+            }else playerTurn=player2.getId();
+        }
+        else{
+            playerTurn=player1.getId();
+            playerPlayedFirstCell=1;
+        }
+        playAgainPlayer1=false;
+        playAgainPlayer2=false;
     }
 
     public Player getPlayer1() {

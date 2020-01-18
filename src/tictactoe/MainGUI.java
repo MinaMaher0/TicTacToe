@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 public class MainGUI extends Application {    
    public static Stage primaryStage;
     Parent root;
+    
     @Override
     public void start(Stage stage) {
         try {   

@@ -16,6 +16,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import static tictactoe.TheBoardController.newStage;
 
 /**
@@ -32,13 +34,42 @@ public class PlayAgainDialogController implements Initializable {
     PlayerFunctions playerFunctionsObj;
     TheBoardController boardObj;
     
+    @FXML
+    private Label lbl;
+    
+    @FXML
+    private Button playAgainBTN;
+    
     public void setPlayerFunctionsObj(PlayerFunctions obj){
         playerFunctionsObj=obj;
     }
     
+    void loadHomePage(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ControlButtons.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            ControlButtonsController controll=loader.getController();
+            controll.setPlayerObj(playerFunctionsObj);
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("Home Page");
+            MainGUI.primaryStage.setScene(scene);
+            MainGUI.primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(PlayAgainDialogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void exitAction(){
+        loadHomePage();
+        playerFunctionsObj.exitGame();
+        if (playerFunctionsObj.isPlayWithComputer())
+        TheBoardController.newStage.close();
+    }
+    
     @FXML
     void exit(ActionEvent event) {
-
+        exitAction();
     }
     
     void setBoardObj(TheBoardController obj){
@@ -49,14 +80,21 @@ public class PlayAgainDialogController implements Initializable {
     void playAgain(ActionEvent event) {
         boardObj.createBoard();
         boardObj.setTurnLbl(true);
-        playerFunctionsObj.game.playAgain();
-        TheBoardController.newStage.close();
+        playerFunctionsObj.playAgain();
+        if (playerFunctionsObj.isPlayWithComputer())
+            TheBoardController.newStage.close();
+        else{
+            playAgainBTN.setVisible(false);
+            lbl.setVisible(true);
+            lbl.setText("Wait until the other player click play again");
+        }
     }
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        lbl.setVisible(false);
     }    
     
 }
