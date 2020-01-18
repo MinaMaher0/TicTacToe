@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import tictactoe.Game;
-import tictactoe.Player;
+import tictactoe.*;
 import utils.Request;
 
 /**
@@ -41,6 +41,8 @@ class ServerHandler extends Thread {
     }
             
             
+    ControlButtonsController cbControl= null;
+    
     public ServerHandler(Socket socket) {
         try {
             s=socket;
@@ -112,15 +114,22 @@ class ServerHandler extends Thread {
 
                 case Request.ACCEPT_INVITATION:
                     p1 = getPlayer(json.getInt("senderID"));
-                    p2 = getPlayer(json.getInt("receiverID"));                            
+                    p2 = getPlayer(json.getInt("receiverID"));
+                    serverObj.fillLsitofBusyUser(p1.getId(),p2.getId());
                     Game g = new Game(p1, p2);
                     ServerControl.playerMap.get(json.getInt("senderID")).setGame(g);
                     ServerControl.playerMap.get(json.getInt("receiverID")).setGame(g);
                     serverObj.sendStartGameRequest(p1.getId(), p2.getId(),g);
                     JSONObject sendReqType=new JSONObject();
                     sendReqType.put("RequestType", Request.PLAYER_TURN);
-                    ServerControl.playerMap.get(g.getPlayerTurn()).Ps.println(sendReqType.toString());
+                ServerControl.playerMap.get(g.getPlayerTurn()).Ps.println(sendReqType.toString());
                     break;
+                    
+                    
+                case Request.REFUSE_INVITATION: 
+                    serverObj.sendRefuseGameRequest(json.getInt("senderID"), json.getInt("receiverID"));
+                    break;
+                    
                 case Request.PLAYED_CELL:
                    int cellNum=json.getInt("cellNum");
                    handleCellPlayed(cellNum);

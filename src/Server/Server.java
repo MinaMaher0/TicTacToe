@@ -33,7 +33,7 @@ public interface Server{
     public char checkWinner();
     
     //in its body should check state of the online if busy or not 
-    public Vector<String> fillLsitofBusyUser();
+    public void fillLsitofBusyUser(int pOneId,int pTwoId);
     
     //remove from BusyList and Change state in list as free 
     public void serverFallen();

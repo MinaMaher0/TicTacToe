@@ -29,6 +29,11 @@ public class ServerDownDialogController implements Initializable {
     @FXML
     private JFXButton ok;
     
+    ControlButtonsController sobj = null;
+    public void setControlObject(ControlButtonsController obj){
+        sobj=obj;
+    }
+    
     @FXML
     void accept(ActionEvent event) {
         ControlButtonsController.newStage.close();

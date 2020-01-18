@@ -22,6 +22,7 @@ import tictactoe.PlayerFunctions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tictactoe.Game;
+import static tictactoe.PlayerFunctions.users;
 
 /**
  *
@@ -78,6 +79,8 @@ public class ServerSideClass implements Server {
                     if (ServerControl.players.get(i).getId()== p.getId())
                     {
                         ServerControl.players.get(i).setFlag(true);
+                        ServerControl.players.get(i).setStatus(false);
+                        System.out.println("xXx "+ ServerControl.players.get(i).getStatus());
                     }
                 }
                 
@@ -196,10 +199,19 @@ public class ServerSideClass implements Server {
 
    
     @Override
-    public Vector<String> fillLsitofBusyUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void fillLsitofBusyUser(int p1,int p2) {
+        for (Player p:ServerControl.players)
+        {
+            if (p.getId()== p1 ||p.getId() == p2)
+            {
+                p.setFlag(true);
+                p.setStatus(true);
+                System.out.println("status is true y prince");
+            }
+        }
+        sendUsers();
     }
-
+        
     @Override
     public void serverFallen() {
        System.out.println("falllllen ");
@@ -210,9 +222,9 @@ public class ServerSideClass implements Server {
             {
                 if(p.getFlag()==true)
                 {   
+                    p.setFlag(false);
                     ServerControl.playerMap.get(p.getId()).Ps.println(serverFail.toString());
                     System.out.println("afllennnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-                    p.setFlag(false);
                 }
             }
         } catch (JSONException ex) {
@@ -328,8 +340,11 @@ public class ServerSideClass implements Server {
     {
         JSONObject jsonRefuse = new JSONObject();
         try {
-            jsonRefuse.put("SenderID", p1);
-            jsonRefuse.put("receiverID", p2);
+            for (Player p:ServerControl.players)
+            {
+                if(p.getId()== p2)
+                    jsonRefuse.put("userName", p.getUser_name());
+            }
             jsonRefuse.put("RequestType", Request.REFUSE_INVITATION);
             ServerControl.playerMap.get(p1).Ps.println(jsonRefuse.toString());
         } catch (JSONException ex) {
