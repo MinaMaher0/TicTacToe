@@ -31,6 +31,9 @@ import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -96,16 +99,17 @@ public class ControlButtonsController implements Initializable {
             item.getChildren().add(imageView);
             
             VBox userName_Score = new VBox();
+          
             userName_Score.setSpacing(2);
             Text t = new Text(p.getUser_name());
-
+            t.setStyle(" -fx-font-family: 'Comic Sans MS';-fx-font-size : 15px;-fx-font: bold; -fx-text-fill: #756C6C;");
             HBox score_button = new HBox();
-
-            score_button.setSpacing(10);
+            
+            score_button.setSpacing(150);
             score_button.setAlignment(Pos.CENTER);
 
             Text score = new Text(String.valueOf(p.getScore()));
-
+            score.setStyle(" -fx-font-family: 'Comic Sans MS';-fx-font-size : 15px;-fx-font: bold; -fx-text-fill: #756C6C;");
             Button invite = new Button();
             
             invite.addEventHandler(ActionEvent.ACTION,new EventHandler<ActionEvent>() {
@@ -120,12 +124,32 @@ public class ControlButtonsController implements Initializable {
             if (p.getFlag()){
                 invite.setText("Invite");
                 invite.setCursor(Cursor.HAND);
-                invite.setStyle("-fx-color: #00FF00; -fx-border-width: 5px;");
+                invite.setStyle(" -fx-outline: none;\n" +
+"    -fx-transition: .5s;\n" +
+"    -fx-font-size : 10px;\n" +
+"    -fx-background-color: FFF;\n" +
+"    -fx-text-fill:#37cd0d;\n" +
+"    -fx-font-weight:bold;\n" +
+"    -fx-font-family: 'Comic Sans MS';\n" +
+"    -fx-font: italic;\n" +
+" -fx-border-color:#00E676;"+   
+"-fx-border-width: 2px;"+                        
+"   -fx-font: bold;");
                 
                 
             }else {
                 invite.setText("Offline");
-                invite.setStyle("-fx-color: #A9A9A9; -fx-border-width: 5px;");
+                invite.setStyle(" -fx-outline: none;\n" +
+"    -fx-transition: .5s;\n" +
+"    -fx-font-size : 8px;\n" +
+"    -fx-background-color: FFF;\n" +
+"    -fx-text-fill: #756C6C;\n" +
+" -fx-border-color:#756C6C;"+ 
+"    -fx-font-weight:bold;\n" +
+"    -fx-font-family: 'Comic Sans MS';\n" +
+"    -fx-font: italic;\n" +
+"-fx-border-width: 2px;"+                          
+"   -fx-font: bold;");
             }
                 
 

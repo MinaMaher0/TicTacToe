@@ -31,9 +31,9 @@ public class DbConnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","password");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
 
-
+//jdbc:mysql://localhost:3306/tic_tac_toe
             st = conn.createStatement();
         } catch (SQLException ex) {
             System.out.println("test");
@@ -243,7 +243,7 @@ public class DbConnection {
   //      Player x =d.signIn("ahmed@gmail.com","aa22");
 //        System.out.println(x.getUser_name());
        // d.signUp("ahmed", "aa22", "ahmed@gmail.com");
-        d.getData();
+       d.getData();
         
     }
 

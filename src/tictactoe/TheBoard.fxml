@@ -17,8 +17,8 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.TheBoardController">
    <children>
-      <FontAwesomeIconView glyphName="VIDEO_GAME" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="172.0" layoutY="531.0" opacity="0.4" size="650" strokeLineJoin="BEVEL" text="" textAlignment="CENTER" wrappingWidth="570.6666870117188" />
-      <GridPane alignment="CENTER_LEFT" layoutX="216.0" layoutY="59.0" prefHeight="425.0" prefWidth="561.0">
+      <FontAwesomeIconView glyphName="VIDEO_GAME" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="172.0" layoutY="531.0" opacity="0.8" size="650" strokeLineJoin="BEVEL" text="" textAlignment="CENTER" wrappingWidth="570.6666870117188" />
+      <GridPane alignment="CENTER_LEFT" layoutX="231.0" layoutY="80.0" prefHeight="408.0" prefWidth="549.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.3333435058594" minWidth="10.0" prefWidth="205.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="308.66668701171875" minWidth="10.0" prefWidth="202.33331298828125" />
@@ -31,7 +31,7 @@
          </rowConstraints>
          <children>
 
-            <Label fx:id="lbl_13" alignment="CENTER" onMouseClicked="#lbl3" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="2" />
+            <Label fx:id="lbl_13" alignment="CENTER" onMouseClicked="#lbl3" prefHeight="150.0" prefWidth="169.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="2" />
             <Label fx:id="lbl_12" alignment="CENTER" onMouseClicked="#lbl2" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.columnIndex="1" />
             <Label fx:id="lbl_11" alignment="CENTER" onMouseClicked="#lbl1" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" />
             <Label fx:id="lbl_21" alignment="CENTER" onMouseClicked="#lbl4" prefHeight="130.0" prefWidth="180.0" styleClass="board_button" stylesheets="@board.css" GridPane.rowIndex="1" />
@@ -43,14 +43,14 @@
 
          </children>
       </GridPane>
-      <Pane layoutX="337.0" layoutY="492.0" prefHeight="210.0" prefWidth="353.0">
+      <Pane fx:id="chat_pane" layoutX="245.0" layoutY="492.0" prefHeight="210.0" prefWidth="487.0">
          <children>
-            <JFXTextArea fx:id="textArea" editable="false" layoutX="-4.0" layoutY="4.0" prefHeight="149.0" prefWidth="371.0" styleClass="textArea" stylesheets="@board.css" unFocusColor="#4059a9">
+            <JFXTextArea fx:id="textArea" editable="false" layoutX="3.0" layoutY="-2.0" prefHeight="149.0" prefWidth="482.0" styleClass="textArea" stylesheets="@board.css" unFocusColor="#4059a9">
                <font>
                   <Font name="Tahoma" size="15.0" />
                </font>
             </JFXTextArea>
-            <JFXTextField fx:id="textfield" layoutX="-6.0" layoutY="160.0" prefHeight="49.0" prefWidth="334.0" unFocusColor="#c14378">
+            <JFXTextField fx:id="textfield" layoutX="2.0" layoutY="151.0" prefHeight="49.0" prefWidth="436.0" unFocusColor="#c14378">
                <focusColor>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -63,44 +63,56 @@
                   <Font size="15.0" />
                </font>
             </JFXTextField>
-            <FontAwesomeIconView glyphName="SHARE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="343.0" layoutY="190.0" size="20" wrappingWidth="21.9999937415123" />
-            <Button fx:id="msgbtn" layoutX="330.0" layoutY="160.0" mnemonicParsing="false" onAction="#textFtotextArea" prefHeight="47.0" prefWidth="39.0" styleClass="close_pane_button" stylesheets="@board.css" text="send" />
-            <FontAwesomeIconView glyphName="SHARE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="344.0" layoutY="187.0" size="15" text="" />
+            <Button fx:id="msgbtn" layoutX="439.0" layoutY="154.0" mnemonicParsing="false" onAction="#textFtotextArea" prefHeight="47.0" prefWidth="48.0" styleClass="close_pane_button" stylesheets="@board.css" text="send" />
+            <FontAwesomeIconView glyphName="SEND" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="453.0" layoutY="181.0" size="15" text="" />
+            <Button layoutX="445.0" layoutY="1.0" mnemonicParsing="false" onAction="#close_window" prefHeight="26.0" prefWidth="40.0" styleClass="close_window" stylesheets="@board.css" text="X" />
          </children>
       </Pane>
-      <Button alignment="CENTER" layoutX="446.0" layoutY="11.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="118.0" styleClass="input_button" stylesheets="@board.css" textAlignment="JUSTIFY" />
-      <FontAwesomeIconView fill="WHITE" glyphName="SAVE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="497.0" layoutY="42.0" size="20" wrappingWidth="17.14285659790039" />
-      <Label layoutX="4.0" layoutY="7.0" prefHeight="87.0" prefWidth="205.0" styleClass="user_label" stylesheets="@board.css" />
+      <Button alignment="CENTER" layoutX="873.0" layoutY="223.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="118.0" styleClass="input_button" stylesheets="@board.css" textAlignment="JUSTIFY" />
+      <FontAwesomeIconView fill="WHITE" glyphName="SAVE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="930.0" layoutY="250.0" size="20" wrappingWidth="17.14285659790039" />
+      <Label layoutX="7.0" layoutY="7.0" prefHeight="87.0" prefWidth="185.0" styleClass="user_label" stylesheets="@board.css" />
       <ImageView fitHeight="53.0" fitWidth="88.0" layoutX="12.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/user.png" />
          </image>
       </ImageView>
-      <Label layoutX="57.0" layoutY="1.0" prefHeight="47.0" prefWidth="128.0" text="mina" textFill="#c59ffd">
+      <Label fx:id="playerTname" layoutX="57.0" layoutY="1.0" prefHeight="47.0" prefWidth="128.0" text="mina" textFill="#c59ffd">
          <font>
             <Font name="Tahoma Bold" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="71.0" layoutY="50.0" prefHeight="27.0" prefWidth="50.0" text="100">
+      <Label fx:id="pTscore" layoutX="64.0" layoutY="51.0" prefHeight="27.0" prefWidth="50.0" text="100">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label layoutX="787.0" layoutY="6.0" prefHeight="87.0" prefWidth="205.0" styleClass="user_label" stylesheets="@board.css" />
-      <ImageView fitHeight="53.0" fitWidth="88.0" layoutX="796.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="811.0" layoutY="2.0" prefHeight="87.0" prefWidth="185.0" styleClass="user_label" stylesheets="@board.css" />
+      <ImageView fitHeight="53.0" fitWidth="88.0" layoutX="813.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/user.png" />
          </image>
       </ImageView>
-      <Label layoutX="843.0" layoutY="5.0" prefHeight="35.0" prefWidth="122.0" text="salama" textFill="#c59ffd">
+      <Label fx:id="playerOname" layoutX="860.0" layoutY="5.0" prefHeight="35.0" prefWidth="122.0" text="salama" textFill="#c59ffd">
          <font>
             <Font name="Tahoma Bold" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="862.0" layoutY="49.0" prefHeight="27.0" prefWidth="50.0" text="100">
+      <Label fx:id="playerOscore" layoutX="871.0" layoutY="45.0" prefHeight="27.0" prefWidth="50.0" text="100">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
+      <Button fx:id="chat_btn" alignment="CENTER" layoutX="878.0" layoutY="301.0" mnemonicParsing="false" onAction="#show_pane" prefHeight="44.0" prefWidth="118.0" styleClass="input_button" stylesheets="@board.css" textAlignment="JUSTIFY" />
+      <Label alignment="CENTER" layoutX="381.0" layoutY="-24.0" prefHeight="87.0" prefWidth="185.0" styleClass="user_label" stylesheets="@board.css" text="Tie" textFill="#c59ffd">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="num_of_tie" alignment="CENTER" layoutX="444.0" layoutY="35.0" prefHeight="27.0" prefWidth="65.0" text="100">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Label>
+      <FontAwesomeIconView glyphName="WHATSAPP" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="928.0" layoutY="331.0" size="20" />
    </children>
 </Pane>

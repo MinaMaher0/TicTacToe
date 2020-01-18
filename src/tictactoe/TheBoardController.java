@@ -41,6 +41,18 @@ public class TheBoardController implements Initializable {
     }
    
     @FXML
+    private Label num_of_tie;
+    @FXML
+    private Label playerOname;   
+    @FXML
+    private Label playerOscore;
+    @FXML
+    private Label playerTname;
+    @FXML
+    private Label pTscore;
+    @FXML
+    private Pane chat_pane;
+    @FXML
     private JFXTextArea textArea;
     
     @FXML
@@ -255,19 +267,45 @@ public class TheBoardController implements Initializable {
         sendLblRequest(9);
 
     }
-    
+       
+       
     @FXML
     void textFtotextArea(ActionEvent event) {
-       String message=new String();
-       message=textfield.getText();
-       textArea.appendText(message);
-       pf.sendMessage(message);
+       String theMessage=new String();
+       theMessage=textfield.getText();
+       pf.sendMessage(theMessage);
+      textfield.setText("");
+      
     }
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+   
+    @FXML
+    private Button chat_btn;
+    
+     @FXML
+    void show_pane(ActionEvent event) {
+        chat_pane.setVisible(true);
     }
- 
+     @FXML
+    void close_window(ActionEvent event) {
+        chat_pane.setVisible(false);
+    }
+
+   
+  public void appendText(String body){
+      if(textArea.getText() != ""){
+      chat_pane.setVisible(true);
+      textArea.appendText(body+"\n");
+        // chat_pane.setVisible(false);
+      }else{
+          chat_pane.setVisible(false);
+     // textArea.appendText(body+"\n");
+     
+  }
+//    @Override
+//    public void initialize(URL url, ResourceBundle rb) {
+//        // TODO
+//    }
+  }
 
     
 }
