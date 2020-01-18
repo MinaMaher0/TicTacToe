@@ -35,4 +35,5 @@ public class Request{
     public static final int PLAY_AGAIN=22;
     public static final int EXIT_GAME=23;
     public static final int WAIT_PLAY_AGAIN=24;
+    public static final int NOTIFICATION=30; 
 }
