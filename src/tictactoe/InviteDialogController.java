@@ -38,7 +38,7 @@ public class InviteDialogController implements Initializable {
     private JFXButton decline;
     
 
-    ControlButtonsController invite=null;
+    ControlButtonsController invite = null;
     
     public void setControlObject(ControlButtonsController obj){
         invite=obj;
@@ -56,7 +56,7 @@ public class InviteDialogController implements Initializable {
     void decline(ActionEvent event)
     {
         ControlButtonsController.newStage.close();
-        playerfunc.declineInvitation(p1, p1);
+        playerfunc.declineInvitation(p1, p2);
     }
     
     
@@ -64,7 +64,7 @@ public class InviteDialogController implements Initializable {
     void accept(ActionEvent event) {
        ControlButtonsController.newStage.close();
        playerfunc.acceptinvitation(p1, p2);
-       invite.loadBoard();
+       invite.loadBoard(false);
       //swaped
     }
     

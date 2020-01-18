@@ -106,6 +106,9 @@ class ServerHandler extends Thread {
                     break;
 
                 }
+                case Request.SERVER_FAILED:
+                    serverObj.serverFallen();
+                break;
 
                 case Request.ACCEPT_INVITATION:
                     p1 = getPlayer(json.getInt("senderID"));
@@ -119,6 +122,7 @@ class ServerHandler extends Thread {
                 
                 ServerControl.playerMap.get(g.getPlayerTurn()).Ps.println(sendReqType.toString());
                     break;
+                    
                 case Request.PLAYED_CELL:
                    int cellNum=json.getInt("cellNum");
                    handleCellPlayed(cellNum);

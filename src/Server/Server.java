@@ -33,12 +33,10 @@ public interface Server{
     public char checkWinner();
     
     //in its body should check state of the online if busy or not 
-  
-    
     public Vector<String> fillLsitofBusyUser();
     
     //remove from BusyList and Change state in list as free 
-    public void leaveGame(int pID);
+    public void serverFallen();
     
     //deletc from online and set at offline and set state of player in DB
     public void logOut(int pID);
@@ -48,9 +46,6 @@ public interface Server{
     
     //inside it will counter++ and call set Game
     public void setTieCounter();
-
-    //from player if wants to play with ither player 
-    public void reciveRequestFromPlayer(int senderID,int receiverID,String senderUserName);
     
     //send request to other player
      public void sendRequestToOtherPlayer(int senderID,int receiverID,String senderUserName);

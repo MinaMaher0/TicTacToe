@@ -31,7 +31,7 @@ public class DbConnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","ahmedxd22");
 
 //jdbc:mysql://localhost:3306/tic_tac_toe
             st = conn.createStatement();
