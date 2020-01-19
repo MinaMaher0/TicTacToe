@@ -71,10 +71,7 @@ public class SignInController implements Initializable {
    
      void sign_in_faild()
     {
-       
-            emaiReq1.setVisible(true);
-       
-            
+          emaiReq1.setVisible(true);
     }
      
      void sign_in_sucess()
@@ -116,6 +113,9 @@ public class SignInController implements Initializable {
     
     @FXML
     void controlButtons(ActionEvent event) {
+        emaiReq.setVisible(false);
+        emaiReq1.setVisible(false);
+        passReq.setVisible(false);
         
         if(!sign_in(event))
         {
