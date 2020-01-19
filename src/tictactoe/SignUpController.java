@@ -49,7 +49,7 @@ PlayerFunctions p= new PlayerFunctions();
           emailAdress = email.getText();
           passwordP = password.getText();
 
-        String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+        String pattern = "{8,}";
         if (username.equals("")) {
             userReq.setVisible(true);
             return false;
@@ -67,12 +67,6 @@ PlayerFunctions p= new PlayerFunctions();
             return false;
         }
         if (!passwordP.matches(pattern)) {
-            System.out.println("a digit must occur at least once "
-                    + "a lower case letter must occur at least once"
-                    + "an upper case letter must occur at least once"
-                    + "a special character must occur at least once"
-                    + "no whitespace allowed in the entire string"
-                    + "at least 8 characters");
             passwordReq.setVisible(true);
             return false;
         }
@@ -106,12 +100,8 @@ PlayerFunctions p= new PlayerFunctions();
             Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-//    void SignUp_Faild()
-//    {
-//        Platform.runLater(() -> {
-//        });
-//    }
     
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

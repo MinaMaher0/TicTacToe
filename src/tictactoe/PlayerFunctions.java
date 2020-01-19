@@ -188,14 +188,16 @@ public class PlayerFunctions implements Client {
                     System.out.println("unsecss");
                     break;
                 case Request.LOGIN_SUCCESS:
+                    siginObj.sign_in_sucess();
                     pla.setId(ReqObj.getInt("id"));
                     pla.setEmail(ReqObj.getString("email"));
                     pla.setUser_name(ReqObj.getString("userName"));
                     pla.setScore(ReqObj.getInt("score"));
-                    siginObj.sign_in_sucess();
                     break;
                 case Request.LOGIN_FAILED:
+                  
                     siginObj.sign_in_faild();
+                   
                     break;
                 case Request.INVITE_PLAYER_SUCESS:
                     System.out.println("invitation accepted");
