@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -45,6 +46,7 @@ public class TheBoardController implements Initializable {
      */
     PlayerFunctions pf ;
     boolean isComputer=false;
+
     EventHandler<Event> lbl_11Event;
     EventHandler<Event> lbl_12Event;
     EventHandler<Event> lbl_13Event;
@@ -75,6 +77,24 @@ public class TheBoardController implements Initializable {
         }
     }
     
+    @FXML 
+    public void loadLeaveGameDialg()
+    {
+       try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LeaveGameDialog.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            LeaveGameDialogController lGD =loader.getController();
+            lGD.setPlayerFunctionsObj(pf);
+            Scene scene=new Scene(root);
+            newStage.setTitle("Save Game");
+            newStage.setScene(scene);
+            newStage.show();
+            newStage.setResizable(false);
+        } catch (IOException ex) {
+            Logger.getLogger(TheBoardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public  void SetPlayerFunctionObj(PlayerFunctions obj)
     {
         pf=obj;
@@ -111,6 +131,7 @@ public class TheBoardController implements Initializable {
     
     @FXML
     private JFXTextField textfield;
+    
     @FXML
     private Button msgbtn;
     
@@ -149,7 +170,8 @@ public class TheBoardController implements Initializable {
     @FXML
     private Label lbl_33;
     
-    
+    @FXML
+    private JFXButton leaveGame;
     
     public void setLbl(int cellNum,char cellChar)
     {

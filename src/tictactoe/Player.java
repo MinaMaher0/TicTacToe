@@ -16,11 +16,11 @@ import javax.print.DocFlavor;
 public class Player {
     int id,score;
     String user_name,email,token,profile_picture;
-    boolean flag;
+    boolean flag,status;
     
     public Player(){}
     
-    public Player(int id, String user_name,String  email, String token, String profile_picture, int score, boolean flag  ){
+    public Player(int id, String user_name,String  email, String token, String profile_picture, int score, boolean flag){
         this.id=id;
         this.user_name= user_name;
         this.email=email;
@@ -84,5 +84,13 @@ public class Player {
     
     public String getEmail() {
         return email;
+    }
+    
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

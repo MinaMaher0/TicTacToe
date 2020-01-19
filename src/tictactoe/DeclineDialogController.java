@@ -1,6 +1,7 @@
 
 package tictactoe;
 
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -18,25 +19,27 @@ public class DeclineDialogController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    PlayerFunctions playerfunc ;
-    ControlButtonsController invite=null;
-    
-    public void setPlayer(PlayerFunctions p)
-    {
-        playerfunc = p;
+ 
+   @FXML
+    private Label userName;
+
+    @FXML
+    private JFXButton ok;
+
+    ControlButtonsController sobj = null;
+    public void setControlObject(ControlButtonsController obj){
+        sobj=obj;
     }
-    
-    String userName = new String();
-    
-    
-    
+
     public void setUserName(String name){
-         userName=name;
+         userName.setText(name);
     }
     
-   
-   
-    
+    @FXML
+    public void accept()
+    {
+        ControlButtonsController.newStage.close();
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

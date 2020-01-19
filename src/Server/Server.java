@@ -4,10 +4,7 @@
  * and open the template in the editor.
  */
 package Server;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Vector;
-import tictactoe.Player;
+import tictactoe.*;;
 
 
 /**
@@ -25,7 +22,7 @@ public interface Server{
     public void updateUserScore(String userName,int score);
     
     //save state of game "can replace all of this with object of class GAME"
-    public void saveGame(int pOneID,int pTwoID,int pOneScore,int pTwoScore,String[] board);
+    public void saveGame(Game g);
     
    // public Game checkDBForSamePlayersSavedGame(int pOneID,int pTwoID);
     
@@ -33,7 +30,7 @@ public interface Server{
     public char checkWinner();
     
     //in its body should check state of the online if busy or not 
-    public Vector<String> fillLsitofBusyUser();
+    public void fillLsitofBusyUser(int pOneId,int pTwoId);
     
     //remove from BusyList and Change state in list as free 
     public void serverFallen();

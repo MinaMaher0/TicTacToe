@@ -33,4 +33,6 @@ public interface Client {
     public void logOut(int pId);
     
     public void sort(Vector<Player> p);
+    
+    public void leaveGame();
 }
