@@ -18,7 +18,7 @@ import tictactoe.MainGUI;
 /**
  * FXML Controller class
  *
- * @author DELL
+ * @author DELL 
  */
 public class ServerDownDialogController implements Initializable {
 

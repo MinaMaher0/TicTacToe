@@ -8,7 +8,6 @@ package Server;
 
 import java.io.DataInputStream;
 import java.io.PrintStream;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONException;
@@ -16,7 +15,6 @@ import org.json.JSONObject;
 import tictactoe.DbConnection;
 import tictactoe.Player;
 import utils.Request;
-import ServerGui.ServerHomeController;
 import javafx.application.Platform;
 import tictactoe.PlayerFunctions;
 import javafx.collections.FXCollections;
@@ -188,8 +186,10 @@ public class ServerSideClass implements Server {
     }
 
     @Override
-    public void saveGame(int pOneID, int pTwoID, int pOneScore, int pTwoScore, String[] board) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void saveGame(Game g) {
+        System.out.println("Server Save Game");
+        sendLeaveGame(g.getPlayer1().getId(),g.getPlayer2().getId());
+        db.saveGame(g);
     }
 
     @Override
@@ -203,8 +203,7 @@ public class ServerSideClass implements Server {
         for (Player p:ServerControl.players)
         {
             if (p.getId()== p1 ||p.getId() == p2)
-            {
-                p.setFlag(true);
+            { 
                 p.setStatus(true);
                 System.out.println("status is true y prince");
             }
@@ -361,6 +360,34 @@ public class ServerSideClass implements Server {
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    
+    public void sendLeaveGame(int p1, int p2)
+    {
+          JSONObject jsonLeaveGame = new JSONObject();
+        try {
+            for (Player p:ServerControl.players)
+            {
+                if(p.getId()== p1)
+                    jsonLeaveGame.put("userName", p.getUser_name());
+            }
+            jsonLeaveGame.put("RequestType", Request.LEAVE_GAME);
+            ServerControl.playerMap.get(p2).Ps.println(jsonLeaveGame.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void enableInviteButton(int p1, int p2)
+    {
+        for(Player p:ServerControl.players)
+        {
+            if (p.getId() == p1 || p.getId() == p2)
+                p.setStatus(false);
+        }
+        sendUsers();
     }
 
 }

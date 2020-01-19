@@ -188,8 +188,9 @@ public class DbConnection {
         
         
     }
-   public void saveGame(Game game)
+   public void saveGame(Game game) 
     {
+        System.out.println("DB save Game ///////");
        int p1 = game.getPlayer1().getId();
        int p2 = game.getPlayer2().getId();
        
@@ -205,7 +206,7 @@ public class DbConnection {
             pst.setInt(6, game.getSp_score());
             pst.setInt(7, game.getTie_score());
             int rs = pst.executeUpdate();
-            
+            System.out.println("Game Saved Successfully");
         } catch (SQLException ex) {
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
         }

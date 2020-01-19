@@ -344,6 +344,12 @@ public class PlayerFunctions implements Client {
                         });
                         
                     }
+                    
+                case Request.LEAVE_GAME:
+                    Platform.runLater(() -> {
+                        cbController.showServerDownDialog();
+                    });
+                    
                     break;
             }
 
@@ -372,6 +378,7 @@ public class PlayerFunctions implements Client {
             p.setId(jObj.getInt("id"));
             p.setUser_name(jObj.getString("user_name"));
             p.setFlag(jObj.getBoolean("flag"));
+            p.setStatus(jObj.getBoolean("status"));
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -568,5 +575,20 @@ public class PlayerFunctions implements Client {
     public boolean isPlayWithComputer(){
         return game!=null;
     }
+    @Override
+    public void leaveGame(int pOneId, int pTwoId) {
+        
+          JSONObject saveGame = new JSONObject();
+         try {
+            saveGame.put("senderID", pOneId);
+            saveGame.put("receiverID", pTwoId);
+            saveGame.put("RequestType", Request.SAVE_GAME);
+            output.println(saveGame.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("player function save game ");
+    }
+    
     
 }

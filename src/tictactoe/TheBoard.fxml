@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -115,5 +116,10 @@
       </Label>
       <FontAwesomeIconView fx:id="cht_icon" glyphName="WHATSAPP" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="928.0" layoutY="331.0" size="20" />
       <Label fx:id="turnLbl" layoutX="643.0" layoutY="17.0" prefHeight="27.0" prefWidth="90.0" text="Your Turn" textFill="#00ff22" />
+      <JFXButton fx:id="leaveGame" layoutX="14.0" layoutY="14.0" onAction="#loadLeaveGameDialg" styleClass="signin_btn" stylesheets="@signin.css" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </JFXButton>
    </children>
 </Pane>
