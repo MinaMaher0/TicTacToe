@@ -58,8 +58,8 @@ public class PlayerFunctions implements Client {
         cbController.showPlayers();
     }
 
-    public void setSignUpObject(SignUpController obj) {
-        signupObj = obj;
+    public void setSignUpObject(SignUpController object) {
+        signupObj = object;
     }
 
     public void setSignInObject(SignInController obj) {
@@ -179,7 +179,7 @@ public class PlayerFunctions implements Client {
     @Override
     public void logOut(int pId) {
 
-        try {
+        
             JSONObject logOutObject = new JSONObject();
             try {
                 logOutObject.put("userId", pId);
@@ -187,10 +187,8 @@ public class PlayerFunctions implements Client {
             } catch (JSONException ex) {
                 Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
             }
-            input.close();
-        } catch (IOException ex) {
-            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            System.exit(0);
+        
     }
 
     public void RequestHandller(String str) {
@@ -199,10 +197,15 @@ public class PlayerFunctions implements Client {
             final JSONObject ReqObj = new JSONObject(str);
             switch (ReqObj.get("RequestType").hashCode()) {
                 case Request.SIGN_UP_SUCCESS:
-                    signupObj.SignUp_Success();
+                    Platform.runLater(() -> {
+                        signupObj.SignUp_Success();
+                    });
+                         
                     break;
                 case Request.SIGN_UP_FAILED:
-                    System.out.println("unsecss");
+                    Platform.runLater(() -> {
+                        signupObj.sign_Up_failed();
+                    });
                     break;
                 case Request.LOGIN_SUCCESS:
                     siginObj.sign_in_sucess();
@@ -212,9 +215,9 @@ public class PlayerFunctions implements Client {
                     pla.setScore(ReqObj.getInt("score"));
                     break;
                 case Request.LOGIN_FAILED:
-                  
-                    siginObj.sign_in_faild();
-                   
+                 
+                       siginObj.sign_in_faild();
+   
                     break;
                 case Request.INVITE_PLAYER_SUCESS:
                     System.out.println("invitation accepted");
@@ -340,6 +343,8 @@ public class PlayerFunctions implements Client {
                         
                     }
                     break;
+                case Request.LOG_OUT:
+                    
             }
 
         } catch (Exception ex) {
