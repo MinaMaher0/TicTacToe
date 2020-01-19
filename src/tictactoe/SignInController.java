@@ -39,9 +39,9 @@ public class SignInController implements Initializable {
     @FXML
     private Label passReq;
     @FXML
-    private Label emailReq;
+    private Label emaiReq;
     @FXML
-    private Label emailReq1;
+    private Label emaiReq1;
    
     String emailAdress = new String();
     String passwordP = new String();
@@ -53,24 +53,28 @@ public class SignInController implements Initializable {
            
           if(emailAdress.equals(""))
           {
-             emailReq.setVisible(true);
+              
+            emaiReq.setVisible(true);
+       
              return false;
           }
           if(passwordP.equals(""))
           {
+             
               passReq.setVisible(true);
+              
               return false;
           }
           
            return true;
     }
-    
+   
      void sign_in_faild()
     {
-        Platform.runLater(() -> {
-            emailReq1.setVisible(true);
-        });
-        
+       
+            emaiReq1.setVisible(true);
+       
+            
     }
      
      void sign_in_sucess()
@@ -117,7 +121,7 @@ public class SignInController implements Initializable {
         {
             return;
         }
-         System.out.println(p.signIn(emailAdress, passwordP));
+         p.signIn(emailAdress, passwordP);
     }
     
         @Override
