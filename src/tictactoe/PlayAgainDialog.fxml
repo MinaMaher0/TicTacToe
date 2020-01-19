@@ -11,12 +11,18 @@
         <URL value="@playagaindialog.css" />
     </stylesheets>
    <children>
-      <Button fx:id="playAgainBTN" layoutX="180.0" layoutY="281.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="40.0" prefWidth="105.0" text="Play Again" />
-      <Button layoutX="340.0" layoutY="281.0" mnemonicParsing="false" onAction="#exit" prefHeight="40.0" prefWidth="89.0" text="Exit" />
-      <Label fx:id="lbl" layoutX="23.0" layoutY="293.0" prefHeight="40.0" prefWidth="455.0" />
-      <Label fx:id="msg" layoutX="71.0" layoutY="107.0" prefHeight="93.0" prefWidth="467.0" textAlignment="CENTER">
+      <Button fx:id="playAgainBTN" layoutX="84.0" layoutY="271.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="50.0" prefWidth="186.0" styleClass="signin_btn" stylesheets="@signin.css" text="Play Again">
          <font>
-            <Font size="64.0" />
+            <Font name="System Bold" size="20.0" />
+         </font></Button>
+      <Button layoutX="340.0" layoutY="271.0" mnemonicParsing="false" onAction="#exit" prefHeight="50.0" prefWidth="186.0" styleClass="signin_btn" stylesheets="@signin.css" text="Exit">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Button>
+      <Label fx:id="lbl" layoutX="23.0" layoutY="293.0" prefHeight="40.0" prefWidth="455.0" />
+      <Label fx:id="msg" layoutX="69.0" layoutY="63.0" prefHeight="167.0" prefWidth="467.0" textAlignment="CENTER">
+         <font>
+            <Font name="Cambria Bold" size="36.0" />
          </font></Label>
    </children>
 </AnchorPane>

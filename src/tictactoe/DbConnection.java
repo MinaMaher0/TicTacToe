@@ -211,14 +211,14 @@ public class DbConnection {
         }
        
     }
-    public Boolean updateScore(int pId , int pScore)
+    public Boolean updateScore(int pId)
     {
         PreparedStatement pst;
         try {
             pst = conn.prepareStatement(" UPDATE player set score= score+?" +"where id=?; ");
              
-            pst.setInt(1, pId);
-            pst.setInt(2, pScore); 
+            pst.setInt(1,10);
+            pst.setInt(2, pId); 
             int rs = pst.executeUpdate();  
             if(rs!=0)
                 return true;
@@ -239,10 +239,7 @@ public class DbConnection {
     
     public static void main(String[] args) {
         DbConnection d = new DbConnection();
-      //d.signUp("m", "m", "mmm");  
-  //      Player x =d.signIn("ahmed@gmail.com","aa22");
-//        System.out.println(x.getUser_name());
-       // d.signUp("ahmed", "aa22", "ahmed@gmail.com");
+      
        d.getData();
         
     }
