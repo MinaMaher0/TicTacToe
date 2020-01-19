@@ -75,10 +75,10 @@ public class ControlButtonsController implements Initializable {
             Parent root;
             root = (Parent)loader.load();
             InviteDialogController inviterController=loader.getController();
-            LeaveGameDialogController lGD=new LeaveGameDialogController();
+          
             inviterController.setUserName(name);
             inviterController.setplayersId(p1, p2);
-            lGD.setPlayersID(p1, p2);
+
             inviterController.setControlObject(this);
             Scene scene=new Scene(root);
             newStage.setTitle("InviteDialogController");

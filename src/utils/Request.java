@@ -37,7 +37,6 @@ public class Request{
     public static final int WAIT_PLAY_AGAIN=24;
     public static final int NOTIFICATION=30; 
 
-    public static final int SERVER_FAILED=19;
     
     public static final int SAVE_GAME=28;
     

@@ -304,7 +304,7 @@ public class PlayerFunctions implements Client {
                         }
                  });
                     break;
-                }
+                
                 case Request.PLAYER_TURN:
                     playerIsTurn = true;
                     System.out.println("yyyyyyyyyyyyyyy");
@@ -344,13 +344,8 @@ public class PlayerFunctions implements Client {
                         });
                         
                     }
-                    
-                case Request.LEAVE_GAME:
-                    Platform.runLater(() -> {
-                        cbController.showServerDownDialog();
-                    });
-                    
                     break;
+             
             }
 
         } catch (Exception ex) {
@@ -575,13 +570,12 @@ public class PlayerFunctions implements Client {
     public boolean isPlayWithComputer(){
         return game!=null;
     }
+    
     @Override
-    public void leaveGame(int pOneId, int pTwoId) {
+    public void leaveGame() {
         
           JSONObject saveGame = new JSONObject();
          try {
-            saveGame.put("senderID", pOneId);
-            saveGame.put("receiverID", pTwoId);
             saveGame.put("RequestType", Request.SAVE_GAME);
             output.println(saveGame.toString());
         } catch (JSONException ex) {

@@ -117,7 +117,7 @@ class ServerHandler extends Thread {
                     p2 = getPlayer(json.getInt("receiverID"));
                     serverObj.fillLsitofBusyUser(p1.getId(),p2.getId());
                     Game g = new Game(p1, p2);
-                    
+                    setGame(g);
                     ServerControl.playerMap.get(json.getInt("senderID")).setGame(g);
                     ServerControl.playerMap.get(json.getInt("receiverID")).setGame(g);
                     serverObj.sendStartGameRequest(p1.getId(), p2.getId(),g);
@@ -146,11 +146,10 @@ class ServerHandler extends Thread {
                     handleExitGame();
                     break;
                 
-                    case Request.SAVE_GAME:
-                        System.out.println(game.getBoard());
-                        serverObj.saveGame(game);
-                        System.out.println("get the right game");
-                        break;
+                case Request.SAVE_GAME:
+                    serverObj.saveGame(getGame());
+                    System.out.println("get the right game");
+                    break;
             }
         } catch (Exception ex) {
             

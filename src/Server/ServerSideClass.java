@@ -20,6 +20,7 @@ import tictactoe.PlayerFunctions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tictactoe.Game;
+import tictactoe.LeaveGameDialogController;
 import static tictactoe.PlayerFunctions.users;
 
 /**
@@ -33,7 +34,7 @@ public class ServerSideClass implements Server {
     DbConnection db;
     DataInputStream dis;
     PrintStream ps;
-
+ 
     
     public static String getName() {
         return name;
@@ -188,7 +189,6 @@ public class ServerSideClass implements Server {
     @Override
     public void saveGame(Game g) {
         System.out.println("Server Save Game");
-        sendLeaveGame(g.getPlayer1().getId(),g.getPlayer2().getId());
         db.saveGame(g);
     }
 
@@ -363,7 +363,7 @@ public class ServerSideClass implements Server {
     }
     
     
-    public void sendLeaveGame(int p1, int p2)
+   /* public void sendLeaveGame(int p1, int p2)
     {
           JSONObject jsonLeaveGame = new JSONObject();
         try {
@@ -378,7 +378,7 @@ public class ServerSideClass implements Server {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
+    }*/
     
     public void enableInviteButton(int p1, int p2)
     {

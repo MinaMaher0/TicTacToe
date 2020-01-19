@@ -29,10 +29,9 @@ public class LeaveGameDialogController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    int pOneId,pTwoId;
     PlayerFunctions pFunctions=new PlayerFunctions();
-    SignInController signInController= new SignInController();
-    ServerSideClass sSC= new ServerSideClass();
+
+    
     @FXML
     private JFXButton yesSave;
 
@@ -48,43 +47,19 @@ public class LeaveGameDialogController implements Initializable {
     public void saveGame()
     {
         System.out.println("hellooooooo");
-        pFunctions.leaveGame(pOneId,pTwoId);
-        //sSC.enableInviteButton(pOneId, pTwoId);
+         pFunctions.leaveGame();
         ControlButtonsController.newStage.close();
-        signInController.sign_in_sucess();
-       
+        pFunctions.exitGame();
     }
     
     @FXML
     public void leave()
     {
         ControlButtonsController.newStage.close();
-        sSC.sendLeaveGame(pOneId, pTwoId);
-        signInController.sign_in_sucess();
-        sSC.sendUsers();
+        pFunctions.exitGame();
     }
-    
-    public void setPlayersID(int p1,int p2)
-    {
-        this.pOneId=p1;
-        this.pTwoId=p2;
-                System.out.println("Players ID seted");
-    }
-    
-    public void leaveGame()
-    {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("LeaveGameDialog.fxml"));
-            Parent root;
-            root = (Parent)loader.load();;
-            Scene scene=new Scene(root);
-            newStage.setTitle("Leave");
-            newStage.setScene(scene);
-            newStage.show();
-            newStage.setResizable(false);
-        } catch (IOException ex) {
-            Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void setPlayerFunctionsObj(PlayerFunctions obj){
+        pFunctions=obj;
     }
 
 }

@@ -34,5 +34,5 @@ public interface Client {
     
     public void sort(Vector<Player> p);
     
-    public void leaveGame(int pOneId,int pTwoId);
+    public void leaveGame();
 }

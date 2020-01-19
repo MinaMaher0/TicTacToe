@@ -46,7 +46,7 @@ public class TheBoardController implements Initializable {
      */
     PlayerFunctions pf ;
     boolean isComputer=false;
-    LeaveGameDialogController lGD= new LeaveGameDialogController();
+
     EventHandler<Event> lbl_11Event;
     EventHandler<Event> lbl_12Event;
     EventHandler<Event> lbl_13Event;
@@ -79,7 +79,20 @@ public class TheBoardController implements Initializable {
     @FXML 
     public void loadLeaveGameDialg()
     {
-        lGD.leaveGame();
+       try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LeaveGameDialog.fxml"));
+            Parent root;
+            root = (Parent)loader.load();
+            LeaveGameDialogController lGD =loader.getController();
+            lGD.setPlayerFunctionsObj(pf);
+            Scene scene=new Scene(root);
+            newStage.setTitle("Save Game");
+            newStage.setScene(scene);
+            newStage.show();
+            newStage.setResizable(false);
+        } catch (IOException ex) {
+            Logger.getLogger(TheBoardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public  void SetPlayerFunctionObj(PlayerFunctions obj)
     {
@@ -117,6 +130,7 @@ public class TheBoardController implements Initializable {
     
     @FXML
     private JFXTextField textfield;
+    
     @FXML
     private Button msgbtn;
     
