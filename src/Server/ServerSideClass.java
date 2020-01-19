@@ -23,6 +23,7 @@ import tictactoe.Game;
 import tictactoe.LeaveGameDialogController;
 import static tictactoe.PlayerFunctions.users;
 
+
 /**
  *
  * @author aAbdelnaby
@@ -93,7 +94,6 @@ public class ServerSideClass implements Server {
                 });
                
                 ps.println(singInBack.toString());
-                sendNotification(p.getUser_name(),p.getId());
                 sendUsers();
                 ServerControl.playerMap.put(p.getId(),s);
                 System.out.println("PPPPPPPPPPPP");
@@ -127,21 +127,6 @@ public class ServerSideClass implements Server {
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         } 
-    }
-    
-    void sendNotification(String userName,int pID){
-        JSONObject users= new JSONObject();
-        try {
-            users.put("RequestType",Request.NOTIFICATION);
-            users.put("userName",userName);
-            users.put("pID",pID);
-            for (ServerHandler sv : ServerHandler.socketVector)
-            {
-                sv.Ps.println(users.toString());
-            }
-        } catch (JSONException ex) {
-            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @Override
@@ -315,18 +300,13 @@ public class ServerSideClass implements Server {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void sendStartGameRequest(int p1 , int p2,Game game)
+    public void sendStartGameRequest(int p1 , int p2)
     {
         JSONObject jsonStart = new JSONObject();
         try {
             jsonStart.put("senderID", p1);
             jsonStart.put("receiverID", p2);
             jsonStart.put("RequestType", Request.START_GAME);
-            jsonStart.put("playerOneName", game.getPlayer1().getUser_name());
-            jsonStart.put("playerTwoName", game.getPlayer2().getUser_name());
-            jsonStart.put("playerOneScore", game.getFp_score());
-            jsonStart.put("playerTwoScore", game.getSp_score());
-            jsonStart.put("tieScore", game.getTie_score());
             ServerControl.playerMap.get(p1).Ps.println(jsonStart.toString());
             ServerControl.playerMap.get(p2).Ps.println(jsonStart.toString());
         } catch (JSONException ex) {

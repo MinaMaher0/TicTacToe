@@ -29,9 +29,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.json.JSONException;
-import org.json.JSONObject;
 import static tictactoe.ControlButtonsController.newStage;
+import static tictactoe.MainGUI.primaryStage;
 
 /**
  * FXML Controller class
@@ -57,8 +56,21 @@ public class TheBoardController implements Initializable {
     EventHandler<Event> lbl_32Event;
     EventHandler<Event> lbl_33Event;
     
-    
-    public void showPlayAgainDialog(String msg,String color){
+      @FXML
+    void back_home(ActionEvent event) {
+        try {
+           
+            Parent root;
+            root=FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
+            Scene scene=new Scene(root);
+            primaryStage.setTitle("Home");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TheBoardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void showPlayAgainDialog(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayAgainDialog.fxml"));
             Parent root;
@@ -66,7 +78,6 @@ public class TheBoardController implements Initializable {
             PlayAgainDialogController playAgainContoller=loader.getController();
             playAgainContoller.setPlayerFunctionsObj(pf);
             playAgainContoller.setBoardObj(this);
-            playAgainContoller.setMsg(msg,color);
             Scene scene=new Scene(root);
             newStage.setTitle("Play Again ?");
             newStage.setScene(scene);
@@ -99,15 +110,7 @@ public class TheBoardController implements Initializable {
     {
         pf=obj;
         pf.setBoardObj(this);
-    }    
-    public void setGameDetails(String playerOneName,int playerOneScore,String playerTwoName,int playerTwoScore,int tieScore){
-        num_of_tie.setText(String.valueOf(tieScore));
-        playerOname.setText(playerOneName);
-        playerOscore.setText(String.valueOf(playerOneScore));
-        playerTname.setText(playerTwoName);
-        pTscore.setText(String.valueOf(playerTwoScore));
     }
-   
     @FXML
     private FontAwesomeIconView save_icon;
     @FXML
@@ -233,11 +236,13 @@ public class TheBoardController implements Initializable {
     }
     
     public void hideChatAndSave(){
-        chat_btn.setVisible(false);
-        chat_pane.setVisible(false);
-        cht_icon.setVisible(false);
-        save_btn.setVisible(false);
-        save_icon.setVisible(false);
+        if (pf!=null && pf.isPlayWithComputer()){
+            chat_btn.setVisible(false);
+            chat_pane.setVisible(false);
+            cht_icon.setVisible(false);
+            save_btn.setVisible(false);
+            save_icon.setVisible(false);
+        }
     }
     
     public void createBoard(){

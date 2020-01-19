@@ -96,12 +96,7 @@
                </font>
             </JFXTextField>
             <FontAwesomeIconView glyphName="ENVELOPE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="193.0" layoutY="49.0" lineSpacing="10.0" size="30" text="" />
-            <Label fx:id="emailReq" layoutX="231.0" layoutY="69.0" prefHeight="22.0" prefWidth="239.0" text="Email Is Required" textFill="#e41212" visible="false">
-               <font>
-                  <Font name="Comic Sans MS" size="15.0" />
-               </font>
-            </Label>
-            <Label fx:id="hasAccount" layoutX="517.0" layoutY="69.0" prefHeight="22.0" prefWidth="239.0" text="you are already signed in " textFill="#e41212" visible="false">
+            <Label fx:id="emailReq" layoutX="241.0" layoutY="76.0" prefHeight="22.0" prefWidth="239.0" text="Email Is Required" textFill="#e41212" visible="false">
                <font>
                   <Font name="Comic Sans MS" size="15.0" />
                </font>

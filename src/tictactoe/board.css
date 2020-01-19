@@ -170,3 +170,33 @@
     -fx-font: italic;
    -fx-font: bold;
 }
+
+
+.back_home{
+     
+    
+    -fx-outline: none;
+    -fx-transition: .5s;
+    -fx-font-size : 10px;
+    -fx-background-color: FFF;
+    -fx-text-fill: linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-font-weight:bold;
+    -fx-font-family: 'Comic Sans MS';
+    -fx-font: italic;
+   -fx-font: bold;
+}
+.back_home:hover{
+     
+    -fx-cursor: hand;
+    -fx-border-color:  linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-border-width: 2px;
+    -fx-outline: none;
+    -fx-transition: .5s;
+    -fx-font-size : 10px;
+    -fx-background-color: FFF;
+    -fx-text-fill: linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-font-weight:bold;
+    -fx-font-family: 'Comic Sans MS';
+    -fx-font: italic;
+   -fx-font: bold;
+}

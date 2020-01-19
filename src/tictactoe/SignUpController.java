@@ -38,8 +38,6 @@ PlayerFunctions p= new PlayerFunctions();
     private Label passwordReq;
     @FXML
     private Label emailReq;
-    @FXML
-    private Label hasAccount;
 
    String username = new String();
    String emailAdress = new String();
@@ -51,7 +49,7 @@ PlayerFunctions p= new PlayerFunctions();
           emailAdress = email.getText();
           passwordP = password.getText();
 
-        String pattern = "^[0-9]{6,}$";
+        String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         if (username.equals("")) {
             userReq.setVisible(true);
             return false;
@@ -69,6 +67,12 @@ PlayerFunctions p= new PlayerFunctions();
             return false;
         }
         if (!passwordP.matches(pattern)) {
+            System.out.println("a digit must occur at least once "
+                    + "a lower case letter must occur at least once"
+                    + "an upper case letter must occur at least once"
+                    + "a special character must occur at least once"
+                    + "no whitespace allowed in the entire string"
+                    + "at least 8 characters");
             passwordReq.setVisible(true);
             return false;
         }
@@ -81,31 +85,27 @@ PlayerFunctions p= new PlayerFunctions();
         if(!SignUpValidate())
             return;
         PlayerFunctions p = new PlayerFunctions();
-        p.setSignUpObject(this);
         p.signUp(username, emailAdress, passwordP);
     }
-    
     void SignUp_Success()
     {
-             try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("ControlButtons.fxml"));
-                    Parent root;
-                    root = (Parent)loader.load();
-                    ControlButtonsController CBController=loader.getController();
-                    CBController.setPlayerObj(p);
-                    Scene scene = new Scene(root);
-                    MainGUI.primaryStage.setTitle("SignUp");
-                    MainGUI.primaryStage.setScene(scene);
-                    MainGUI.primaryStage.show(); 
+         try {
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("ControlButtons.fxml"));
+            Scene scene = new Scene(root);
+            MainGUI.primaryStage.setTitle("SignUp");
+            MainGUI.primaryStage.setScene(scene);
+            MainGUI.primaryStage.show();
+             
         } catch (IOException ex) {
-            Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
-         } 
+            Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-
-    void sign_Up_failed(){
-       hasAccount.setVisible(true);
-    }
+//    void SignUp_Faild()
+//    {
+//        Platform.runLater(() -> {
+//        });
+//    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

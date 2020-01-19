@@ -55,7 +55,7 @@
                   <Font name="Comic Sans MS" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="emaiReq1" layoutX="502.0" layoutY="68.0" prefHeight="17.0" prefWidth="196.0" text="you are not signed in" textFill="#e41212" visible="false">
+            <Label fx:id="emaiReq1" layoutX="214.0" layoutY="67.0" prefHeight="17.0" prefWidth="196.0" text="you are not signed in" textFill="#e41212" visible="false">
                <font>
                   <Font name="Comic Sans MS" size="15.0" />
                </font>

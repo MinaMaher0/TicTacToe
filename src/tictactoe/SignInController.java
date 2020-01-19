@@ -39,39 +39,38 @@ public class SignInController implements Initializable {
     @FXML
     private Label passReq;
     @FXML
-    private Label emaiReq;
+    private Label emailReq;
     @FXML
-    private Label emaiReq1;
+    private Label emailReq1;
    
     String emailAdress = new String();
     String passwordP = new String();
-    
+   
     @FXML
     boolean sign_in(ActionEvent event) {
           emailAdress = email.getText();
           passwordP = password.getText();
-           
+           setEmail(emailAdress);
           if(emailAdress.equals(""))
           {
-              
-            emaiReq.setVisible(true);
-       
+             emailReq.setVisible(true);
              return false;
           }
           if(passwordP.equals(""))
           {
-             
               passReq.setVisible(true);
-              
               return false;
           }
           
            return true;
     }
-   
+    
      void sign_in_faild()
     {
-          emaiReq1.setVisible(true);
+        Platform.runLater(() -> {
+            emailReq1.setVisible(true);
+        });
+        
     }
      
      void sign_in_sucess()
@@ -113,21 +112,26 @@ public class SignInController implements Initializable {
     
     @FXML
     void controlButtons(ActionEvent event) {
-        emaiReq.setVisible(false);
-        emaiReq1.setVisible(false);
-        passReq.setVisible(false);
         
         if(!sign_in(event))
         {
             return;
         }
-         p.signIn(emailAdress, passwordP);
+         System.out.println(p.signIn(emailAdress, passwordP));
     }
     
         @Override
     public void initialize(URL url, ResourceBundle rb) {
         p.setSignInObject(this);
-    }   
+    }
+    
+     public  void setEmail(String emailAddress){
+        
+         emailAdress=emailAddress;
+    }
+     public String getEmail(){
+         return this.emailAdress;
+     }
     }
 
     

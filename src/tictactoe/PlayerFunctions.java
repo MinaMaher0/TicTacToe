@@ -19,18 +19,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import static tictactoe.ControlButtonsController.newStage;
-import tray.animations.AnimationType;
-import tray.notification.NotificationType;
-import tray.notification.TrayNotification;
 import utils.Request;
 
 /**
@@ -57,8 +51,8 @@ public class PlayerFunctions implements Client {
         cbController.showPlayers();
     }
 
-    public void setSignUpObject(SignUpController object) {
-        signupObj = object;
+    public void setSignUpObject(SignUpController obj) {
+        signupObj = obj;
     }
 
     public void setSignInObject(SignInController obj) {
@@ -177,7 +171,7 @@ public class PlayerFunctions implements Client {
     @Override
     public void logOut(int pId) {
 
-        
+        try {
             JSONObject logOutObject = new JSONObject();
             try {
                 logOutObject.put("userId", pId);
@@ -185,8 +179,10 @@ public class PlayerFunctions implements Client {
             } catch (JSONException ex) {
                 Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.exit(0);
-        
+            input.close();
+        } catch (IOException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void RequestHandller(String str) {
@@ -195,27 +191,20 @@ public class PlayerFunctions implements Client {
             final JSONObject ReqObj = new JSONObject(str);
             switch (ReqObj.get("RequestType").hashCode()) {
                 case Request.SIGN_UP_SUCCESS:
-                    Platform.runLater(() -> {
-                        signupObj.SignUp_Success();
-                    });
-                         
+                    signupObj.SignUp_Success();
                     break;
                 case Request.SIGN_UP_FAILED:
-                    Platform.runLater(() -> {
-                        signupObj.sign_Up_failed();
-                    });
+                    System.out.println("unsecss");
                     break;
                 case Request.LOGIN_SUCCESS:
-                    siginObj.sign_in_sucess();
                     pla.setId(ReqObj.getInt("id"));
                     pla.setEmail(ReqObj.getString("email"));
                     pla.setUser_name(ReqObj.getString("userName"));
                     pla.setScore(ReqObj.getInt("score"));
+                    siginObj.sign_in_sucess();
                     break;
                 case Request.LOGIN_FAILED:
-                 
-                       siginObj.sign_in_faild();
-   
+                    siginObj.sign_in_faild();
                     break;
                 case Request.INVITE_PLAYER_SUCESS:
                     System.out.println("invitation accepted");
@@ -244,7 +233,8 @@ public class PlayerFunctions implements Client {
                     JSONArray jArr = ReqObj.getJSONArray("users");
                     for (int i = 0; i < jArr.length(); ++i) {
                         Player p = convertJsonObjtoPlayer(jArr.getJSONObject(i));
-                        users.add(p);
+                        PlayerFunctions.users.add(p);
+                        System.out.println("yyyyy = "+users.size());
                     }
                     if (cbController != null) {
                         Platform.runLater(new Runnable() {
@@ -264,13 +254,7 @@ public class PlayerFunctions implements Client {
                                
                                 cbController.loadBoard(false);
                                 Platform.runLater(() -> {
-                                    try {
-                                        boardObj.exitDialog();
-                                        boardObj.setTurnLbl(playerIsTurn);
-                                        boardObj.setGameDetails(ReqObj.getString("playerOneName"),ReqObj.getInt("playerOneScore"),ReqObj.getString("playerTwoName"),ReqObj.getInt("playerTwoScore"),ReqObj.getInt("tieScore"));
-                                    } catch (JSONException ex) {
-                                        Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
+                                       boardObj.setTurnLbl(playerIsTurn);
                                 });
                             } else {
                                 System.out.println("nullllllllllll");
@@ -328,9 +312,11 @@ public class PlayerFunctions implements Client {
                             }
                         }
                     });
-                    break;
+                  
+                    System.out.println("The Message Body" + ReqObj.getString("Message"));
+                   break;
                 case Request.PLAY_AGAIN:
-                    showPlayAgain(ReqObj.getString("Message"),ReqObj.getString("Color"));
+                    showPlayAgain();
                     break;
                 case Request.EXIT_GAME:
                     extiPlayAgain();
@@ -350,7 +336,6 @@ public class PlayerFunctions implements Client {
                         
                     }
                     break;
-
             }
 
         } catch (Exception ex) {
@@ -359,16 +344,6 @@ public class PlayerFunctions implements Client {
             //Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
-    
-    void notifi(String userName){
-        NotificationType notification = NotificationType.SUCCESS;
-        TrayNotification tray = new TrayNotification();
-        tray.setTitle("New Player is Online");
-        tray.setMessage(userName + " is Online now");
-        tray.setRectangleFill(Paint.valueOf("#2A9A84"));
-        tray.setAnimationType(AnimationType.POPUP);
-        tray.showAndDismiss(Duration.seconds(2));
     }
 
     Player convertJsonObjtoPlayer(JSONObject jObj) {
@@ -379,6 +354,7 @@ public class PlayerFunctions implements Client {
             p.setUser_name(jObj.getString("user_name"));
             p.setFlag(jObj.getBoolean("flag"));
             p.setStatus(jObj.getBoolean("status"));
+            p.setScore(jObj.getInt("score"));
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -408,8 +384,7 @@ public class PlayerFunctions implements Client {
     public void playWithComuter(String level) {
         game = new Game(pla, true, level);
         playerIsTurn = true;
-        boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),"Computer", game.getSp_score(), game.getTie_score());
-        boardObj.hideChatAndSave();
+
     }
 
     public void sendPlayedCellRequest(int cellNum, boolean isComputer) {
@@ -471,11 +446,11 @@ public class PlayerFunctions implements Client {
         }
     }
 
-    void showPlayAgain(String msg,String color) {
+    void showPlayAgain() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                boardObj.showPlayAgainDialog(msg,color);
+                boardObj.showPlayAgainDialog();
             }
         });
     }
@@ -492,7 +467,6 @@ public class PlayerFunctions implements Client {
     public void playAgain() {
         if (game!=null) {
             game.playAgain();
-            boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),"Computer", game.getSp_score(), game.getTie_score());
             if (game.playerTurn==-1)
                 computerTurn();
         }else {
@@ -551,19 +525,19 @@ public class PlayerFunctions implements Client {
         }
         int ret = playerTurn(cellNum);
         if (ret == 1) {
-            showPlayAgain("you win","Green");
+            showPlayAgain();
             //boardObj.setTurnLbl(false);
         } else if (ret == -1) {
-            showPlayAgain("Tie","Yellow");
+            showPlayAgain();
         } else {
             Platform.runLater(() -> {
                 boardObj.setTurnLbl(!playerIsTurn);
             });
             int cpuret = computerTurn();
             if (cpuret == 1) {
-                showPlayAgain("You Lose","Red");
+                showPlayAgain();
             } else if (cpuret == -1) {
-                showPlayAgain("Tie","Yellow");
+                showPlayAgain();
             } else {
                 Platform.runLater(() -> {
                     boardObj.setTurnLbl(playerIsTurn);
@@ -589,5 +563,7 @@ public class PlayerFunctions implements Client {
         System.out.println("player function save game ");
     }
     
-    
+    public Player getPlayer(){
+        return pla;
+    }
 }

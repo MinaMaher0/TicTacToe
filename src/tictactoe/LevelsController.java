@@ -34,20 +34,20 @@ public class LevelsController implements Initializable {
     
     @FXML
     void easy(ActionEvent event) {
-        loadBoard();
         pF.playWithComuter("easy");
+        loadBoard();
     }
 
     @FXML
     void hard(ActionEvent event) {
-        loadBoard();
         pF.playWithComuter("hard");
+        loadBoard();
     }
 
     @FXML
     void meduim(ActionEvent event) {
-        loadBoard();
         pF.playWithComuter("medium");
+        loadBoard();
     }
     
     public void loadBoard(){

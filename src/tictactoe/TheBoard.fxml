@@ -17,8 +17,8 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.TheBoardController">
    <children>
-      <FontAwesomeIconView glyphName="VIDEO_GAME" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="172.0" layoutY="531.0" opacity="0.8" size="650" strokeLineJoin="BEVEL" text="" textAlignment="CENTER" wrappingWidth="570.6666870117188" />
-      <GridPane alignment="CENTER_LEFT" layoutX="231.0" layoutY="80.0" prefHeight="408.0" prefWidth="549.0">
+      <FontAwesomeIconView glyphName="VIDEO_GAME" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="169.0" layoutY="518.0" size="650" strokeLineJoin="BEVEL" text="" textAlignment="CENTER" wrappingWidth="570.6666870117188" />
+      <GridPane alignment="CENTER_LEFT" layoutX="224.0" layoutY="93.0" prefHeight="408.0" prefWidth="549.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.3333435058594" minWidth="10.0" prefWidth="205.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="308.66668701171875" minWidth="10.0" prefWidth="202.33331298828125" />
@@ -43,14 +43,14 @@
 
          </children>
       </GridPane>
-      <Pane fx:id="chat_pane" layoutX="245.0" layoutY="492.0" prefHeight="210.0" prefWidth="487.0">
+      <Pane fx:id="chat_pane" layoutX="221.0" layoutY="504.0" prefHeight="198.0" prefWidth="564.0" visible="false">
          <children>
-            <JFXTextArea fx:id="textArea" editable="false" layoutX="3.0" layoutY="-2.0" prefHeight="149.0" prefWidth="482.0" styleClass="textArea" stylesheets="@board.css" unFocusColor="#4059a9">
+            <JFXTextArea fx:id="textArea" editable="false" layoutX="3.0" layoutY="-2.0" prefHeight="149.0" prefWidth="561.0" styleClass="textArea" stylesheets="@board.css" unFocusColor="#4059a9">
                <font>
                   <Font name="Tahoma" size="15.0" />
                </font>
             </JFXTextArea>
-            <JFXTextField fx:id="textfield" layoutX="2.0" layoutY="151.0" prefHeight="49.0" prefWidth="436.0" unFocusColor="#c14378">
+            <JFXTextField fx:id="textfield" layoutX="2.0" layoutY="151.0" prefHeight="40.0" prefWidth="517.0" unFocusColor="#c14378">
                <focusColor>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -63,9 +63,21 @@
                   <Font size="15.0" />
                </font>
             </JFXTextField>
-            <Button fx:id="msgbtn" layoutX="439.0" layoutY="154.0" mnemonicParsing="false" onAction="#textFtotextArea" prefHeight="47.0" prefWidth="48.0" styleClass="close_pane_button" stylesheets="@board.css" text="send" />
-            <FontAwesomeIconView glyphName="SEND" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="453.0" layoutY="181.0" size="15" text="" />
-            <Button layoutX="445.0" layoutY="1.0" mnemonicParsing="false" onAction="#close_window" prefHeight="26.0" prefWidth="40.0" styleClass="close_window" stylesheets="@board.css" text="X" />
+            <Button fx:id="msgbtn" layoutX="517.0" layoutY="154.0" mnemonicParsing="false" onAction="#textFtotextArea" prefHeight="40.0" prefWidth="48.0" styleClass="close_pane_button" stylesheets="@board.css" text="send" />
+            <Button layoutX="525.0" layoutY="1.0" mnemonicParsing="false" onAction="#close_window" prefHeight="26.0" prefWidth="40.0" styleClass="close_window" stylesheets="@board.css" text="X" />
+            <Label layoutX="534.0" layoutY="157.0" prefHeight="24.0" prefWidth="11.0" rotate="180.0" text="◀">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#e81523" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
          </children>
       </Pane>
       <Button fx:id="save_btn" alignment="CENTER" layoutX="873.0" layoutY="223.0" mnemonicParsing="false" onAction="#loadLeaveGameDialg" prefHeight="44.0" prefWidth="118.0" styleClass="input_button" stylesheets="@board.css" textAlignment="JUSTIFY" />
@@ -114,6 +126,31 @@
          </font>
       </Label>
       <FontAwesomeIconView fx:id="cht_icon" glyphName="WHATSAPP" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="928.0" layoutY="331.0" size="20" />
-      <Label fx:id="turnLbl" layoutX="643.0" layoutY="17.0" prefHeight="27.0" prefWidth="90.0" text="Your Turn" textFill="#00ff22" />
+      <Label fx:id="turnLbl" alignment="CENTER" layoutX="423.0" layoutY="57.0" prefHeight="30.0" prefWidth="106.0" text="Your Turn">
+         <font>
+            <Font name="Comic Sans MS Bold" size="22.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#804ca8" />
+                  <Stop color="#e81523" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
+      <Button layoutX="6.0" layoutY="663.0" mnemonicParsing="false" onAction="#back_home" prefHeight="35.0" prefWidth="79.0" styleClass="back_home" stylesheets="@board.css" />
+      <Label layoutX="10.0" layoutY="659.0" text="🔙">
+         <font>
+            <Font size="30.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#804ca8" />
+                  <Stop color="#e81523" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
    </children>
 </Pane>

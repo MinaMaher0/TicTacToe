@@ -29,7 +29,7 @@ public class MainGUI extends Application {
             stage.setTitle("SignIn");
             stage.setScene(scene);
             stage.show();
-            stage.setResizable(true);
+            stage.setResizable(false);
         } catch (IOException ex) {
 
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
