@@ -323,7 +323,7 @@ public class PlayerFunctions implements Client {
                     });
                     break;
                 case Request.PLAY_AGAIN:
-                    showPlayAgain();
+                    showPlayAgain(ReqObj.getString("Message"),ReqObj.getString("Color"));
                     break;
                 case Request.EXIT_GAME:
                     extiPlayAgain();
@@ -465,11 +465,11 @@ public class PlayerFunctions implements Client {
         }
     }
 
-    void showPlayAgain() {
+    void showPlayAgain(String msg,String color) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                boardObj.showPlayAgainDialog();
+                boardObj.showPlayAgainDialog(msg,color);
             }
         });
     }
@@ -545,19 +545,19 @@ public class PlayerFunctions implements Client {
         }
         int ret = playerTurn(cellNum);
         if (ret == 1) {
-            showPlayAgain();
+            showPlayAgain("you win","Green");
             //boardObj.setTurnLbl(false);
         } else if (ret == -1) {
-            showPlayAgain();
+            showPlayAgain("Tie","Yellow");
         } else {
             Platform.runLater(() -> {
                 boardObj.setTurnLbl(!playerIsTurn);
             });
             int cpuret = computerTurn();
             if (cpuret == 1) {
-                showPlayAgain();
+                showPlayAgain("You Lose","Red");
             } else if (cpuret == -1) {
-                showPlayAgain();
+                showPlayAgain("Tie","Yellow");
             } else {
                 Platform.runLater(() -> {
                     boardObj.setTurnLbl(playerIsTurn);
