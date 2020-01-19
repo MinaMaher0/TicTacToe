@@ -37,3 +37,22 @@
    -fx-border-color:#BCDDEE;
    -fx-border-width: 0.5px;
 }
+.invit_friend{
+
+    -fx-font-size : 10px;
+    -fx-background-color: FFF;
+    -fx-text-fill: linear-gradient(#C02347 0%,#8F3D85 85%);
+    -fx-font-weight:bold;
+    -fx-font-family: 'Comic Sans MS';
+    -fx-font: italic;
+    -fx-font: bold;   
+}
+.friend_label{
+     -fx-background-color: rgba(0, 0, 0, 0.03);
+     -fx-cursor: hand;
+  
+    -fx-border-color: linear-gradient(#C59FFD 15%,#8F3D85 80%);
+     -fx-border-width: 3px;
+ 
+    -fx-border-radius:10px;
+}

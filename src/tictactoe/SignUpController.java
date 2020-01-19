@@ -76,15 +76,10 @@ PlayerFunctions p= new PlayerFunctions();
     @FXML
     void sign_up(ActionEvent event) {
         
-       if(!SignUpValidate())
-       {
-           return;
-       }
+        if(!SignUpValidate())
+            return;
         PlayerFunctions p = new PlayerFunctions();
         p.signUp(username, emailAdress, passwordP);
-
-        
-       
     }
     void SignUp_Success()
     {

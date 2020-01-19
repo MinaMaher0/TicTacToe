@@ -10,6 +10,7 @@ package utils;
  * @author Me5a
  */
 public class Request{
+    
     public static final int LOGIN=1;
     public static final int LOGIN_SUCCESS=2;
     public static final int LOGIN_FAILED=3;
@@ -24,6 +25,15 @@ public class Request{
     public static final int REFUSE_INVITATION=12;
     public static final int RECEIVE_INVITATION=13;
     public static final int USERS=14;
-    public static final int START_GAME=16;
     public static final int LOG_OUT = 15;
+    public static final int START_GAME=16;
+    public static final int PLAYED_CELL=17;
+    public static final int GAME_END=21;
+    public static final int PLAYER_TURN=18;
+    public static final int SERVER_FAILED=19; 
+    public static final int SEND_MESSAGE=20;
+    public static final int PLAY_AGAIN=22;
+    public static final int EXIT_GAME=23;
+    public static final int WAIT_PLAY_AGAIN=24;
+    public static final int NOTIFICATION=30; 
 }

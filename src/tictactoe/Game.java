@@ -14,11 +14,15 @@ public class Game {
     Player player1,player2;
     char board[];
     int playerTurn;
+    int playerPlayedFirstCell=1;
     int fp_score;
     int sp_score;
     int tie_score;
     int cellFilled;
-
+    boolean isComputer;
+    String level;
+    boolean playAgainPlayer1=false,playAgainPlayer2=false;
+    
     public Game(Player player1, Player player2, char[] board, int playerTurn, int fp_score, int sp_score, int tie_score) {
         this.player1 = player1;
         this.player2 = player2;
@@ -28,15 +32,32 @@ public class Game {
         this.sp_score = sp_score;
         this.tie_score = tie_score;
         cellFilled=countCells();
+        for (int i=0;i<9;++i){
+            board[i]=' ';
+        }
     }
 
     public Game(Player player1, Player player2) {
-       this(player1, player2, new char[9], 1);
+       this(player1, player2, new char[9], player1.getId());
         
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
     
     public Game(Player player1, Player player2, char[] board, int playerTurn) {
         this(player1, player2, board, playerTurn, 0, 0, 0);
+    }
+    
+    public Game(Player player,boolean isComputer,String level){
+        this(player,null);
+        this.isComputer=isComputer;
+        this.level=level;
     }
     
     int countCells(){
@@ -47,36 +68,60 @@ public class Game {
         return counter;
     }
     
-    public int chooseCell(int x,int y){
+    public boolean isAvailable(int cellNum){
+        return board[cellNum]==' ';
+    }
+    
+    public int chooseCell(int cellNum){
         char ch = getPlayerChar();
-        board[x*3+y]=ch;
+        board[cellNum]=ch;
         ++cellFilled;
-        if  (checkWinner(ch)) // current player win
+        if  (checkWinner(ch)){ // current player win
+            if (player1.getId()==playerTurn) ++fp_score;
+            else ++sp_score;
             return 1;
-        if (cellFilled==9) // tie
+        }
+        if (cellFilled==9){ // tie
+            ++tie_score;
             return -1;
+        }
         changeTurn();
         return 0;
     }
     
     void changeTurn(){
-        playerTurn%=2;
-        playerTurn++;
+        if(playerTurn == player1.getId()){
+            if (isComputer){
+                playerTurn=-1;
+            }else{
+                playerTurn=player2.getId();
+            }
+        }else{
+            playerTurn=player1.getId();
+        }
     }
     
-    char getPlayerChar(){
-        if (playerTurn==1)
+    public char getPlayerChar(){
+        if (playerTurn==player1.getId())
             return 'x';
         return 'o';
     }
+
+    public int getPlayerPlayedFirstCell() {
+        return playerPlayedFirstCell;
+    }
+
+    public void setPlayerPlayedFirstCell(int playerPlayedFirstCell) {
+        this.playerPlayedFirstCell = playerPlayedFirstCell;
+    }
     
-    boolean checkWinner(char ch){
+    public boolean checkWinner(char ch){
         if (checkHorizontal(ch) || checkVertical(ch) || checkDiagonal(ch))
             return true;
         return false;
     }
     
-    boolean checkHorizontal(char ch){
+    public boolean checkHorizontal(char ch){
         if (board[0]==board[1] && board[1]==board[2] && board[2]==ch){
             return true;
         }
@@ -89,7 +134,7 @@ public class Game {
         return false;
     }
     
-    boolean checkVertical(char ch){
+    public boolean checkVertical(char ch){
         if (board[0]==board[3] && board[3]==board[6] && board[6]==ch){
             return true;
         }
@@ -102,7 +147,7 @@ public class Game {
         return false;
     }
     
-    boolean checkDiagonal(char ch){
+    public boolean checkDiagonal(char ch){
         if (board[0]==board[4] && board[4]==board[8] && board[8]==ch){
             return true;
         }
@@ -110,6 +155,35 @@ public class Game {
             return true;
         }
         return false;
+    }
+    
+    public boolean chkPlayersClickedPlayAgain(int pID){
+        if (pID==player1.getId()) playAgainPlayer1=true;
+        if (pID==player2.getId()) playAgainPlayer2=true;
+        if (playAgainPlayer1 && playAgainPlayer2){
+            playAgain();
+            return true;
+        }
+        return false;
+    }
+    
+    public void playAgain(){
+        for (int i=0;i<9;++i){
+            board[i]=' ';
+        }
+        cellFilled=0;
+        if (playerPlayedFirstCell==1){
+            playerPlayedFirstCell=2;
+            if (isComputer){
+                playerTurn=-1;
+            }else playerTurn=player2.getId();
+        }
+        else{
+            playerTurn=player1.getId();
+            playerPlayedFirstCell=1;
+        }
+        playAgainPlayer1=false;
+        playAgainPlayer2=false;
     }
 
     public Player getPlayer1() {

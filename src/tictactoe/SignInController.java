@@ -81,15 +81,15 @@ public class SignInController implements Initializable {
      {
          Platform.runLater(() -> {
              try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ControlButtons.fxml"));
-            Parent root;
-            root = (Parent)loader.load();
-            ControlButtonsController CBController=loader.getController();
-            CBController.setPlayerObj(p);
-            Scene scene = new Scene(root);
-            MainGUI.primaryStage.setTitle("Signin");
-            MainGUI.primaryStage.setScene(scene);
-            MainGUI.primaryStage.show(); 
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("ControlButtons.fxml"));
+                    Parent root;
+                    root = (Parent)loader.load();
+                    ControlButtonsController CBController=loader.getController();
+                    CBController.setPlayerObj(p);
+                    Scene scene = new Scene(root);
+                    MainGUI.primaryStage.setTitle("Signin");
+                    MainGUI.primaryStage.setScene(scene);
+                    MainGUI.primaryStage.show(); 
         } catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
          } 
@@ -100,15 +100,15 @@ public class SignInController implements Initializable {
     void tosign_up(ActionEvent event) {
 
        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUp.fxml"));
-            Parent root;
-            root = (Parent)loader.load();
-            Scene scene = new Scene(root);
-            MainGUI.primaryStage.setTitle("SignUp");
-            MainGUI.primaryStage.setScene(scene);
-            MainGUI.primaryStage.show();
-        } catch (IOException ex) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUp.fxml"));
+                Parent root;
+                root = (Parent)loader.load();
+                Scene scene = new Scene(root);
+                MainGUI.primaryStage.setTitle("SignUp");
+                MainGUI.primaryStage.setScene(scene);
+                MainGUI.primaryStage.show();
+        } 
+        catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
