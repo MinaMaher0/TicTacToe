@@ -56,7 +56,7 @@ public class TheBoardController implements Initializable {
     EventHandler<Event> lbl_33Event;
     
     
-    public void showPlayAgainDialog(){
+    public void showPlayAgainDialog(String msg,String color){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayAgainDialog.fxml"));
             Parent root;
@@ -64,6 +64,7 @@ public class TheBoardController implements Initializable {
             PlayAgainDialogController playAgainContoller=loader.getController();
             playAgainContoller.setPlayerFunctionsObj(pf);
             playAgainContoller.setBoardObj(this);
+            playAgainContoller.setMsg(msg,color);
             Scene scene=new Scene(root);
             newStage.setTitle("Play Again ?");
             newStage.setScene(scene);
