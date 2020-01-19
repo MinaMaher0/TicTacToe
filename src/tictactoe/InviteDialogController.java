@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import Server.*;
 
 /**
  * FXML Controller class
@@ -24,6 +25,7 @@ public class InviteDialogController implements Initializable {
      * Initializes the controller class.
      */
     PlayerFunctions playerfunc = new PlayerFunctions();
+    ServerSideClass sSC= new ServerSideClass();
     
     @FXML
     private Label usrName;
@@ -62,10 +64,10 @@ public class InviteDialogController implements Initializable {
     
     @FXML
     void accept(ActionEvent event) {
-       ControlButtonsController.newStage.close();
-       playerfunc.acceptinvitation(p1, p2);
-       invite.loadBoard(false);
-      //swaped
+        //sSC.fillLsitofBusyUser(p1,p2);
+        ControlButtonsController.newStage.close();
+        playerfunc.acceptinvitation(p1, p2); 
+        invite.loadBoard(false);
     }
     
     public void setplayersId(int p1,int p2)

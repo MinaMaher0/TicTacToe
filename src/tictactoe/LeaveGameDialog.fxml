@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="170.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tictactoe.LeaveGameDialogController">
+   <children>
+      <Label layoutX="22.0" layoutY="14.0" prefHeight="60.0" prefWidth="361.0" text="You Will Leave the Game ">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#804ca8" />
+                  <Stop color="#e81523" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="22.0" layoutY="74.0" prefHeight="30.0" prefWidth="263.0" text="Do you Want to Save it ??">
+         <font>
+            <Font name="Comic Sans MS Bold" size="15.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#804ca8" />
+                  <Stop color="#e81523" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <JFXButton fx:id="yesSave" layoutX="80.0" layoutY="115.0" onAction="#saveGame" prefHeight="40.0" prefWidth="94.0" styleClass="signin_btn" stylesheets="@signin.css" text="Yes" />
+      <JFXButton fx:id="noLeave" layoutX="226.0" layoutY="115.0" onAction="#leave" prefHeight="40.0" prefWidth="94.0" styleClass="signin_btn" stylesheets="@signin.css" text="No" />
+   </children>
+</AnchorPane>

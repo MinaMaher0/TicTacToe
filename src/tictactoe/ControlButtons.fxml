@@ -67,7 +67,7 @@
             </ImageView>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#playWithComputer" prefHeight="60.0" prefWidth="277.0" styleClass="control_btn" stylesheets="@controlbutton.css" text="Play A Game!  💻 ">
+                  <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="277.0" styleClass="control_btn" stylesheets="@controlbutton.css" text="Play A Game!  💻 ">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -76,7 +76,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="277.0" styleClass="control_btn" stylesheets="@controlbutton.css" text="Exit">
+                  <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#Exit" prefHeight="60.0" prefWidth="277.0" styleClass="control_btn" stylesheets="@controlbutton.css" text="Exit">
                      <font>
                         <Font size="22.0" />
                      </font>

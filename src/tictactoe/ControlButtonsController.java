@@ -41,14 +41,21 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
+
 public class ControlButtonsController implements Initializable {
     public static Stage newStage = new Stage();
     PlayerFunctions pF;
+    Player p = new Player();
     String s= new String("test");
     ObservableList li =FXCollections.observableArrayList();
     @FXML
     void invite_friend(ActionEvent event) {
         System.out.println("invite a friend!");
+    }
+    
+    @FXML
+    void Exit(ActionEvent event){
+        pF.logOut(p.getId());
     }
     
       @FXML
@@ -75,8 +82,10 @@ public class ControlButtonsController implements Initializable {
             Parent root;
             root = (Parent)loader.load();
             InviteDialogController inviterController=loader.getController();
+          
             inviterController.setUserName(name);
             inviterController.setplayersId(p1, p2);
+
             inviterController.setControlObject(this);
             Scene scene=new Scene(root);
             newStage.setTitle("InviteDialogController");
@@ -88,14 +97,15 @@ public class ControlButtonsController implements Initializable {
         }
         return ret;
     }
+    
     public void showServerDownDialog()
     {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ServerDownDialog.fxml"));
             Parent root;
-            //Stage s= new Stage();
             root = (Parent)loader.load();
-          //  newStage.initModality(Modality.WINDOW_MODAL);
+            ServerDownDialogController sDDControl= new ServerDownDialogController();
+            sDDControl.setControlObject(this);
             Scene scene=new Scene(root);
             newStage.setTitle("ServerFallen");
             newStage.setScene(scene);
@@ -155,7 +165,8 @@ public class ControlButtonsController implements Initializable {
                 }
             });
             
-            if (p.getFlag()){
+            if (p.getFlag() && !p.getStatus())
+            {
                 invite.setText("Invite");
                 invite.setCursor(Cursor.HAND);
                 invite.setStyle(" -fx-outline: none;\n" +
@@ -171,7 +182,9 @@ public class ControlButtonsController implements Initializable {
 "   -fx-font: bold;");
                 
                 
-            }else {
+            }
+            else if(!p.getFlag())
+            {
                 invite.setText("Offline");
                 invite.setStyle(" -fx-outline: none;\n" +
 "    -fx-transition: .5s;\n" +
@@ -185,12 +198,18 @@ public class ControlButtonsController implements Initializable {
 "-fx-border-width: 2px;"+                          
 "   -fx-font: bold;");
             }
-                
+            //set to busy if in a game
+            else if (p.getStatus())
+            {
+                System.out.println("heloooooooooooooooooooooolllolo");
+                invite.setText("Busy");
+                invite.setDisable(true);
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle("-fx-color: #FF0000; -fx-border-width: 5px;");
+            }
 
             score_button.getChildren().addAll(score,invite);
-
-
-
+            
             userName_Score.getChildren().addAll(t,score_button);
 
             item.getChildren().add(userName_Score);
@@ -204,6 +223,7 @@ public class ControlButtonsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         showPlayers();
     }
+    
     public void loadBoard(boolean isComputer){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("TheBoard.fxml"));
@@ -225,13 +245,12 @@ public class ControlButtonsController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DeclineDialog.fxml"));
             Parent root;
-
             root = (Parent)loader.load();
             DeclineDialogController declineController=loader.getController();
             declineController.setUserName(name);
-         //   newStage.initModality(Modality.WINDOW_MODAL);
+            declineController.setControlObject(this);
             Scene scene=new Scene(root);
-            newStage.setTitle("DeclineDialogController");
+            newStage.setTitle("DeclineInvitation");
             newStage.setScene(scene);
             newStage.show();
             newStage.setResizable(false);
