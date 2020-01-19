@@ -174,11 +174,26 @@ class ServerHandler extends Thread {
             if(result==1){
                 JSONObject sendReqType=new JSONObject();
                 sendReqType.put("RequestType", Request.PLAY_AGAIN);
-                ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
-                ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
+                sendReqType.put("Message", "You Are Winner");
+                sendReqType.put("Color", "Green");
+                if (game.getPlayerTurn()==game.getPlayer1().getId()){
+                    ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
+                    sendReqType.remove("Message");
+                    sendReqType.put("Message", "You Are Loser");
+                    sendReqType.put("Color", "Red");
+                    ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
+                }else {
+                    ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
+                    sendReqType.remove("Message");
+                    sendReqType.put("Message", "You Are Loser");
+                    sendReqType.put("Color", "Red");
+                    ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
+                }
             }else if(result==-1){
                 JSONObject sendReqType=new JSONObject();
                 sendReqType.put("RequestType", Request.PLAY_AGAIN);
+                sendReqType.put("Message", "Tie");
+                sendReqType.put("Color", "Yellow");
                 ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
                 ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
             }else{

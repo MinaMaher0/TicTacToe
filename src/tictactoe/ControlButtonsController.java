@@ -41,14 +41,21 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
+
 public class ControlButtonsController implements Initializable {
     public static Stage newStage = new Stage();
     PlayerFunctions pF;
+    Player p = new Player();
     String s= new String("test");
     ObservableList li =FXCollections.observableArrayList();
     @FXML
     void invite_friend(ActionEvent event) {
         System.out.println("invite a friend!");
+    }
+    
+    @FXML
+    void Exit(ActionEvent event){
+        pF.logOut(p.getId());
     }
     
       @FXML
