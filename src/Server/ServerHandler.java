@@ -45,7 +45,7 @@ class ServerHandler extends Thread {
             
     ControlButtonsController cbControl= null;
     
-    public ServerHandler(Socket socket) {
+    public ServerHandler(Socket socket,DbConnection db) {
 
         try {
             this.db=db;
