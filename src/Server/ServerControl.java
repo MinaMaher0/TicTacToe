@@ -52,7 +52,7 @@ public class ServerControl extends Thread{
                     while(true)
                     {
                         s = sSocket.accept();
-                        new ServerHandler(s);
+                        new ServerHandler(s,db);
                     }
                 }
         catch (IOException e) {}

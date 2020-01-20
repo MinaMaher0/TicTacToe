@@ -389,6 +389,7 @@ public class PlayerFunctions implements Client {
             p.setUser_name(jObj.getString("user_name"));
             p.setFlag(jObj.getBoolean("flag"));
             p.setStatus(jObj.getBoolean("status"));
+            p.setScore(jObj.getInt("score"));
             p.setProfile_picture(jObj.getString("profile_picture"));
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);

@@ -67,7 +67,7 @@
       </Pane>
       <Pane layoutX="304.0" layoutY="370.0" prefHeight="185.0" prefWidth="320.0">
          <children>
-            <JFXButton alignment="CENTER" layoutX="10.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="277.0" styleClass="control_btn" stylesheets="@controlbutton.css" text="Exit">
+            <JFXButton alignment="CENTER" layoutX="10.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#Exit" prefHeight="60.0" prefWidth="277.0" styleClass="control_btn" stylesheets="@controlbutton.css" text="Exit">
                <font>
                   <Font size="22.0" />
                </font>

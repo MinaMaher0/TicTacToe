@@ -11,9 +11,19 @@
         <URL value="@playagaindialog.css" />
     </stylesheets>
    <children>
-      <Label fx:id="lbl" alignment="CENTER" layoutX="131.0" layoutY="195.0" prefHeight="40.0" prefWidth="248.0">
+      <Button fx:id="playAgainBTN" layoutX="84.0" layoutY="271.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="50.0" prefWidth="186.0" styleClass="signin_btn" stylesheets="@signin.css" text="Play Again">
          <font>
-            <Font size="25.0" />
+            <Font name="System Bold" size="20.0" />
+         </font></Button>
+      <Button layoutX="340.0" layoutY="271.0" mnemonicParsing="false" onAction="#exit" prefHeight="50.0" prefWidth="186.0" styleClass="signin_btn" stylesheets="@signin.css" text="Exit">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Button>
+      <Label fx:id="lbl" layoutX="23.0" layoutY="293.0" prefHeight="40.0" prefWidth="455.0" />
+      <Label fx:id="msg" layoutX="69.0" layoutY="63.0" prefHeight="167.0" prefWidth="467.0" textAlignment="CENTER">
+         <font>
+            <Font name="Cambria Bold" size="36.0" />
+
          </font></Label>
       <JFXButton fx:id="playAgainBTN" layoutX="95.0" layoutY="150.0" onAction="#playAgain" prefHeight="45.0" prefWidth="143.0" styleClass="accept_btn" stylesheets="@playagaindialog.css" text="Play Again" />
       <JFXButton layoutX="287.0" layoutY="150.0" onAction="#exit" prefHeight="45.0" prefWidth="136.0" styleClass="deline_btn" stylesheets="@playagaindialog.css" text="Exit" />
