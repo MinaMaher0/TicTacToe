@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.PlayAgainDialogController">
+<AnchorPane id="AnchorPane" prefHeight="242.0" prefWidth="507.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.PlayAgainDialogController">
     <stylesheets>
         <URL value="@playagaindialog.css" />
     </stylesheets>
    <children>
-      <Button fx:id="playAgainBTN" layoutX="180.0" layoutY="281.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="40.0" prefWidth="105.0" text="Play Again" />
-      <Button layoutX="340.0" layoutY="281.0" mnemonicParsing="false" onAction="#exit" prefHeight="40.0" prefWidth="89.0" text="Exit" />
-      <Label fx:id="lbl" layoutX="23.0" layoutY="293.0" prefHeight="40.0" prefWidth="455.0" />
-      <Label fx:id="msg" layoutX="71.0" layoutY="107.0" prefHeight="93.0" prefWidth="467.0" textAlignment="CENTER">
+      <Label layoutX="210.0" layoutY="-10.0" prefHeight="103.0" prefWidth="89.0" text="🔁" textFill="#756d6d">
          <font>
-            <Font size="64.0" />
+            <Font size="80.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl" alignment="CENTER" layoutX="131.0" layoutY="195.0" prefHeight="40.0" prefWidth="248.0">
+         <font>
+            <Font size="25.0" />
          </font></Label>
+      <JFXButton fx:id="playAgainBTN" layoutX="95.0" layoutY="150.0" onAction="#playAgain" prefHeight="45.0" prefWidth="143.0" styleClass="accept_btn" stylesheets="@playagaindialog.css" text="Accept" />
+      <JFXButton layoutX="287.0" layoutY="150.0" onAction="#exit" prefHeight="45.0" prefWidth="136.0" styleClass="deline_btn" stylesheets="@playagaindialog.css" text="Decline" />
+      <Label fx:id="usrName" layoutX="166.0" layoutY="97.0" prefHeight="45.0" prefWidth="176.0" text="Play Again?" textFill="#756d6d">
+         <font>
+            <Font name="Comic Sans MS Bold" size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
+s

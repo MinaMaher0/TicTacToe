@@ -602,6 +602,8 @@ public class PlayerFunctions implements Client {
         }
         System.out.println("player function save game ");
     }
-    
+   public Player getPlayer(){
+        return pla;
+    }    
     
 }
