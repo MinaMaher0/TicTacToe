@@ -132,7 +132,7 @@ public class ControlButtonsController implements Initializable {
             
             HBox item = new HBox();
             item.setSpacing(10);
-            Image img = new Image("file:///C:/Users/Me5a/Desktop/Java project/TicTacToe/src/Images/1.jpg");
+            Image img = new Image(getClass().getResource("../Images/"+p.getProfile_picture()).toString(), true);
             ImageView imageView = new ImageView(img);
             imageView.setFitWidth(40);
             imageView.setFitHeight(40);

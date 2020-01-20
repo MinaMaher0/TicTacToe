@@ -17,8 +17,6 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -56,6 +56,12 @@ public class TheBoardController implements Initializable {
     EventHandler<Event> lbl_31Event;
     EventHandler<Event> lbl_32Event;
     EventHandler<Event> lbl_33Event;
+    
+    @FXML
+    private ImageView playerOnePic;
+    
+    @FXML
+    private ImageView playerTwoPic;
     
     
     public void showPlayAgainDialog(String msg,String color){
@@ -100,12 +106,17 @@ public class TheBoardController implements Initializable {
         pf=obj;
         pf.setBoardObj(this);
     }    
-    public void setGameDetails(String playerOneName,int playerOneScore,String playerTwoName,int playerTwoScore,int tieScore){
+    public void setGameDetails(String playerOneName,int playerOneScore,String playerOnePic,String playerTwoName,int playerTwoScore,String playerTwoPic,int tieScore){
         num_of_tie.setText(String.valueOf(tieScore));
         playerOname.setText(playerOneName);
+        Image img1 = new Image(getClass().getResource("../Images/"+playerOnePic).toString(), true);
+        this.playerOnePic.setImage(img1);
         playerOscore.setText(String.valueOf(playerOneScore));
         playerTname.setText(playerTwoName);
         pTscore.setText(String.valueOf(playerTwoScore));
+        Image img2 = new Image(getClass().getResource("../Images/"+playerTwoPic).toString(), true);
+        this.playerTwoPic.setImage(img2);
+        
     }
    
     @FXML
