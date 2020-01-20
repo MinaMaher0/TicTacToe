@@ -30,15 +30,15 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
+
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.VPos;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
+
 import javafx.stage.Stage;
 
 
@@ -436,5 +436,6 @@ public class ControlButtonsController implements Initializable {
             Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     
 }

@@ -330,6 +330,7 @@ public class ServerSideClass implements Server {
             jsonStart.put("playerOneScore", game.getFp_score());
             jsonStart.put("playerTwoScore", game.getSp_score());
             jsonStart.put("tieScore", game.getTie_score());
+            jsonStart.put("GameBoard",String.valueOf(game.getBoard()));
             ServerControl.playerMap.get(p1).Ps.println(jsonStart.toString());
             ServerControl.playerMap.get(p2).Ps.println(jsonStart.toString());
         } catch (JSONException ex) {
@@ -364,25 +365,6 @@ public class ServerSideClass implements Server {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-   /* public void sendLeaveGame(int p1, int p2)
-    {
-          JSONObject jsonLeaveGame = new JSONObject();
-        try {
-            for (Player p:ServerControl.players)
-            {
-                if(p.getId()== p1)
-                    jsonLeaveGame.put("userName", p.getUser_name());
-            }
-            jsonLeaveGame.put("RequestType", Request.LEAVE_GAME);
-            ServerControl.playerMap.get(p2).Ps.println(jsonLeaveGame.toString());
-        } catch (JSONException ex) {
-            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }*/
-    
     public void enableInviteButton(int p1, int p2)
     {
         for(Player p:ServerControl.players)
@@ -391,6 +373,20 @@ public class ServerSideClass implements Server {
                 p.setStatus(false);
         }
         sendUsers();
+    }
+    
+    public Game checkAvilabeGame(Player p1 , Player p2)
+    {
+        Game g;
+        if(db.checkAvailableGame(p1.getId(), p2.getId()))
+        {
+            g=db.getGame(p1.getId(), p2.getId());
+//            System.out.println(g.getPlayer1().getUser_name()+" "+g.getPlayer2().getUser_name());
+            db.deleteGame(p1.getId(), p2.getId());
+            return g;
+        }
+        else
+            return new Game(p1,p2);
     }
 
 }
