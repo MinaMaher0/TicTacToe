@@ -55,7 +55,7 @@ public class Game {
     }
     
     public Game(Player player,boolean isComputer,String level){
-        this.player1=player;
+        this(player,null);
         this.isComputer=isComputer;
         this.level=level;
     }
