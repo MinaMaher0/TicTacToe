@@ -479,6 +479,7 @@ public class PlayerFunctions implements Client {
             sendMsg.put("RequestType", Request.SEND_MESSAGE);
             //sendMsg.put("PlayerID", pla.getId());
             sendMsg.put("Message", msg);
+            sendMsg.put("senderName", pla.getUser_name());
             output.println(sendMsg.toString());
 
         } catch (JSONException ex) {
@@ -548,6 +549,11 @@ public class PlayerFunctions implements Client {
         Platform.runLater(() -> {
             boardObj.setLbl(cellNum, ch);
         });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return game.chooseCell(cellNum - 1);
     }
 
@@ -573,19 +579,19 @@ public class PlayerFunctions implements Client {
         }
         int ret = playerTurn(cellNum);
         if (ret == 1) {
-            showPlayAgain("you win","Green");
+            showPlayAgain("                          you win","Green");
             //boardObj.setTurnLbl(false);
         } else if (ret == -1) {
-            showPlayAgain("Tie","Yellow");
+            showPlayAgain("                              Tie","Yellow");
         } else {
             Platform.runLater(() -> {
                 boardObj.setTurnLbl(!playerIsTurn);
             });
             int cpuret = computerTurn();
             if (cpuret == 1) {
-                showPlayAgain("You Lose","Red");
+                showPlayAgain("                          You Lose","Red");
             } else if (cpuret == -1) {
-                showPlayAgain("Tie","Yellow");
+                showPlayAgain("                              Tie","Yellow");
             } else {
                 Platform.runLater(() -> {
                     boardObj.setTurnLbl(playerIsTurn);
