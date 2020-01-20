@@ -290,7 +290,7 @@ public class ServerSideClass implements Server {
         }
     }
 
-     public void recieveMessageFromPlayer(String message,int senderID ,int recieverID){
+     public void recieveMessageFromPlayer(String message,int senderID ,int recieverID, String senderName){
        
         try {
             System.out.println(message);
@@ -298,9 +298,9 @@ public class ServerSideClass implements Server {
             sendMessage.put("RequestType",Request.SEND_MESSAGE);
             sendMessage.put("senderID",senderID);
             sendMessage.put("recieverID",recieverID);
-            sendMessage.put("Message",message);
-              ServerControl.playerMap.get(senderID).Ps.println(sendMessage.toString());
-             ServerControl.playerMap.get(recieverID).Ps.println(sendMessage.toString());
+            sendMessage.put("Message",senderName+" : "+message);
+            ServerControl.playerMap.get(senderID).Ps.println(sendMessage.toString());
+            ServerControl.playerMap.get(recieverID).Ps.println(sendMessage.toString());
            // ps.println(sendMessage.toString());
         } catch (JSONException ex) {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);

@@ -46,7 +46,6 @@ class ServerHandler extends Thread {
     ControlButtonsController cbControl= null;
     
     public ServerHandler(Socket socket,DbConnection db) {
-
         try {
             this.db=db;
             s=socket;
@@ -141,7 +140,7 @@ class ServerHandler extends Thread {
                    
                     break;
                 case Request.SEND_MESSAGE:
-                    serverObj.recieveMessageFromPlayer(json.getString("Message"), game.getPlayer1().getId(), game.getPlayer2().getId());
+                    serverObj.recieveMessageFromPlayer(json.getString("Message"), game.getPlayer1().getId(), game.getPlayer2().getId(),json.getString("senderName"));
                     break;
                 case Request.PLAY_AGAIN:
                     HandlePlayAgain(json.getInt("ID"));
