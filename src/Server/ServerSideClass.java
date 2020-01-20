@@ -145,9 +145,9 @@ public class ServerSideClass implements Server {
     }
 
     @Override
-    public boolean signUP(String userName, String email, String password){
+    public boolean signUP(String userName, String email, String password, String image){
         
-        boolean sUpStatus=db.signUp(userName, password, email);
+        boolean sUpStatus=db.signUp(userName, password, email , image);
         JSONObject singUpBack= new JSONObject();
         if(sUpStatus == true)
         {
@@ -161,7 +161,7 @@ public class ServerSideClass implements Server {
                 singUpBack.put("userName",p.getUser_name());
                 singUpBack.put("email",p.getEmail());
                 singUpBack.put("score",p.getScore());
-                singUpBack.put("pPic",p.getProfile_picture());
+                singUpBack.put("image",p.getProfile_picture());
                 singUpBack.put("RequestType",Request.SIGN_UP_SUCCESS);
                 ps.println(singUpBack.toString());
                 
@@ -324,6 +324,8 @@ public class ServerSideClass implements Server {
             jsonStart.put("RequestType", Request.START_GAME);
             jsonStart.put("playerOneName", game.getPlayer1().getUser_name());
             jsonStart.put("playerTwoName", game.getPlayer2().getUser_name());
+            jsonStart.put("playerOnePic", game.getPlayer1().getProfile_picture());
+            jsonStart.put("playerTwoPic", game.getPlayer2().getProfile_picture());
             jsonStart.put("playerOneScore", game.getFp_score());
             jsonStart.put("playerTwoScore", game.getSp_score());
             jsonStart.put("tieScore", game.getTie_score());

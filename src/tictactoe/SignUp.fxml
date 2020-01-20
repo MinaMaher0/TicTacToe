@@ -7,7 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -16,7 +16,7 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.SignUpController">
    <children>
-      <ImageView fitHeight="172.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="118.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/sign-up-3.png" />
          </image>
@@ -34,6 +34,34 @@
             </LinearGradient>
          </textFill>
       </Label>
+      <Pane prefHeight="101.0" prefWidth="770.0">
+         <children>
+            <JFXTextField fx:id="email" layoutX="231.0" layoutY="13.0" prefHeight="46.0" prefWidth="330.0" promptText="Email" unFocusColor="#c14378">
+               <focusColor>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#d31557" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </focusColor>
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font>
+            </JFXTextField>
+            <FontAwesomeIconView glyphName="ENVELOPE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="193.0" layoutY="49.0" lineSpacing="10.0" size="30" text="" />
+            <Label fx:id="emailReq" layoutX="231.0" layoutY="69.0" prefHeight="22.0" prefWidth="239.0" text="Email Is Required" textFill="#e41212" visible="false">
+               <font>
+                  <Font name="Comic Sans MS" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="hasAccount" layoutX="517.0" layoutY="69.0" prefHeight="22.0" prefWidth="239.0" text="you are already signed in " textFill="#e41212" visible="false">
+               <font>
+                  <Font name="Comic Sans MS" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
       <Pane prefHeight="93.0" prefWidth="770.0">
          <children>
             <FontAwesomeIconView glyphName="USER" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="196.0" layoutY="53.0" lineSpacing="10.0" size="30" />
@@ -80,42 +108,76 @@
             </Label>
          </children>
       </Pane>
-      <Pane prefHeight="101.0" prefWidth="770.0">
+      <Pane prefHeight="217.0" prefWidth="770.0">
          <children>
-            <JFXTextField fx:id="email" layoutX="231.0" layoutY="13.0" prefHeight="46.0" prefWidth="330.0" promptText="Email" unFocusColor="#c14378">
-               <focusColor>
+            <BorderPane fx:id="borderPane1" layoutY="60.0" prefHeight="140.0" prefWidth="154.0">
+               <center>
+                  <ImageView fitHeight="118.0" fitWidth="84.0" onMouseClicked="#pic1" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../Images/5.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+            <BorderPane fx:id="borderPane2" layoutX="153.0" layoutY="61.0" prefHeight="148.0" prefWidth="154.0">
+               <center>
+                  <ImageView fx:id="anger" fitHeight="101.0" fitWidth="84.0" onMouseClicked="#pic2" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../Images/4.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+            <BorderPane fx:id="borderPane4" layoutX="449.0" layoutY="85.0" prefHeight="118.0" prefWidth="135.0">
+               <center>
+                  <ImageView fitHeight="109.0" fitWidth="101.0" onMouseClicked="#pic4" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../Images/1.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+            <BorderPane fx:id="borderPane3" layoutX="318.0" layoutY="85.0" prefHeight="118.0" prefWidth="135.0">
+               <center>
+                  <ImageView fitHeight="101.0" fitWidth="64.0" onMouseClicked="#pic3" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../Images/2.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+            <Label layoutX="268.0" layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="248.0" text="Choose A Photo">
+               <font>
+                  <Font name="Comic Sans MS" size="34.0" />
+               </font>
+               <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
                         <Stop color="#804ca8" />
-                        <Stop color="#d31557" offset="1.0" />
+                        <Stop color="#e81523" offset="1.0" />
                      </stops>
                   </LinearGradient>
-               </focusColor>
-               <font>
-                  <Font name="Tahoma" size="15.0" />
-               </font>
-            </JFXTextField>
-            <FontAwesomeIconView glyphName="ENVELOPE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="193.0" layoutY="49.0" lineSpacing="10.0" size="30" text="" />
-            <Label fx:id="emailReq" layoutX="231.0" layoutY="69.0" prefHeight="22.0" prefWidth="239.0" text="Email Is Required" textFill="#e41212" visible="false">
-               <font>
-                  <Font name="Comic Sans MS" size="15.0" />
-               </font>
+               </textFill>
             </Label>
-            <Label fx:id="hasAccount" layoutX="517.0" layoutY="69.0" prefHeight="22.0" prefWidth="239.0" text="you are already signed in " textFill="#e41212" visible="false">
-               <font>
-                  <Font name="Comic Sans MS" size="15.0" />
-               </font>
-            </Label>
+            <BorderPane fx:id="borderPane5" layoutX="593.0" layoutY="85.0" prefHeight="118.0" prefWidth="135.0">
+               <center>
+                  <ImageView fitHeight="109.0" fitWidth="166.0" onMouseClicked="#pic5" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../Images/3.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
          </children>
       </Pane>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="99.0" prefWidth="647.0">
+      <Pane>
          <children>
-            <JFXButton alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#sign_up" prefHeight="60.0" prefWidth="260.0" styleClass="signup_btn" stylesheets="@signup.css" text="Sign Up">
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="268.0" layoutY="-6.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#sign_up" prefHeight="54.0" prefWidth="248.0" styleClass="signup_btn" stylesheets="@signup.css" text="Sign Up">
                <font>
                   <Font name="Tahoma" size="15.0" />
                </font>
             </JFXButton>
          </children>
-      </HBox>
+      </Pane>
    </children>
 </VBox>

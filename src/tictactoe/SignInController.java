@@ -53,16 +53,12 @@ public class SignInController implements Initializable {
            
           if(emailAdress.equals(""))
           {
-              
             emaiReq.setVisible(true);
-       
              return false;
           }
           if(passwordP.equals(""))
           {
-             
               passReq.setVisible(true);
-              
               return false;
           }
           
@@ -71,7 +67,7 @@ public class SignInController implements Initializable {
    
      void sign_in_faild()
     {
-          emaiReq1.setVisible(true);
+       emaiReq1.setVisible(true);
     }
      
      void sign_in_sucess()

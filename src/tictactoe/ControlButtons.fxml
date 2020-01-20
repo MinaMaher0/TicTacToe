@@ -5,32 +5,30 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.ControlButtonsController">
+<Pane prefHeight="630.0" prefWidth="886.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.ControlButtonsController">
    <children>
       <Pane>
          <children>
-            <ListView fx:id="listView" layoutX="7.0" layoutY="99.0" prefHeight="595.0" prefWidth="287.0" styleClass="friend_label" stylesheets="@controlbutton.css" />
-            <Label alignment="CENTER" layoutX="9.0" layoutY="-19.0" prefHeight="113.0" prefWidth="287.0" styleClass="friend_label" stylesheets="@controlbutton.css">
+            <ListView fx:id="listView" layoutX="4.0" layoutY="30.0" prefHeight="179.0" prefWidth="280.0" styleClass="friend_label" stylesheets="@../../../../TheLastCloneان%20شاء%20الله/TicTacToe/src/tictactoe/controlbutton.css" />
+            <Label layoutX="73.0" layoutY="-1.0" text="professional">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#804ca8" />
+                        <Stop color="#e81523" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
                <font>
-                  <Font name="Comic Sans MS Bold" size="25.0" />
+                  <Font name="Comic Sans MS Bold" size="20.0" />
                </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop color="#804ca8" />
-                        <Stop color="#e81523" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill>
             </Label>
-            <Label layoutX="86.0" layoutY="13.0" text="Friends">
+            <Label layoutX="78.0" layoutY="209.0" prefHeight="28.0" prefWidth="133.0" text="Intermediate">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -40,16 +38,21 @@
                   </LinearGradient>
                </textFill>
                <font>
-                  <Font name="Comic Sans MS Bold" size="35.0" />
+                  <Font name="Comic Sans MS Bold" size="20.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="500.0">
+      <Pane layoutX="285.0" layoutY="-1.0" prefHeight="330.0" prefWidth="336.0">
          <children>
-            <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="77.0" prefWidth="374.0" text="Wlcome to tic-tac-toe">
+            <ImageView fitHeight="219.0" fitWidth="298.0" layoutX="20.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/flamenco-welcome.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="19.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="323.0" text="Wlcome to tic-tac-toe">
                <font>
-                  <Font name="Comic Sans MS" size="34.0" />
+                  <Font name="Comic Sans MS" size="30.0" />
                </font>
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
@@ -60,30 +63,87 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <ImageView fitHeight="189.0" fitWidth="267.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/flamenco-welcome.png" />
-               </image>
-            </ImageView>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#playWithComputer" prefHeight="60.0" prefWidth="277.0" styleClass="control_btn" stylesheets="@controlbutton.css" text="Play A Game!  💻 ">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#Exit" prefHeight="60.0" prefWidth="277.0" styleClass="control_btn" stylesheets="@controlbutton.css" text="Exit">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </HBox>
          </children>
-      </VBox>
+      </Pane>
+      <Pane layoutX="304.0" layoutY="370.0" prefHeight="185.0" prefWidth="320.0">
+         <children>
+            <JFXButton alignment="CENTER" layoutX="10.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="277.0" styleClass="control_btn" stylesheets="@controlbutton.css" text="Exit">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" layoutX="8.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#playWithComputer" prefHeight="60.0" prefWidth="277.0" styleClass="control_btn" stylesheets="@controlbutton.css" text="Play A Game!  💻 ">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Label alignment="CENTER" layoutX="633.0" layoutY="-21.0" prefHeight="149.0" prefWidth="242.0" styleClass="friend_label" stylesheets="@../../../../TheLastCloneان%20شاء%20الله/TicTacToe/src/tictactoe/controlbutton.css">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#804ca8" />
+                  <Stop color="#e81523" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <ImageView fitHeight="85.0" fitWidth="93.0" layoutX="710.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/order-completed-4.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="656.0" layoutY="74.0" text="your Profile">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#804ca8" />
+                  <Stop color="#e81523" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Comic Sans MS Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="632.0" layoutY="151.0" prefHeight="30.0" prefWidth="114.0" text="User Name:" textFill="#756d6d">
+         <font>
+            <Font name="Comic Sans MS" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="634.0" layoutY="210.0" prefHeight="30.0" prefWidth="68.0" text="Score:" textFill="#756d6d">
+         <font>
+            <Font name="Comic Sans MS" size="20.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listView2" layoutX="2.0" layoutY="235.0" prefHeight="177.0" prefWidth="280.0" styleClass="friend_label" stylesheets="@../../../../TheLastCloneان%20شاء%20الله/TicTacToe/src/tictactoe/controlbutton.css" />
+      <ListView fx:id="listView3" layoutX="4.0" layoutY="440.0" prefHeight="185.0" prefWidth="281.0" styleClass="friend_label" stylesheets="@../../../../TheLastCloneان%20شاء%20الله/TicTacToe/src/tictactoe/controlbutton.css" />
+      <Label layoutX="96.0" layoutY="412.0" text="Beginners">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#804ca8" />
+                  <Stop color="#e81523" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Comic Sans MS Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="prof_uName" layoutX="747.0" layoutY="141.0" prefHeight="45.0" prefWidth="123.0">
+         <font>
+            <Font name="Comic Sans MS" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="prof_Score" layoutX="700.0" layoutY="209.0" prefHeight="34.0" prefWidth="123.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
-</HBox>
+</Pane>
