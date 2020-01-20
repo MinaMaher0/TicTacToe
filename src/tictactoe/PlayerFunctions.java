@@ -344,7 +344,7 @@ public class PlayerFunctions implements Client {
                             @Override
                             public void run() {
                                 try {
-                                    notifi(ReqObj.getString("userName"));
+                                    notifi(ReqObj.getString("userName"),ReqObj.getString("playerPic"));
                                 } catch (JSONException ex) {
                                     Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -364,13 +364,16 @@ public class PlayerFunctions implements Client {
 
     }
     
-    void notifi(String userName){
+    void notifi(String userName,String playerPic){
         NotificationType notification = NotificationType.SUCCESS;
+        Image whatsAppImg = new Image(getClass().getResource("../Images/"+playerPic).toString(), true);
+
         TrayNotification tray = new TrayNotification();
         tray.setTitle("New Player is Online");
         tray.setMessage(userName + " is Online now");
-        tray.setRectangleFill(Paint.valueOf("#2A9A84"));
+        tray.setRectangleFill(Paint.valueOf("#AA3672"));
         tray.setAnimationType(AnimationType.POPUP);
+        tray.setImage(whatsAppImg);
         tray.showAndDismiss(Duration.seconds(2));
     }
 

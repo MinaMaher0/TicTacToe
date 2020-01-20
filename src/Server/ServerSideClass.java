@@ -93,7 +93,7 @@ public class ServerSideClass implements Server {
                 });
                
                 ps.println(singInBack.toString());
-                sendNotification(p.getUser_name(),p.getId());
+                sendNotification(p.getUser_name(),p.getId(),p.getProfile_picture());
                 sendUsers();
                 ServerControl.playerMap.put(p.getId(),s);
                 System.out.println("PPPPPPPPPPPP");
@@ -129,12 +129,13 @@ public class ServerSideClass implements Server {
         } 
     }
     
-    void sendNotification(String userName,int pID){
+    void sendNotification(String userName,int pID,String playerPic){
         JSONObject users= new JSONObject();
         try {
             users.put("RequestType",Request.NOTIFICATION);
             users.put("userName",userName);
             users.put("pID",pID);
+            users.put("playerPic",playerPic);
             for (ServerHandler sv : ServerHandler.socketVector)
             {
                 sv.Ps.println(users.toString());
