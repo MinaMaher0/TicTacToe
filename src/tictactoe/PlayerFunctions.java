@@ -271,7 +271,7 @@ public class PlayerFunctions implements Client {
                                         boardObj.exitDialog();
                                         boardObj.setTurnLbl(playerIsTurn);
 
-                                        boardObj.setGameDetails(ReqObj.getString("playerOneName"),ReqObj.getInt("playerOneScore"),ReqObj.getString("playerOnePic"),ReqObj.getString("playerTwoName"),ReqObj.getInt("playerTwoScore"),ReqObj.getString("playerTwoPic"),ReqObj.getInt("tieScore"));
+                                        boardObj.setGameDetails(ReqObj.getString("playerOneName"),ReqObj.getInt("playerOneScore"),ReqObj.getString("playerOnePic"),ReqObj.getString("playerTwoName"),ReqObj.getInt("playerTwoScore"),ReqObj.getString("playerTwoPic"),ReqObj.getInt("tieScore"),ReqObj.getString("GameBoard"));
 
                                     } catch (JSONException ex) {
                                         Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
@@ -423,7 +423,7 @@ public class PlayerFunctions implements Client {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),game.getPlayer1().getProfile_picture(),"Computer", game.getSp_score(),"computer.png", game.getTie_score());
+                boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),game.getPlayer1().getProfile_picture(),"Computer", game.getSp_score(),"computer.png", game.getTie_score()," ");
             }
         });
         boardObj.hideChatAndSave();
@@ -510,7 +510,7 @@ public class PlayerFunctions implements Client {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),game.getPlayer1().getProfile_picture(),"Computer", game.getSp_score(),"computer.png", game.getTie_score());
+                    boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),game.getPlayer1().getProfile_picture(),"Computer", game.getSp_score(),"computer.png", game.getTie_score()," ");
                 }
             });
 

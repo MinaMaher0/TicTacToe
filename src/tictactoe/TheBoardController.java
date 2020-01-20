@@ -107,7 +107,7 @@ public class TheBoardController implements Initializable {
         pf.setBoardObj(this);
     }    
 
-    public void setGameDetails(String playerOneName,int playerOneScore,String playerOnePic,String playerTwoName,int playerTwoScore,String playerTwoPic,int tieScore){
+    public void setGameDetails(String playerOneName,int playerOneScore,String playerOnePic,String playerTwoName,int playerTwoScore,String playerTwoPic,int tieScore,String board){
 
         num_of_tie.setText(String.valueOf(tieScore));
         playerOname.setText(playerOneName);
