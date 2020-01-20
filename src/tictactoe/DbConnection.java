@@ -32,8 +32,8 @@ public class DbConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","ahmedxd22");
 
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","ahmedxd22");
 
 //jdbc:mysql://localhost:3306/tic_tac_toe
             st = conn.createStatement();
@@ -71,16 +71,17 @@ public class DbConnection {
         return v;
     }
     
-    public boolean signUp( String user_name , String password , String mail)
+    public boolean signUp( String user_name , String password , String mail, String image)
     {
         try {
             
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO player (user_name,email,password) " +
-                    "VALUES (?,?,?);");
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO player (user_name,email,password,Profile_picture) " +
+                    "VALUES (?,?,?,?);");
             
             pst.setString(1, user_name);
             pst.setString(2, mail);
             pst.setString(3, password);
+            pst.setString(4, image);
             int rs = pst.executeUpdate();
             getData();
             return rs!=0;

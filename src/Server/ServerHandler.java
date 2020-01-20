@@ -95,7 +95,7 @@ class ServerHandler extends Thread {
             {
                 case Request.SIGNUP:
                 {
-                     serverObj.signUP(json.getString("userName"), json.getString("email"), json.getString("password"));
+                     serverObj.signUP(json.getString("userName"), json.getString("email"), json.getString("password"), json.getString("image"));
                      break;
                 }
                 case Request.LOGIN:

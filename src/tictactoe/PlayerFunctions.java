@@ -126,12 +126,14 @@ public class PlayerFunctions implements Client {
     }
 
     @Override
-    public boolean signUp(String userName, String email, String password) {
+    public boolean signUp(String userName, String email, String password ,String image) {
         try {
             JSONObject SignupObject = new JSONObject();
             SignupObject.put("userName", userName);
             SignupObject.put("email", email);
             SignupObject.put("password", password);
+            SignupObject.put("image",image);
+            
             SignupObject.put("RequestType", Request.SIGNUP);
             output.println(SignupObject.toString());
 
@@ -439,10 +441,7 @@ public class PlayerFunctions implements Client {
         }
     }
 
-    @Override
-    public void sort(Vector<Player> p) {
-
-    }
+    
 
     @Override
     public void declineInvitation(int pOneId, int pTwoId) {
@@ -575,6 +574,8 @@ public class PlayerFunctions implements Client {
     public boolean isPlayWithComputer(){
         return game!=null;
     }
+
+   
     
     @Override
     public void leaveGame() {
