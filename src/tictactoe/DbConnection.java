@@ -33,7 +33,8 @@ public class DbConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","1234");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","password");
+
 
 //jdbc:mysql://localhost:3306/tic_tac_toe
             st = conn.createStatement();
