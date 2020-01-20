@@ -16,7 +16,7 @@ public interface Client {
     
     public boolean signIn(String userName,String password);
     
-    public boolean signUp(String userName,String email,String password);
+    public boolean signUp(String userName, String email, String password, String image);
     
     public Vector<Player> getPlayers();
     
@@ -32,5 +32,4 @@ public interface Client {
     
     public void logOut(int pId);
     
-    public void sort(Vector<Player> p);
 }

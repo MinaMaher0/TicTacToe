@@ -20,6 +20,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import org.apache.commons.validator.routines.EmailValidator;
 
 
@@ -40,11 +41,37 @@ PlayerFunctions p= new PlayerFunctions();
     private Label emailReq;
     @FXML
     private Label hasAccount;
+    
+      @FXML
+    void pic1(MouseEvent event) {
+         Image = "1.png";
+    }
+
+    @FXML
+    void pic2(MouseEvent event) {
+        Image = "2.png";
+    }
+
+    @FXML
+    void pic3(MouseEvent event) {
+        Image = "3.png";
+    }
+
+    @FXML
+    void pic4(MouseEvent event) {
+         Image = "4.png";
+    }
+
+    @FXML
+    void pic5(MouseEvent event) {
+        Image = "5.png";
+    }
+
 
    String username = new String();
    String emailAdress = new String();
    String passwordP = new String();
-
+   String Image = new String("1.png");
      
     boolean SignUpValidate() {
           username = userName.getText();
@@ -82,7 +109,7 @@ PlayerFunctions p= new PlayerFunctions();
             return;
         PlayerFunctions p = new PlayerFunctions();
         p.setSignUpObject(this);
-        p.signUp(username, emailAdress, passwordP);
+        p.signUp(username, emailAdress, passwordP ,Image);
     }
     
     void SignUp_Success()

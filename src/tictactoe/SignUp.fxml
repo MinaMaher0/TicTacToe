@@ -109,22 +109,22 @@
       </Pane>
       <Pane prefHeight="217.0" prefWidth="770.0">
          <children>
-            <ImageView fitHeight="118.0" fitWidth="84.0" layoutX="72.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="118.0" fitWidth="84.0" layoutX="72.0" layoutY="64.0" onMouseClicked="#pic1" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/5.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="101.0" fitWidth="84.0" layoutX="195.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="101.0" fitWidth="84.0" layoutX="195.0" layoutY="85.0" onMouseClicked="#pic2" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/4.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="109.0" fitWidth="101.0" layoutX="480.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="109.0" fitWidth="101.0" layoutX="480.0" layoutY="68.0" onMouseClicked="#pic4" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/1.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="101.0" fitWidth="64.0" layoutX="353.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="101.0" fitWidth="64.0" layoutX="353.0" layoutY="85.0" onMouseClicked="#pic3" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/2.png" />
                </image>
@@ -142,7 +142,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <ImageView fitHeight="109.0" fitWidth="166.0" layoutX="560.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="109.0" fitWidth="166.0" layoutX="560.0" layoutY="76.0" onMouseClicked="#pic5" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/3.png" />
                </image>
