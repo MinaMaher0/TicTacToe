@@ -324,6 +324,8 @@ public class ServerSideClass implements Server {
             jsonStart.put("RequestType", Request.START_GAME);
             jsonStart.put("playerOneName", game.getPlayer1().getUser_name());
             jsonStart.put("playerTwoName", game.getPlayer2().getUser_name());
+            jsonStart.put("playerOnePic", game.getPlayer1().getProfile_picture());
+            jsonStart.put("playerTwoPic", game.getPlayer2().getProfile_picture());
             jsonStart.put("playerOneScore", game.getFp_score());
             jsonStart.put("playerTwoScore", game.getSp_score());
             jsonStart.put("tieScore", game.getTie_score());

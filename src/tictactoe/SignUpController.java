@@ -20,7 +20,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import org.apache.commons.validator.routines.EmailValidator;
 
 
@@ -42,29 +46,60 @@ PlayerFunctions p= new PlayerFunctions();
     @FXML
     private Label hasAccount;
     
+    @FXML
+    private BorderPane borderPane1;
+
+    @FXML
+    private BorderPane borderPane2;
+
+    @FXML
+    private ImageView anger;
+
+    @FXML
+    private BorderPane borderPane4;
+
+    @FXML
+    private BorderPane borderPane3;
+
+    @FXML
+    private BorderPane borderPane5;
+    
+    void imgBackgroundColor(int i){
+        borderPane1.setStyle(i==1? "-fx-background-color: #0000FF;":"-fx-background-color: #FFFFFF;");
+        borderPane2.setStyle(i==2? "-fx-background-color: #0000FF;":"-fx-background-color: #FFFFFF;");
+        borderPane3.setStyle(i==3? "-fx-background-color: #0000FF;":"-fx-background-color: #FFFFFF;");
+        borderPane4.setStyle(i==4? "-fx-background-color: #0000FF;":"-fx-background-color: #FFFFFF;");
+        borderPane5.setStyle(i==5? "-fx-background-color: #0000FF;":"-fx-background-color: #FFFFFF;");
+    }
+    
       @FXML
     void pic1(MouseEvent event) {
-         Image = "1.png";
+         Image = "5.png";
+         imgBackgroundColor(1);
     }
 
     @FXML
     void pic2(MouseEvent event) {
-        Image = "2.png";
+        Image = "4.png";
+        imgBackgroundColor(2);
     }
 
     @FXML
     void pic3(MouseEvent event) {
-        Image = "3.png";
+        Image = "2.png";
+        imgBackgroundColor(3);
     }
 
     @FXML
     void pic4(MouseEvent event) {
-         Image = "4.png";
+         Image = "1.png";
+         imgBackgroundColor(4);
     }
 
     @FXML
     void pic5(MouseEvent event) {
-        Image = "5.png";
+        Image = "3.png";
+        imgBackgroundColor(5);
     }
 
 
