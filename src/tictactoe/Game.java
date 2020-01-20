@@ -23,22 +23,21 @@ public class Game {
     String level;
     boolean playAgainPlayer1=false,playAgainPlayer2=false;
     
-    public Game(Player player1, Player player2, char[] board, int playerTurn, int fp_score, int sp_score, int tie_score) {
+    public Game(Player player1, Player player2,int playerTurn,int pFirstCell, char[] board, int tie_score,  int fp_score, int sp_score) {
         this.player1 = player1;
         this.player2 = player2;
         this.board = board;
         this.playerTurn = playerTurn;
+        this.playerPlayedFirstCell=pFirstCell;
         this.fp_score = fp_score;
         this.sp_score = sp_score;
         this.tie_score = tie_score;
         cellFilled=countCells();
-        for (int i=0;i<9;++i){
-            board[i]=' ';
-        }
+        System.out.println("board at Game = "+board[0]);
     }
 
     public Game(Player player1, Player player2) {
-       this(player1, player2, new char[9], player1.getId());
+       this(player1, player2, player1.getId(), 1 ,new char[9]);
         
     }
 
@@ -50,8 +49,8 @@ public class Game {
         this.level = level;
     }
     
-    public Game(Player player1, Player player2, char[] board, int playerTurn) {
-        this(player1, player2, board, playerTurn, 0, 0, 0);
+    public Game(Player player1, Player player2, int playerTurn,int pFCell, char[] board) {
+        this(player1, player2,playerTurn,pFCell, board, 0, 0, 0);
     }
     
     public Game(Player player,boolean isComputer,String level){

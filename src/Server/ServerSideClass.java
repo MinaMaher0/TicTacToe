@@ -93,7 +93,7 @@ public class ServerSideClass implements Server {
                 });
                
                 ps.println(singInBack.toString());
-                sendNotification(p.getUser_name(),p.getId());
+                sendNotification(p.getUser_name(),p.getId(),p.getProfile_picture());
                 sendUsers();
                 ServerControl.playerMap.put(p.getId(),s);
                 System.out.println("PPPPPPPPPPPP");
@@ -129,12 +129,13 @@ public class ServerSideClass implements Server {
         } 
     }
     
-    void sendNotification(String userName,int pID){
+    void sendNotification(String userName,int pID,String playerPic){
         JSONObject users= new JSONObject();
         try {
             users.put("RequestType",Request.NOTIFICATION);
             users.put("userName",userName);
             users.put("pID",pID);
+            users.put("playerPic",playerPic);
             for (ServerHandler sv : ServerHandler.socketVector)
             {
                 sv.Ps.println(users.toString());
@@ -145,9 +146,9 @@ public class ServerSideClass implements Server {
     }
 
     @Override
-    public boolean signUP(String userName, String email, String password){
+    public boolean signUP(String userName, String email, String password, String image){
         
-        boolean sUpStatus=db.signUp(userName, password, email);
+        boolean sUpStatus=db.signUp(userName, password, email , image);
         JSONObject singUpBack= new JSONObject();
         if(sUpStatus == true)
         {
@@ -161,7 +162,7 @@ public class ServerSideClass implements Server {
                 singUpBack.put("userName",p.getUser_name());
                 singUpBack.put("email",p.getEmail());
                 singUpBack.put("score",p.getScore());
-                singUpBack.put("pPic",p.getProfile_picture());
+                singUpBack.put("image",p.getProfile_picture());
                 singUpBack.put("RequestType",Request.SIGN_UP_SUCCESS);
                 ps.println(singUpBack.toString());
                 
@@ -324,9 +325,12 @@ public class ServerSideClass implements Server {
             jsonStart.put("RequestType", Request.START_GAME);
             jsonStart.put("playerOneName", game.getPlayer1().getUser_name());
             jsonStart.put("playerTwoName", game.getPlayer2().getUser_name());
+            jsonStart.put("playerOnePic", game.getPlayer1().getProfile_picture());
+            jsonStart.put("playerTwoPic", game.getPlayer2().getProfile_picture());
             jsonStart.put("playerOneScore", game.getFp_score());
             jsonStart.put("playerTwoScore", game.getSp_score());
             jsonStart.put("tieScore", game.getTie_score());
+            jsonStart.put("GameBoard",String.valueOf(game.getBoard()));
             ServerControl.playerMap.get(p1).Ps.println(jsonStart.toString());
             ServerControl.playerMap.get(p2).Ps.println(jsonStart.toString());
         } catch (JSONException ex) {
@@ -361,25 +365,6 @@ public class ServerSideClass implements Server {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-   /* public void sendLeaveGame(int p1, int p2)
-    {
-          JSONObject jsonLeaveGame = new JSONObject();
-        try {
-            for (Player p:ServerControl.players)
-            {
-                if(p.getId()== p1)
-                    jsonLeaveGame.put("userName", p.getUser_name());
-            }
-            jsonLeaveGame.put("RequestType", Request.LEAVE_GAME);
-            ServerControl.playerMap.get(p2).Ps.println(jsonLeaveGame.toString());
-        } catch (JSONException ex) {
-            Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }*/
-    
     public void enableInviteButton(int p1, int p2)
     {
         for(Player p:ServerControl.players)
@@ -388,6 +373,20 @@ public class ServerSideClass implements Server {
                 p.setStatus(false);
         }
         sendUsers();
+    }
+    
+    public Game checkAvilabeGame(Player p1 , Player p2)
+    {
+        Game g;
+        if(db.checkAvailableGame(p1.getId(), p2.getId()))
+        {
+            g=db.getGame(p1.getId(), p2.getId());
+//            System.out.println(g.getPlayer1().getUser_name()+" "+g.getPlayer2().getUser_name());
+            db.deleteGame(p1.getId(), p2.getId());
+            return g;
+        }
+        else
+            return new Game(p1,p2);
     }
 
 }

@@ -16,7 +16,7 @@ public interface Server{
 
     public boolean signIN(String userName,String password,ServerHandler s);
     
-    public boolean signUP(String userName,String email,String password);
+    public boolean signUP(String userName,String email,String password,String image);
     
     //when user logout set new points to consider which level he belongs to
     public void updateUserScore(String userName,int score);

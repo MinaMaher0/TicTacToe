@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.SignInController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.SignInController">
    <children>
       <ImageView fitHeight="256.0" fitWidth="331.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -96,41 +96,5 @@
             <Font name="System Italic" size="20.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" prefHeight="46.0" prefWidth="766.0" spacing="70.0">
-         <children>
-            <JFXButton styleClass="google_btn" stylesheets="@signin.css" text="oogle">
-               <font>
-                  <Font name="Tahoma" size="18.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop color="#e81523" />
-                        <Stop color="#1841e2" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-               <graphic>
-                  <FontAwesomeIconView glyphName="GOOGLE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="40" />
-               </graphic>
-            </JFXButton>
-            <JFXButton styleClass="facebook_btn" stylesheets="@signin.css" text="aceBook">
-               <font>
-                  <Font name="Tahoma" size="18.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop color="#e81523" />
-                        <Stop color="#1841e2" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-               <graphic>
-                  <FontAwesomeIconView glyphName="FACEBOOK_OFFICIAL" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" size="40" />
-               </graphic>
-            </JFXButton>
-         </children>
-      </HBox>
    </children>
 </VBox>

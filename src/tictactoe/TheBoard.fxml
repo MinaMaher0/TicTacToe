@@ -71,33 +71,29 @@
       <Button fx:id="save_btn" alignment="CENTER" layoutX="873.0" layoutY="223.0" mnemonicParsing="false" onAction="#loadLeaveGameDialg" prefHeight="44.0" prefWidth="118.0" styleClass="input_button" stylesheets="@board.css" textAlignment="JUSTIFY" />
       <FontAwesomeIconView fx:id="save_icon" fill="WHITE" glyphName="SAVE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="930.0" layoutY="250.0" size="20" wrappingWidth="17.14285659790039" />
       <Label layoutX="7.0" layoutY="7.0" prefHeight="87.0" prefWidth="185.0" styleClass="user_label" stylesheets="@board.css" />
-      <ImageView fitHeight="53.0" fitWidth="88.0" layoutX="12.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="playerTwoPic" fitHeight="53.0" fitWidth="88.0" layoutX="12.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/user.png" />
          </image>
       </ImageView>
-      <Label fx:id="playerTname" layoutX="57.0" layoutY="1.0" prefHeight="47.0" prefWidth="128.0" text="mina" textFill="#c59ffd">
+      <Label fx:id="playerTname" layoutX="73.0" layoutY="1.0" prefHeight="47.0" prefWidth="128.0" text="mina" textFill="#c59ffd">
          <font>
             <Font name="Tahoma Bold" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="pTscore" layoutX="64.0" layoutY="51.0" prefHeight="27.0" prefWidth="50.0" text="100">
+      <Label fx:id="pTscore" layoutX="83.0" layoutY="51.0" prefHeight="27.0" prefWidth="50.0" text="100">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
       <Label layoutX="811.0" layoutY="2.0" prefHeight="87.0" prefWidth="185.0" styleClass="user_label" stylesheets="@board.css" />
-      <ImageView fitHeight="53.0" fitWidth="88.0" layoutX="813.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/user.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="playerOname" layoutX="860.0" layoutY="5.0" prefHeight="35.0" prefWidth="122.0" text="salama" textFill="#c59ffd">
+      <ImageView fx:id="playerOnePic" fitHeight="53.0" fitWidth="65.0" layoutX="813.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="playerOname" layoutX="876.0" layoutY="5.0" prefHeight="35.0" prefWidth="122.0" text="salama" textFill="#c59ffd">
          <font>
             <Font name="Tahoma Bold" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="playerOscore" layoutX="871.0" layoutY="45.0" prefHeight="27.0" prefWidth="50.0" text="100">
+      <Label fx:id="playerOscore" layoutX="887.0" layoutY="45.0" prefHeight="27.0" prefWidth="50.0" text="100">
          <font>
             <Font size="25.0" />
          </font>

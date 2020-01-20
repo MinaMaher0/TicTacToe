@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.PlayAgainDialogController">
+<AnchorPane id="AnchorPane" prefHeight="242.0" prefWidth="507.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.PlayAgainDialogController">
     <stylesheets>
         <URL value="@playagaindialog.css" />
     </stylesheets>
@@ -23,6 +23,14 @@
       <Label fx:id="msg" layoutX="69.0" layoutY="63.0" prefHeight="167.0" prefWidth="467.0" textAlignment="CENTER">
          <font>
             <Font name="Cambria Bold" size="36.0" />
+
          </font></Label>
+      <JFXButton fx:id="playAgainBTN" layoutX="95.0" layoutY="150.0" onAction="#playAgain" prefHeight="45.0" prefWidth="143.0" styleClass="accept_btn" stylesheets="@playagaindialog.css" text="Play Again" />
+      <JFXButton layoutX="287.0" layoutY="150.0" onAction="#exit" prefHeight="45.0" prefWidth="136.0" styleClass="deline_btn" stylesheets="@playagaindialog.css" text="Exit" />
+      <Label fx:id="msg" alignment="CENTER" layoutX="81.0" layoutY="21.0" prefHeight="85.0" prefWidth="349.0" textAlignment="CENTER">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

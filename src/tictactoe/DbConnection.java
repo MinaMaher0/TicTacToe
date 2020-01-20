@@ -32,8 +32,8 @@ public class DbConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","ahmedxd22");
 
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","ahmedxd22");
 
 //jdbc:mysql://localhost:3306/tic_tac_toe
             st = conn.createStatement();
@@ -71,16 +71,17 @@ public class DbConnection {
         return v;
     }
     
-    public boolean signUp( String user_name , String password , String mail)
+    public boolean signUp( String user_name , String password , String mail, String image)
     {
         try {
             
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO player (user_name,email,password) " +
-                    "VALUES (?,?,?);");
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO player (user_name,email,password,Profile_picture) " +
+                    "VALUES (?,?,?,?);");
             
             pst.setString(1, user_name);
             pst.setString(2, mail);
             pst.setString(3, password);
+            pst.setString(4, image);
             int rs = pst.executeUpdate();
             getData();
             return rs!=0;
@@ -120,10 +121,12 @@ public class DbConnection {
     {
         PreparedStatement pst;
         try {
-            pst = conn.prepareStatement(" select * from game" +"where first_player=? and second_player=?; ");
-        
+            pst = conn.prepareStatement("SELECT * FROM game WHERE (first_player=? AND second_player=?) OR (first_player= ? AND second_player=?);");
+            
             pst.setInt(1, pId1);
-            pst.setInt(2, pId2); 
+            pst.setInt(2, pId2);
+            pst.setInt(4, pId1);
+            pst.setInt(3, pId2); 
             ResultSet rs = pst.executeQuery();  
             if(rs.next())
                 return true;
@@ -155,15 +158,20 @@ public class DbConnection {
         
         PreparedStatement pst;
         try {
-             pst = conn.prepareStatement(" select * from game " +"where first_player= ? && second_player=? ; ");
+            
+             pst = conn.prepareStatement(" select * from game " +"where (first_player= ? AND second_player=?) OR (first_player= ? AND second_player=?);");
              pst.setInt(1, pId1);
              pst.setInt(2, pId2);
+             
+             pst.setInt(4, pId1);
+             pst.setInt(3, pId2);
              
              ResultSet rs = pst.executeQuery();  
             
             if(rs.next())
              {
-                 Game g = new Game(getPlayer(pId1), getPlayer(pId2),rs.getString(7).toCharArray(), rs.getInt(6), rs.getInt(9), rs.getInt(10), rs.getInt(8));
+                 System.out.println("at DB=  "+rs.getString(7).toCharArray()[0]+" String = "+rs.getString(7));
+                 Game g = new Game(getPlayer(rs.getInt(2)), getPlayer(rs.getInt(3)),rs.getInt(4), rs.getInt(5),rs.getString(6).toCharArray(), rs.getInt(7), rs.getInt(8), rs.getInt(9));  
                  return g ;
              }
             
@@ -178,9 +186,12 @@ public class DbConnection {
     {
         PreparedStatement pst;
         try {
-            pst = conn.prepareStatement(" DELETE FROM game " +"where first_player= ? and second_player=?; ");
+            pst = conn.prepareStatement(" DELETE FROM game " +"where (first_player= ? and second_player=?) OR (first_player= ? and second_player=?); ");
             pst.setInt(1, pId1);
             pst.setInt(2, pId2);
+            
+            pst.setInt(4, pId1);
+            pst.setInt(3, pId2);
             
             pst.executeUpdate();  
             
@@ -197,16 +208,17 @@ public class DbConnection {
        int p2 = game.getPlayer2().getId();
        
         try {
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO game (first_player,second_player,fp_code,game_board,fp_score,sp_score,tie) " +
-                    "VALUES (?,?,?,?,?,?,?);");
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO game (first_player,second_player,playerTurn,first_cell,game_board,tie,fp_score,sp_score) " +
+                    "VALUES (?,?,?,?,?,?,?,?);");
             
             pst.setInt(1, p1);
             pst.setInt(2, p2);
             pst.setInt(3, game.getPlayerTurn());
-            pst.setString(4, String.valueOf(game.getBoard()));
-            pst.setInt(5, game.getFp_score());
-            pst.setInt(6, game.getSp_score());
-            pst.setInt(7, game.getTie_score());
+            pst.setInt(4, game.getPlayerPlayedFirstCell());
+            pst.setString(5, String.valueOf(game.getBoard()));
+            pst.setInt(6, game.getTie_score());
+            pst.setInt(7, game.getFp_score());
+            pst.setInt(8, game.getSp_score());
             int rs = pst.executeUpdate();
             System.out.println("Game Saved Successfully");
         } catch (SQLException ex) {

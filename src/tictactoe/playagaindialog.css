@@ -5,3 +5,41 @@
 .mainFxmlClass {
 
 }
+
+
+.mainFxmlClass {
+
+}
+.accept_btn{
+  -fx-font-family : Tahoma;
+  -fx-font-size : 22px;
+  -fx-text-fill: #FFF;
+  -fx-background-radius: 10px;
+  -fx-background-color:#00E676;
+}
+.accept_btn:hover{
+    -fx-cursor: hand;
+    -fx-border-color:#00E676;
+    -fx-border-width: 3px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #FFF;
+     -fx-text-fill: #00E676;
+    -fx-font-weight: bold; 
+}
+.deline_btn{
+  -fx-font-family : Tahoma;
+  -fx-font-size : 22px;
+  -fx-text-fill: #FFF;
+  -fx-background-radius: 10px;
+  -fx-background-color: #FF0000;
+}
+.deline_btn:hover{
+    -fx-cursor: hand;
+    -fx-border-color: #FF0000;
+    -fx-border-width: 3px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #FFF;
+     -fx-text-fill:#FF0000;
+    -fx-font-weight: bold; 
+}
+
