@@ -100,12 +100,25 @@ public class TheBoardController implements Initializable {
         pf=obj;
         pf.setBoardObj(this);
     }    
-    public void setGameDetails(String playerOneName,int playerOneScore,String playerTwoName,int playerTwoScore,int tieScore){
+    public void setGameDetails(String playerOneName,int playerOneScore,String playerTwoName,int playerTwoScore,int tieScore,String board){
         num_of_tie.setText(String.valueOf(tieScore));
         playerOname.setText(playerOneName);
         playerOscore.setText(String.valueOf(playerOneScore));
         playerTname.setText(playerTwoName);
         pTscore.setText(String.valueOf(playerTwoScore));
+        System.out.println("bord = "+board);
+        lbl_11.setText(String.valueOf(board.charAt(0)));
+        lbl_12.setText(String.valueOf(board.charAt(1)));
+        lbl_13.setText(String.valueOf(board.charAt(2)));
+        
+        lbl_21.setText(String.valueOf(board.charAt(3)));
+        lbl_22.setText(String.valueOf(board.charAt(4)));
+        lbl_23.setText(String.valueOf(board.charAt(5)));
+        
+        lbl_31.setText(String.valueOf(board.charAt(6)));
+        lbl_32.setText(String.valueOf(board.charAt(7)));
+        lbl_33.setText(String.valueOf(board.charAt(8)));
+        
     }
    
     @FXML

@@ -116,7 +116,7 @@ class ServerHandler extends Thread {
                     p1 = getPlayer(json.getInt("senderID"));
                     p2 = getPlayer(json.getInt("receiverID"));
                     serverObj.fillLsitofBusyUser(p1.getId(),p2.getId());
-                    Game g = new Game(p1, p2);
+                    Game g = serverObj.checkAvilabeGame(p1,p2);
                     setGame(g);
                     ServerControl.playerMap.get(json.getInt("senderID")).setGame(g);
                     ServerControl.playerMap.get(json.getInt("receiverID")).setGame(g);

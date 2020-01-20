@@ -267,7 +267,7 @@ public class PlayerFunctions implements Client {
                                     try {
                                         boardObj.exitDialog();
                                         boardObj.setTurnLbl(playerIsTurn);
-                                        boardObj.setGameDetails(ReqObj.getString("playerOneName"),ReqObj.getInt("playerOneScore"),ReqObj.getString("playerTwoName"),ReqObj.getInt("playerTwoScore"),ReqObj.getInt("tieScore"));
+                                        boardObj.setGameDetails(ReqObj.getString("playerOneName"),ReqObj.getInt("playerOneScore"),ReqObj.getString("playerTwoName"),ReqObj.getInt("playerTwoScore"),ReqObj.getInt("tieScore"),ReqObj.getString("GameBoard"));
                                     } catch (JSONException ex) {
                                         Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                                     }
@@ -350,6 +350,7 @@ public class PlayerFunctions implements Client {
                         
                     }
                     break;
+       
 
             }
 
@@ -408,7 +409,7 @@ public class PlayerFunctions implements Client {
     public void playWithComuter(String level) {
         game = new Game(pla, true, level);
         playerIsTurn = true;
-        boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),"Computer", game.getSp_score(), game.getTie_score());
+        boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),"Computer", game.getSp_score(), game.getTie_score(),"");
         boardObj.hideChatAndSave();
     }
 
@@ -492,7 +493,7 @@ public class PlayerFunctions implements Client {
     public void playAgain() {
         if (game!=null) {
             game.playAgain();
-            boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),"Computer", game.getSp_score(), game.getTie_score());
+            boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),"Computer", game.getSp_score(), game.getTie_score(),"");
             if (game.playerTurn==-1)
                 computerTurn();
         }else {
