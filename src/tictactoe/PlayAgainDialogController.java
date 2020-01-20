@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import static tictactoe.TheBoardController.newStage;
 
 /**
@@ -39,6 +40,18 @@ public class PlayAgainDialogController implements Initializable {
     
     @FXML
     private Button playAgainBTN;
+     @FXML
+    private Label msg;
+     
+     void setMsg(String message,String color){
+         System.out.println(message + " "+color);
+         msg.setText(message);
+         if (color.equals("Red"))
+            msg.setTextFill(Color.RED);
+         else if (color.equals("Green"))
+             msg.setTextFill(Color.GREEN);
+         else msg.setTextFill(Color.YELLOW);
+     }
     
     public void setPlayerFunctionsObj(PlayerFunctions obj){
         playerFunctionsObj=obj;
@@ -62,9 +75,9 @@ public class PlayAgainDialogController implements Initializable {
     
     public void exitAction(){
         loadHomePage();
-        playerFunctionsObj.exitGame();
         if (playerFunctionsObj.isPlayWithComputer())
         TheBoardController.newStage.close();
+        playerFunctionsObj.exitGame();
     }
     
     @FXML

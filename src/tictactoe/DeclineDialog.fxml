@@ -5,20 +5,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="173.0" prefWidth="392.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tictactoe.DeclineDialogController">
+<AnchorPane id="AnchorPane" prefHeight="173.0" prefWidth="392.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.DeclineDialogController">
    <children>
       <Label layoutX="158.0" prefHeight="46.0" prefWidth="87.0" text="Sorry!" textFill="#e82020">
          <font>
             <Font name="Comic Sans MS Bold" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="46.0" prefHeight="30.0" prefWidth="180.0" text="Mohamed Salma" textFill="#756d6d">
+      <Label fx:id="userName" layoutX="14.0" layoutY="46.0" prefHeight="30.0" prefWidth="180.0" text="Mohamed Salma" textFill="#756d6d">
          <font>
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font>
       </Label>
-      <JFXButton layoutX="126.0" layoutY="116.0" prefHeight="46.0" prefWidth="152.0" styleClass="deline_btn" stylesheets="@invitedialog.css" text="Ok" />
+      <JFXButton fx:id="ok" layoutX="126.0" layoutY="116.0" onAction="#accept" prefHeight="46.0" prefWidth="152.0" styleClass="deline_btn" stylesheets="@invitedialog.css" text="Ok" />
       <Label layoutX="14.0" layoutY="80.0" prefHeight="28.0" prefWidth="240.0" text="Rejected your invitation." textFill="#756d6d">
          <font>
             <Font name="Comic Sans MS" size="20.0" />

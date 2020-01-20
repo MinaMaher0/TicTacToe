@@ -5,7 +5,7 @@
  */
 package tictactoe;
 
-import Server.ServerControl;
+import Server.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -50,11 +50,10 @@ public class PlayerFunctions implements Client {
     SignInController siginObj = null;
     SignUpController signupObj = null;
     TheBoardController boardObj = null;
-
-    String messageContent = new String();
-
-    public void setControlButtonsController(ControlButtonsController obj) {
-        cbController = obj;
+    ServerSideClass sSC= new ServerSideClass();
+    
+    public void setControlButtonsController(ControlButtonsController obj){
+        cbController=obj;
         cbController.showPlayers();
     }
 
@@ -168,7 +167,6 @@ public class PlayerFunctions implements Client {
             invitePlayerObject.put("receiverID", id);
             invitePlayerObject.put("senderUserName", pla.getUser_name());
             invitePlayerObject.put("RequestType", Request.INVITE_PLAYER);
-
             output.println(invitePlayerObject.toString());
             //acceptinvitation(pla.getId(), id);
         } catch (JSONException ex) {
@@ -264,7 +262,8 @@ public class PlayerFunctions implements Client {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            if (cbController != null) {
+                            if (cbController!=null){
+                               
                                 cbController.loadBoard(false);
                                 Platform.runLater(() -> {
                                     try {
@@ -294,7 +293,14 @@ public class PlayerFunctions implements Client {
                     });
                     break;
                 case Request.REFUSE_INVITATION:
-                    cbController.loadDeclineboard(ReqObj.getString("usrName"));
+                    Platform.runLater(() -> {
+                    try {
+                         cbController.loadDeclineboard(ReqObj.getString("userName"));
+                    } catch (JSONException ex) {
+                    Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
+                   
                     break;
                 case Request.SERVER_FAILED:
                     Platform.runLater(new Runnable() {
@@ -303,8 +309,9 @@ public class PlayerFunctions implements Client {
                             System.out.println("Server Fallen ya beeh ");
                             cbController.showServerDownDialog();
                         }
-                    });
+                 });
                     break;
+                
                 case Request.PLAYER_TURN:
                     playerIsTurn = true;
                     System.out.println("yyyyyyyyyyyyyyy");
@@ -325,7 +332,7 @@ public class PlayerFunctions implements Client {
                     });
                     break;
                 case Request.PLAY_AGAIN:
-                    showPlayAgain();
+                    showPlayAgain(ReqObj.getString("Message"),ReqObj.getString("Color"));
                     break;
                 case Request.EXIT_GAME:
                     extiPlayAgain();
@@ -345,8 +352,7 @@ public class PlayerFunctions implements Client {
                         
                     }
                     break;
-                case Request.LOG_OUT:
-                    
+
             }
 
         } catch (Exception ex) {
@@ -374,6 +380,7 @@ public class PlayerFunctions implements Client {
             p.setId(jObj.getInt("id"));
             p.setUser_name(jObj.getString("user_name"));
             p.setFlag(jObj.getBoolean("flag"));
+            p.setStatus(jObj.getBoolean("status"));
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -394,7 +401,6 @@ public class PlayerFunctions implements Client {
             acceptinvitation.put("receiverID", pTwoId);
             acceptinvitation.put("RequestType", Request.ACCEPT_INVITATION);
             output.println(acceptinvitation.toString());
-
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -441,9 +447,9 @@ public class PlayerFunctions implements Client {
     public void declineInvitation(int pOneId, int pTwoId) {
         System.out.println("ayaaaaaaaaaa");
         JSONObject declineinvitation = new JSONObject();
-        try {
-            declineinvitation.put("SenderId", pOneId);
-            declineinvitation.put("RecieverId", pTwoId);
+         try {
+            declineinvitation.put("senderID", pOneId);
+            declineinvitation.put("receiverID", pTwoId);
             declineinvitation.put("RequestType", Request.REFUSE_INVITATION);
             output.println(declineinvitation.toString());
         } catch (JSONException ex) {
@@ -464,11 +470,11 @@ public class PlayerFunctions implements Client {
         }
     }
 
-    void showPlayAgain() {
+    void showPlayAgain(String msg,String color) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                boardObj.showPlayAgainDialog();
+                boardObj.showPlayAgainDialog(msg,color);
             }
         });
     }
@@ -544,19 +550,19 @@ public class PlayerFunctions implements Client {
         }
         int ret = playerTurn(cellNum);
         if (ret == 1) {
-            showPlayAgain();
+            showPlayAgain("you win","Green");
             //boardObj.setTurnLbl(false);
         } else if (ret == -1) {
-            showPlayAgain();
+            showPlayAgain("Tie","Yellow");
         } else {
             Platform.runLater(() -> {
                 boardObj.setTurnLbl(!playerIsTurn);
             });
             int cpuret = computerTurn();
             if (cpuret == 1) {
-                showPlayAgain();
+                showPlayAgain("You Lose","Red");
             } else if (cpuret == -1) {
-                showPlayAgain();
+                showPlayAgain("Tie","Yellow");
             } else {
                 Platform.runLater(() -> {
                     boardObj.setTurnLbl(playerIsTurn);
@@ -570,5 +576,19 @@ public class PlayerFunctions implements Client {
     }
 
    
+    
+    @Override
+    public void leaveGame() {
+        
+          JSONObject saveGame = new JSONObject();
+         try {
+            saveGame.put("RequestType", Request.SAVE_GAME);
+            output.println(saveGame.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("player function save game ");
+    }
+    
     
 }

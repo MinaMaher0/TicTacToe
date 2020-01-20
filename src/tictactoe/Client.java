@@ -32,4 +32,6 @@ public interface Client {
     
     public void logOut(int pId);
     
+    public void leaveGame();
+
 }

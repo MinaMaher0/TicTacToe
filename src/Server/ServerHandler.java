@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import tictactoe.Game;
-import tictactoe.Player;
+import tictactoe.*;
 import utils.Request;
 
 /**
@@ -41,6 +41,8 @@ class ServerHandler extends Thread {
     }
             
             
+    ControlButtonsController cbControl= null;
+    
     public ServerHandler(Socket socket) {
         try {
             s=socket;
@@ -112,8 +114,10 @@ class ServerHandler extends Thread {
 
                 case Request.ACCEPT_INVITATION:
                     p1 = getPlayer(json.getInt("senderID"));
-                    p2 = getPlayer(json.getInt("receiverID"));                            
+                    p2 = getPlayer(json.getInt("receiverID"));
+                    serverObj.fillLsitofBusyUser(p1.getId(),p2.getId());
                     Game g = new Game(p1, p2);
+                    setGame(g);
                     ServerControl.playerMap.get(json.getInt("senderID")).setGame(g);
                     ServerControl.playerMap.get(json.getInt("receiverID")).setGame(g);
                     serverObj.sendStartGameRequest(p1.getId(), p2.getId(),g);
@@ -121,6 +125,12 @@ class ServerHandler extends Thread {
                     sendReqType.put("RequestType", Request.PLAYER_TURN);
                     ServerControl.playerMap.get(g.getPlayerTurn()).Ps.println(sendReqType.toString());
                     break;
+                    
+                    
+                case Request.REFUSE_INVITATION: 
+                    serverObj.sendRefuseGameRequest(json.getInt("senderID"), json.getInt("receiverID"));
+                    break;
+                    
                 case Request.PLAYED_CELL:
                    int cellNum=json.getInt("cellNum");
                    handleCellPlayed(cellNum);
@@ -136,6 +146,10 @@ class ServerHandler extends Thread {
                     handleExitGame();
                     break;
                 
+                case Request.SAVE_GAME:
+                    serverObj.saveGame(getGame());
+                    System.out.println("get the right game");
+                    break;
             }
         } catch (Exception ex) {
             
@@ -160,11 +174,26 @@ class ServerHandler extends Thread {
             if(result==1){
                 JSONObject sendReqType=new JSONObject();
                 sendReqType.put("RequestType", Request.PLAY_AGAIN);
-                ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
-                ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
+                sendReqType.put("Message", "You Are Winner");
+                sendReqType.put("Color", "Green");
+                if (game.getPlayerTurn()==game.getPlayer1().getId()){
+                    ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
+                    sendReqType.remove("Message");
+                    sendReqType.put("Message", "You Are Loser");
+                    sendReqType.put("Color", "Red");
+                    ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
+                }else {
+                    ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
+                    sendReqType.remove("Message");
+                    sendReqType.put("Message", "You Are Loser");
+                    sendReqType.put("Color", "Red");
+                    ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
+                }
             }else if(result==-1){
                 JSONObject sendReqType=new JSONObject();
                 sendReqType.put("RequestType", Request.PLAY_AGAIN);
+                sendReqType.put("Message", "Tie");
+                sendReqType.put("Color", "Yellow");
                 ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
                 ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
             }else{

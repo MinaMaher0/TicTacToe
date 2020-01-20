@@ -68,7 +68,7 @@
             <Button layoutX="445.0" layoutY="1.0" mnemonicParsing="false" onAction="#close_window" prefHeight="26.0" prefWidth="40.0" styleClass="close_window" stylesheets="@board.css" text="X" />
          </children>
       </Pane>
-      <Button fx:id="save_btn" alignment="CENTER" layoutX="873.0" layoutY="223.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="118.0" styleClass="input_button" stylesheets="@board.css" textAlignment="JUSTIFY" />
+      <Button fx:id="save_btn" alignment="CENTER" layoutX="873.0" layoutY="223.0" mnemonicParsing="false" onAction="#loadLeaveGameDialg" prefHeight="44.0" prefWidth="118.0" styleClass="input_button" stylesheets="@board.css" textAlignment="JUSTIFY" />
       <FontAwesomeIconView fx:id="save_icon" fill="WHITE" glyphName="SAVE" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="930.0" layoutY="250.0" size="20" wrappingWidth="17.14285659790039" />
       <Label layoutX="7.0" layoutY="7.0" prefHeight="87.0" prefWidth="185.0" styleClass="user_label" stylesheets="@board.css" />
       <ImageView fitHeight="53.0" fitWidth="88.0" layoutX="12.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
