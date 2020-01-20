@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
+import tictactoe.DbConnection;
 import tictactoe.Game;
 import tictactoe.*;
 import utils.Request;
@@ -29,6 +30,7 @@ class ServerHandler extends Thread {
     
     ServerSideClass serverObj;
     DataInputStream Dis;
+    DbConnection db;
     public PrintStream Ps;
     Socket s;
     ServerHandler me;
@@ -44,7 +46,9 @@ class ServerHandler extends Thread {
     ControlButtonsController cbControl= null;
     
     public ServerHandler(Socket socket) {
+
         try {
+            this.db=db;
             s=socket;
             Dis = new DataInputStream(socket.getInputStream());
             Ps = new PrintStream(socket.getOutputStream());
@@ -174,16 +178,18 @@ class ServerHandler extends Thread {
             if(result==1){
                 JSONObject sendReqType=new JSONObject();
                 sendReqType.put("RequestType", Request.PLAY_AGAIN);
-                sendReqType.put("Message", "You Are Winner");
+                sendReqType.put("Message", "You Are Winner\n your score inceased by 10");
                 sendReqType.put("Color", "Green");
                 if (game.getPlayerTurn()==game.getPlayer1().getId()){
                     ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
+                    db.updateScore(game.getPlayer1().getId());
                     sendReqType.remove("Message");
-                    sendReqType.put("Message", "You Are Loser");
+                    sendReqType.put("Message", "              You Are Loser");
                     sendReqType.put("Color", "Red");
                     ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
                 }else {
                     ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
+                    db.updateScore(game.getPlayer2().getId());
                     sendReqType.remove("Message");
                     sendReqType.put("Message", "You Are Loser");
                     sendReqType.put("Color", "Red");
