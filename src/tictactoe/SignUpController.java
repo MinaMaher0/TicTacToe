@@ -150,13 +150,11 @@ PlayerFunctions p= new PlayerFunctions();
     void SignUp_Success()
     {
              try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("ControlButtons.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
                     Parent root;
                     root = (Parent)loader.load();
-                    ControlButtonsController CBController=loader.getController();
-                    CBController.setPlayerObj(p);
                     Scene scene = new Scene(root);
-                    MainGUI.primaryStage.setTitle("SignUp");
+                    MainGUI.primaryStage.setTitle("SignIN");
                     MainGUI.primaryStage.setScene(scene);
                     MainGUI.primaryStage.show(); 
         } catch (IOException ex) {

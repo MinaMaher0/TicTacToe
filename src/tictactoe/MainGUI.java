@@ -24,7 +24,7 @@ public class MainGUI extends Application {
     public void start(Stage stage) {
         try {   
             primaryStage=stage;
-            root=FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+            root=FXMLLoader.load(getClass().getResource("SignIn.fxml")) ;
             Scene scene=new Scene(root);
             stage.setTitle("SignIn");
             stage.setScene(scene);

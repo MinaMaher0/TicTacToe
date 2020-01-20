@@ -193,35 +193,38 @@ public class ControlButtonsController implements Initializable {
                     }
                 });
 
-                if (p.getFlag()) {
-                    invite.setText("Invite");
-                    invite.setCursor(Cursor.HAND);
-                    invite.setStyle(" -fx-outline: none;\n"
-                            + "    -fx-transition: .5s;\n"
-                            + "    -fx-font-size : 10px;\n"
-                            + "    -fx-background-color: FFF;\n"
-                            + "    -fx-text-fill:#37cd0d;\n"
-                            + "    -fx-font-weight:bold;\n"
-                            + "    -fx-font-family: 'Comic Sans MS';\n"
-                            + "    -fx-font: italic;\n"
-                            + " -fx-border-color:#00E676;"
-                            + "-fx-border-width: 2px;"
-                            + "   -fx-font: bold;");
+                
 
-                } else {
-                    invite.setText("Offline");
-                    invite.setStyle(" -fx-outline: none;\n"
-                            + "    -fx-transition: .5s;\n"
-                            + "    -fx-font-size : 8px;\n"
-                            + "    -fx-background-color: FFF;\n"
-                            + "    -fx-text-fill: #756C6C;\n"
-                            + " -fx-border-color:#756C6C;"
-                            + "    -fx-font-weight:bold;\n"
-                            + "    -fx-font-family: 'Comic Sans MS';\n"
-                            + "    -fx-font: italic;\n"
-                            + "-fx-border-width: 2px;"
-                            + "   -fx-font: bold;");
-                }
+            if (p.getFlag() && !p.getStatus())
+            {
+                invite.setText("Invite");
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle(" -fx-outline: none;\n" +
+"    -fx-transition: .5s;\n" +
+"    -fx-font-size : 10px;\n" +
+"    -fx-background-color: FFF;\n" +
+"    -fx-text-fill:#37cd0d;\n" +
+"    -fx-font-weight:bold;\n" +
+"    -fx-font-family: 'Comic Sans MS';\n" +
+"    -fx-font: italic;\n" +
+" -fx-border-color:#00E676;"+   
+"-fx-border-width: 2px;"+                        
+"   -fx-font: bold;");
+            } else if (p.getStatus())
+            {
+                System.out.println("heloooooooooooooooooooooolllolo");
+                invite.setText("Busy");
+                invite.setDisable(true);
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle("-fx-color: #FF0000; -fx-border-width: 5px;");
+            }else{
+                invite.setText("Offline");
+                invite.setDisable(true);
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle("-fx-color: #C8C8C8; -fx-border-width: 5px;");
+            }
+
+
 
                 score_button.getChildren().addAll(score, invite);
 
@@ -270,35 +273,34 @@ public class ControlButtonsController implements Initializable {
                     }
                 });
 
-                if (p.getFlag()) {
-                    invite.setText("Invite");
-                    invite.setCursor(Cursor.HAND);
-                    invite.setStyle(" -fx-outline: none;\n"
-                            + "    -fx-transition: .5s;\n"
-                            + "    -fx-font-size : 10px;\n"
-                            + "    -fx-background-color: FFF;\n"
-                            + "    -fx-text-fill:#37cd0d;\n"
-                            + "    -fx-font-weight:bold;\n"
-                            + "    -fx-font-family: 'Comic Sans MS';\n"
-                            + "    -fx-font: italic;\n"
-                            + " -fx-border-color:#00E676;"
-                            + "-fx-border-width: 2px;"
-                            + "   -fx-font: bold;");
-
-                } else {
-                    invite.setText("Offline");
-                    invite.setStyle(" -fx-outline: none;\n"
-                            + "    -fx-transition: .5s;\n"
-                            + "    -fx-font-size : 8px;\n"
-                            + "    -fx-background-color: FFF;\n"
-                            + "    -fx-text-fill: #756C6C;\n"
-                            + " -fx-border-color:#756C6C;"
-                            + "    -fx-font-weight:bold;\n"
-                            + "    -fx-font-family: 'Comic Sans MS';\n"
-                            + "    -fx-font: italic;\n"
-                            + "-fx-border-width: 2px;"
-                            + "   -fx-font: bold;");
-                }
+                if (p.getFlag() && !p.getStatus())
+            {
+                invite.setText("Invite");
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle(" -fx-outline: none;\n" +
+"    -fx-transition: .5s;\n" +
+"    -fx-font-size : 10px;\n" +
+"    -fx-background-color: FFF;\n" +
+"    -fx-text-fill:#37cd0d;\n" +
+"    -fx-font-weight:bold;\n" +
+"    -fx-font-family: 'Comic Sans MS';\n" +
+"    -fx-font: italic;\n" +
+" -fx-border-color:#00E676;"+   
+"-fx-border-width: 2px;"+                        
+"   -fx-font: bold;");
+            } else if (p.getStatus())
+            {
+                System.out.println("heloooooooooooooooooooooolllolo");
+                invite.setText("Busy");
+                invite.setDisable(true);
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle("-fx-color: #FF0000; -fx-border-width: 5px;");
+            }else{
+                invite.setText("Offline");
+                invite.setDisable(true);
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle("-fx-color: #C8C8C8; -fx-border-width: 5px;");
+            }
 
                 score_button.getChildren().addAll(score, invite);
 
@@ -345,35 +347,34 @@ public class ControlButtonsController implements Initializable {
                     }
                 });
 
-                if (p.getFlag()) {
-                    invite.setText("Invite");
-                    invite.setCursor(Cursor.HAND);
-                    invite.setStyle(" -fx-outline: none;\n"
-                            + "    -fx-transition: .5s;\n"
-                            + "    -fx-font-size : 10px;\n"
-                            + "    -fx-background-color: FFF;\n"
-                            + "    -fx-text-fill:#37cd0d;\n"
-                            + "    -fx-font-weight:bold;\n"
-                            + "    -fx-font-family: 'Comic Sans MS';\n"
-                            + "    -fx-font: italic;\n"
-                            + " -fx-border-color:#00E676;"
-                            + "-fx-border-width: 2px;"
-                            + "   -fx-font: bold;");
-
-                } else {
-                    invite.setText("Offline");
-                    invite.setStyle(" -fx-outline: none;\n"
-                            + "    -fx-transition: .5s;\n"
-                            + "    -fx-font-size : 8px;\n"
-                            + "    -fx-background-color: FFF;\n"
-                            + "    -fx-text-fill: #756C6C;\n"
-                            + " -fx-border-color:#756C6C;"
-                            + "    -fx-font-weight:bold;\n"
-                            + "    -fx-font-family: 'Comic Sans MS';\n"
-                            + "    -fx-font: italic;\n"
-                            + "-fx-border-width: 2px;"
-                            + "   -fx-font: bold;");
-                }
+                if (p.getFlag() && !p.getStatus())
+            {
+                invite.setText("Invite");
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle(" -fx-outline: none;\n" +
+"    -fx-transition: .5s;\n" +
+"    -fx-font-size : 10px;\n" +
+"    -fx-background-color: FFF;\n" +
+"    -fx-text-fill:#37cd0d;\n" +
+"    -fx-font-weight:bold;\n" +
+"    -fx-font-family: 'Comic Sans MS';\n" +
+"    -fx-font: italic;\n" +
+" -fx-border-color:#00E676;"+   
+"-fx-border-width: 2px;"+                        
+"   -fx-font: bold;");
+            } else if (p.getStatus())
+            {
+                System.out.println("heloooooooooooooooooooooolllolo");
+                invite.setText("Busy");
+                invite.setDisable(true);
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle("-fx-color: #FF0000; -fx-border-width: 5px;");
+            }else{
+                invite.setText("Offline");
+                invite.setDisable(true);
+                invite.setCursor(Cursor.HAND);
+                invite.setStyle("-fx-color: #C8C8C8; -fx-border-width: 5px;");
+            }
 
                 score_button.getChildren().addAll(score, invite);
 
@@ -399,6 +400,11 @@ public class ControlButtonsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         showPlayers();
+    }
+    
+    void fillHome(){
+        showPlayers();
+        
     }
     
     public void loadBoard(boolean isComputer){

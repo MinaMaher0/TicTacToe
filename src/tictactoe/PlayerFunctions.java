@@ -136,7 +136,7 @@ public class PlayerFunctions implements Client {
             
             SignupObject.put("RequestType", Request.SIGNUP);
             output.println(SignupObject.toString());
-
+            
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -197,6 +197,7 @@ public class PlayerFunctions implements Client {
             final JSONObject ReqObj = new JSONObject(str);
             switch (ReqObj.get("RequestType").hashCode()) {
                 case Request.SIGN_UP_SUCCESS:
+                    
                     Platform.runLater(() -> {
                         signupObj.SignUp_Success();
                     });

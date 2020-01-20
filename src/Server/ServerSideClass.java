@@ -365,14 +365,25 @@ public class ServerSideClass implements Server {
             Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     public void enableInviteButton(int p1, int p2)
     {
+        JSONObject users= new JSONObject();
         for(Player p:ServerControl.players)
         {
             if (p.getId() == p1 || p.getId() == p2)
+            {   
                 p.setStatus(false);
+                try {
+                    users.put("RequestType",Request.USERS);
+                    users.put("users",ServerControl.players);
+                    ServerControl.playerMap.get(p.getId()).Ps.println(users.toString());
+                } catch (JSONException ex) {
+                Logger.getLogger(ServerSideClass.class.getName()).log(Level.SEVERE, null, ex);
+                } 
+            }
         }
-        sendUsers();
+        
     }
     
     public Game checkAvilabeGame(Player p1 , Player p2)
@@ -381,7 +392,6 @@ public class ServerSideClass implements Server {
         if(db.checkAvailableGame(p1.getId(), p2.getId()))
         {
             g=db.getGame(p1.getId(), p2.getId());
-//            System.out.println(g.getPlayer1().getUser_name()+" "+g.getPlayer2().getUser_name());
             db.deleteGame(p1.getId(), p2.getId());
             return g;
         }

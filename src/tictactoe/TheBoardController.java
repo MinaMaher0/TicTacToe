@@ -445,6 +445,7 @@ public class TheBoardController implements Initializable {
             root = (Parent)loader.load();
             ControlButtonsController controll=loader.getController();
             controll.setPlayerObj(pf);
+            controll.fillHome();
             Scene scene = new Scene(root);
             MainGUI.primaryStage.setTitle("Home Page");
             MainGUI.primaryStage.setScene(scene);

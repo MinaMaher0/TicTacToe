@@ -45,7 +45,7 @@ class ServerHandler extends Thread {
             
     ControlButtonsController cbControl= null;
     
-    public ServerHandler(Socket socket) {
+    public ServerHandler(Socket socket,DbConnection db) {
 
         try {
             this.db=db;
@@ -245,6 +245,7 @@ class ServerHandler extends Thread {
             ServerControl.playerMap.get(g.getPlayer2().getId()).setGame(null);
             JSONObject sendReqType=new JSONObject();
             sendReqType.put("RequestType", Request.EXIT_GAME);
+            serverObj.enableInviteButton(g.getPlayer1().getId(), g.getPlayer2().getId());
             ServerControl.playerMap.get(g.getPlayer1().getId()).Ps.println(sendReqType.toString());
             ServerControl.playerMap.get(g.getPlayer2().getId()).Ps.println(sendReqType.toString());
         } catch (JSONException ex) {
