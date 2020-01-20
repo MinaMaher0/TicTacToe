@@ -157,11 +157,11 @@ public class ControlButtonsController implements Initializable {
             }
             if (p.getScore() >= 100) {
 
-                System.out.println("score = " + p.getScore());
+                System.out.println("score = " + p.getProfile_picture());
                 HBox item = new HBox();
                 item.setSpacing(10);
-                Image img = new Image("file:///C:/Users/Me5a/Desktop/Java project/TicTacToe/src/Images/1.jpg");
-                ImageView imageView = new ImageView(img);
+                 Image img = new Image(getClass().getResource("../Images/"+p.getProfile_picture()).toString(), true);
+            ImageView imageView = new ImageView(img);
                 imageView.setFitWidth(40);
                 imageView.setFitHeight(40);
                 Rectangle clip = new Rectangle(40, 40);
@@ -237,8 +237,8 @@ public class ControlButtonsController implements Initializable {
                 System.out.println("score = " + p.getScore());
                 HBox item2 = new HBox();
                 item2.setSpacing(10);
-                Image img = new Image("file:///C:/Users/Me5a/Desktop/Java project/TicTacToe/src/Images/1.jpg");
-                ImageView imageView = new ImageView(img);
+                Image img = new Image(getClass().getResource("../Images/"+p.getProfile_picture()).toString(), true);
+            ImageView imageView = new ImageView(img);
                 imageView.setFitWidth(40);
                 imageView.setFitHeight(40);
                 Rectangle clip = new Rectangle(40, 40);
@@ -312,8 +312,8 @@ public class ControlButtonsController implements Initializable {
                 System.out.println("score = " + p.getScore());
                 HBox item3 = new HBox();
                 item3.setSpacing(10);
-                Image img = new Image("file:///C:/Users/Me5a/Desktop/Java project/TicTacToe/src/Images/1.jpg");
-                ImageView imageView = new ImageView(img);
+                Image img = new Image(getClass().getResource("../Images/"+p.getProfile_picture()).toString(), true);
+            ImageView imageView = new ImageView(img);
                 imageView.setFitWidth(40);
                 imageView.setFitHeight(40);
                 Rectangle clip = new Rectangle(40, 40);
