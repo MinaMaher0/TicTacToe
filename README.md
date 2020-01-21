@@ -51,8 +51,6 @@ Tic-Tac-Toe, Game that allow player to:
  - can see other player levels and score
  - See notifications when other player become online
 
-can play a game with other online and free player "not in a game with other"  , also can make a chat with him , can 
-
 ### Built With
 * [Java](https://www.java.com)
 * [FXML](https://docs.oracle.com/javafx/2/get_started/fxml_tutorial.htm)
