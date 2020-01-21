@@ -26,6 +26,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import Server.ServerControl;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,14 +53,17 @@ public class ControlButtonsController implements Initializable {
     ObservableList li2 = FXCollections.observableArrayList();
     ObservableList li3 = FXCollections.observableArrayList();
     @FXML
-    void invite_friend(ActionEvent event) {
-        System.out.println("invite a friend!");
-    }
-    @FXML
     private Label prof_uName;
 
     @FXML
     private Label prof_Score;
+    
+    @FXML
+    private ListView<?> listView;
+    @FXML
+    private ListView<?> listView2;
+    @FXML
+    private ListView<?> listView3;
     
     @FXML
     void Exit(ActionEvent event){
@@ -75,7 +79,7 @@ public class ControlButtonsController implements Initializable {
             LevelsController levelsObj=loader.getController();
             levelsObj.setPlayerObj(pF);
             Scene scene = new Scene(root);
-            MainGUI.primaryStage.setTitle("GameBoard");
+            MainGUI.primaryStage.setTitle("Choose Level");
             MainGUI.primaryStage.setScene(scene); 
             MainGUI.primaryStage.show();
         } catch (IOException ex) {
@@ -96,7 +100,7 @@ public class ControlButtonsController implements Initializable {
 
             inviterController.setControlObject(this);
             Scene scene=new Scene(root);
-            newStage.setTitle("InviteDialogController");
+            newStage.setTitle("Invitation");
             newStage.setScene(scene);
             newStage.show();
             newStage.setResizable(false);
@@ -115,7 +119,7 @@ public class ControlButtonsController implements Initializable {
             ServerDownDialogController sDDControl= new ServerDownDialogController();
             sDDControl.setControlObject(this);
             Scene scene=new Scene(root);
-            newStage.setTitle("ServerFallen");
+            newStage.setTitle("Server Fallen");
             newStage.setScene(scene);
             newStage.show();
             newStage.setResizable(false);
@@ -125,20 +129,85 @@ public class ControlButtonsController implements Initializable {
         }
     }
     
-    @FXML
-    private ListView<?> listView;
     
     public void setPlayerObj(PlayerFunctions obj){
         pF=obj;
         pF.setControlButtonsController(this);
     }
     
-    @FXML
-    private ListView<?> listView2;
-    @FXML
-    private ListView<?> listView3;
-    public void showPlayers() {
+    HBox getListItem(Player p){
+        HBox item = new HBox();
+        item.setSpacing(10);
+        Image img = new Image(getClass().getResource("/Images/"+p.getProfile_picture()).toString(), true);
+        ImageView imageView = new ImageView(img);
+        imageView.setFitWidth(40);
+        imageView.setFitHeight(40);
+        Rectangle clip = new Rectangle(40, 40);
+        clip.setArcHeight(40);
+        clip.setArcWidth(40);
+        imageView.setClip(clip);
+        item.getChildren().add(imageView);
 
+        VBox userName_Score = new VBox();
+
+        userName_Score.setSpacing(2);
+        Text t = new Text(p.getUser_name());
+        t.setStyle(" -fx-font-family: 'Comic Sans MS';-fx-font-size : 15px;-fx-font: bold; -fx-text-fill: #756C6C;");
+        HBox score_button = new HBox();
+
+        score_button.setSpacing(120);
+        score_button.setAlignment(Pos.CENTER);
+
+        Text score = new Text(String.valueOf(p.getScore()));
+        score.setStyle(" -fx-font-family: 'Comic Sans MS';-fx-font-size : 15px;-fx-font: bold; -fx-text-fill: #756C6C;");
+        Button invite = new Button();
+
+        invite.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                int id = p.getId();
+                pF.invitePlayer(id);
+            }
+        });
+
+        if (p.getFlag() && !p.getStatus())
+        {
+            invite.setText("Invite");
+            invite.setCursor(Cursor.HAND);
+            invite.setStyle(" -fx-outline: none;\n" +
+                            "    -fx-transition: .5s;\n" +
+                            "    -fx-font-size : 10px;\n" +
+                            "    -fx-background-color: FFF;\n" +
+                            "    -fx-text-fill:#37cd0d;\n" +
+                            "    -fx-font-weight:bold;\n" +
+                            "    -fx-font-family: 'Comic Sans MS';\n" +
+                            "    -fx-font: italic;\n" +
+                            " -fx-border-color:#00E676;"+   
+                            "-fx-border-width: 2px;"+                        
+                            "   -fx-font: bold;");
+        } else if (p.getStatus())
+        {
+            invite.setText("Busy");
+            invite.setDisable(true);
+            invite.setCursor(Cursor.HAND);
+            invite.setStyle("-fx-color: #FF0000; -fx-border-width: 5px;");
+        }else{
+            invite.setText("Offline");
+            invite.setDisable(true);
+            invite.setCursor(Cursor.HAND);
+            invite.setStyle("-fx-color: #C8C8C8; -fx-border-width: 5px;");
+        }
+        
+        score_button.getChildren().addAll(score, invite);
+
+        userName_Score.getChildren().addAll(t, score_button);
+
+        item.getChildren().add(userName_Score);
+        return item;
+    }
+    
+    public void showPlayers() {
+        Collections.sort(PlayerFunctions.users);
         listView.getItems().clear();
         listView2.getItems().clear();
         listView3.getItems().clear();
@@ -156,239 +225,14 @@ public class ControlButtonsController implements Initializable {
                 continue;
             }
             if (p.getScore() >= 100) {
-
-                System.out.println("score = " + p.getProfile_picture());
-                HBox item = new HBox();
-                item.setSpacing(10);
-                 Image img = new Image(getClass().getResource("../Images/"+p.getProfile_picture()).toString(), true);
-            ImageView imageView = new ImageView(img);
-                imageView.setFitWidth(40);
-                imageView.setFitHeight(40);
-                Rectangle clip = new Rectangle(40, 40);
-                clip.setArcHeight(40);
-                clip.setArcWidth(40);
-                imageView.setClip(clip);
-                item.getChildren().add(imageView);
-
-                VBox userName_Score = new VBox();
-
-                userName_Score.setSpacing(2);
-                Text t = new Text(p.getUser_name());
-                t.setStyle(" -fx-font-family: 'Comic Sans MS';-fx-font-size : 15px;-fx-font: bold; -fx-text-fill: #756C6C;");
-                HBox score_button = new HBox();
-
-                score_button.setSpacing(120);
-                score_button.setAlignment(Pos.CENTER);
-
-                Text score = new Text(String.valueOf(p.getScore()));
-                score.setStyle(" -fx-font-family: 'Comic Sans MS';-fx-font-size : 15px;-fx-font: bold; -fx-text-fill: #756C6C;");
-                Button invite = new Button();
-
-                invite.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        int id = p.getId();
-                        System.out.println(id);
-                        pF.invitePlayer(id);
-                    }
-                });
-
-                
-
-            if (p.getFlag() && !p.getStatus())
-            {
-                invite.setText("Invite");
-                invite.setCursor(Cursor.HAND);
-                invite.setStyle(" -fx-outline: none;\n" +
-"    -fx-transition: .5s;\n" +
-"    -fx-font-size : 10px;\n" +
-"    -fx-background-color: FFF;\n" +
-"    -fx-text-fill:#37cd0d;\n" +
-"    -fx-font-weight:bold;\n" +
-"    -fx-font-family: 'Comic Sans MS';\n" +
-"    -fx-font: italic;\n" +
-" -fx-border-color:#00E676;"+   
-"-fx-border-width: 2px;"+                        
-"   -fx-font: bold;");
-            } else if (p.getStatus())
-            {
-                System.out.println("heloooooooooooooooooooooolllolo");
-                invite.setText("Busy");
-                invite.setDisable(true);
-                invite.setCursor(Cursor.HAND);
-                invite.setStyle("-fx-color: #FF0000; -fx-border-width: 5px;");
-            }else{
-                invite.setText("Offline");
-                invite.setDisable(true);
-                invite.setCursor(Cursor.HAND);
-                invite.setStyle("-fx-color: #C8C8C8; -fx-border-width: 5px;");
-            }
-
-
-
-                score_button.getChildren().addAll(score, invite);
-
-                userName_Score.getChildren().addAll(t, score_button);
-
-                item.getChildren().add(userName_Score);
-
-                li.add(item);
-
+                li.add(getListItem(p));
             }
             if (p.getScore() < 100 && p.getScore() >= 50) {
-
-                System.out.println("score = " + p.getScore());
-                HBox item2 = new HBox();
-                item2.setSpacing(10);
-                Image img = new Image(getClass().getResource("../Images/"+p.getProfile_picture()).toString(), true);
-            ImageView imageView = new ImageView(img);
-                imageView.setFitWidth(40);
-                imageView.setFitHeight(40);
-                Rectangle clip = new Rectangle(40, 40);
-                clip.setArcHeight(40);
-                clip.setArcWidth(40);
-                imageView.setClip(clip);
-                item2.getChildren().add(imageView);
-
-                VBox userName_Score = new VBox();
-
-                userName_Score.setSpacing(2);
-                Text t = new Text(p.getUser_name());
-                t.setStyle(" -fx-font-family: 'Comic Sans MS';-fx-font-size : 15px;-fx-font: bold; -fx-text-fill: #756C6C;");
-                HBox score_button = new HBox();
-
-                score_button.setSpacing(120);
-                score_button.setAlignment(Pos.CENTER);
-
-                Text score = new Text(String.valueOf(p.getScore()));
-                score.setStyle(" -fx-font-family: 'Comic Sans MS';-fx-font-size : 15px;-fx-font: bold; -fx-text-fill: #756C6C;");
-                Button invite = new Button();
-
-                invite.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        int id = p.getId();
-                        System.out.println(id);
-                        pF.invitePlayer(id);
-                    }
-                });
-
-                if (p.getFlag() && !p.getStatus())
-            {
-                invite.setText("Invite");
-                invite.setCursor(Cursor.HAND);
-                invite.setStyle(" -fx-outline: none;\n" +
-"    -fx-transition: .5s;\n" +
-"    -fx-font-size : 10px;\n" +
-"    -fx-background-color: FFF;\n" +
-"    -fx-text-fill:#37cd0d;\n" +
-"    -fx-font-weight:bold;\n" +
-"    -fx-font-family: 'Comic Sans MS';\n" +
-"    -fx-font: italic;\n" +
-" -fx-border-color:#00E676;"+   
-"-fx-border-width: 2px;"+                        
-"   -fx-font: bold;");
-            } else if (p.getStatus())
-            {
-                System.out.println("heloooooooooooooooooooooolllolo");
-                invite.setText("Busy");
-                invite.setDisable(true);
-                invite.setCursor(Cursor.HAND);
-                invite.setStyle("-fx-color: #FF0000; -fx-border-width: 5px;");
-            }else{
-                invite.setText("Offline");
-                invite.setDisable(true);
-                invite.setCursor(Cursor.HAND);
-                invite.setStyle("-fx-color: #C8C8C8; -fx-border-width: 5px;");
-            }
-
-                score_button.getChildren().addAll(score, invite);
-
-                userName_Score.getChildren().addAll(t, score_button);
-
-                item2.getChildren().add(userName_Score);
-                li2.add(item2);
+                li2.add(getListItem(p));
             }
              if (p.getScore() <= 50) {
-
-                System.out.println("score = " + p.getScore());
-                HBox item3 = new HBox();
-                item3.setSpacing(10);
-                Image img = new Image(getClass().getResource("../Images/"+p.getProfile_picture()).toString(), true);
-            ImageView imageView = new ImageView(img);
-                imageView.setFitWidth(40);
-                imageView.setFitHeight(40);
-                Rectangle clip = new Rectangle(40, 40);
-                clip.setArcHeight(40);
-                clip.setArcWidth(40);
-                imageView.setClip(clip);
-                item3.getChildren().add(imageView);
-
-                VBox userName_Score = new VBox();
-
-                userName_Score.setSpacing(2);
-                Text t = new Text(p.getUser_name());
-                t.setStyle(" -fx-font-family: 'Comic Sans MS';-fx-font-size : 15px;-fx-font: bold; -fx-text-fill: #756C6C;");
-                HBox score_button = new HBox();
-
-                score_button.setSpacing(120);
-                score_button.setAlignment(Pos.CENTER);
-
-                Text score = new Text(String.valueOf(p.getScore()));
-                score.setStyle(" -fx-font-family: 'Comic Sans MS';-fx-font-size : 15px;-fx-font: bold; -fx-text-fill: #756C6C;");
-                Button invite = new Button();
-
-                invite.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        int id = p.getId();
-                        System.out.println(id);
-                        pF.invitePlayer(id);
-                    }
-                });
-
-                if (p.getFlag() && !p.getStatus())
-            {
-                invite.setText("Invite");
-                invite.setCursor(Cursor.HAND);
-                invite.setStyle(" -fx-outline: none;\n" +
-"    -fx-transition: .5s;\n" +
-"    -fx-font-size : 10px;\n" +
-"    -fx-background-color: FFF;\n" +
-"    -fx-text-fill:#37cd0d;\n" +
-"    -fx-font-weight:bold;\n" +
-"    -fx-font-family: 'Comic Sans MS';\n" +
-"    -fx-font: italic;\n" +
-" -fx-border-color:#00E676;"+   
-"-fx-border-width: 2px;"+                        
-"   -fx-font: bold;");
-            } else if (p.getStatus())
-            {
-                System.out.println("heloooooooooooooooooooooolllolo");
-                invite.setText("Busy");
-                invite.setDisable(true);
-                invite.setCursor(Cursor.HAND);
-                invite.setStyle("-fx-color: #FF0000; -fx-border-width: 5px;");
-            }else{
-                invite.setText("Offline");
-                invite.setDisable(true);
-                invite.setCursor(Cursor.HAND);
-                invite.setStyle("-fx-color: #C8C8C8; -fx-border-width: 5px;");
+                li3.add(getListItem(p));
             }
-
-                score_button.getChildren().addAll(score, invite);
-
-                userName_Score.getChildren().addAll(t, score_button);
-
-                item3.getChildren().add(userName_Score);
-                li3.add(item3);
-            }
-            
-            
-            
-            
-            
-
         }
         listView.getItems().addAll(li);
         listView2.getItems().addAll(li2);
@@ -404,7 +248,6 @@ public class ControlButtonsController implements Initializable {
     
     void fillHome(){
         showPlayers();
-        
     }
     
     public void loadBoard(boolean isComputer){
@@ -416,7 +259,7 @@ public class ControlButtonsController implements Initializable {
             boardObj.SetPlayerFunctionObj(pF);
             boardObj.setComputerPlayer(isComputer);
             Scene scene = new Scene(root);
-            MainGUI.primaryStage.setTitle("GameBoard");
+            MainGUI.primaryStage.setTitle("Game Board");
             MainGUI.primaryStage.setScene(scene);
             MainGUI.primaryStage.show(); 
         } catch (Exception ex) {
@@ -433,15 +276,12 @@ public class ControlButtonsController implements Initializable {
             declineController.setUserName(name);
             declineController.setControlObject(this);
             Scene scene=new Scene(root);
-            newStage.setTitle("DeclineInvitation");
+            newStage.setTitle("Decline Invitation");
             newStage.setScene(scene);
             newStage.show();
             newStage.setResizable(false);
         } catch (Exception ex) {
-            System.out.println(ex.toString());
             Logger.getLogger(ControlButtonsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
 }

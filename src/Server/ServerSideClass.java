@@ -383,7 +383,7 @@ public class ServerSideClass implements Server {
                 } 
             }
         }
-        
+        sendUsers();
     }
     
     public Game checkAvilabeGame(Player p1 , Player p2)

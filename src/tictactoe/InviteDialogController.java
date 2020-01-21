@@ -21,9 +21,7 @@ import Server.*;
  */
 public class InviteDialogController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+
     PlayerFunctions playerfunc = new PlayerFunctions();
     ServerSideClass sSC= new ServerSideClass();
     
@@ -49,11 +47,7 @@ public class InviteDialogController implements Initializable {
     public void setUserName(String name){
         usrName.setText(name);
     }
-//    public void accept()
-//    {   
-//       // MainGUI.primaryStage.close();
-//        System.out.println("habllllll =======================");
-        
+    
     @FXML
     void decline(ActionEvent event)
     {
@@ -64,7 +58,6 @@ public class InviteDialogController implements Initializable {
     
     @FXML
     void accept(ActionEvent event) {
-        //sSC.fillLsitofBusyUser(p1,p2);
         ControlButtonsController.newStage.close();
         playerfunc.acceptinvitation(p1, p2); 
         invite.loadBoard(false);

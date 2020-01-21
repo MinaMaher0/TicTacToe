@@ -39,8 +39,7 @@ public class LeaveGameDialogController implements Initializable {
     @FXML
     public void saveGame()
     {
-        System.out.println("hellooooooo");
-         pFunctions.leaveGame();
+        pFunctions.leaveGame();
         ControlButtonsController.newStage.close();
         pFunctions.exitGame();
     }

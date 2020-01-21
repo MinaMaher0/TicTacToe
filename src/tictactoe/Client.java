@@ -16,14 +16,8 @@ public interface Client {
     
     public boolean signIn(String userName,String password);
     
-    public boolean signUp(String userName, String email, String password, String image);
-    
-    public Vector<Player> getPlayers();
-    
-    public void printPlayer(Player p);
-    
-    public void playWithComputer();
-    
+    public boolean signUp(String userName, String email, String password, String image); 
+        
     public boolean invitePlayer(int id);
     
     public boolean acceptinvitation(int pOneId,int pTwoId);

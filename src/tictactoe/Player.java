@@ -13,7 +13,7 @@ import javax.print.DocFlavor;
  *
  * @author Aya Morsi
  */
-public class Player {
+public class Player implements Comparable<Player> {
     int id,score;
     String user_name,email,token,profile_picture;
     boolean flag,status;
@@ -92,5 +92,12 @@ public class Player {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    @Override
+    public int compareTo(Player t) {
+        if (this.score >= t.getScore())
+            return -1;
+        else return 1;
     }
 }

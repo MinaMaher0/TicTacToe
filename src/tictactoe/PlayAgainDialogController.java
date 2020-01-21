@@ -44,13 +44,12 @@ public class PlayAgainDialogController implements Initializable {
     private Label msg;
      
      void setMsg(String message,String color){
-         System.out.println(message + " "+color);
          msg.setText(message);
          if (color.equals("Red"))
             msg.setTextFill(Color.RED);
          else if (color.equals("Green"))
              msg.setTextFill(Color.GREEN);
-         else msg.setTextFill(Color.YELLOW);
+         else msg.setTextFill(Color.BLUE);
      }
     
     public void setPlayerFunctionsObj(PlayerFunctions obj){

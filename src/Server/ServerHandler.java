@@ -153,6 +153,14 @@ class ServerHandler extends Thread {
                     serverObj.saveGame(getGame());
                     System.out.println("get the right game");
                     break;
+                case Request.IS_BUSY:
+                    serverObj.fillLsitofBusyUser(json.getInt("pID"),json.getInt("pID"));
+                    break;
+                case Request.NOT_BUSY:
+                    serverObj.enableInviteButton(json.getInt("pID"),json.getInt("pID"));
+                    break;
+                
+                    
             }
         } catch (Exception ex) {
             
@@ -181,9 +189,10 @@ class ServerHandler extends Thread {
                 sendReqType.put("Color", "Green");
                 if (game.getPlayerTurn()==game.getPlayer1().getId()){
                     ServerControl.playerMap.get(game.getPlayer1().getId()).Ps.println(sendReqType.toString());
+                    JSONObject updatePlayer = new JSONObject();
                     db.updateScore(game.getPlayer1().getId());
                     sendReqType.remove("Message");
-                    sendReqType.put("Message", "              You Are Loser");
+                    sendReqType.put("Message", "You Are Loser");
                     sendReqType.put("Color", "Red");
                     ServerControl.playerMap.get(game.getPlayer2().getId()).Ps.println(sendReqType.toString());
                 }else {

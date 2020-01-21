@@ -15,10 +15,6 @@ import javafx.scene.control.Label;
  * @author Salama
  */
 public class DeclineDialogController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
  
    @FXML
     private Label userName;
@@ -27,6 +23,7 @@ public class DeclineDialogController implements Initializable {
     private JFXButton ok;
 
     ControlButtonsController sobj = null;
+    
     public void setControlObject(ControlButtonsController obj){
         sobj=obj;
     }

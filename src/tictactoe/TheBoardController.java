@@ -111,13 +111,12 @@ public class TheBoardController implements Initializable {
 
         num_of_tie.setText(String.valueOf(tieScore));
         playerOname.setText(playerOneName);
-        Image img1 = new Image(getClass().getResource("../Images/"+playerOnePic).toString(), true);
+        Image img1 = new Image(getClass().getResource("/Images/"+playerOnePic).toString(), true);
         this.playerOnePic.setImage(img1);
         playerOscore.setText(String.valueOf(playerOneScore));
         playerTname.setText(playerTwoName);
         pTscore.setText(String.valueOf(playerTwoScore));
 
-        System.out.println("bord = "+board);
         lbl_11.setText(String.valueOf(board.charAt(0)));
         lbl_12.setText(String.valueOf(board.charAt(1)));
         lbl_13.setText(String.valueOf(board.charAt(2)));
@@ -130,7 +129,7 @@ public class TheBoardController implements Initializable {
         lbl_32.setText(String.valueOf(board.charAt(7)));
         lbl_33.setText(String.valueOf(board.charAt(8)));
 
-        Image img2 = new Image(getClass().getResource("../Images/"+playerTwoPic).toString(), true);
+        Image img2 = new Image(getClass().getResource("/Images/"+playerTwoPic).toString(), true);
         this.playerTwoPic.setImage(img2);
 
         
@@ -416,10 +415,8 @@ public class TheBoardController implements Initializable {
       if(textArea.getText() != ""){
       chat_pane.setVisible(true);
       textArea.appendText(body+"\n");
-        // chat_pane.setVisible(false);
       }else{
           chat_pane.setVisible(false);
-     // textArea.appendText(body+"\n");
       }
   }
     

@@ -31,15 +31,9 @@ public class DbConnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-
-
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","password");
-
-
-//jdbc:mysql://localhost:3306/tic_tac_toe
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tic_tac_toe","root","1234");
             st = conn.createStatement();
         } catch (SQLException ex) {
-            System.out.println("test");
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,10 +57,6 @@ public class DbConnection {
         }
         return v ;
     }
-    /*public int getNewId()
-    {
-        return v.get(v.size()-1).getId()+1;
-    }*/
 
     public Vector<Player> getV() {
         return v;
@@ -171,7 +161,6 @@ public class DbConnection {
             
             if(rs.next())
              {
-                 System.out.println("at DB=  "+rs.getString(7).toCharArray()[0]+" String = "+rs.getString(7));
                  Game g = new Game(getPlayer(rs.getInt(2)), getPlayer(rs.getInt(3)),rs.getInt(4), rs.getInt(5),rs.getString(6).toCharArray(), rs.getInt(7), rs.getInt(8), rs.getInt(9));  
                  return g ;
              }
@@ -204,7 +193,6 @@ public class DbConnection {
     }
    public void saveGame(Game game) 
     {
-        System.out.println("DB save Game ///////");
        int p1 = game.getPlayer1().getId();
        int p2 = game.getPlayer2().getId();
        
@@ -221,7 +209,6 @@ public class DbConnection {
             pst.setInt(7, game.getFp_score());
             pst.setInt(8, game.getSp_score());
             int rs = pst.executeUpdate();
-            System.out.println("Game Saved Successfully");
         } catch (SQLException ex) {
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -231,7 +218,7 @@ public class DbConnection {
     {
         PreparedStatement pst;
         try {
-            pst = conn.prepareStatement(" UPDATE player set score= score+?" +"where id=?; ");
+            pst = conn.prepareStatement("UPDATE player set score= score+? " +"where id=?; ");
              
             pst.setInt(1,10);
             pst.setInt(2, pId); 

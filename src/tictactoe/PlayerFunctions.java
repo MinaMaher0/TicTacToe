@@ -73,13 +73,10 @@ public class PlayerFunctions implements Client {
 
     public PlayerFunctions() {
         try {
-
             s = new Socket("127.0.0.1", 8000);
-
             input = new DataInputStream(s.getInputStream());
             output = new PrintStream(s.getOutputStream());
             users = new Vector<>();
-
         } catch (IOException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -90,14 +87,11 @@ public class PlayerFunctions implements Client {
                     if (input != null) {
                         try {
                             str = input.readLine();
-                            System.out.println(str);
                             RequestHandller(str);
-                            System.out.println("server response: " + str);
                         } catch (IOException ex) {
                             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        System.out.println("connection lost");
                         break;
                     }
                 }
@@ -115,9 +109,9 @@ public class PlayerFunctions implements Client {
     public boolean signIn(String email, String password) {
         try {
             JSONObject SigninObject = new JSONObject();
+            SigninObject.put("RequestType", Request.LOGIN);
             SigninObject.put("email", email);
             SigninObject.put("password", password);
-            SigninObject.put("RequestType", Request.LOGIN);
             output.println(SigninObject.toString());
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,33 +123,17 @@ public class PlayerFunctions implements Client {
     public boolean signUp(String userName, String email, String password ,String image) {
         try {
             JSONObject SignupObject = new JSONObject();
+            SignupObject.put("RequestType", Request.SIGNUP);
             SignupObject.put("userName", userName);
             SignupObject.put("email", email);
             SignupObject.put("password", password);
             SignupObject.put("image",image);
-            
-            SignupObject.put("RequestType", Request.SIGNUP);
             output.println(SignupObject.toString());
             
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
-    }
-
-    @Override
-    public Vector<Player> getPlayers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void printPlayer(Player p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void playWithComputer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -168,7 +146,6 @@ public class PlayerFunctions implements Client {
             invitePlayerObject.put("senderUserName", pla.getUser_name());
             invitePlayerObject.put("RequestType", Request.INVITE_PLAYER);
             output.println(invitePlayerObject.toString());
-            //acceptinvitation(pla.getId(), id);
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -178,30 +155,24 @@ public class PlayerFunctions implements Client {
 
     @Override
     public void logOut(int pId) {
-
-        
-            JSONObject logOutObject = new JSONObject();
-            try {
-                logOutObject.put("userId", pId);
-                logOutObject.put("RequestType", Request.LOG_OUT);
-            } catch (JSONException ex) {
-                Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.exit(0);
-        
+        JSONObject logOutObject = new JSONObject();
+        try {
+            logOutObject.put("userId", pId);
+            logOutObject.put("RequestType", Request.LOG_OUT);
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.exit(0);
     }
 
     public void RequestHandller(String str) {
-        System.out.println("batata " + str);
         try {
             final JSONObject ReqObj = new JSONObject(str);
             switch (ReqObj.get("RequestType").hashCode()) {
                 case Request.SIGN_UP_SUCCESS:
-                    
                     Platform.runLater(() -> {
                         signupObj.SignUp_Success();
                     });
-                         
                     break;
                 case Request.SIGN_UP_FAILED:
                     Platform.runLater(() -> {
@@ -209,32 +180,33 @@ public class PlayerFunctions implements Client {
                     });
                     break;
                 case Request.LOGIN_SUCCESS:
-                    siginObj.sign_in_sucess();
-                    pla.setId(ReqObj.getInt("id"));
-                    pla.setEmail(ReqObj.getString("email"));
-                    pla.setUser_name(ReqObj.getString("userName"));
-                    pla.setScore(ReqObj.getInt("score"));
-                    pla.setProfile_picture(ReqObj.getString("pPic"));
-                    break;
+                    Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                    siginObj.sign_in_sucess();
+                                }
+                            }
+                        );
+                        pla.setId(ReqObj.getInt("id"));
+                        pla.setEmail(ReqObj.getString("email"));
+                        pla.setUser_name(ReqObj.getString("userName"));
+                        pla.setScore(ReqObj.getInt("score"));
+                        pla.setProfile_picture(ReqObj.getString("pPic"));
+                        break;
                 case Request.LOGIN_FAILED:
-                 
-                       siginObj.sign_in_faild();
-   
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                               siginObj.sign_in_faild();
+                        }
+                    });
                     break;
-                case Request.INVITE_PLAYER_SUCESS:
-                    System.out.println("invitation accepted");
-                    break;
-                case Request.INVITE_PLAYER_FAILED:
-                    System.out.println("invitation decliend");
-                    break;
-
                 case Request.INVITE_PLAYER:
                     if (cbController != null) {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
                                 try {
-                                    System.out.println("user " + ReqObj);
                                     cbController.showInviteDialog(ReqObj.getString("senderUserName"), ReqObj.getInt("senderID"), pla.getId());
                                 } catch (JSONException ex) {
                                     Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
@@ -259,27 +231,21 @@ public class PlayerFunctions implements Client {
                         });
                     }
                     break;
-
                 case Request.START_GAME:
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
                             if (cbController!=null){
-                               
                                 cbController.loadBoard(false);
                                 Platform.runLater(() -> {
                                     try {
                                         boardObj.exitDialog();
                                         boardObj.setTurnLbl(playerIsTurn);
-
                                         boardObj.setGameDetails(ReqObj.getString("playerOneName"),ReqObj.getInt("playerOneScore"),ReqObj.getString("playerOnePic"),ReqObj.getString("playerTwoName"),ReqObj.getInt("playerTwoScore"),ReqObj.getString("playerTwoPic"),ReqObj.getInt("tieScore"),ReqObj.getString("GameBoard"));
-
                                     } catch (JSONException ex) {
                                         Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                                     }
                                 });
-                            } else {
-                                System.out.println("nullllllllllll");
                             }
                         }
                     });
@@ -298,29 +264,25 @@ public class PlayerFunctions implements Client {
                     break;
                 case Request.REFUSE_INVITATION:
                     Platform.runLater(() -> {
-                    try {
-                         cbController.loadDeclineboard(ReqObj.getString("userName"));
-                    } catch (JSONException ex) {
-                    Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+                        try {
+                             cbController.loadDeclineboard(ReqObj.getString("userName"));
+                        }catch (JSONException ex) {
+                            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     });
-                   
                     break;
                 case Request.SERVER_FAILED:
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            System.out.println("Server Fallen ya beeh ");
                             cbController.showServerDownDialog();
                         }
-                 });
+                    });
                     break;
-                
                 case Request.PLAYER_TURN:
                     playerIsTurn = true;
-                    System.out.println("yyyyyyyyyyyyyyy");
                     Platform.runLater(() -> {
-                            boardObj.setTurnLbl(playerIsTurn);
+                        boardObj.setTurnLbl(playerIsTurn);
                     });
                     break;
                 case Request.SEND_MESSAGE:
@@ -353,25 +315,17 @@ public class PlayerFunctions implements Client {
                                 }
                             }
                         });
-                        
                     }
                     break;
-       
-
             }
-
         } catch (Exception ex) {
-            //System.out.println("bateeeeeeeeee5");
             System.out.println(ex.toString());
-            //Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
     
     void notifi(String userName,String playerPic){
         NotificationType notification = NotificationType.SUCCESS;
         Image whatsAppImg = new Image(getClass().getResource("../Images/"+playerPic).toString(), true);
-
         TrayNotification tray = new TrayNotification();
         tray.setTitle("New Player is Online");
         tray.setMessage(userName + " is Online now");
@@ -382,7 +336,6 @@ public class PlayerFunctions implements Client {
     }
 
     Player convertJsonObjtoPlayer(JSONObject jObj) {
-        System.out.println("jjjjjjjjjjjj = "+jObj);
         Player p = new Player();
         try {
             p.setEmail(jObj.getString("email"));
@@ -398,19 +351,14 @@ public class PlayerFunctions implements Client {
         return p;
     }
 
-    public static void main(String[] args) {
-        new PlayerFunctions();
-
-    }
-
     @Override
     public boolean acceptinvitation(int pOneId, int pTwoId) {
 
         JSONObject acceptinvitation = new JSONObject();
         try {
+            acceptinvitation.put("RequestType", Request.ACCEPT_INVITATION);
             acceptinvitation.put("senderID", pOneId);
             acceptinvitation.put("receiverID", pTwoId);
-            acceptinvitation.put("RequestType", Request.ACCEPT_INVITATION);
             output.println(acceptinvitation.toString());
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
@@ -421,18 +369,24 @@ public class PlayerFunctions implements Client {
     public void playWithComuter(String level) {
         game = new Game(pla, true, level);
         playerIsTurn = true;
-
+        JSONObject isBusy = new JSONObject();
+        try {
+            isBusy.put("RequestType", Request.IS_BUSY);
+            isBusy.put("pID", pla.getId());
+        } catch (JSONException ex) {
+            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        output.println(isBusy);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),game.getPlayer1().getProfile_picture(),"Computer", game.getSp_score(),"computer.png", game.getTie_score()," ");
+                boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),game.getPlayer1().getProfile_picture(),"Computer", game.getSp_score(),"computer.png", game.getTie_score(),"         ");
             }
         });
         boardObj.hideChatAndSave();
     }
 
     public void sendPlayedCellRequest(int cellNum, boolean isComputer) {
-        System.out.println("turn " + playerIsTurn);
         if (!playerIsTurn) {
             // handle when it's not your turn
             return;
@@ -445,7 +399,6 @@ public class PlayerFunctions implements Client {
                     json.put("RequestType", Request.PLAYED_CELL);
                     json.put("Player1ID", pla.getId());
                     json.put("cellNum", cellNum);
-                    System.out.println(json);
                     output.println(json.toString());
                     playerIsTurn = false;
                     Platform.runLater(() -> {
@@ -462,7 +415,6 @@ public class PlayerFunctions implements Client {
 
     @Override
     public void declineInvitation(int pOneId, int pTwoId) {
-        System.out.println("ayaaaaaaaaaa");
         JSONObject declineinvitation = new JSONObject();
          try {
             declineinvitation.put("senderID", pOneId);
@@ -478,11 +430,9 @@ public class PlayerFunctions implements Client {
         try {
             JSONObject sendMsg = new JSONObject();
             sendMsg.put("RequestType", Request.SEND_MESSAGE);
-            //sendMsg.put("PlayerID", pla.getId());
             sendMsg.put("Message", msg);
             sendMsg.put("senderName", pla.getUser_name());
             output.println(sendMsg.toString());
-
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -509,14 +459,12 @@ public class PlayerFunctions implements Client {
     public void playAgain() {
         if (game!=null) {
             game.playAgain();
-
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),game.getPlayer1().getProfile_picture(),"Computer", game.getSp_score(),"computer.png", game.getTie_score()," ");
+                    boardObj.setGameDetails(game.getPlayer1().getUser_name(),game.getFp_score(),game.getPlayer1().getProfile_picture(),"Computer", game.getSp_score(),"computer.png", game.getTie_score(),"         ");
                 }
             });
-
             if (game.playerTurn==-1)
                 computerTurn();
         }else {
@@ -532,8 +480,17 @@ public class PlayerFunctions implements Client {
     }
 
     public void exitGame() {
-        if (game!=null)
+        if (game!=null){
             game = null;
+            JSONObject notBusy = new JSONObject();
+            try {
+                notBusy.put("RequestType", Request.NOT_BUSY);
+                notBusy.put("pID", pla.getId());
+            } catch (JSONException ex) {
+                Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            output.println(notBusy);
+        }
         else{
             JSONObject json = new JSONObject();
             try {
@@ -550,11 +507,6 @@ public class PlayerFunctions implements Client {
         Platform.runLater(() -> {
             boardObj.setLbl(cellNum, ch);
         });
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return game.chooseCell(cellNum - 1);
     }
 
@@ -580,19 +532,18 @@ public class PlayerFunctions implements Client {
         }
         int ret = playerTurn(cellNum);
         if (ret == 1) {
-            showPlayAgain("                          you win","Green");
-            //boardObj.setTurnLbl(false);
+            showPlayAgain("you win","Green");
         } else if (ret == -1) {
-            showPlayAgain("                              Tie","Yellow");
+            showPlayAgain("Tie","Yellow");
         } else {
             Platform.runLater(() -> {
                 boardObj.setTurnLbl(!playerIsTurn);
             });
             int cpuret = computerTurn();
             if (cpuret == 1) {
-                showPlayAgain("                          You Lose","Red");
+                showPlayAgain("You Lose","Red");
             } else if (cpuret == -1) {
-                showPlayAgain("                              Tie","Yellow");
+                showPlayAgain("Tie","Yellow");
             } else {
                 Platform.runLater(() -> {
                     boardObj.setTurnLbl(playerIsTurn);
@@ -605,19 +556,15 @@ public class PlayerFunctions implements Client {
         return game!=null;
     }
 
-   
-    
     @Override
     public void leaveGame() {
-        
-          JSONObject saveGame = new JSONObject();
-         try {
+        JSONObject saveGame = new JSONObject();
+        try {
             saveGame.put("RequestType", Request.SAVE_GAME);
             output.println(saveGame.toString());
         } catch (JSONException ex) {
             Logger.getLogger(PlayerFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("player function save game ");
     }
    public Player getPlayer(){
         return pla;

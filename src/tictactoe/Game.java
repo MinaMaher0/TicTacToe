@@ -38,6 +38,8 @@ public class Game {
 
     public Game(Player player1, Player player2) {
        this(player1, player2, player1.getId(), 1 ,new char[9]);
+        for (int i=0;i<9;++i)
+            board[i]=' ';
         
     }
 
@@ -57,6 +59,8 @@ public class Game {
         this(player,null);
         this.isComputer=isComputer;
         this.level=level;
+        for (int i=0;i<9;++i)
+            board[i]=' ';
     }
     
     int countCells(){
