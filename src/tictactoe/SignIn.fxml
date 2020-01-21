@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.SignInController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.SignInController">
    <children>
       <ImageView fitHeight="256.0" fitWidth="331.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -91,10 +91,5 @@
             <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#tosign_up" prefHeight="60.0" prefWidth="246.0" styleClass="signup_btn" stylesheets="@signin.css" text="Sign Up" />
          </children>
       </HBox>
-      <Label alignment="BASELINE_LEFT" prefHeight="30.0" prefWidth="357.0" styleClass="forget_passowrd" stylesheets="@signin.css" text="Forget Password?" textFill="#757171" underline="true">
-         <font>
-            <Font name="System Italic" size="20.0" />
-         </font>
-      </Label>
    </children>
 </VBox>

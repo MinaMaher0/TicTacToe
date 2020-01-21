@@ -18,7 +18,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.TheBoardController">
    <children>
       <FontAwesomeIconView glyphName="VIDEO_GAME" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="172.0" layoutY="531.0" opacity="0.8" size="650" strokeLineJoin="BEVEL" text="" textAlignment="CENTER" wrappingWidth="570.6666870117188" />
-      <GridPane alignment="CENTER_LEFT" layoutX="231.0" layoutY="80.0" prefHeight="408.0" prefWidth="549.0">
+      <GridPane alignment="CENTER_LEFT" layoutX="247.0" layoutY="97.0" prefHeight="391.0" prefWidth="532.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.3333435058594" minWidth="10.0" prefWidth="205.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="308.66668701171875" minWidth="10.0" prefWidth="202.33331298828125" />
@@ -43,7 +43,7 @@
 
          </children>
       </GridPane>
-      <Pane fx:id="chat_pane" layoutX="245.0" layoutY="492.0" prefHeight="210.0" prefWidth="487.0">
+      <Pane fx:id="chat_pane" layoutX="245.0" layoutY="492.0" prefHeight="210.0" prefWidth="487.0" visible="false">
          <children>
             <JFXTextArea fx:id="textArea" editable="false" layoutX="3.0" layoutY="-2.0" prefHeight="149.0" prefWidth="482.0" styleClass="textArea" stylesheets="@board.css" unFocusColor="#4059a9">
                <font>
@@ -76,24 +76,24 @@
             <Image url="@Images/user.png" />
          </image>
       </ImageView>
-      <Label fx:id="playerTname" layoutX="73.0" layoutY="1.0" prefHeight="47.0" prefWidth="128.0" text="mina" textFill="#c59ffd">
+      <Label fx:id="playerTname" layoutX="87.0" layoutY="17.0" prefHeight="37.0" prefWidth="97.0" text="mina" textFill="#c59ffd">
          <font>
             <Font name="Tahoma Bold" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="pTscore" layoutX="83.0" layoutY="51.0" prefHeight="27.0" prefWidth="50.0" text="100">
+      <Label fx:id="pTscore" layoutX="94.0" layoutY="49.0" prefHeight="27.0" prefWidth="50.0" text="100">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
       <Label layoutX="811.0" layoutY="2.0" prefHeight="87.0" prefWidth="185.0" styleClass="user_label" stylesheets="@board.css" />
       <ImageView fx:id="playerOnePic" fitHeight="53.0" fitWidth="65.0" layoutX="813.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="playerOname" layoutX="876.0" layoutY="5.0" prefHeight="35.0" prefWidth="122.0" text="salama" textFill="#c59ffd">
+      <Label fx:id="playerOname" layoutX="885.0" layoutY="9.0" prefHeight="35.0" prefWidth="99.0" text="salama" textFill="#c59ffd">
          <font>
-            <Font name="Tahoma Bold" size="25.0" />
+            <Font name="Tahoma Bold" size="22.0" />
          </font>
       </Label>
-      <Label fx:id="playerOscore" layoutX="887.0" layoutY="45.0" prefHeight="27.0" prefWidth="50.0" text="100">
+      <Label fx:id="playerOscore" layoutX="902.0" layoutY="44.0" prefHeight="27.0" prefWidth="50.0" text="100">
          <font>
             <Font size="25.0" />
          </font>
@@ -110,6 +110,9 @@
          </font>
       </Label>
       <FontAwesomeIconView fx:id="cht_icon" glyphName="WHATSAPP" glyphStyle="-fx-fill: linear-gradient(#C02347 0%,#8F3D85 85%);" layoutX="928.0" layoutY="331.0" size="20" />
-      <Label fx:id="turnLbl" layoutX="643.0" layoutY="17.0" prefHeight="27.0" prefWidth="90.0" text="Your Turn" textFill="#00ff22" />
+      <Label fx:id="turnLbl" layoutX="443.0" layoutY="64.0" prefHeight="27.0" prefWidth="90.0" text="Your Turn" textFill="#00ff22">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
    </children>
 </Pane>

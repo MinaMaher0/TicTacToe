@@ -18,7 +18,7 @@
   
      
 }
-.user_label:hover{
+/*.user_label:hover{
     
     -fx-background-color:  rgba(0, 0, 0, 0.03);
      -fx-cursor: hand;
@@ -29,7 +29,7 @@
     -fx-border-radius:10px;
   
      
-}
+}*/
 .control_btn{
   -fx-font-family : Tahoma;
   -fx-font-size : 22px;

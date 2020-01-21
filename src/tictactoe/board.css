@@ -122,7 +122,9 @@
     -fx-background-color:  rgbargba(255,255,255,0.008);
      -fx-cursor: hand;
   
-    -fx-border-color: linear-gradient(#C59FFD 15%,#8F3D85 80%);
+    -fx-border-color:  linear-gradient(#C02347 0%,#8F3D85 85%);
+    
+        /*linear-gradient(#C59FFD 15%,#8F3D85 80%);*/
      -fx-border-width: 3px;
  
     -fx-border-radius:10px;
